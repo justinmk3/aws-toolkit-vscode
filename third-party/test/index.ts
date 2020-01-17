@@ -38,6 +38,7 @@ import * as glob from "glob";
 import * as os from "os"
 // END 2018-10-05: Amazon addition.
 import * as paths from "path";
+import { MochaOptions } from "mocha";
 
 const istanbul = require("istanbul");
 const Mocha = require("mocha");
@@ -52,10 +53,18 @@ if (!tty.getWindowSize) {
     };
 }
 
-let mocha = new Mocha({
-    ui: "bdd",
-    useColors: true,
-});
+export function defaultMochaOptions(useColors: boolean = true): MochaOptions {
+    return {
+        ui: "bdd",
+        useColors: useColors,
+        reporter: 'mocha-junit-reporter',
+        reporterOptions: {
+            mochaFile: '.test-reports/report.xml'
+        }
+    }
+}
+
+let mocha = new Mocha(defaultMochaOptions());
 
 // 2018-10-05: Amazon addition.
 // @ts-ignore - Implicit any
@@ -307,7 +316,7 @@ class CoverageRunner {
 }
 
 // 2019-12-05: Amazon addition. (export declarations - runTests)
-export const runTests = (testsRoot: string, clb: (err: any, failedTests: number) => void ): void => run(testsRoot, clb)
+export const runTests = (testsRoot: string, clb: (err: any, failedTests: number) => void): void => run(testsRoot, clb)
 // END 2019-12-05: Amazon addition. (export declarations - runTests)
 // 2020-01-08: Amazon addition. (export declarations - configureMocha)
 export const configureMocha = (mochaOpts: any) => configure(mochaOpts)
