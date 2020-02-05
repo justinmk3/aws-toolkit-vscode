@@ -38,7 +38,10 @@ import * as glob from "glob";
 import * as os from "os"
 // END 2018-10-05: Amazon addition.
 import * as paths from "path";
+
+// 2020-02-05: Amazon addition.
 import { MochaOptions } from "mocha";
+// END 2020-02-05: Amazon addition.
 
 const istanbul = require("istanbul");
 const Mocha = require("mocha");
@@ -53,6 +56,7 @@ if (!tty.getWindowSize) {
     };
 }
 
+// 2020-02-05: Amazon addition.
 export function defaultMochaOptions(useColors: boolean = true): MochaOptions {
     return {
         ui: "bdd",
@@ -65,6 +69,7 @@ export function defaultMochaOptions(useColors: boolean = true): MochaOptions {
 }
 
 let mocha = new Mocha(defaultMochaOptions());
+// END 2020-02-05: Amazon addition.
 
 // 2018-10-05: Amazon addition.
 // @ts-ignore - Implicit any
