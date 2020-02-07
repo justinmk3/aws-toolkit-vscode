@@ -61,9 +61,12 @@ export function defaultMochaOptions(useColors: boolean = true): MochaOptions {
     return {
         ui: "bdd",
         useColors: useColors,
-        reporter: 'mocha-junit-reporter',
+        reporter: "mocha-multi-reporters",
         reporterOptions: {
-            mochaFile: '.test-reports/report.xml'
+            reporterEnabled: "mocha-junit-reporter, spec",
+            mochaJunitReporterReporterOptions: {
+                mochaFile: ".test-reports/report.xml"
+            }
         }
     }
 }
