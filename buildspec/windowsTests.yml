@@ -27,9 +27,3 @@ phases:
                     -c $Env:CODEBUILD_RESOLVED_SOURCE_VERSION
                 }
             - dir
-
-reports:
-    unit-test:
-        files:
-            - '*'
-        base-directory: '.test-reports'
