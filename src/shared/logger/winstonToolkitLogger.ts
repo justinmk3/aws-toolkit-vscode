@@ -124,6 +124,9 @@ export class WinstonToolkitLogger implements Logger, vscode.Disposable {
 
         if (types.isNativeError(message)) {
             coerceNameToString(message)
+            if ((message as any).requestId) {
+                message.stack = undefined
+            }
             this.logger.log(level, '%O', message, ...meta, { logID: this.idCounter })
         } else {
             this.logger.log(level, message, ...meta, { logID: this.idCounter })

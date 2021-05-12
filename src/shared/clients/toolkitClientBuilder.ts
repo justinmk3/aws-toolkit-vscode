@@ -20,6 +20,7 @@ import { RegionProvider } from '../regions/regionProvider'
 import { DEFAULT_PARTITION } from '../regions/regionUtilities'
 import { ClassToInterfaceType } from '../utilities/tsUtils'
 import { AppRunnerClient, DefaultAppRunnerClient } from './apprunnerClient'
+import { getLogger } from '../logger/logger'
 
 export type ToolkitClientBuilder = ClassToInterfaceType<DefaultToolkitClientBuilder>
 export class DefaultToolkitClientBuilder {
@@ -76,4 +77,30 @@ export class DefaultToolkitClientBuilder {
     public createAppRunnerClient(regionCode: string): AppRunnerClient {
         return new DefaultAppRunnerClient(regionCode)
     }
+}
+
+/**
+ * Formats `AWS.AWSError` for logging or text display.
+ *
+ * @param e `AWS.AWSError` object
+ * @param path HTTP path or API name that characterizes the request, if any.
+ * @param stack Decides whether to include the stacktrace.
+ * @returns Formatted error string.
+ */
+export function fmtAwsError(e: AWS.AWSError, path?: string, stack = false): string {
+    const logDebug = getLogger().logLevelEnabled('debug')
+    let formatted = `AWS request failed: ${e.statusCode}: ${e.code}: ${path}`
+    // Format AWS.AWSError fields, if any.
+    for (const name of ['message', 'name', 'region', 'requestId', 'cfId', 'extendedRequestId', 'hostname']) {
+        if ((e as any)[name]) {
+            formatted += `\n  ${name}: ${(e as any)[name]}`
+        }
+    }
+    if (logDebug && stack) {
+        formatted += `\n  stack: ${e.stack}`
+    }
+    if (logDebug) {
+        formatted += `\n  originalError: ${e.originalError}`
+    }
+    return formatted
 }
