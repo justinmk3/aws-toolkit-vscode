@@ -82,3 +82,44 @@ export async function insertTextIntoFile(text: string, filePath: string, line: n
         }
     })
 }
+
+/**
+ * Gets the top `n` lines of `text`.
+ */
+export function top(n: number, text: string): string {
+    if (n < 0) {
+        return ''
+    }
+    const lines = text.split('\n')
+    const lastLine = lines[lines.length - 1]
+    if (lines.length === 0) {
+        return ''
+    }
+    let result = ''
+    for (let i = 0; i < n && i < lines.length; i++) {
+        result += `${lines[i]}\n`
+    }
+    if (n >= lines.length && !lastLine.endsWith('\n')) {
+        // Edge case: original input did not end with \n char, so result should not include it.
+        return result.substring(0, result.length - 1)
+    }
+    return result
+}
+
+/**
+ * Tries to get the AWS module name from the stacktrace of an AWS request.
+ *
+ * Example input:
+ * ```
+ * 1993-05-12 16:58:30 [ERROR]: Failed to list buckets: [InvalidAccessKeyId: ...
+ * at Request.extractError (/.../node_modules/aws-sdk/lib/services/s3.js:718:35)
+ * at Request.callListeners (/.../node_modules/aws-sdk/lib/sequential_executor.js:106:20)
+ * ```
+ */
+export function getAwsServiceFromStacktrace(trace: string): string {
+    const m = trace.match(/aws-sdk[\/]([_a-zA-Z0-9\/\\-]+)/)
+    if (!m || m.length === 0) {
+        return ''
+    }
+    return m[0]
+}

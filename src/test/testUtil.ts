@@ -12,6 +12,7 @@ import * as FakeTimers from '@sinonjs/fake-timers'
 import * as pathutil from '../shared/utilities/pathUtils'
 import { makeTemporaryToolkitFolder } from '../shared/filesystemUtilities'
 import * as disposableFiles from '../shared/utilities/disposableFiles'
+import { ServiceConfigurationOptions } from 'aws-sdk/lib/service'
 
 /**
  * Writes the string form of `o` to `filepath` as UTF-8 text.
@@ -82,4 +83,17 @@ export function assertFileText(file: string, expected: string, message?: string 
 export async function tickPromise<T>(promise: Promise<T>, clock: FakeTimers.InstalledClock, t: number): Promise<T> {
     clock.tick(t)
     return await promise
+}
+
+export function createFakeAwsService<T extends AWS.Service>(type: new (o: ServiceConfigurationOptions) => T): T {
+    // const opt = <AWS.ServiceConfigurationOptions> {
+    const opt = {
+        region: 'us-west-2',
+        credentials: {
+            accessKeyId: 'fakeid',
+            secretAccessKey: 'fakekey',
+        },
+    }
+    const service = new type(opt)
+    return service
 }
