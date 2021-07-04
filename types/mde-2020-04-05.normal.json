@@ -1,0 +1,1126 @@
+{
+    "version": "2.0",
+    "metadata": {
+        "apiVersion": "2020-04-05",
+        "endpointPrefix": "mde",
+        "jsonVersion": "1.1",
+        "protocol": "rest-json",
+        "serviceFullName": "Amazon Managed Development Environments",
+        "serviceId": "MDE",
+        "signatureVersion": "v4",
+        "signingName": "moontide",
+        "uid": "mde-2020-04-05"
+    },
+    "operations": {
+        "CreateEnvironment": {
+            "name": "CreateEnvironment",
+            "http": {
+                "method": "POST",
+                "requestUri": "/environments",
+                "responseCode": 200
+            },
+            "input": { "shape": "CreateEnvironmentRequest" },
+            "output": { "shape": "CreateEnvironmentResponse" },
+            "errors": [
+                { "shape": "ValidationException" },
+                { "shape": "ThrottlingException" },
+                { "shape": "InternalServiceException" },
+                { "shape": "ServiceQuotaExceededException" },
+                { "shape": "ConflictException" }
+            ],
+            "documentation": "<p>Create a new, running environment from a definition and overrides asynchronously.</p> <p>Use the EventBridge for notification when the environment is &quot;RUNNING&quot; and therefore ready to StartSession, <a href=\"TODO\">details</a>.</p>",
+            "idempotent": true
+        },
+        "DeleteEnvironment": {
+            "name": "DeleteEnvironment",
+            "http": {
+                "method": "DELETE",
+                "requestUri": "/environments/{environmentId}",
+                "responseCode": 200
+            },
+            "input": { "shape": "DeleteEnvironmentRequest" },
+            "output": { "shape": "DeleteEnvironmentResponse" },
+            "errors": [
+                { "shape": "ValidationException" },
+                { "shape": "ResourceNotFoundException" },
+                { "shape": "InternalServiceException" },
+                { "shape": "ConflictException" }
+            ],
+            "documentation": "<p>Delete an environment from the system.</p> <p>Running environments and sessions will be stopped.</p> <p>If the environment does not exist a ResourceNotFoundException will be thrown (unless the clientToken matches a previous successful request).</p>",
+            "idempotent": true
+        },
+        "DescribeEnvironment": {
+            "name": "DescribeEnvironment",
+            "http": {
+                "method": "GET",
+                "requestUri": "/environments/{environmentId}",
+                "responseCode": 200
+            },
+            "input": { "shape": "DescribeEnvironmentRequest" },
+            "output": { "shape": "DescribeEnvironmentResponse" },
+            "errors": [{ "shape": "ValidationException" }, { "shape": "InternalServiceException" }],
+            "documentation": "<p>Retrieve Environment information for a given EnvironmentId</p>"
+        },
+        "DescribeSession": {
+            "name": "DescribeSession",
+            "http": {
+                "method": "GET",
+                "requestUri": "/environments/{environmentId}/sessions/{sessionId}",
+                "responseCode": 200
+            },
+            "input": { "shape": "DescribeSessionRequest" },
+            "output": { "shape": "DescribeSessionResponse" },
+            "errors": [{ "shape": "ValidationException" }, { "shape": "InternalServiceException" }],
+            "documentation": "<p>Retrieve Session information for a given EnvironmentId and SessionId</p>"
+        },
+        "ListEnvironments": {
+            "name": "ListEnvironments",
+            "http": {
+                "method": "GET",
+                "requestUri": "/environments",
+                "responseCode": 200
+            },
+            "input": { "shape": "ListEnvironmentsRequest" },
+            "output": { "shape": "ListEnvironmentsResponse" },
+            "errors": [{ "shape": "ValidationException" }, { "shape": "InternalServiceException" }],
+            "documentation": "<p>Return the environments for a given account</p>"
+        },
+        "ListSessions": {
+            "name": "ListSessions",
+            "http": {
+                "method": "GET",
+                "requestUri": "/environments/{environmentId}/sessions",
+                "responseCode": 200
+            },
+            "input": { "shape": "ListSessionsRequest" },
+            "output": { "shape": "ListSessionsResponse" },
+            "errors": [{ "shape": "ValidationException" }, { "shape": "InternalServiceException" }],
+            "documentation": "<p>Return the Sessions for a given Environment</p>"
+        },
+        "ListTagsForResource": {
+            "name": "ListTagsForResource",
+            "http": {
+                "method": "GET",
+                "requestUri": "/tags/{resourceArn}",
+                "responseCode": 200
+            },
+            "input": { "shape": "ListTagsForResourceRequest" },
+            "output": { "shape": "ListTagsForResourceResponse" },
+            "errors": [
+                { "shape": "ValidationException" },
+                { "shape": "ResourceNotFoundException" },
+                { "shape": "InternalServiceException" }
+            ]
+        },
+        "PutCredentials": {
+            "name": "PutCredentials",
+            "http": {
+                "method": "PUT",
+                "requestUri": "/environments/{environmentId}/credentials",
+                "responseCode": 200
+            },
+            "input": { "shape": "PutCredentialsRequest" },
+            "output": { "shape": "PutCredentialsResponse" },
+            "errors": [
+                { "shape": "AccessDeniedException" },
+                { "shape": "ValidationException" },
+                { "shape": "ResourceNotFoundException" },
+                { "shape": "InternalServiceException" },
+                { "shape": "ConflictException" }
+            ],
+            "documentation": "<p>Puts client's credentials on the environment.</p> <p>The credentials is an union of possible credentials (e.g. AWS, Github, etc). These credentials are pushed down to the environment and the identity of the client is verified. The credentials expected to be short living. The client is responsible for the updating the credentials.</p> <p>If the client does not have permissions to interact with the environment a AccessDeniedException will be thrown. If the customer identity does not match the IAM principal provided during the creation of the environment an AccessDeniedException will be thrown. If the environment does not exist a ResourceNotFoundException will be thrown. If we are unable to connect to the environment a ConflictException will be thrown.</p>",
+            "idempotent": true
+        },
+        "ResumeSession": {
+            "name": "ResumeSession",
+            "http": {
+                "method": "POST",
+                "requestUri": "/environments/{environmentId}/sessions/{sessionId}/resume",
+                "responseCode": 200
+            },
+            "input": { "shape": "ResumeSessionRequest" },
+            "output": { "shape": "ResumeSessionResponse" },
+            "errors": [
+                { "shape": "ValidationException" },
+                { "shape": "ResourceNotFoundException" },
+                { "shape": "InternalServiceException" },
+                { "shape": "ConflictException" }
+            ],
+            "documentation": "<p>Resume an existing session that has been transiently disconnected.</p> <p>For use by clients to automatically reconnect during intermittent network issues. It is not intended for any other use.</p> <p>If the session is not available or environment is not running a ConflictException will be thrown.</p> <p>If the session does not exist a ResourceNotFoundException will be thrown.</p>"
+        },
+        "StartEnvironment": {
+            "name": "StartEnvironment",
+            "http": {
+                "method": "POST",
+                "requestUri": "/environments/{environmentId}/start",
+                "responseCode": 200
+            },
+            "input": { "shape": "StartEnvironmentRequest" },
+            "output": { "shape": "StartEnvironmentResponse" },
+            "errors": [
+                { "shape": "ValidationException" },
+                { "shape": "ResourceNotFoundException" },
+                { "shape": "InternalServiceException" },
+                { "shape": "ConflictException" }
+            ],
+            "documentation": "<p>Start a previously stopped environment</p>",
+            "idempotent": true
+        },
+        "StartSession": {
+            "name": "StartSession",
+            "http": {
+                "method": "POST",
+                "requestUri": "/environments/{environmentId}/sessions",
+                "responseCode": 200
+            },
+            "input": { "shape": "StartSessionRequest" },
+            "output": { "shape": "StartSessionResponse" },
+            "errors": [
+                { "shape": "ValidationException" },
+                { "shape": "InternalServiceException" },
+                { "shape": "LimitExceededException" },
+                { "shape": "ServiceQuotaExceededException" },
+                { "shape": "ConflictException" }
+            ],
+            "documentation": "<p>Start a session connected to a running environment, either SSM or SSH (via SSM).</p> <p>Multiple sessions can be connected to an environment at the same time.</p> <p>If the environment is not running a ValidationException is thrown. If we are unable to connect to the environment a ConflictException is thrown.</p>"
+        },
+        "StopEnvironment": {
+            "name": "StopEnvironment",
+            "http": {
+                "method": "POST",
+                "requestUri": "/environments/{environmentId}/stop",
+                "responseCode": 200
+            },
+            "input": { "shape": "StopEnvironmentRequest" },
+            "output": { "shape": "StopEnvironmentResponse" },
+            "errors": [
+                { "shape": "ValidationException" },
+                { "shape": "ResourceNotFoundException" },
+                { "shape": "InternalServiceException" },
+                { "shape": "ConflictException" }
+            ],
+            "idempotent": true
+        },
+        "StopSession": {
+            "name": "StopSession",
+            "http": {
+                "method": "DELETE",
+                "requestUri": "/environments/{environmentId}/sessions/{sessionId}",
+                "responseCode": 200
+            },
+            "input": { "shape": "StopSessionRequest" },
+            "output": { "shape": "StopSessionResponse" },
+            "errors": [
+                { "shape": "ValidationException" },
+                { "shape": "ResourceNotFoundException" },
+                { "shape": "InternalServiceException" },
+                { "shape": "ConflictException" }
+            ],
+            "documentation": "<p>Stop an existing session. Stopped sessions cannot be refreshed or restarted.</p> <p>If the environment does not exist a ResourceNotFoundException will be thrown. If session is not found a ValidationException will be thrown. (REVIEW) If we are unable to contact to the environment a ConflictException will be thrown.</p>",
+            "idempotent": true
+        },
+        "TagResource": {
+            "name": "TagResource",
+            "http": {
+                "method": "POST",
+                "requestUri": "/tags/{resourceArn}",
+                "responseCode": 200
+            },
+            "input": { "shape": "TagResourceRequest" },
+            "output": { "shape": "TagResourceResponse" },
+            "errors": [
+                { "shape": "ValidationException" },
+                { "shape": "ResourceNotFoundException" },
+                { "shape": "InternalServiceException" }
+            ]
+        },
+        "UntagResource": {
+            "name": "UntagResource",
+            "http": {
+                "method": "DELETE",
+                "requestUri": "/tags/{resourceArn}",
+                "responseCode": 200
+            },
+            "input": { "shape": "UntagResourceRequest" },
+            "output": { "shape": "UntagResourceResponse" },
+            "errors": [
+                { "shape": "ValidationException" },
+                { "shape": "ResourceNotFoundException" },
+                { "shape": "InternalServiceException" }
+            ],
+            "idempotent": true
+        }
+    },
+    "shapes": {
+        "AccessDeniedException": {
+            "type": "structure",
+            "required": ["message"],
+            "members": {
+                "message": { "shape": "String" }
+            },
+            "documentation": "<p>User does not have sufficient access to perform this action</p>",
+            "error": {
+                "httpStatusCode": 403,
+                "senderFault": true
+            },
+            "exception": true
+        },
+        "AccessDetails": {
+            "type": "structure",
+            "members": {
+                "streamUrl": {
+                    "shape": "StreamUrl",
+                    "documentation": "<p>A websocket url to connect to the environment</p>"
+                },
+                "tokenValue": {
+                    "shape": "TokenValue",
+                    "documentation": "<p>An opaque token used to authenticate requests</p>"
+                }
+            }
+        },
+        "AccessKeyId": {
+            "type": "string",
+            "documentation": "<p>The access key ID that identifies the temporary security AWS credentials.</p>",
+            "max": 128,
+            "min": 16,
+            "pattern": "[\\w]*"
+        },
+        "Arn": {
+            "type": "string",
+            "max": 1224,
+            "min": 0,
+            "pattern": "^arn:[a-z0-9][-.a-z0-9]{0,62}:[a-z0-9][-.a-z0-9]{0,62}:([a-z0-9][-.a-z0-9]{0,62})?:([a-z0-9][-.a-z0-9]{0,62})?:[^/].{0,1023}$"
+        },
+        "AwsCredentials": {
+            "type": "structure",
+            "required": ["accessKeyId", "expiration", "secretAccessKey", "sessionToken"],
+            "members": {
+                "accessKeyId": {
+                    "shape": "AccessKeyId",
+                    "documentation": "<p>The access key ID that identifies the temporary security credentials.</p>"
+                },
+                "expiration": {
+                    "shape": "Timestamp",
+                    "documentation": "<p>The date on which the current credentials expire.</p>"
+                },
+                "lastUpdated": {
+                    "shape": "Timestamp",
+                    "documentation": "<p>The last updated timestamp.</p>"
+                },
+                "secretAccessKey": {
+                    "shape": "String",
+                    "documentation": "<p>The secret access key that can be used to sign requests.</p>"
+                },
+                "sessionToken": {
+                    "shape": "String",
+                    "documentation": "<p>The token that users must pass to the service API to use the temporary credentials.</p>"
+                },
+                "type": {
+                    "shape": "String",
+                    "documentation": "<p>The type of AWS credentials, i.e. 'AWS-HMAC'</p>"
+                }
+            }
+        },
+        "ClientToken": {
+            "type": "string",
+            "max": 64,
+            "min": 0,
+            "pattern": "^[!-~]*$"
+        },
+        "Command": {
+            "type": "list",
+            "member": { "shape": "CommandMemberString" },
+            "max": 11,
+            "min": 1
+        },
+        "CommandMemberString": {
+            "type": "string",
+            "max": 255,
+            "min": 1
+        },
+        "ConflictException": {
+            "type": "structure",
+            "required": ["message"],
+            "members": {
+                "message": { "shape": "String" }
+            },
+            "documentation": "<p>Operation requested on a resource in an inconsistent state</p>",
+            "error": {
+                "httpStatusCode": 409,
+                "senderFault": true
+            },
+            "exception": true
+        },
+        "CreateEnvironmentRequest": {
+            "type": "structure",
+            "required": ["userId"],
+            "members": {
+                "clientToken": {
+                    "shape": "ClientToken",
+                    "idempotencyToken": true
+                },
+                "definition": {
+                    "shape": "Definition",
+                    "documentation": "<p>The <code>definition</code> parameter provides the image, repo or compose file that defines the container setup for the new environment.</p> <p>If no definition is provided then a default environment is used.</p>"
+                },
+                "ideRuntimes": {
+                    "shape": "IdeRuntimesInput",
+                    "documentation": "<p>The optional IDE runtime to use</p>"
+                },
+                "instanceType": {
+                    "shape": "InstanceType",
+                    "documentation": "<p>The optional Instance Type to use for the MDE environment CPU and RAM</p>"
+                },
+                "kmsKeyID": {
+                    "shape": "KmsKeyArn",
+                    "documentation": "<p>The optional KMS Key ARN used for encryption</p>"
+                },
+                "payerToken": {
+                    "shape": "PayerToken",
+                    "documentation": "<p>The optional token that uniquely identifies a customer account for billing purposes</p>"
+                },
+                "secretArn": {
+                    "shape": "SecretArn",
+                    "documentation": "<p>The optional Secret ARN to use for authentication when cloning a private repository</p>"
+                },
+                "tags": {
+                    "shape": "TagMap",
+                    "documentation": "<p>Tags to apply to the environment during creation</p>"
+                },
+                "userId": {
+                    "shape": "UserId",
+                    "documentation": "<p>The end user ID (customer using Cloud Shell, etc.)</p>"
+                }
+            },
+            "documentation": "<p>Create a running environment asynchronously</p>"
+        },
+        "CreateEnvironmentResponse": {
+            "type": "structure",
+            "required": ["environment"],
+            "members": {
+                "environment": { "shape": "Environment" }
+            },
+            "documentation": "<p>The new Environment</p>"
+        },
+        "CredentialsName": {
+            "type": "string",
+            "documentation": "<p>Name of the credentials, unique within an environment</p>"
+        },
+        "Definition": {
+            "type": "structure",
+            "members": {
+                "shellImage": { "shape": "DefinitionShellImageString" },
+                "sourceCodeUris": { "shape": "SourceCodeUris" }
+            },
+            "documentation": "<p>Definition to use for the Environment</p>",
+            "union": true
+        },
+        "DefinitionShellImageString": {
+            "type": "string",
+            "max": 400,
+            "min": 1
+        },
+        "DeleteEnvironmentRequest": {
+            "type": "structure",
+            "required": ["environmentId"],
+            "members": {
+                "clientToken": {
+                    "shape": "ClientToken",
+                    "idempotencyToken": true,
+                    "location": "header",
+                    "locationName": "X-Amzn-ClientToken"
+                },
+                "environmentId": {
+                    "shape": "EnvironmentId",
+                    "location": "uri",
+                    "locationName": "environmentId"
+                }
+            }
+        },
+        "DeleteEnvironmentResponse": {
+            "type": "structure",
+            "required": ["environment"],
+            "members": {
+                "environment": {
+                    "shape": "Environment",
+                    "documentation": "<p>The Environment that was deleted</p>"
+                }
+            }
+        },
+        "DescribeEnvironmentRequest": {
+            "type": "structure",
+            "required": ["environmentId"],
+            "members": {
+                "environmentId": {
+                    "shape": "EnvironmentId",
+                    "location": "uri",
+                    "locationName": "environmentId"
+                }
+            }
+        },
+        "DescribeEnvironmentResponse": {
+            "type": "structure",
+            "required": ["environment"],
+            "members": {
+                "environment": { "shape": "Environment" }
+            }
+        },
+        "DescribeSessionRequest": {
+            "type": "structure",
+            "required": ["environmentId", "sessionId"],
+            "members": {
+                "environmentId": {
+                    "shape": "EnvironmentId",
+                    "location": "uri",
+                    "locationName": "environmentId"
+                },
+                "sessionId": {
+                    "shape": "SessionId",
+                    "location": "uri",
+                    "locationName": "sessionId"
+                }
+            }
+        },
+        "DescribeSessionResponse": {
+            "type": "structure",
+            "required": ["session"],
+            "members": {
+                "session": { "shape": "Session" }
+            }
+        },
+        "Environment": {
+            "type": "structure",
+            "required": ["arn", "environmentId"],
+            "members": {
+                "arn": {
+                    "shape": "Arn",
+                    "documentation": "<p>ARN for the Environment</p>"
+                },
+                "createTime": {
+                    "shape": "Timestamp",
+                    "documentation": "<p>Creation timestamp in UTC</p>"
+                },
+                "deadlineTime": {
+                    "shape": "Timestamp",
+                    "documentation": "<p>Upper limit of Environment lifetime as a timestamp in UTC.</p> <p>Environments have a maximum duration of X hours and will be stopped and deleted after this time.</p>"
+                },
+                "definition": {
+                    "shape": "Definition",
+                    "documentation": "<p>Definition used for this environment</p>"
+                },
+                "environmentId": {
+                    "shape": "EnvironmentId",
+                    "documentation": "<p>Environment Identifier created for this instance, unique within the AWS Account</p>"
+                },
+                "ideRuntimes": {
+                    "shape": "IdeRuntimes",
+                    "documentation": "<p>Optional IDE runtime to use</p>"
+                },
+                "instanceType": {
+                    "shape": "InstanceType",
+                    "documentation": "<p>The optional Instance Type to use for the MDE environment CPU and RAM</p>"
+                },
+                "lastSessionActivityTime": {
+                    "shape": "Timestamp",
+                    "documentation": "<p>Time of the last session activity, including start, refresh and resume as a timestamp in UTC.</p> <p>Environments with no activity for X minutes may be stopped and deleted.</p>"
+                },
+                "status": {
+                    "shape": "EnvironmentStatus",
+                    "documentation": "<p>Actual status of the environment, such as RUNNING</p>"
+                },
+                "stoppedReason": {
+                    "shape": "String",
+                    "documentation": "<p>Reason for the most recent stop of the environment</p>"
+                },
+                "tags": {
+                    "shape": "TagMap",
+                    "documentation": "<p>Tags of the environment</p>"
+                },
+                "userId": {
+                    "shape": "UserId",
+                    "documentation": "<p>The end customer ID</p>"
+                }
+            }
+        },
+        "EnvironmentId": {
+            "type": "string",
+            "documentation": "<p>Environment Identifier, unique within an account</p>",
+            "pattern": "^e-[0-9a-z]{8,63}$"
+        },
+        "EnvironmentStatus": {
+            "type": "string",
+            "enum": ["PENDING", "RUNNING", "STARTING", "STOPPING", "STOPPED", "DELETING", "DELETED"]
+        },
+        "Environments": {
+            "type": "list",
+            "member": { "shape": "Environment" }
+        },
+        "IdeRuntime": {
+            "type": "structure",
+            "required": ["id", "version"],
+            "members": {
+                "id": {
+                    "shape": "IdeRuntimeIdString",
+                    "documentation": "<p>The identifier of the IDE runtime</p>"
+                },
+                "version": {
+                    "shape": "IdeRuntimeVersionString",
+                    "documentation": "<p>The version of the IDE runtime</p>"
+                }
+            }
+        },
+        "IdeRuntimeIdString": {
+            "type": "string",
+            "max": 128,
+            "min": 1
+        },
+        "IdeRuntimeInput": {
+            "type": "structure",
+            "required": ["id"],
+            "members": {
+                "id": {
+                    "shape": "IdeRuntimeInputIdString",
+                    "documentation": "<p>The identifier of the IDE runtime</p>"
+                }
+            }
+        },
+        "IdeRuntimeInputIdString": {
+            "type": "string",
+            "max": 128,
+            "min": 1
+        },
+        "IdeRuntimeVersionString": {
+            "type": "string",
+            "max": 256,
+            "min": 1
+        },
+        "IdeRuntimes": {
+            "type": "list",
+            "member": { "shape": "IdeRuntime" },
+            "documentation": "<p>The list of IDE runtimes</p>",
+            "max": 1,
+            "min": 0
+        },
+        "IdeRuntimesInput": {
+            "type": "list",
+            "member": { "shape": "IdeRuntimeInput" },
+            "documentation": "<p>IDE runtimes to include in the environment</p>",
+            "max": 1,
+            "min": 0
+        },
+        "InstanceType": {
+            "type": "string",
+            "documentation": "<p>Supported MDE instance types</p>",
+            "enum": ["mde.small", "mde.medium", "mde.large"]
+        },
+        "InternalServiceException": {
+            "type": "structure",
+            "members": {
+                "message": { "shape": "String" }
+            },
+            "documentation": "<p>Unexpected error during processing of request</p>",
+            "error": { "httpStatusCode": 500 },
+            "exception": true,
+            "fault": true,
+            "retryable": { "throttling": false }
+        },
+        "InvalidParameters": {
+            "type": "map",
+            "key": { "shape": "String" },
+            "value": { "shape": "String" },
+            "documentation": "<p>Invalid parameter name and corresponding message</p>"
+        },
+        "KmsKeyArn": {
+            "type": "string",
+            "max": 1224,
+            "min": 0,
+            "pattern": "^arn:[a-z0-9][-.a-z0-9]{0,62}:kms:([a-z0-9][-.a-z0-9]{0,62})?:([a-z0-9][-.a-z0-9]{0,62})?:key/.{0,1019}$"
+        },
+        "LimitExceededException": {
+            "type": "structure",
+            "required": ["message"],
+            "members": {
+                "message": { "shape": "String" }
+            },
+            "documentation": "<p>Limit exceeded failure</p>",
+            "error": {
+                "httpStatusCode": 400,
+                "senderFault": true
+            },
+            "exception": true
+        },
+        "ListEnvironmentsRequest": {
+            "type": "structure",
+            "members": {
+                "limit": {
+                    "shape": "MaxSize1000",
+                    "location": "querystring",
+                    "locationName": "limit"
+                },
+                "nextToken": {
+                    "shape": "NextToken",
+                    "location": "querystring",
+                    "locationName": "nextToken"
+                }
+            }
+        },
+        "ListEnvironmentsResponse": {
+            "type": "structure",
+            "members": {
+                "environments": { "shape": "Environments" },
+                "nextToken": { "shape": "NextToken" }
+            }
+        },
+        "ListSessionsRequest": {
+            "type": "structure",
+            "required": ["environmentId"],
+            "members": {
+                "environmentId": {
+                    "shape": "EnvironmentId",
+                    "location": "uri",
+                    "locationName": "environmentId"
+                },
+                "limit": {
+                    "shape": "MaxSize200",
+                    "location": "querystring",
+                    "locationName": "limit"
+                },
+                "nextToken": {
+                    "shape": "NextToken",
+                    "location": "querystring",
+                    "locationName": "nextToken"
+                }
+            }
+        },
+        "ListSessionsResponse": {
+            "type": "structure",
+            "members": {
+                "nextToken": { "shape": "NextToken" },
+                "sessions": { "shape": "Sessions" }
+            }
+        },
+        "ListTagsForResourceRequest": {
+            "type": "structure",
+            "required": ["resourceArn"],
+            "members": {
+                "resourceArn": {
+                    "shape": "String",
+                    "location": "uri",
+                    "locationName": "resourceArn"
+                }
+            }
+        },
+        "ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "tags": { "shape": "TagMap" }
+            }
+        },
+        "MaxSize1000": {
+            "type": "integer",
+            "max": 1000,
+            "min": 1
+        },
+        "MaxSize200": {
+            "type": "integer",
+            "max": 200,
+            "min": 1
+        },
+        "NextToken": { "type": "string" },
+        "PayerToken": { "type": "string" },
+        "PutCredentialsRequest": {
+            "type": "structure",
+            "required": ["credentials", "environmentId", "name"],
+            "members": {
+                "credentials": { "shape": "SyntheticPutCredentialsRequestCredentials" },
+                "environmentId": {
+                    "shape": "EnvironmentId",
+                    "location": "uri",
+                    "locationName": "environmentId"
+                },
+                "name": { "shape": "CredentialsName" }
+            }
+        },
+        "PutCredentialsResponse": {
+            "type": "structure",
+            "required": ["environmentId"],
+            "members": {
+                "environmentId": {
+                    "shape": "EnvironmentId",
+                    "documentation": "<p>The environment that got credentials</p>"
+                }
+            }
+        },
+        "ResourceNotFoundException": {
+            "type": "structure",
+            "required": ["message"],
+            "members": {
+                "message": { "shape": "String" }
+            },
+            "documentation": "<p>Request references a resource which does not exist</p>",
+            "error": {
+                "httpStatusCode": 404,
+                "senderFault": true
+            },
+            "exception": true
+        },
+        "ResumeSessionRequest": {
+            "type": "structure",
+            "required": ["environmentId", "sessionId"],
+            "members": {
+                "environmentId": {
+                    "shape": "EnvironmentId",
+                    "location": "uri",
+                    "locationName": "environmentId"
+                },
+                "sessionId": {
+                    "shape": "SessionId",
+                    "location": "uri",
+                    "locationName": "sessionId"
+                }
+            }
+        },
+        "ResumeSessionResponse": {
+            "type": "structure",
+            "required": ["environmentId", "sessionId"],
+            "members": {
+                "accessDetails": {
+                    "shape": "AccessDetails",
+                    "documentation": "<p>Access details for the session, potentially new ones</p>"
+                },
+                "environmentId": { "shape": "EnvironmentId" },
+                "session": {
+                    "shape": "Session",
+                    "documentation": "<p>The Session successfully refreshed</p>"
+                },
+                "sessionId": { "shape": "SessionId" }
+            }
+        },
+        "SecretArn": {
+            "type": "string",
+            "max": 1224,
+            "min": 0,
+            "pattern": "^arn:[a-z0-9][-.a-z0-9]{0,62}:secretsmanager:[a-z0-9][-.a-z0-9]{0,62}:[a-z0-9][-.a-z0-9]{0,62}:secret:.{1,512}$"
+        },
+        "ServiceQuotaExceededException": {
+            "type": "structure",
+            "required": ["message"],
+            "members": {
+                "message": { "shape": "String" }
+            },
+            "documentation": "<p>Request would cause a service quota to be exceeded</p>",
+            "error": {
+                "httpStatusCode": 402,
+                "senderFault": true
+            },
+            "exception": true
+        },
+        "Session": {
+            "type": "structure",
+            "required": ["environmentId", "sessionId"],
+            "members": {
+                "endTime": {
+                    "shape": "Timestamp",
+                    "documentation": "<p>Session end timestamp in UTC, if the session has ended</p>"
+                },
+                "environmentId": { "shape": "EnvironmentId" },
+                "lastActivityTime": {
+                    "shape": "Timestamp",
+                    "documentation": "<p>Time of the last session refresh as a timestamp in UTC</p>"
+                },
+                "sessionId": { "shape": "SessionId" },
+                "sessionStatus": { "shape": "SessionStatus" },
+                "sessionType": { "shape": "SessionType" },
+                "startTime": {
+                    "shape": "Timestamp",
+                    "documentation": "<p>Session creation timestamp in UTC</p>"
+                }
+            },
+            "documentation": "<p>The details of a session.</p> <p>Note that SessionUrl and TokenValue are not included.</p>"
+        },
+        "SessionId": {
+            "type": "string",
+            "documentation": "<p>Session Identifier, unique within an environment</p>",
+            "max": 96,
+            "min": 1
+        },
+        "SessionParameterName": {
+            "type": "string",
+            "max": 255,
+            "min": 1
+        },
+        "SessionParameterValue": {
+            "type": "string",
+            "max": 65535,
+            "min": 1
+        },
+        "SessionParameterlist": {
+            "type": "list",
+            "member": { "shape": "SessionParameterValue" }
+        },
+        "SessionParameters": {
+            "type": "map",
+            "key": { "shape": "SessionParameterName" },
+            "value": { "shape": "SessionParameterlist" }
+        },
+        "SessionStatus": {
+            "type": "string",
+            "enum": ["CONNECTED", "DISCONNECTED"]
+        },
+        "SessionType": {
+            "type": "string",
+            "enum": ["SSM", "SSH"]
+        },
+        "Sessions": {
+            "type": "list",
+            "member": { "shape": "Session" }
+        },
+        "SourceCodeUris": {
+            "type": "list",
+            "member": { "shape": "SourceCodeUrisMemberString" },
+            "documentation": "<p>URIs for git repositories to clone into the created environment</p>",
+            "max": 5,
+            "min": 0
+        },
+        "SourceCodeUrisMemberString": {
+            "type": "string",
+            "max": 400,
+            "min": 1
+        },
+        "StartEnvironmentRequest": {
+            "type": "structure",
+            "required": ["environmentId"],
+            "members": {
+                "clientToken": {
+                    "shape": "ClientToken",
+                    "idempotencyToken": true
+                },
+                "definition": {
+                    "shape": "Definition",
+                    "documentation": "<p>New environment definition for the environment</p>"
+                },
+                "environmentId": {
+                    "shape": "EnvironmentId",
+                    "location": "uri",
+                    "locationName": "environmentId"
+                },
+                "ideRuntimes": {
+                    "shape": "IdeRuntimesInput",
+                    "documentation": "<p>New runtime to be used in the environment</p>"
+                },
+                "instanceType": {
+                    "shape": "InstanceType",
+                    "documentation": "<p>The optional Instance Type to use for the MDE environment CPU and RAM</p>"
+                },
+                "secretArn": {
+                    "shape": "SecretArn",
+                    "documentation": "<p>New Secret ARN to use for authentication when cloning a private repository</p>"
+                }
+            },
+            "documentation": "<p>Start an environment asynchronously</p>"
+        },
+        "StartEnvironmentResponse": {
+            "type": "structure",
+            "required": ["environment"],
+            "members": {
+                "environment": { "shape": "Environment" }
+            }
+        },
+        "StartSessionRequest": {
+            "type": "structure",
+            "required": ["environmentId", "sessionType"],
+            "members": {
+                "command": {
+                    "shape": "Command",
+                    "documentation": "<p>Command for SSM to execute. The first list item is the command and the others are the arguments. If no command is provided then the default shell is launched. A maximum of 10 arguments can be provided.</p> <p>Note: this is only applicable to SSM sessions</p>"
+                },
+                "environmentId": {
+                    "shape": "EnvironmentId",
+                    "location": "uri",
+                    "locationName": "environmentId"
+                },
+                "parameters": {
+                    "shape": "SessionParameters",
+                    "documentation": "<p>Reserved for future use</p>"
+                },
+                "sessionType": { "shape": "SessionType" }
+            }
+        },
+        "StartSessionResponse": {
+            "type": "structure",
+            "required": ["environmentId", "sessionId"],
+            "members": {
+                "accessDetails": { "shape": "AccessDetails" },
+                "environmentId": { "shape": "EnvironmentId" },
+                "sessionId": { "shape": "String" },
+                "sessionType": { "shape": "SessionType" }
+            }
+        },
+        "StopEnvironmentRequest": {
+            "type": "structure",
+            "required": ["environmentId"],
+            "members": {
+                "clientToken": {
+                    "shape": "ClientToken",
+                    "idempotencyToken": true
+                },
+                "environmentId": {
+                    "shape": "EnvironmentId",
+                    "location": "uri",
+                    "locationName": "environmentId"
+                }
+            }
+        },
+        "StopEnvironmentResponse": {
+            "type": "structure",
+            "required": ["environment"],
+            "members": {
+                "environment": { "shape": "Environment" }
+            }
+        },
+        "StopSessionRequest": {
+            "type": "structure",
+            "required": ["environmentId", "sessionId"],
+            "members": {
+                "clientToken": {
+                    "shape": "ClientToken",
+                    "idempotencyToken": true,
+                    "location": "header",
+                    "locationName": "X-Amzn-ClientToken"
+                },
+                "environmentId": {
+                    "shape": "EnvironmentId",
+                    "location": "uri",
+                    "locationName": "environmentId"
+                },
+                "sessionId": {
+                    "shape": "SessionId",
+                    "location": "uri",
+                    "locationName": "sessionId"
+                }
+            }
+        },
+        "StopSessionResponse": {
+            "type": "structure",
+            "required": ["session"],
+            "members": {
+                "session": {
+                    "shape": "Session",
+                    "documentation": "<p>The session that was stopped</p>"
+                }
+            }
+        },
+        "StreamUrl": {
+            "type": "string",
+            "documentation": "<p>Websocket URL for interacting with an environment</p>"
+        },
+        "String": { "type": "string" },
+        "SyntheticPutCredentialsRequestCredentials": {
+            "type": "structure",
+            "members": {
+                "aws": { "shape": "AwsCredentials" }
+            },
+            "documentation": "<p>Credentials to send to the Environment</p>",
+            "sensitive": true,
+            "union": true
+        },
+        "TagKeys": {
+            "type": "list",
+            "member": { "shape": "String" }
+        },
+        "TagMap": {
+            "type": "map",
+            "key": {
+                "shape": "TagMapKeyString",
+                "documentation": "<p>The key of the tag.</p> <p>Constraints: Tag keys are case-sensitive and accept a maximum of 128 Unicode characters. Valid characters are Unicode letters, digits, white space, and any of the following symbols: _ . : / = + - @ May not begin with <code>aws:</code>.</p>"
+            },
+            "value": {
+                "shape": "TagMapValueString",
+                "documentation": "<p>The value of the tag.</p> <p>Constraints: Tag values are case-sensitive and accept a maximum of 256 Unicode characters. Valid characters are Unicode letters, digits, white space, and any of the following symbols: _ . : / = + - @</p>"
+            },
+            "documentation": "<p>A collection of up to 50 unique tags</p>",
+            "max": 50,
+            "min": 0
+        },
+        "TagMapKeyString": {
+            "type": "string",
+            "max": 128,
+            "min": 0
+        },
+        "TagMapValueString": {
+            "type": "string",
+            "max": 256,
+            "min": 0
+        },
+        "TagResourceRequest": {
+            "type": "structure",
+            "required": ["resourceArn", "tags"],
+            "members": {
+                "resourceArn": {
+                    "shape": "String",
+                    "location": "uri",
+                    "locationName": "resourceArn"
+                },
+                "tags": { "shape": "TagMap" }
+            }
+        },
+        "TagResourceResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "ThrottlingException": {
+            "type": "structure",
+            "required": ["message"],
+            "members": {
+                "message": { "shape": "String" }
+            },
+            "documentation": "<p>Request was denied due to request throttling</p>",
+            "error": {
+                "httpStatusCode": 429,
+                "senderFault": true
+            },
+            "exception": true,
+            "retryable": { "throttling": false }
+        },
+        "Timestamp": { "type": "timestamp" },
+        "TokenValue": {
+            "type": "string",
+            "documentation": "<p>Token used to authenticate</p>"
+        },
+        "UntagResourceRequest": {
+            "type": "structure",
+            "required": ["resourceArn", "tagKeys"],
+            "members": {
+                "resourceArn": {
+                    "shape": "String",
+                    "location": "uri",
+                    "locationName": "resourceArn"
+                },
+                "tagKeys": {
+                    "shape": "TagKeys",
+                    "location": "querystring",
+                    "locationName": "tagKeys"
+                }
+            }
+        },
+        "UntagResourceResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "UserId": { "type": "string" },
+        "ValidationException": {
+            "type": "structure",
+            "members": {
+                "invalidParameters": { "shape": "InvalidParameters" },
+                "message": { "shape": "String" }
+            },
+            "documentation": "<p>Parameter validation failure</p>",
+            "error": {
+                "httpStatusCode": 400,
+                "senderFault": true
+            },
+            "exception": true
+        }
+    },
+    "documentation": "<p>Managed Development Environments allow developers to easily create and reproduce as many development environments as they want - be it per software project or for individual experimentation. Using an MDE simplifies and standardizes development environments by codifying them into repeatable toolchains and by automating the creation and configuration of them on burstable compute. As MDE automates away all the manual and tedious work involved with creating and caring for development environments, developers can work more productively and focus on developing code.</p>"
+}
