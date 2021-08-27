@@ -17,14 +17,14 @@ declare class ClientMde extends Service {
     constructor(options?: ClientMde.Types.ClientConfiguration)
     config: Config & ClientMde.Types.ClientConfiguration
     /**
-     * Create a new, running environment from a definition and overrides asynchronously. Use the EventBridge for notification when the environment is &quot;RUNNING&quot; and therefore ready to StartSession, details.
+     * Create a new, running or stopped environment asynchronously. Use the EventBridge for notification when the environment is &quot;RUNNING&quot; and therefore ready to StartSession, details.
      */
     createEnvironment(
         params: ClientMde.Types.CreateEnvironmentRequest,
         callback?: (err: AWSError, data: ClientMde.Types.CreateEnvironmentResponse) => void
     ): Request<ClientMde.Types.CreateEnvironmentResponse, AWSError>
     /**
-     * Create a new, running environment from a definition and overrides asynchronously. Use the EventBridge for notification when the environment is &quot;RUNNING&quot; and therefore ready to StartSession, details.
+     * Create a new, running or stopped environment asynchronously. Use the EventBridge for notification when the environment is &quot;RUNNING&quot; and therefore ready to StartSession, details.
      */
     createEnvironment(
         callback?: (err: AWSError, data: ClientMde.Types.CreateEnvironmentResponse) => void
@@ -45,29 +45,29 @@ declare class ClientMde extends Service {
     /**
      * Retrieve Environment information for a given EnvironmentId
      */
-    describeEnvironment(
-        params: ClientMde.Types.DescribeEnvironmentRequest,
-        callback?: (err: AWSError, data: ClientMde.Types.DescribeEnvironmentResponse) => void
-    ): Request<ClientMde.Types.DescribeEnvironmentResponse, AWSError>
+    getEnvironmentMetadata(
+        params: ClientMde.Types.GetEnvironmentMetadataRequest,
+        callback?: (err: AWSError, data: ClientMde.Types.GetEnvironmentMetadataResponse) => void
+    ): Request<ClientMde.Types.GetEnvironmentMetadataResponse, AWSError>
     /**
      * Retrieve Environment information for a given EnvironmentId
      */
-    describeEnvironment(
-        callback?: (err: AWSError, data: ClientMde.Types.DescribeEnvironmentResponse) => void
-    ): Request<ClientMde.Types.DescribeEnvironmentResponse, AWSError>
+    getEnvironmentMetadata(
+        callback?: (err: AWSError, data: ClientMde.Types.GetEnvironmentMetadataResponse) => void
+    ): Request<ClientMde.Types.GetEnvironmentMetadataResponse, AWSError>
     /**
      * Retrieve Session information for a given EnvironmentId and SessionId
      */
-    describeSession(
-        params: ClientMde.Types.DescribeSessionRequest,
-        callback?: (err: AWSError, data: ClientMde.Types.DescribeSessionResponse) => void
-    ): Request<ClientMde.Types.DescribeSessionResponse, AWSError>
+    getSessionMetadata(
+        params: ClientMde.Types.GetSessionMetadataRequest,
+        callback?: (err: AWSError, data: ClientMde.Types.GetSessionMetadataResponse) => void
+    ): Request<ClientMde.Types.GetSessionMetadataResponse, AWSError>
     /**
      * Retrieve Session information for a given EnvironmentId and SessionId
      */
-    describeSession(
-        callback?: (err: AWSError, data: ClientMde.Types.DescribeSessionResponse) => void
-    ): Request<ClientMde.Types.DescribeSessionResponse, AWSError>
+    getSessionMetadata(
+        callback?: (err: AWSError, data: ClientMde.Types.GetSessionMetadataResponse) => void
+    ): Request<ClientMde.Types.GetSessionMetadataResponse, AWSError>
     /**
      * Return the environments for a given account
      */
@@ -95,44 +95,18 @@ declare class ClientMde extends Service {
         callback?: (err: AWSError, data: ClientMde.Types.ListSessionsResponse) => void
     ): Request<ClientMde.Types.ListSessionsResponse, AWSError>
     /**
-     *
+     * List tags for resource
      */
     listTagsForResource(
         params: ClientMde.Types.ListTagsForResourceRequest,
         callback?: (err: AWSError, data: ClientMde.Types.ListTagsForResourceResponse) => void
     ): Request<ClientMde.Types.ListTagsForResourceResponse, AWSError>
     /**
-     *
+     * List tags for resource
      */
     listTagsForResource(
         callback?: (err: AWSError, data: ClientMde.Types.ListTagsForResourceResponse) => void
     ): Request<ClientMde.Types.ListTagsForResourceResponse, AWSError>
-    /**
-     * Puts client's credentials on the environment. The credentials is an union of possible credentials (e.g. AWS, Github, etc). These credentials are pushed down to the environment and the identity of the client is verified. The credentials expected to be short living. The client is responsible for the updating the credentials. If the client does not have permissions to interact with the environment a AccessDeniedException will be thrown. If the customer identity does not match the IAM principal provided during the creation of the environment an AccessDeniedException will be thrown. If the environment does not exist a ResourceNotFoundException will be thrown. If we are unable to connect to the environment a ConflictException will be thrown.
-     */
-    putCredentials(
-        params: ClientMde.Types.PutCredentialsRequest,
-        callback?: (err: AWSError, data: ClientMde.Types.PutCredentialsResponse) => void
-    ): Request<ClientMde.Types.PutCredentialsResponse, AWSError>
-    /**
-     * Puts client's credentials on the environment. The credentials is an union of possible credentials (e.g. AWS, Github, etc). These credentials are pushed down to the environment and the identity of the client is verified. The credentials expected to be short living. The client is responsible for the updating the credentials. If the client does not have permissions to interact with the environment a AccessDeniedException will be thrown. If the customer identity does not match the IAM principal provided during the creation of the environment an AccessDeniedException will be thrown. If the environment does not exist a ResourceNotFoundException will be thrown. If we are unable to connect to the environment a ConflictException will be thrown.
-     */
-    putCredentials(
-        callback?: (err: AWSError, data: ClientMde.Types.PutCredentialsResponse) => void
-    ): Request<ClientMde.Types.PutCredentialsResponse, AWSError>
-    /**
-     * Resume an existing session that has been transiently disconnected. For use by clients to automatically reconnect during intermittent network issues. It is not intended for any other use. If the session is not available or environment is not running a ConflictException will be thrown. If the session does not exist a ResourceNotFoundException will be thrown.
-     */
-    resumeSession(
-        params: ClientMde.Types.ResumeSessionRequest,
-        callback?: (err: AWSError, data: ClientMde.Types.ResumeSessionResponse) => void
-    ): Request<ClientMde.Types.ResumeSessionResponse, AWSError>
-    /**
-     * Resume an existing session that has been transiently disconnected. For use by clients to automatically reconnect during intermittent network issues. It is not intended for any other use. If the session is not available or environment is not running a ConflictException will be thrown. If the session does not exist a ResourceNotFoundException will be thrown.
-     */
-    resumeSession(
-        callback?: (err: AWSError, data: ClientMde.Types.ResumeSessionResponse) => void
-    ): Request<ClientMde.Types.ResumeSessionResponse, AWSError>
     /**
      * Start a previously stopped environment
      */
@@ -160,14 +134,14 @@ declare class ClientMde extends Service {
         callback?: (err: AWSError, data: ClientMde.Types.StartSessionResponse) => void
     ): Request<ClientMde.Types.StartSessionResponse, AWSError>
     /**
-     *
+     * Stop environment operation stops a running environment
      */
     stopEnvironment(
         params: ClientMde.Types.StopEnvironmentRequest,
         callback?: (err: AWSError, data: ClientMde.Types.StopEnvironmentResponse) => void
     ): Request<ClientMde.Types.StopEnvironmentResponse, AWSError>
     /**
-     *
+     * Stop environment operation stops a running environment
      */
     stopEnvironment(
         callback?: (err: AWSError, data: ClientMde.Types.StopEnvironmentResponse) => void
@@ -177,36 +151,34 @@ declare class ClientMde extends Service {
      */
     stopSession(
         params: ClientMde.Types.StopSessionRequest,
-        callback?: (err: AWSError, data: ClientMde.Types.StopSessionResponse) => void
-    ): Request<ClientMde.Types.StopSessionResponse, AWSError>
+        callback?: (err: AWSError, data: {}) => void
+    ): Request<{}, AWSError>
     /**
      * Stop an existing session. Stopped sessions cannot be refreshed or restarted. If the environment does not exist a ResourceNotFoundException will be thrown. If session is not found a ValidationException will be thrown. (REVIEW) If we are unable to contact to the environment a ConflictException will be thrown.
      */
-    stopSession(
-        callback?: (err: AWSError, data: ClientMde.Types.StopSessionResponse) => void
-    ): Request<ClientMde.Types.StopSessionResponse, AWSError>
+    stopSession(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>
     /**
-     *
+     * Tag resource operation
      */
     tagResource(
         params: ClientMde.Types.TagResourceRequest,
         callback?: (err: AWSError, data: ClientMde.Types.TagResourceResponse) => void
     ): Request<ClientMde.Types.TagResourceResponse, AWSError>
     /**
-     *
+     * Tag resource operation
      */
     tagResource(
         callback?: (err: AWSError, data: ClientMde.Types.TagResourceResponse) => void
     ): Request<ClientMde.Types.TagResourceResponse, AWSError>
     /**
-     *
+     * Untag resource operation
      */
     untagResource(
         params: ClientMde.Types.UntagResourceRequest,
         callback?: (err: AWSError, data: ClientMde.Types.UntagResourceResponse) => void
     ): Request<ClientMde.Types.UntagResourceResponse, AWSError>
     /**
-     *
+     * Untag resource operation
      */
     untagResource(
         callback?: (err: AWSError, data: ClientMde.Types.UntagResourceResponse) => void
@@ -223,34 +195,8 @@ declare namespace ClientMde {
          */
         tokenValue?: TokenValue
     }
-    export type AccessKeyId = string
     export type Arn = string
-    export interface AwsCredentials {
-        /**
-         * The access key ID that identifies the temporary security credentials.
-         */
-        accessKeyId: AccessKeyId
-        /**
-         * The date on which the current credentials expire.
-         */
-        expiration: Timestamp
-        /**
-         * The last updated timestamp.
-         */
-        lastUpdated?: Timestamp
-        /**
-         * The secret access key that can be used to sign requests.
-         */
-        secretAccessKey: String
-        /**
-         * The token that users must pass to the service API to use the temporary credentials.
-         */
-        sessionToken: String
-        /**
-         * The type of AWS credentials, i.e. 'AWS-HMAC'
-         */
-        type?: String
-    }
+    export type Boolean = boolean
     export type ClientToken = string
     export type Command = CommandMemberString[]
     export type CommandMemberString = string
@@ -261,41 +207,66 @@ declare namespace ClientMde {
          */
         definition?: Definition
         /**
-         * The optional IDE runtime to use
+         * The optional Devfile to use
          */
-        ideRuntimes?: IdeRuntimesInput
+        devfile?: DevfileConfiguration
         /**
-         * The optional Instance Type to use for the MDE environment CPU and RAM
+         * The optional ARN of the execution role to be used for launching the environment
          */
-        instanceType?: InstanceType
+        executionRoleArn?: IamRoleArn
         /**
-         * The optional KMS Key ARN used for encryption
+         * The optional IDE runtimes to use
          */
-        kmsKeyID?: KmsKeyArn
+        ideRuntimes?: IdeRuntimesConfiguration
+        inactivityTimeoutMinutes?: InactivityTimeoutMinutes
         /**
-         * The optional token that uniquely identifies a customer account for billing purposes
+         * The instance type to use for the MDE environment CPU and RAM
          */
-        payerToken?: PayerToken
+        instanceType: InstanceType
         /**
-         * The optional Secret ARN to use for authentication when cloning a private repository
+         * Persistent storage configuration
          */
-        secretArn?: SecretArn
+        persistentStorage: PersistentStorageConfiguration
+        /**
+         * The optional ARN of the role to be used within the environment
+         */
+        roleArn?: IamRoleArn
+        /**
+         * List of secret ARNs to use for authentication when cloning source code
+         */
+        secretArns?: SecretArns
+        /**
+         * List of source code to clone after environment creation
+         */
+        sourceCode?: SourceCodeConfigurationList
+        /**
+         * Should the environment be started after successful creation (default: true)?
+         */
+        start?: Boolean
         /**
          * Tags to apply to the environment during creation
          */
         tags?: TagMap
-        /**
-         * The end user ID (customer using Cloud Shell, etc.)
-         */
-        userId: UserId
     }
     export interface CreateEnvironmentResponse {
-        environment: Environment
+        /**
+         * ARN for the Environment
+         */
+        arn: Arn
+        /**
+         * Environment Identifier created for this instance, unique within the AWS Account
+         */
+        id: EnvironmentId
+        /**
+         * Status of the environment, e.g. PENDING
+         */
+        status: EnvironmentStatus
     }
-    export type CredentialsName = string
     export interface Definition {
+        /**
+         * ECS compatible image to start
+         */
         shellImage?: DefinitionShellImageString
-        sourceCodeUris?: SourceCodeUris
     }
     export type DefinitionShellImageString = string
     export interface DeleteEnvironmentRequest {
@@ -304,73 +275,25 @@ declare namespace ClientMde {
     }
     export interface DeleteEnvironmentResponse {
         /**
-         * The Environment that was deleted
-         */
-        environment: Environment
-    }
-    export interface DescribeEnvironmentRequest {
-        environmentId: EnvironmentId
-    }
-    export interface DescribeEnvironmentResponse {
-        environment: Environment
-    }
-    export interface DescribeSessionRequest {
-        environmentId: EnvironmentId
-        sessionId: SessionId
-    }
-    export interface DescribeSessionResponse {
-        session: Session
-    }
-    export interface Environment {
-        /**
          * ARN for the Environment
          */
         arn: Arn
         /**
-         * Creation timestamp in UTC
-         */
-        createTime?: Timestamp
-        /**
-         * Upper limit of Environment lifetime as a timestamp in UTC. Environments have a maximum duration of X hours and will be stopped and deleted after this time.
-         */
-        deadlineTime?: Timestamp
-        /**
-         * Definition used for this environment
-         */
-        definition?: Definition
-        /**
          * Environment Identifier created for this instance, unique within the AWS Account
          */
-        environmentId: EnvironmentId
+        id: EnvironmentId
         /**
-         * Optional IDE runtime to use
+         * Status of the environment, e.g. DELETING
          */
-        ideRuntimes?: IdeRuntimes
-        /**
-         * The optional Instance Type to use for the MDE environment CPU and RAM
-         */
-        instanceType?: InstanceType
-        /**
-         * Time of the last session activity, including start, refresh and resume as a timestamp in UTC. Environments with no activity for X minutes may be stopped and deleted.
-         */
-        lastSessionActivityTime?: Timestamp
-        /**
-         * Actual status of the environment, such as RUNNING
-         */
-        status?: EnvironmentStatus
-        /**
-         * Reason for the most recent stop of the environment
-         */
-        stoppedReason?: String
-        /**
-         * Tags of the environment
-         */
-        tags?: TagMap
-        /**
-         * The end customer ID
-         */
-        userId?: UserId
+        status: EnvironmentStatus
     }
+    export interface DevfileConfiguration {
+        /**
+         * The location of the devfile on the filesystem related to projects directory or the url to the devfile in Devfile Registry
+         */
+        location: DevfileConfigurationLocationString
+    }
+    export type DevfileConfigurationLocationString = string
     export type EnvironmentId = string
     export type EnvironmentStatus =
         | 'PENDING'
@@ -381,7 +304,129 @@ declare namespace ClientMde {
         | 'DELETING'
         | 'DELETED'
         | string
-    export type Environments = Environment[]
+    export type EnvironmentSummaries = EnvironmentSummary[]
+    export interface EnvironmentSummary {
+        /**
+         * ARN for the Environment
+         */
+        arn: Arn
+        /**
+         * Creation timestamp in UTC
+         */
+        createdAt?: Timestamp
+        /**
+         * Environment Identifier created for this instance, unique within the AWS Account
+         */
+        id: EnvironmentId
+        /**
+         * The IDE runtimes configured for the environment
+         */
+        ideRuntimes?: IdeRuntimes
+        /**
+         * Timestamp of the last start in UTC.
+         */
+        lastStartedAt?: Timestamp
+        /**
+         * Actual status of the environment, such as RUNNING
+         */
+        status?: EnvironmentStatus
+        /**
+         * Tags of the environment
+         */
+        tags?: TagMap
+        /**
+         * The ARN of the user that created the environment
+         */
+        userArn?: UserArn
+    }
+    export interface ExecCommandSessionConfiguration {
+        /**
+         * The first list item is the command and the others are the arguments. A maximum of 10 arguments can be provided.
+         */
+        command: Command
+    }
+    export interface GetEnvironmentMetadataRequest {
+        environmentId: EnvironmentId
+    }
+    export interface GetEnvironmentMetadataResponse {
+        /**
+         * ARN for the Environment
+         */
+        arn: Arn
+        /**
+         * Creation timestamp in UTC
+         */
+        createdAt: Timestamp
+        /**
+         * Definition used for this environment
+         */
+        definition?: Definition
+        /**
+         * The optional ARN of the execution role to be used for launching the environment
+         */
+        executionRoleArn?: IamRoleArn
+        /**
+         * Environment Identifier created for this instance, unique within the AWS Account
+         */
+        id: EnvironmentId
+        /**
+         * The IDE runtimes configured for the environment
+         */
+        ideRuntimes?: IdeRuntimes
+        inactivityTimeoutMinutes?: InactivityTimeoutMinutes
+        /**
+         * The optional Instance Type to use for the MDE environment CPU and RAM
+         */
+        instanceType: InstanceType
+        /**
+         * Timestamp of the last start in UTC.
+         */
+        lastStartedAt?: Timestamp
+        /**
+         * Upper limit of Environment lifetime as a timestamp in UTC. Environments have a maximum duration of X hours and will be stopped after this time.
+         */
+        maxRuntimeReachedAt?: Timestamp
+        /**
+         * Persistent storage configuration
+         */
+        persistentStorage?: PersistentStorage
+        /**
+         * The optional ARN of the role to be used within the environment
+         */
+        roleArn?: IamRoleArn
+        /**
+         * Actual status of the environment, such as RUNNING
+         */
+        status: EnvironmentStatus
+        /**
+         * Reason for the most recent stop of the environment
+         */
+        stoppedReason?: String
+        /**
+         * Tags of the environment
+         */
+        tags?: TagMap
+        /**
+         * The ARN of the user that created the environment
+         */
+        userArn?: UserArn
+    }
+    export interface GetSessionMetadataRequest {
+        environmentId: EnvironmentId
+        sessionId: SessionId
+    }
+    export interface GetSessionMetadataResponse {
+        id: SessionId
+        /**
+         * Session creation timestamp in UTC
+         */
+        startedAt?: Timestamp
+        /**
+         * Status of the session
+         */
+        status?: SessionStatus
+    }
+    export type IamRoleArn = string
     export interface IdeRuntime {
         /**
          * The identifier of the IDE runtime
@@ -392,37 +437,49 @@ declare namespace ClientMde {
          */
         version: IdeRuntimeVersionString
     }
-    export type IdeRuntimeIdString = string
-    export interface IdeRuntimeInput {
+    export interface IdeRuntimeConfiguration {
         /**
          * The identifier of the IDE runtime
          */
-        id: IdeRuntimeInputIdString
+        id: IdeRuntimeConfigurationIdString
     }
-    export type IdeRuntimeInputIdString = string
+    export type IdeRuntimeConfigurationIdString = string
+    export type IdeRuntimeIdString = string
     export type IdeRuntimeVersionString = string
     export type IdeRuntimes = IdeRuntime[]
-    export type IdeRuntimesInput = IdeRuntimeInput[]
+    export type IdeRuntimesConfiguration = IdeRuntimeConfiguration[]
+    export type InactivityTimeoutMinutes = number
     export type InstanceType = 'mde.small' | 'mde.medium' | 'mde.large' | string
-    export type KmsKeyArn = string
     export interface ListEnvironmentsRequest {
-        limit?: MaxSize1000
+        maxResults?: MaxSize1000
+        /**
+         * Next token for pagination
+         */
         nextToken?: NextToken
     }
     export interface ListEnvironmentsResponse {
-        environments?: Environments
+        /**
+         * List of Environments
+         */
+        environmentSummaries?: EnvironmentSummaries
+        /**
+         * Next token for pagination
+         */
         nextToken?: NextToken
     }
     export interface ListSessionsRequest {
         environmentId: EnvironmentId
-        limit?: MaxSize200
+        maxResults?: MaxSize200
         nextToken?: NextToken
     }
     export interface ListSessionsResponse {
         nextToken?: NextToken
-        sessions?: Sessions
+        sessionSummaries?: SessionSummaries
     }
     export interface ListTagsForResourceRequest {
+        /**
+         * Resource to list tags for
+         */
         resourceArn: String
     }
     export interface ListTagsForResourceResponse {
@@ -431,76 +488,72 @@ declare namespace ClientMde {
     export type MaxSize1000 = number
     export type MaxSize200 = number
     export type NextToken = string
-    export type PayerToken = string
-    export interface PutCredentialsRequest {
-        credentials: SyntheticPutCredentialsRequestCredentials
-        environmentId: EnvironmentId
-        name: CredentialsName
-    }
-    export interface PutCredentialsResponse {
+    export interface PersistentStorage {
         /**
-         * The environment that got credentials
+         * Size of the persistent storage in Gb (0,16,32,64), zero for no persistence
          */
-        environmentId: EnvironmentId
+        sizeInGiB: PersistentStorageSizeInGiBInteger
     }
-    export interface ResumeSessionRequest {
-        environmentId: EnvironmentId
-        sessionId: SessionId
-    }
-    export interface ResumeSessionResponse {
+    export interface PersistentStorageConfiguration {
         /**
-         * Access details for the session, potentially new ones
+         * Size of the persistent storage in Gb (0,16,32,64), zero for no persistence
          */
-        accessDetails?: AccessDetails
-        environmentId: EnvironmentId
-        /**
-         * The Session successfully refreshed
-         */
-        session?: Session
-        sessionId: SessionId
+        sizeInGiB: PersistentStorageConfigurationSizeInGiBInteger
     }
+    export type PersistentStorageConfigurationSizeInGiBInteger = number
+    export type PersistentStorageSizeInGiBInteger = number
     export type SecretArn = string
-    export interface Session {
-        /**
-         * Session end timestamp in UTC, if the session has ended
-         */
-        endTime?: Timestamp
-        environmentId: EnvironmentId
-        /**
-         * Time of the last session refresh as a timestamp in UTC
-         */
-        lastActivityTime?: Timestamp
-        sessionId: SessionId
-        sessionStatus?: SessionStatus
-        sessionType?: SessionType
+    export type SecretArns = SecretArn[]
+    export interface SessionConfiguration {
+        execCommand?: ExecCommandSessionConfiguration
+        ssh?: SshSessionConfiguration
+    }
+    export type SessionId = string
+    export type SessionStatus = 'CONNECTED' | 'DISCONNECTED' | string
+    export type SessionSummaries = SessionSummary[]
+    export interface SessionSummary {
+        id: SessionId
         /**
          * Session creation timestamp in UTC
          */
-        startTime?: Timestamp
+        startedAt?: Timestamp
+        /**
+         * Status of the session
+         */
+        status?: SessionStatus
     }
-    export type SessionId = string
-    export type SessionParameterName = string
-    export type SessionParameterValue = string
-    export type SessionParameterlist = SessionParameterValue[]
-    export type SessionParameters = { [key: string]: SessionParameterlist }
-    export type SessionStatus = 'CONNECTED' | 'DISCONNECTED' | string
-    export type SessionType = 'SSM' | 'SSH' | string
-    export type Sessions = Session[]
-    export type SourceCodeUris = SourceCodeUrisMemberString[]
-    export type SourceCodeUrisMemberString = string
+    export interface SourceCodeConfiguration {
+        /**
+         * The name of the branch to clone
+         */
+        branch?: SourceCodeConfigurationBranchString
+        /**
+         * The URI of the source code to clone
+         */
+        uri?: SourceCodeConfigurationUriString
+    }
+    export type SourceCodeConfigurationBranchString = string
+    export type SourceCodeConfigurationList = SourceCodeConfiguration[]
+    export type SourceCodeConfigurationUriString = string
+    export interface SshSessionConfiguration {}
     export interface StartEnvironmentRequest {
         clientToken?: ClientToken
         /**
          * New environment definition for the environment
          */
         definition?: Definition
+        /**
+         * The optional Devfile to use
+         */
+        devfile?: DevfileConfiguration
         environmentId: EnvironmentId
         /**
          * New runtime to be used in the environment
          */
-        ideRuntimes?: IdeRuntimesInput
+        ideRuntimes?: IdeRuntimesConfiguration
+        inactivityTimeoutMinutes?: InactivityTimeoutMinutes
         /**
-         * The optional Instance Type to use for the MDE environment CPU and RAM
+         * The optional instance type to use for the MDE environment CPU and RAM
          */
         instanceType?: InstanceType
         /**
@@ -509,54 +562,72 @@ declare namespace ClientMde {
         secretArn?: SecretArn
     }
     export interface StartEnvironmentResponse {
-        environment: Environment
+        /**
+         * ARN for the Environment
+         */
+        arn: Arn
+        /**
+         * Environment Identifier created for this instance, unique within the AWS Account
+         */
+        id: EnvironmentId
+        /**
+         * Status of the environment, e.g. STARTING
+         */
+        status: EnvironmentStatus
     }
     export interface StartSessionRequest {
-        /**
-         * Command for SSM to execute. The first list item is the command and the others are the arguments. If no command is provided then the default shell is launched. A maximum of 10 arguments can be provided. Note: this is only applicable to SSM sessions
-         */
-        command?: Command
         environmentId: EnvironmentId
         /**
-         * Reserved for future use
+         * Session configuration
          */
-        parameters?: SessionParameters
-        sessionType: SessionType
+        sessionConfiguration: SessionConfiguration
     }
     export interface StartSessionResponse {
-        accessDetails?: AccessDetails
-        environmentId: EnvironmentId
-        sessionId: String
-        sessionType?: SessionType
+        /**
+         * Access details for the session, potentially new ones
+         */
+        accessDetails: AccessDetails
+        /**
+         * Session Identifier
+         */
+        id: String
     }
     export interface StopEnvironmentRequest {
         clientToken?: ClientToken
         environmentId: EnvironmentId
     }
     export interface StopEnvironmentResponse {
-        environment: Environment
+        /**
+         * ARN for the Environment
+         */
+        arn: Arn
+        /**
+         * Environment Identifier created for this instance, unique within the AWS Account
+         */
+        id: EnvironmentId
+        /**
+         * Status of the environment, e.g. STOPPING
+         */
+        status: EnvironmentStatus
     }
     export interface StopSessionRequest {
+        /**
+         * Client token for idempotent calls
+         */
         clientToken?: ClientToken
         environmentId: EnvironmentId
         sessionId: SessionId
     }
-    export interface StopSessionResponse {
-        /**
-         * The session that was stopped
-         */
-        session: Session
-    }
     export type StreamUrl = string
     export type String = string
-    export interface SyntheticPutCredentialsRequestCredentials {
-        aws?: AwsCredentials
-    }
     export type TagKeys = String[]
     export type TagMap = { [key: string]: TagMapValueString }
     export type TagMapKeyString = string
     export type TagMapValueString = string
     export interface TagResourceRequest {
+        /**
+         * Resource to tag
+         */
         resourceArn: String
         tags: TagMap
     }
@@ -564,15 +635,21 @@ declare namespace ClientMde {
     export type Timestamp = Date
     export type TokenValue = string
     export interface UntagResourceRequest {
+        /**
+         * Resource to untag
+         */
         resourceArn: String
+        /**
+         * Keys to untag
+         */
         tagKeys: TagKeys
     }
     export interface UntagResourceResponse {}
-    export type UserId = string
+    export type UserArn = string
     /**
      * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
      */
-    export type apiVersion = '2020-04-05' | 'latest' | string
+    export type apiVersion = '2021-04-05' | 'latest' | string
     export interface ClientApiVersions {
         /**
          * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
