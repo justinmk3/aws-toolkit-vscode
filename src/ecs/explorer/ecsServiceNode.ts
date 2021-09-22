@@ -3,7 +3,6 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import * as vscode from 'vscode'
 import { ECS } from 'aws-sdk'
 import { EcsClient } from '../../shared/clients/ecsClient'
 import { AWSResourceNode } from '../../shared/treeview/nodes/awsResourceNode'
@@ -14,14 +13,18 @@ import { makeChildrenNodes } from '../../shared/treeview/treeNodeUtilities'
 import { localize } from '../../shared/utilities/vsCodeUtils'
 import { EcsClusterNode } from './ecsClusterNode'
 import { EcsContainerNode } from './ecsContainerNode'
+import { toArrayAsync, toMap } from '../../shared/utilities/collectionUtils'
+import { CloudWatchLogsBase } from '../../cloudWatchLogs/explorer/cloudWatchLogsNode'
+import { CloudWatchLogs } from 'aws-sdk'
+import { CloudWatchLogsClient } from '../../shared/clients/cloudWatchLogsClient'
 
-export class EcsServiceNode extends AWSTreeNodeBase implements AWSResourceNode {
+export class EcsServiceNode extends CloudWatchLogsBase implements AWSResourceNode {
     public constructor(
         public readonly service: ECS.Service,
         public readonly parent: EcsClusterNode,
         public readonly ecs: EcsClient
     ) {
-        super(service.serviceName!, vscode.TreeItemCollapsibleState.Collapsed)
+        super(service.serviceName ?? '?', ecs.regionCode, localize('AWS.explorerNode.nologs', '[No logs found]'))
         this.tooltip = `${service.serviceArn}\nTask Definition: ${service.taskDefinition}`
         this.contextValue = 'awsEcsServiceNode'
     }
@@ -39,10 +42,27 @@ export class EcsServiceNode extends AWSTreeNodeBase implements AWSResourceNode {
     }
 
     public get arn(): string {
-        return this.service.serviceArn!
+        if (this.service.serviceArn === undefined) {
+            throw Error()
+        }
+        return this.service.serviceArn
     }
 
     public get name(): string {
-        return this.service.serviceName!
+        if (this.service.serviceName === undefined) {
+            throw Error()
+        }
+        return this.service.serviceName
+    }
+
+    protected async getLogGroups(client: CloudWatchLogsClient): Promise<Map<string, CloudWatchLogs.LogGroup>> {
+        return toMap(
+            await toArrayAsync(
+                client.describeLogGroups({
+                    logGroupNamePrefix: `/aws/ecs/${this.name}`, // + `/${this._info.ServiceId}`
+                })
+            ),
+            configuration => configuration.logGroupName
+        )
     }
 }
