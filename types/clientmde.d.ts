@@ -232,10 +232,6 @@ declare namespace ClientMde {
          */
         roleArn?: IamRoleArn
         /**
-         * List of secret ARNs to use for authentication when cloning source code
-         */
-        secretArns?: SecretArns
-        /**
          * List of source code to clone after environment creation
          */
         sourceCode?: SourceCodeConfigurationList
@@ -247,6 +243,10 @@ declare namespace ClientMde {
          * Tags to apply to the environment during creation
          */
         tags?: TagMap
+        /**
+         * The optional VPC security groups and subnets that are attached to the environment
+         */
+        vpcConfig?: VpcConfig
     }
     export interface CreateEnvironmentResponse {
         /**
@@ -449,7 +449,15 @@ declare namespace ClientMde {
     export type IdeRuntimes = IdeRuntime[]
     export type IdeRuntimesConfiguration = IdeRuntimeConfiguration[]
     export type InactivityTimeoutMinutes = number
-    export type InstanceType = 'mde.small' | 'mde.medium' | 'mde.large' | string
+    export type InstanceType =
+        | 'dev.standard1.micro'
+        | 'dev.standard1.small'
+        | 'dev.standard1.medium'
+        | 'dev.standard1.large'
+        | 'mde.small'
+        | 'mde.medium'
+        | 'mde.large'
+        | string
     export interface ListEnvironmentsRequest {
         maxResults?: MaxSize1000
         /**
@@ -496,14 +504,15 @@ declare namespace ClientMde {
     }
     export interface PersistentStorageConfiguration {
         /**
-         * Size of the persistent storage in Gb (0,16,32,64), zero for no persistence
+         * Size of the persistent storage in GiB (0,16,32,64), zero for no persistence
          */
         sizeInGiB: PersistentStorageConfigurationSizeInGiBInteger
     }
     export type PersistentStorageConfigurationSizeInGiBInteger = number
     export type PersistentStorageSizeInGiBInteger = number
     export type SecretArn = string
-    export type SecretArns = SecretArn[]
+    export type SecurityGroupId = string
+    export type SecurityGroupIds = SecurityGroupId[]
     export interface SessionConfiguration {
         execCommand?: ExecCommandSessionConfiguration
         ssh?: SshSessionConfiguration
@@ -528,9 +537,13 @@ declare namespace ClientMde {
          */
         branch?: SourceCodeConfigurationBranchString
         /**
+         * Secret ARNs to use for authentication when cloning source code
+         */
+        gitSecretArn?: SecretArn
+        /**
          * The URI of the source code to clone
          */
-        uri?: SourceCodeConfigurationUriString
+        uri: SourceCodeConfigurationUriString
     }
     export type SourceCodeConfigurationBranchString = string
     export type SourceCodeConfigurationList = SourceCodeConfiguration[]
@@ -556,10 +569,6 @@ declare namespace ClientMde {
          * The optional instance type to use for the MDE environment CPU and RAM
          */
         instanceType?: InstanceType
-        /**
-         * New Secret ARN to use for authentication when cloning a private repository
-         */
-        secretArn?: SecretArn
     }
     export interface StartEnvironmentResponse {
         /**
@@ -620,6 +629,8 @@ declare namespace ClientMde {
     }
     export type StreamUrl = string
     export type String = string
+    export type SubnetId = string
+    export type SubnetIds = SubnetId[]
     export type TagKeys = String[]
     export type TagMap = { [key: string]: TagMapValueString }
     export type TagMapKeyString = string
@@ -646,6 +657,10 @@ declare namespace ClientMde {
     }
     export interface UntagResourceResponse {}
     export type UserArn = string
+    export interface VpcConfig {
+        securityGroupIds?: SecurityGroupIds
+        subnetIds?: SubnetIds
+    }
     /**
      * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
      */

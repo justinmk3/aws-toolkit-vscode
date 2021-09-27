@@ -361,10 +361,6 @@
                     "shape": "IamRoleArn",
                     "documentation": "<p>The optional ARN of the role to be used within the environment</p>"
                 },
-                "secretArns": {
-                    "shape": "SecretArns",
-                    "documentation": "<p>List of secret ARNs to use for authentication when cloning source code</p>"
-                },
                 "sourceCode": {
                     "shape": "SourceCodeConfigurationList",
                     "documentation": "<p>List of source code to clone after environment creation</p>"
@@ -376,6 +372,10 @@
                 "tags": {
                     "shape": "TagMap",
                     "documentation": "<p>Tags to apply to the environment during creation</p>"
+                },
+                "vpcConfig": {
+                    "shape": "VpcConfig",
+                    "documentation": "<p>The optional VPC security groups and subnets that are attached to the environment</p>"
                 }
             },
             "documentation": "<p>Create a running environment asynchronously</p>"
@@ -712,7 +712,15 @@
         "InstanceType": {
             "type": "string",
             "documentation": "<p>Supported MDE instance types</p>",
-            "enum": ["mde.small", "mde.medium", "mde.large"]
+            "enum": [
+                "dev.standard1.micro",
+                "dev.standard1.small",
+                "dev.standard1.medium",
+                "dev.standard1.large",
+                "mde.small",
+                "mde.medium",
+                "mde.large"
+            ]
         },
         "Integer": {
             "type": "integer",
@@ -844,7 +852,7 @@
             "members": {
                 "sizeInGiB": {
                     "shape": "PersistentStorageConfigurationSizeInGiBInteger",
-                    "documentation": "<p>Size of the persistent storage in Gb (0,16,32,64), zero for no persistence</p>"
+                    "documentation": "<p>Size of the persistent storage in GiB (0,16,32,64), zero for no persistence</p>"
                 }
             },
             "documentation": "<p>Persistent storage configuration</p>"
@@ -888,12 +896,19 @@
             "min": 0,
             "pattern": "^arn:[a-z0-9][-.a-z0-9]{0,62}:secretsmanager:[a-z0-9][-.a-z0-9]{0,62}:[a-z0-9][-.a-z0-9]{0,62}:secret:.{1,512}$"
         },
-        "SecretArns": {
+        "SecurityGroupId": {
+            "type": "string",
+            "documentation": "<p>Identifier of a Security Group</p>",
+            "max": 255,
+            "min": 1,
+            "pattern": "^sg-[0-9a-f]{8,40}$"
+        },
+        "SecurityGroupIds": {
             "type": "list",
-            "member": { "shape": "SecretArn" },
-            "documentation": "<p>List of secret ARNs to use for authentication when cloning source code</p>",
-            "max": 1,
-            "min": 0
+            "member": { "shape": "SecurityGroupId" },
+            "documentation": "<p>A list of one or more groups IDs in the customer VPC</p>",
+            "max": 5,
+            "min": 1
         },
         "ServiceQuotaExceededException": {
             "type": "structure",
@@ -966,10 +981,15 @@
         },
         "SourceCodeConfiguration": {
             "type": "structure",
+            "required": ["uri"],
             "members": {
                 "branch": {
                     "shape": "SourceCodeConfigurationBranchString",
                     "documentation": "<p>The name of the branch to clone</p>"
+                },
+                "gitSecretArn": {
+                    "shape": "SecretArn",
+                    "documentation": "<p>Secret ARNs to use for authentication when cloning source code</p>"
                 },
                 "uri": {
                     "shape": "SourceCodeConfigurationUriString",
@@ -987,7 +1007,7 @@
             "type": "list",
             "member": { "shape": "SourceCodeConfiguration" },
             "documentation": "<p>List of source code to clone into the created environment</p>",
-            "max": 5,
+            "max": 1,
             "min": 0
         },
         "SourceCodeConfigurationUriString": {
@@ -1029,10 +1049,6 @@
                 "instanceType": {
                     "shape": "InstanceType",
                     "documentation": "<p>The optional instance type to use for the MDE environment CPU and RAM</p>"
-                },
-                "secretArn": {
-                    "shape": "SecretArn",
-                    "documentation": "<p>New Secret ARN to use for authentication when cloning a private repository</p>"
                 }
             },
             "documentation": "<p>Start an environment asynchronously</p>"
@@ -1147,6 +1163,20 @@
             "documentation": "<p>Websocket URL for interacting with an environment</p>"
         },
         "String": { "type": "string" },
+        "SubnetId": {
+            "type": "string",
+            "documentation": "<p>Identifier of a subnet</p>",
+            "max": 255,
+            "min": 1,
+            "pattern": "^subnet-[0-9a-f]{8,40}$"
+        },
+        "SubnetIds": {
+            "type": "list",
+            "member": { "shape": "SubnetId" },
+            "documentation": "<p>A list of one or more subnet IDs in the customer VPC</p>",
+            "max": 16,
+            "min": 1
+        },
         "TagKeys": {
             "type": "list",
             "member": { "shape": "String" }
@@ -1287,6 +1317,14 @@
             "type": "string",
             "documentation": "<p>Possible reasons a request failed validation</p>",
             "enum": ["cannotParse", "fieldValidationFailed", "other"]
+        },
+        "VpcConfig": {
+            "type": "structure",
+            "members": {
+                "securityGroupIds": { "shape": "SecurityGroupIds" },
+                "subnetIds": { "shape": "SubnetIds" }
+            },
+            "documentation": "<p>Customer VPC Configuration that the environment accesses</p>"
         }
     },
     "documentation": "<p>Managed Development Environments allow developers to easily create and reproduce as many development environments as they want - be it per software project or for individual experimentation. Using an MDE simplifies and standardizes development environments by codifying them into repeatable toolchains and by automating the creation and configuration of them on burstable compute. As MDE automates away all the manual and tedious work involved with creating and caring for development environments, developers can work more productively and focus on developing code.</p>"
