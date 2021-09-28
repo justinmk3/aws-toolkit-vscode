@@ -209,7 +209,7 @@ ${fileContents}
     const serviceClientDefinitions: ServiceClientDefinition[] = [
         {
             serviceJsonPath: 'types/codeaws-2020-12-01.api.json',
-            serviceName: 'ClientCodeAws'
+            serviceName: 'ClientCodeAws',
         },
         {
             serviceJsonPath: 'src/shared/telemetry/service-2.json',
@@ -217,7 +217,7 @@ ${fileContents}
         },
         {
             serviceJsonPath: 'types/mde-2020-04-05.normal.json',
-            serviceName: 'ClientMde'
+            serviceName: 'ClientMde',
         },
     ]
     await generateServiceClients(serviceClientDefinitions)
