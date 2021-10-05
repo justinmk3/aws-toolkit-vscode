@@ -117,7 +117,7 @@ export function isTelemetryEnabled(toolkitSettings: SettingsConfiguration): bool
 function validateTelemetrySettingType(toolkitSettings: SettingsConfiguration): void {
     const value = toolkitSettings.readSetting<any>(AWS_TELEMETRY_KEY)
     if (typeof value !== 'boolean') {
-        getLogger().error('In settings.json, aws.telemetry value must be a boolean')
+        getLogger().error('telemetry: aws.telemetry setting is not a boolean')
         vscode.window.showErrorMessage(
             localize('AWS.message.error.settings.telemetry.invalid_type', 'The aws.telemetry value must be a boolean')
         )
@@ -137,7 +137,7 @@ export function hasUserSeenTelemetryNotice(extensionContext: vscode.ExtensionCon
 
 export async function setHasUserSeenTelemetryNotice(extensionContext: vscode.ExtensionContext): Promise<void> {
     await extensionContext.globalState.update(TELEMETRY_NOTICE_VERSION_ACKNOWLEDGED, CURRENT_TELEMETRY_NOTICE_VERSION)
-    getLogger().verbose('Telemetry notice has been shown')
+    getLogger().verbose('telemetry: displayed telemetry notice')
 }
 
 /**
@@ -145,7 +145,7 @@ export async function setHasUserSeenTelemetryNotice(extensionContext: vscode.Ext
  * handles the response appropriately.
  */
 function showTelemetryNotice(extensionContext: vscode.ExtensionContext) {
-    getLogger().verbose('Showing telemetry notice')
+    getLogger().verbose('telemetry: showing telemetry notice')
 
     const telemetryNoticeText: string = localize(
         'AWS.telemetry.notificationMessage',
@@ -164,7 +164,7 @@ export async function handleTelemetryNoticeResponse(
     extensionContext: vscode.ExtensionContext
 ) {
     try {
-        getLogger().verbose(`Telemetry notice response: ${response}`)
+        getLogger().verbose(`telemetry: Telemetry notice response: ${response}`)
 
         if (!response) {
             // undefined == user discarded notice

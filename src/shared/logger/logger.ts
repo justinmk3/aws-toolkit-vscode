@@ -63,8 +63,12 @@ export function compareLogLevel(l1: LogLevel, l2: LogLevel): number {
  * * `'main'` or `undefined`: Main logger; default impl: logs to log file and log output channel
  * * `'channel'`: Channel Logger; default impl: logs to the `main` channels and the `AWS Toolkit` output channel
  * * `'debug'`: Debug Console Logger; default impl: logs to the `channel` channels and the currently-active VS Code Debug Console pane.
+ * @param topic Topic/category shared by all messages sent to this logger. Logger will include this string as a prefix on all messages.
  */
-export function getLogger(type?: 'channel' | 'debugConsole' | 'main'): Logger {
+export function getLogger(type: 'channel' | 'debugConsole' | 'main', topic: string): Logger {
+    if (topic === undefined || topic.length < 3) {
+        throw Error(`topic must be >= 3 chars`)
+    }
     const logger = toolkitLoggers[type ?? 'main']
     if (!logger) {
         return new ConsoleLogger()
