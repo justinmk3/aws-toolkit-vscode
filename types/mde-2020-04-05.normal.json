@@ -67,24 +67,6 @@
             ],
             "documentation": "<p>Retrieve Environment information for a given EnvironmentId</p>"
         },
-        "GetSessionMetadata": {
-            "name": "GetSessionMetadata",
-            "http": {
-                "method": "GET",
-                "requestUri": "/environments/{environmentId}/sessions/{sessionId}",
-                "responseCode": 200
-            },
-            "input": { "shape": "GetSessionMetadataRequest" },
-            "output": { "shape": "GetSessionMetadataResponse" },
-            "errors": [
-                { "shape": "ValidationException" },
-                { "shape": "AccessDeniedException" },
-                { "shape": "InternalServiceException" },
-                { "shape": "ResourceNotFoundException" },
-                { "shape": "ThrottlingException" }
-            ],
-            "documentation": "<p>Retrieve Session information for a given EnvironmentId and SessionId</p>"
-        },
         "ListEnvironments": {
             "name": "ListEnvironments",
             "http": {
@@ -336,17 +318,19 @@
                     "deprecated": true,
                     "deprecatedMessage": "Devfile will replace Definition, SourceCode become top-level"
                 },
-                "devfile": {
+                "devfileConfiguration": {
                     "shape": "DevfileConfiguration",
-                    "documentation": "<p>The optional Devfile to use</p>"
-                },
-                "executionRoleArn": {
-                    "shape": "IamRoleArn",
-                    "documentation": "<p>The optional ARN of the execution role to be used for launching the environment</p>"
+                    "documentation": "<p>The optional DevfileConfiguration to use</p>"
                 },
                 "ideRuntimes": {
                     "shape": "IdeRuntimesConfiguration",
-                    "documentation": "<p>The optional IDE runtimes to use</p>"
+                    "documentation": "<p>The optional IDE runtimes to use</p>",
+                    "deprecated": true,
+                    "deprecatedMessage": "Use ides instead"
+                },
+                "ides": {
+                    "shape": "IdeConfigurationList",
+                    "documentation": "<p>The optional IDEs to be used in the environment</p>"
                 },
                 "inactivityTimeoutMinutes": { "shape": "InactivityTimeoutMinutes" },
                 "instanceType": {
@@ -452,21 +436,56 @@
             },
             "documentation": "<p>The Environment being deleted</p>"
         },
-        "DevfileConfiguration": {
+        "DevfileAction": {
             "type": "structure",
-            "required": ["location"],
+            "required": ["location", "status", "updatedAt"],
             "members": {
                 "location": {
-                    "shape": "DevfileConfigurationLocationString",
-                    "documentation": "<p>The location of the devfile on the filesystem related to projects directory or the url to the devfile in Devfile Registry</p>"
+                    "shape": "String",
+                    "documentation": "<p>The location of the devfile</p>"
+                },
+                "message": {
+                    "shape": "String",
+                    "documentation": "<p>A message about the status</p>"
+                },
+                "status": {
+                    "shape": "DevfileStatus",
+                    "documentation": "<p>The status of the devfile</p>"
+                },
+                "updatedAt": {
+                    "shape": "Timestamp",
+                    "documentation": "<p>The timestamp of the status</p>"
                 }
             },
-            "documentation": "<p>Devfile to use in the environment</p>"
+            "documentation": "<p>The status of the devfile</p>"
         },
-        "DevfileConfigurationLocationString": {
+        "DevfileConfiguration": {
+            "type": "structure",
+            "members": {
+                "filesystem": { "shape": "FilesystemConfiguration" },
+                "uri": { "shape": "UriConfiguration" }
+            },
+            "documentation": "<p>DevfileConfiguration determines the type of Devfile and is either a FilesystemConfiguration or UriConfiguration</p>",
+            "union": true
+        },
+        "DevfileStatus": {
             "type": "string",
-            "max": 512,
-            "min": 1
+            "documentation": "<p>Devfile status</p>",
+            "enum": ["STARTING", "RUNNING", "STARTING_FAILED"]
+        },
+        "EnvironmentActions": {
+            "type": "structure",
+            "members": {
+                "devfile": {
+                    "shape": "DevfileAction",
+                    "documentation": "<p>The devfile</p>"
+                },
+                "sourceCode": {
+                    "shape": "SourceCodeActionList",
+                    "documentation": "<p>The source code repositories</p>"
+                }
+            },
+            "documentation": "<p>The actions that happened inside of the environment</p>"
         },
         "EnvironmentId": {
             "type": "string",
@@ -531,6 +550,22 @@
             },
             "documentation": "<p>ExecCommandSessionConfiguration configures an SSM session that executes a command</p>"
         },
+        "FilesystemConfiguration": {
+            "type": "structure",
+            "required": ["path"],
+            "members": {
+                "path": {
+                    "shape": "FilesystemConfigurationPathString",
+                    "documentation": "<p>The location of the devfile on the filesystem related to projects directory</p>"
+                }
+            },
+            "documentation": "<p>Devfile to use in the environment on the filesystem</p>"
+        },
+        "FilesystemConfigurationPathString": {
+            "type": "string",
+            "max": 512,
+            "min": 1
+        },
         "GetEnvironmentMetadataRequest": {
             "type": "structure",
             "required": ["environmentId"],
@@ -546,6 +581,10 @@
             "type": "structure",
             "required": ["arn", "createdAt", "id", "instanceType", "status"],
             "members": {
+                "actions": {
+                    "shape": "EnvironmentActions",
+                    "documentation": "<p>The actions that happened inside of the environment</p>"
+                },
                 "arn": {
                     "shape": "Arn",
                     "documentation": "<p>ARN for the Environment</p>"
@@ -570,9 +609,18 @@
                 },
                 "ideRuntimes": {
                     "shape": "IdeRuntimes",
-                    "documentation": "<p>The IDE runtimes configured for the environment</p>"
+                    "documentation": "<p>The IDE runtimes configured for the environment</p>",
+                    "deprecated": true,
+                    "deprecatedMessage": "Use ides instead"
                 },
-                "inactivityTimeoutMinutes": { "shape": "InactivityTimeoutMinutes" },
+                "ides": {
+                    "shape": "Ides",
+                    "documentation": "<p>The IDEs configured for the environment</p>"
+                },
+                "inactivityTimeoutMinutes": {
+                    "shape": "InactivityTimeoutMinutes",
+                    "documentation": "<p>The amount of idle time before the environment is automatically stopped</p>"
+                },
                 "instanceType": {
                     "shape": "InstanceType",
                     "documentation": "<p>The optional Instance Type to use for the MDE environment CPU and RAM</p>"
@@ -611,42 +659,45 @@
                 }
             }
         },
-        "GetSessionMetadataRequest": {
-            "type": "structure",
-            "required": ["environmentId", "sessionId"],
-            "members": {
-                "environmentId": {
-                    "shape": "EnvironmentId",
-                    "location": "uri",
-                    "locationName": "environmentId"
-                },
-                "sessionId": {
-                    "shape": "SessionId",
-                    "location": "uri",
-                    "locationName": "sessionId"
-                }
-            }
-        },
-        "GetSessionMetadataResponse": {
-            "type": "structure",
-            "required": ["id"],
-            "members": {
-                "id": { "shape": "SessionId" },
-                "startedAt": {
-                    "shape": "Timestamp",
-                    "documentation": "<p>Session creation timestamp in UTC</p>"
-                },
-                "status": {
-                    "shape": "SessionStatus",
-                    "documentation": "<p>Status of the session</p>"
-                }
-            }
-        },
         "IamRoleArn": {
             "type": "string",
             "max": 1224,
             "min": 0,
             "pattern": "^arn:[a-z0-9][-.a-z0-9]{0,62}:[a-z0-9][-.a-z0-9]{0,62}:([a-z0-9][-.a-z0-9]{0,62})?:([a-z0-9][-.a-z0-9]{0,62})?:[^/].{0,1023}$"
+        },
+        "Ide": {
+            "type": "structure",
+            "required": ["runtime"],
+            "members": {
+                "runtime": {
+                    "shape": "IdeRuntimeString",
+                    "documentation": "<p>The IDE runtime</p>"
+                }
+            },
+            "documentation": "<p>IDE to use for the environment</p>"
+        },
+        "IdeConfiguration": {
+            "type": "structure",
+            "required": ["runtime"],
+            "members": {
+                "runtime": {
+                    "shape": "IdeConfigurationRuntimeString",
+                    "documentation": "<p>The IDE runtime</p>"
+                }
+            },
+            "documentation": "<p>IDE configuration to use for the environment</p>"
+        },
+        "IdeConfigurationList": {
+            "type": "list",
+            "member": { "shape": "IdeConfiguration" },
+            "documentation": "<p>The list of IDE configurations</p>",
+            "max": 1,
+            "min": 0
+        },
+        "IdeConfigurationRuntimeString": {
+            "type": "string",
+            "max": 400,
+            "min": 1
         },
         "IdeRuntime": {
             "type": "structure",
@@ -684,6 +735,11 @@
             "max": 128,
             "min": 1
         },
+        "IdeRuntimeString": {
+            "type": "string",
+            "max": 400,
+            "min": 1
+        },
         "IdeRuntimeVersionString": {
             "type": "string",
             "max": 300,
@@ -700,6 +756,13 @@
             "type": "list",
             "member": { "shape": "IdeRuntimeConfiguration" },
             "documentation": "<p>IDE runtimes to include in the environment</p>",
+            "max": 1,
+            "min": 0
+        },
+        "Ides": {
+            "type": "list",
+            "member": { "shape": "Ide" },
+            "documentation": "<p>The list of IDEs</p>",
             "max": 1,
             "min": 0
         },
@@ -979,6 +1042,36 @@
             },
             "documentation": "<p>Session information</p>"
         },
+        "SourceCodeAction": {
+            "type": "structure",
+            "required": ["status", "updatedAt", "uri"],
+            "members": {
+                "message": {
+                    "shape": "String",
+                    "documentation": "<p>A message about the status</p>"
+                },
+                "status": {
+                    "shape": "SourceCodeStatus",
+                    "documentation": "<p>The status of the repository</p>"
+                },
+                "updatedAt": {
+                    "shape": "Timestamp",
+                    "documentation": "<p>The timestamp of the status</p>"
+                },
+                "uri": {
+                    "shape": "String",
+                    "documentation": "<p>The uri of the repository</p>"
+                }
+            },
+            "documentation": "<p>The status of the source code repository</p>"
+        },
+        "SourceCodeActionList": {
+            "type": "list",
+            "member": { "shape": "SourceCodeAction" },
+            "documentation": "<p>The list of repositories and their status</p>",
+            "max": 1,
+            "min": 0
+        },
         "SourceCodeConfiguration": {
             "type": "structure",
             "required": ["uri"],
@@ -1015,6 +1108,11 @@
             "max": 400,
             "min": 1
         },
+        "SourceCodeStatus": {
+            "type": "string",
+            "documentation": "<p>Source code repository status</p>",
+            "enum": ["CLONING", "CLONED", "CLONING_FAILED"]
+        },
         "SshSessionConfiguration": {
             "type": "structure",
             "members": {},
@@ -1032,9 +1130,9 @@
                     "shape": "Definition",
                     "documentation": "<p>New environment definition for the environment</p>"
                 },
-                "devfile": {
+                "devfileConfiguration": {
                     "shape": "DevfileConfiguration",
-                    "documentation": "<p>The optional Devfile to use</p>"
+                    "documentation": "<p>The optional DevfileConfiguration to use</p>"
                 },
                 "environmentId": {
                     "shape": "EnvironmentId",
@@ -1043,7 +1141,13 @@
                 },
                 "ideRuntimes": {
                     "shape": "IdeRuntimesConfiguration",
-                    "documentation": "<p>New runtime to be used in the environment</p>"
+                    "documentation": "<p>New runtime to be used in the environment</p>",
+                    "deprecated": true,
+                    "deprecatedMessage": "Use ides instead"
+                },
+                "ides": {
+                    "shape": "IdeConfigurationList",
+                    "documentation": "<p>New IDEs to be used in the environment</p>"
                 },
                 "inactivityTimeoutMinutes": { "shape": "InactivityTimeoutMinutes" },
                 "instanceType": {
@@ -1276,6 +1380,22 @@
         "UntagResourceResponse": {
             "type": "structure",
             "members": {}
+        },
+        "UriConfiguration": {
+            "type": "structure",
+            "required": ["uri"],
+            "members": {
+                "uri": {
+                    "shape": "UriConfigurationUriString",
+                    "documentation": "<p>The uri to the devfile in the public Devfile Registry</p>"
+                }
+            },
+            "documentation": "<p>Devfile to use in the environment from the public Devfile Registry</p>"
+        },
+        "UriConfigurationUriString": {
+            "type": "string",
+            "max": 512,
+            "min": 1
         },
         "UserArn": { "type": "string" },
         "ValidationException": {

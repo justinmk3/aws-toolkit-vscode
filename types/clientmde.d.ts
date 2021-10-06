@@ -56,19 +56,6 @@ declare class ClientMde extends Service {
         callback?: (err: AWSError, data: ClientMde.Types.GetEnvironmentMetadataResponse) => void
     ): Request<ClientMde.Types.GetEnvironmentMetadataResponse, AWSError>
     /**
-     * Retrieve Session information for a given EnvironmentId and SessionId
-     */
-    getSessionMetadata(
-        params: ClientMde.Types.GetSessionMetadataRequest,
-        callback?: (err: AWSError, data: ClientMde.Types.GetSessionMetadataResponse) => void
-    ): Request<ClientMde.Types.GetSessionMetadataResponse, AWSError>
-    /**
-     * Retrieve Session information for a given EnvironmentId and SessionId
-     */
-    getSessionMetadata(
-        callback?: (err: AWSError, data: ClientMde.Types.GetSessionMetadataResponse) => void
-    ): Request<ClientMde.Types.GetSessionMetadataResponse, AWSError>
-    /**
      * Return the environments for a given account
      */
     listEnvironments(
@@ -207,17 +194,17 @@ declare namespace ClientMde {
          */
         definition?: Definition
         /**
-         * The optional Devfile to use
+         * The optional DevfileConfiguration to use
          */
-        devfile?: DevfileConfiguration
-        /**
-         * The optional ARN of the execution role to be used for launching the environment
-         */
-        executionRoleArn?: IamRoleArn
+        devfileConfiguration?: DevfileConfiguration
         /**
          * The optional IDE runtimes to use
          */
         ideRuntimes?: IdeRuntimesConfiguration
+        /**
+         * The optional IDEs to be used in the environment
+         */
+        ides?: IdeConfigurationList
         inactivityTimeoutMinutes?: InactivityTimeoutMinutes
         /**
          * The instance type to use for the MDE environment CPU and RAM
@@ -287,13 +274,39 @@ declare namespace ClientMde {
          */
         status: EnvironmentStatus
     }
-    export interface DevfileConfiguration {
+    export interface DevfileAction {
         /**
-         * The location of the devfile on the filesystem related to projects directory or the url to the devfile in Devfile Registry
+         * The location of the devfile
          */
-        location: DevfileConfigurationLocationString
+        location: String
+        /**
+         * A message about the status
+         */
+        message?: String
+        /**
+         * The status of the devfile
+         */
+        status: DevfileStatus
+        /**
+         * The timestamp of the status
+         */
+        updatedAt: Timestamp
     }
-    export type DevfileConfigurationLocationString = string
+    export interface DevfileConfiguration {
+        filesystem?: FilesystemConfiguration
+        uri?: UriConfiguration
+    }
+    export type DevfileStatus = 'STARTING' | 'RUNNING' | 'STARTING_FAILED' | string
+    export interface EnvironmentActions {
+        /**
+         * The devfile
+         */
+        devfile?: DevfileAction
+        /**
+         * The source code repositories
+         */
+        sourceCode?: SourceCodeActionList
+    }
     export type EnvironmentId = string
     export type EnvironmentStatus =
         | 'PENDING'
@@ -345,10 +358,21 @@ declare namespace ClientMde {
          */
         command: Command
     }
+    export interface FilesystemConfiguration {
+        /**
+         * The location of the devfile on the filesystem related to projects directory
+         */
+        path: FilesystemConfigurationPathString
+    }
+    export type FilesystemConfigurationPathString = string
     export interface GetEnvironmentMetadataRequest {
         environmentId: EnvironmentId
     }
     export interface GetEnvironmentMetadataResponse {
+        /**
+         * The actions that happened inside of the environment
+         */
+        actions?: EnvironmentActions
         /**
          * ARN for the Environment
          */
@@ -373,6 +397,13 @@ declare namespace ClientMde {
          * The IDE runtimes configured for the environment
          */
         ideRuntimes?: IdeRuntimes
+        /**
+         * The IDEs configured for the environment
+         */
+        ides?: Ides
+        /**
+         * The amount of idle time before the environment is automatically stopped
+         */
         inactivityTimeoutMinutes?: InactivityTimeoutMinutes
         /**
          * The optional Instance Type to use for the MDE environment CPU and RAM
@@ -411,22 +442,21 @@ declare namespace ClientMde {
          */
         userArn?: UserArn
     }
-    export interface GetSessionMetadataRequest {
-        environmentId: EnvironmentId
-        sessionId: SessionId
-    }
-    export interface GetSessionMetadataResponse {
-        id: SessionId
-        /**
-         * Session creation timestamp in UTC
-         */
-        startedAt?: Timestamp
-        /**
-         * Status of the session
-         */
-        status?: SessionStatus
-    }
     export type IamRoleArn = string
+    export interface Ide {
+        /**
+         * The IDE runtime
+         */
+        runtime: IdeRuntimeString
+    }
+    export interface IdeConfiguration {
+        /**
+         * The IDE runtime
+         */
+        runtime: IdeConfigurationRuntimeString
+    }
+    export type IdeConfigurationList = IdeConfiguration[]
+    export type IdeConfigurationRuntimeString = string
     export interface IdeRuntime {
         /**
          * The identifier of the IDE runtime
@@ -445,9 +475,11 @@ declare namespace ClientMde {
     }
     export type IdeRuntimeConfigurationIdString = string
     export type IdeRuntimeIdString = string
+    export type IdeRuntimeString = string
     export type IdeRuntimeVersionString = string
     export type IdeRuntimes = IdeRuntime[]
     export type IdeRuntimesConfiguration = IdeRuntimeConfiguration[]
+    export type Ides = Ide[]
     export type InactivityTimeoutMinutes = number
     export type InstanceType =
         | 'dev.standard1.micro'
@@ -531,6 +563,25 @@ declare namespace ClientMde {
          */
         status?: SessionStatus
     }
+    export interface SourceCodeAction {
+        /**
+         * A message about the status
+         */
+        message?: String
+        /**
+         * The status of the repository
+         */
+        status: SourceCodeStatus
+        /**
+         * The timestamp of the status
+         */
+        updatedAt: Timestamp
+        /**
+         * The uri of the repository
+         */
+        uri: String
+    }
+    export type SourceCodeActionList = SourceCodeAction[]
     export interface SourceCodeConfiguration {
         /**
          * The name of the branch to clone
@@ -548,6 +599,7 @@ declare namespace ClientMde {
     export type SourceCodeConfigurationBranchString = string
     export type SourceCodeConfigurationList = SourceCodeConfiguration[]
     export type SourceCodeConfigurationUriString = string
+    export type SourceCodeStatus = 'CLONING' | 'CLONED' | 'CLONING_FAILED' | string
     export interface SshSessionConfiguration {}
     export interface StartEnvironmentRequest {
         clientToken?: ClientToken
@@ -556,14 +608,18 @@ declare namespace ClientMde {
          */
         definition?: Definition
         /**
-         * The optional Devfile to use
+         * The optional DevfileConfiguration to use
          */
-        devfile?: DevfileConfiguration
+        devfileConfiguration?: DevfileConfiguration
         environmentId: EnvironmentId
         /**
          * New runtime to be used in the environment
          */
         ideRuntimes?: IdeRuntimesConfiguration
+        /**
+         * New IDEs to be used in the environment
+         */
+        ides?: IdeConfigurationList
         inactivityTimeoutMinutes?: InactivityTimeoutMinutes
         /**
          * The optional instance type to use for the MDE environment CPU and RAM
@@ -656,6 +712,13 @@ declare namespace ClientMde {
         tagKeys: TagKeys
     }
     export interface UntagResourceResponse {}
+    export interface UriConfiguration {
+        /**
+         * The uri to the devfile in the public Devfile Registry
+         */
+        uri: UriConfigurationUriString
+    }
+    export type UriConfigurationUriString = string
     export type UserArn = string
     export interface VpcConfig {
         securityGroupIds?: SecurityGroupIds
