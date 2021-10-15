@@ -318,21 +318,18 @@
                     "deprecated": true,
                     "deprecatedMessage": "Devfile will replace Definition, SourceCode become top-level"
                 },
-                "devfileConfiguration": {
+                "devfile": {
                     "shape": "DevfileConfiguration",
-                    "documentation": "<p>The optional DevfileConfiguration to use</p>"
-                },
-                "ideRuntimes": {
-                    "shape": "IdeRuntimesConfiguration",
-                    "documentation": "<p>The optional IDE runtimes to use</p>",
-                    "deprecated": true,
-                    "deprecatedMessage": "Use ides instead"
+                    "documentation": "<p>The optional devfile to use</p>"
                 },
                 "ides": {
                     "shape": "IdeConfigurationList",
                     "documentation": "<p>The optional IDEs to be used in the environment</p>"
                 },
-                "inactivityTimeoutMinutes": { "shape": "InactivityTimeoutMinutes" },
+                "inactivityTimeoutMinutes": {
+                    "shape": "InactivityTimeoutMinutes",
+                    "documentation": "<p>The amount of idle time before the environment is automatically stopped</p>"
+                },
                 "instanceType": {
                     "shape": "InstanceType",
                     "documentation": "<p>The instance type to use for the MDE environment CPU and RAM</p>"
@@ -480,6 +477,10 @@
                     "shape": "DevfileAction",
                     "documentation": "<p>The devfile</p>"
                 },
+                "ides": {
+                    "shape": "IDEActionList",
+                    "documentation": "<p>The IDEs</p>"
+                },
                 "sourceCode": {
                     "shape": "SourceCodeActionList",
                     "documentation": "<p>The source code repositories</p>"
@@ -494,7 +495,7 @@
         },
         "EnvironmentStatus": {
             "type": "string",
-            "enum": ["PENDING", "RUNNING", "STARTING", "STOPPING", "STOPPED", "DELETING", "DELETED"]
+            "enum": ["PENDING", "RUNNING", "STARTING", "STOPPING", "STOPPED", "FAILED", "DELETING", "DELETED"]
         },
         "EnvironmentSummaries": {
             "type": "list",
@@ -516,9 +517,9 @@
                     "shape": "EnvironmentId",
                     "documentation": "<p>Environment Identifier created for this instance, unique within the AWS Account</p>"
                 },
-                "ideRuntimes": {
-                    "shape": "IdeRuntimes",
-                    "documentation": "<p>The IDE runtimes configured for the environment</p>"
+                "ides": {
+                    "shape": "Ides",
+                    "documentation": "<p>The IDEs configured for the environment</p>"
                 },
                 "lastStartedAt": {
                     "shape": "Timestamp",
@@ -607,12 +608,6 @@
                     "shape": "EnvironmentId",
                     "documentation": "<p>Environment Identifier created for this instance, unique within the AWS Account</p>"
                 },
-                "ideRuntimes": {
-                    "shape": "IdeRuntimes",
-                    "documentation": "<p>The IDE runtimes configured for the environment</p>",
-                    "deprecated": true,
-                    "deprecatedMessage": "Use ides instead"
-                },
                 "ides": {
                     "shape": "Ides",
                     "documentation": "<p>The IDEs configured for the environment</p>"
@@ -659,6 +654,41 @@
                 }
             }
         },
+        "IDEAction": {
+            "type": "structure",
+            "required": ["runtime", "status", "updatedAt"],
+            "members": {
+                "message": {
+                    "shape": "String",
+                    "documentation": "<p>A message about the status</p>"
+                },
+                "runtime": {
+                    "shape": "String",
+                    "documentation": "<p>The runtime of the IDE</p>"
+                },
+                "status": {
+                    "shape": "IDEStatus",
+                    "documentation": "<p>The status of the IDE</p>"
+                },
+                "updatedAt": {
+                    "shape": "Timestamp",
+                    "documentation": "<p>The timestamp of the status</p>"
+                }
+            },
+            "documentation": "<p>The status of the IDE</p>"
+        },
+        "IDEActionList": {
+            "type": "list",
+            "member": { "shape": "IDEAction" },
+            "documentation": "<p>The list of IDEs and their status</p>",
+            "max": 1,
+            "min": 0
+        },
+        "IDEStatus": {
+            "type": "string",
+            "documentation": "<p>IDE status</p>",
+            "enum": ["IN_PROGRESS", "READY", "FAILED"]
+        },
         "IamRoleArn": {
             "type": "string",
             "max": 1224,
@@ -699,65 +729,10 @@
             "max": 400,
             "min": 1
         },
-        "IdeRuntime": {
-            "type": "structure",
-            "required": ["id", "version"],
-            "members": {
-                "id": {
-                    "shape": "IdeRuntimeIdString",
-                    "documentation": "<p>The identifier of the IDE runtime</p>"
-                },
-                "version": {
-                    "shape": "IdeRuntimeVersionString",
-                    "documentation": "<p>The version of the IDE runtime</p>"
-                }
-            },
-            "documentation": "<p>IDE runtime to use for the environment</p>"
-        },
-        "IdeRuntimeConfiguration": {
-            "type": "structure",
-            "required": ["id"],
-            "members": {
-                "id": {
-                    "shape": "IdeRuntimeConfigurationIdString",
-                    "documentation": "<p>The identifier of the IDE runtime</p>"
-                }
-            },
-            "documentation": "<p>IDE runtime to include in the environment</p>"
-        },
-        "IdeRuntimeConfigurationIdString": {
-            "type": "string",
-            "max": 128,
-            "min": 1
-        },
-        "IdeRuntimeIdString": {
-            "type": "string",
-            "max": 128,
-            "min": 1
-        },
         "IdeRuntimeString": {
             "type": "string",
             "max": 400,
             "min": 1
-        },
-        "IdeRuntimeVersionString": {
-            "type": "string",
-            "max": 300,
-            "min": 1
-        },
-        "IdeRuntimes": {
-            "type": "list",
-            "member": { "shape": "IdeRuntime" },
-            "documentation": "<p>The list of IDE runtimes</p>",
-            "max": 1,
-            "min": 0
-        },
-        "IdeRuntimesConfiguration": {
-            "type": "list",
-            "member": { "shape": "IdeRuntimeConfiguration" },
-            "documentation": "<p>IDE runtimes to include in the environment</p>",
-            "max": 1,
-            "min": 0
         },
         "Ides": {
             "type": "list",
@@ -775,15 +750,7 @@
         "InstanceType": {
             "type": "string",
             "documentation": "<p>Supported MDE instance types</p>",
-            "enum": [
-                "dev.standard1.micro",
-                "dev.standard1.small",
-                "dev.standard1.medium",
-                "dev.standard1.large",
-                "mde.small",
-                "mde.medium",
-                "mde.large"
-            ]
+            "enum": ["dev.standard1.micro", "dev.standard1.small", "dev.standard1.medium", "dev.standard1.large"]
         },
         "Integer": {
             "type": "integer",
@@ -904,7 +871,7 @@
             "members": {
                 "sizeInGiB": {
                     "shape": "PersistentStorageSizeInGiBInteger",
-                    "documentation": "<p>Size of the persistent storage in Gb (0,16,32,64), zero for no persistence</p>"
+                    "documentation": "<p>Size of the persistent storage in Gb (16,32,64), zero for no persistence</p>"
                 }
             },
             "documentation": "<p>Persistent storage configuration</p>"
@@ -915,7 +882,7 @@
             "members": {
                 "sizeInGiB": {
                     "shape": "PersistentStorageConfigurationSizeInGiBInteger",
-                    "documentation": "<p>Size of the persistent storage in GiB (0,16,32,64), zero for no persistence</p>"
+                    "documentation": "<p>Size of the persistent storage in GiB (16,32,64), zero for no persistence</p>"
                 }
             },
             "documentation": "<p>Persistent storage configuration</p>"
@@ -1130,26 +1097,23 @@
                     "shape": "Definition",
                     "documentation": "<p>New environment definition for the environment</p>"
                 },
-                "devfileConfiguration": {
+                "devfile": {
                     "shape": "DevfileConfiguration",
-                    "documentation": "<p>The optional DevfileConfiguration to use</p>"
+                    "documentation": "<p>The optional devfile to use</p>"
                 },
                 "environmentId": {
                     "shape": "EnvironmentId",
                     "location": "uri",
                     "locationName": "environmentId"
                 },
-                "ideRuntimes": {
-                    "shape": "IdeRuntimesConfiguration",
-                    "documentation": "<p>New runtime to be used in the environment</p>",
-                    "deprecated": true,
-                    "deprecatedMessage": "Use ides instead"
-                },
                 "ides": {
                     "shape": "IdeConfigurationList",
                     "documentation": "<p>New IDEs to be used in the environment</p>"
                 },
-                "inactivityTimeoutMinutes": { "shape": "InactivityTimeoutMinutes" },
+                "inactivityTimeoutMinutes": {
+                    "shape": "InactivityTimeoutMinutes",
+                    "documentation": "<p>The amount of idle time before the environment is automatically stopped</p>"
+                },
                 "instanceType": {
                     "shape": "InstanceType",
                     "documentation": "<p>The optional instance type to use for the MDE environment CPU and RAM</p>"

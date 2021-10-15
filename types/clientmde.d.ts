@@ -194,17 +194,16 @@ declare namespace ClientMde {
          */
         definition?: Definition
         /**
-         * The optional DevfileConfiguration to use
+         * The optional devfile to use
          */
-        devfileConfiguration?: DevfileConfiguration
-        /**
-         * The optional IDE runtimes to use
-         */
-        ideRuntimes?: IdeRuntimesConfiguration
+        devfile?: DevfileConfiguration
         /**
          * The optional IDEs to be used in the environment
          */
         ides?: IdeConfigurationList
+        /**
+         * The amount of idle time before the environment is automatically stopped
+         */
         inactivityTimeoutMinutes?: InactivityTimeoutMinutes
         /**
          * The instance type to use for the MDE environment CPU and RAM
@@ -303,6 +302,10 @@ declare namespace ClientMde {
          */
         devfile?: DevfileAction
         /**
+         * The IDEs
+         */
+        ides?: IDEActionList
+        /**
          * The source code repositories
          */
         sourceCode?: SourceCodeActionList
@@ -314,6 +317,7 @@ declare namespace ClientMde {
         | 'STARTING'
         | 'STOPPING'
         | 'STOPPED'
+        | 'FAILED'
         | 'DELETING'
         | 'DELETED'
         | string
@@ -332,9 +336,9 @@ declare namespace ClientMde {
          */
         id: EnvironmentId
         /**
-         * The IDE runtimes configured for the environment
+         * The IDEs configured for the environment
          */
-        ideRuntimes?: IdeRuntimes
+        ides?: Ides
         /**
          * Timestamp of the last start in UTC.
          */
@@ -394,10 +398,6 @@ declare namespace ClientMde {
          */
         id: EnvironmentId
         /**
-         * The IDE runtimes configured for the environment
-         */
-        ideRuntimes?: IdeRuntimes
-        /**
          * The IDEs configured for the environment
          */
         ides?: Ides
@@ -442,6 +442,26 @@ declare namespace ClientMde {
          */
         userArn?: UserArn
     }
+    export interface IDEAction {
+        /**
+         * A message about the status
+         */
+        message?: String
+        /**
+         * The runtime of the IDE
+         */
+        runtime: String
+        /**
+         * The status of the IDE
+         */
+        status: IDEStatus
+        /**
+         * The timestamp of the status
+         */
+        updatedAt: Timestamp
+    }
+    export type IDEActionList = IDEAction[]
+    export type IDEStatus = 'IN_PROGRESS' | 'READY' | 'FAILED' | string
     export type IamRoleArn = string
     export interface Ide {
         /**
@@ -457,28 +477,7 @@ declare namespace ClientMde {
     }
     export type IdeConfigurationList = IdeConfiguration[]
     export type IdeConfigurationRuntimeString = string
-    export interface IdeRuntime {
-        /**
-         * The identifier of the IDE runtime
-         */
-        id: IdeRuntimeIdString
-        /**
-         * The version of the IDE runtime
-         */
-        version: IdeRuntimeVersionString
-    }
-    export interface IdeRuntimeConfiguration {
-        /**
-         * The identifier of the IDE runtime
-         */
-        id: IdeRuntimeConfigurationIdString
-    }
-    export type IdeRuntimeConfigurationIdString = string
-    export type IdeRuntimeIdString = string
     export type IdeRuntimeString = string
-    export type IdeRuntimeVersionString = string
-    export type IdeRuntimes = IdeRuntime[]
-    export type IdeRuntimesConfiguration = IdeRuntimeConfiguration[]
     export type Ides = Ide[]
     export type InactivityTimeoutMinutes = number
     export type InstanceType =
@@ -486,9 +485,6 @@ declare namespace ClientMde {
         | 'dev.standard1.small'
         | 'dev.standard1.medium'
         | 'dev.standard1.large'
-        | 'mde.small'
-        | 'mde.medium'
-        | 'mde.large'
         | string
     export interface ListEnvironmentsRequest {
         maxResults?: MaxSize1000
@@ -530,13 +526,13 @@ declare namespace ClientMde {
     export type NextToken = string
     export interface PersistentStorage {
         /**
-         * Size of the persistent storage in Gb (0,16,32,64), zero for no persistence
+         * Size of the persistent storage in Gb (16,32,64), zero for no persistence
          */
         sizeInGiB: PersistentStorageSizeInGiBInteger
     }
     export interface PersistentStorageConfiguration {
         /**
-         * Size of the persistent storage in GiB (0,16,32,64), zero for no persistence
+         * Size of the persistent storage in GiB (16,32,64), zero for no persistence
          */
         sizeInGiB: PersistentStorageConfigurationSizeInGiBInteger
     }
@@ -608,18 +604,17 @@ declare namespace ClientMde {
          */
         definition?: Definition
         /**
-         * The optional DevfileConfiguration to use
+         * The optional devfile to use
          */
-        devfileConfiguration?: DevfileConfiguration
+        devfile?: DevfileConfiguration
         environmentId: EnvironmentId
-        /**
-         * New runtime to be used in the environment
-         */
-        ideRuntimes?: IdeRuntimesConfiguration
         /**
          * New IDEs to be used in the environment
          */
         ides?: IdeConfigurationList
+        /**
+         * The amount of idle time before the environment is automatically stopped
+         */
         inactivityTimeoutMinutes?: InactivityTimeoutMinutes
         /**
          * The optional instance type to use for the MDE environment CPU and RAM
