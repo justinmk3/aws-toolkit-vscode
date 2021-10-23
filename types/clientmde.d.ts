@@ -295,7 +295,7 @@ declare namespace ClientMde {
         filesystem?: FilesystemConfiguration
         uri?: UriConfiguration
     }
-    export type DevfileStatus = 'STARTING' | 'RUNNING' | 'STARTING_FAILED' | string
+    export type DevfileStatus = 'PENDING' | 'SUCCESSFUL' | 'FAILED' | string
     export interface EnvironmentActions {
         /**
          * The devfile
@@ -430,9 +430,9 @@ declare namespace ClientMde {
          */
         status: EnvironmentStatus
         /**
-         * Reason for the most recent stop of the environment
+         * Reason for the most recent status of the environment
          */
-        stoppedReason?: String
+        statusReason?: String
         /**
          * Tags of the environment
          */
@@ -441,6 +441,10 @@ declare namespace ClientMde {
          * The ARN of the user that created the environment
          */
         userArn?: UserArn
+        /**
+         * The optional VPC security groups and subnets that are attached to the environment
+         */
+        vpcConfig?: VpcConfig
     }
     export interface IDEAction {
         /**
@@ -461,7 +465,7 @@ declare namespace ClientMde {
         updatedAt: Timestamp
     }
     export type IDEActionList = IDEAction[]
-    export type IDEStatus = 'IN_PROGRESS' | 'READY' | 'FAILED' | string
+    export type IDEStatus = 'PENDING' | 'SUCCESSFUL' | 'FAILED' | string
     export type IamRoleArn = string
     export interface Ide {
         /**
@@ -595,7 +599,7 @@ declare namespace ClientMde {
     export type SourceCodeConfigurationBranchString = string
     export type SourceCodeConfigurationList = SourceCodeConfiguration[]
     export type SourceCodeConfigurationUriString = string
-    export type SourceCodeStatus = 'CLONING' | 'CLONED' | 'CLONING_FAILED' | string
+    export type SourceCodeStatus = 'PENDING' | 'SUCCESSFUL' | 'FAILED' | string
     export interface SshSessionConfiguration {}
     export interface StartEnvironmentRequest {
         clientToken?: ClientToken
