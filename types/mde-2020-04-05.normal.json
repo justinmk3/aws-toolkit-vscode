@@ -468,7 +468,7 @@
         "DevfileStatus": {
             "type": "string",
             "documentation": "<p>Devfile status</p>",
-            "enum": ["STARTING", "RUNNING", "STARTING_FAILED"]
+            "enum": ["PENDING", "SUCCESSFUL", "FAILED"]
         },
         "EnvironmentActions": {
             "type": "structure",
@@ -640,9 +640,9 @@
                     "shape": "EnvironmentStatus",
                     "documentation": "<p>Actual status of the environment, such as RUNNING</p>"
                 },
-                "stoppedReason": {
+                "statusReason": {
                     "shape": "String",
-                    "documentation": "<p>Reason for the most recent stop of the environment</p>"
+                    "documentation": "<p>Reason for the most recent status of the environment</p>"
                 },
                 "tags": {
                     "shape": "TagMap",
@@ -651,6 +651,10 @@
                 "userArn": {
                     "shape": "UserArn",
                     "documentation": "<p>The ARN of the user that created the environment</p>"
+                },
+                "vpcConfig": {
+                    "shape": "VpcConfig",
+                    "documentation": "<p>The optional VPC security groups and subnets that are attached to the environment</p>"
                 }
             }
         },
@@ -687,7 +691,7 @@
         "IDEStatus": {
             "type": "string",
             "documentation": "<p>IDE status</p>",
-            "enum": ["IN_PROGRESS", "READY", "FAILED"]
+            "enum": ["PENDING", "SUCCESSFUL", "FAILED"]
         },
         "IamRoleArn": {
             "type": "string",
@@ -744,7 +748,7 @@
         "InactivityTimeoutMinutes": {
             "type": "integer",
             "documentation": "<p>The environment will be stopped after this number of minutes without user interaction. Send 0 to turn this feature off.</p>",
-            "max": 720,
+            "max": 1200,
             "min": 0
         },
         "InstanceType": {
@@ -1078,7 +1082,7 @@
         "SourceCodeStatus": {
             "type": "string",
             "documentation": "<p>Source code repository status</p>",
-            "enum": ["CLONING", "CLONED", "CLONING_FAILED"]
+            "enum": ["PENDING", "SUCCESSFUL", "FAILED"]
         },
         "SshSessionConfiguration": {
             "type": "structure",
