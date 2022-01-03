@@ -18,7 +18,7 @@ import globals from '../extensionGlobals'
 export const useGraphql = false
 
 export const cawsRegion = 'us-east-1'
-export const cawsEndpoint = 'public.api-gamma.quokka.codes'
+export const cawsEndpoint = 'https://public.api-gamma.quokka.codes'
 export const cawsEndpointGql = 'https://public.api-gamma.quokka.codes/graphql'
 export const cawsHostname = 'quokka.codes' // 'nqw1rfzyye.execute-api.us-east-1.amazonaws.cominteg.codedemo.dev-tools.aws.dev'
 export const cawsGitHostname = `git.service.${cawsHostname}`
