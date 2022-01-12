@@ -208,7 +208,7 @@ ${fileContents}
 ;(async () => {
     const serviceClientDefinitions: ServiceClientDefinition[] = [
         {
-            serviceJsonPath: 'types/codeaws-2020-12-01.api.json',
+            serviceJsonPath: 'types/codeaws-2020-12-01.json',
             serviceName: 'ClientCodeAws',
         },
         {

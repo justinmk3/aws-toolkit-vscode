@@ -19,6 +19,19 @@ declare class ClientCodeAws extends Service {
     /**
      *
      */
+    acceptOrganizationInvitation(
+        params: ClientCodeAws.Types.AcceptOrganizationInvitationRequest,
+        callback?: (err: AWSError, data: ClientCodeAws.Types.AcceptOrganizationInvitationResponse) => void
+    ): Request<ClientCodeAws.Types.AcceptOrganizationInvitationResponse, AWSError>
+    /**
+     *
+     */
+    acceptOrganizationInvitation(
+        callback?: (err: AWSError, data: ClientCodeAws.Types.AcceptOrganizationInvitationResponse) => void
+    ): Request<ClientCodeAws.Types.AcceptOrganizationInvitationResponse, AWSError>
+    /**
+     *
+     */
     acceptProjectInvitation(
         params: ClientCodeAws.Types.AcceptProjectInvitationRequest,
         callback?: (err: AWSError, data: ClientCodeAws.Types.AcceptProjectInvitationResponse) => void
@@ -45,6 +58,19 @@ declare class ClientCodeAws extends Service {
     /**
      *
      */
+    associateRoleToProject(
+        params: ClientCodeAws.Types.AssociateRoleToProjectInput,
+        callback?: (err: AWSError, data: ClientCodeAws.Types.AssociateRoleToProjectOutput) => void
+    ): Request<ClientCodeAws.Types.AssociateRoleToProjectOutput, AWSError>
+    /**
+     *
+     */
+    associateRoleToProject(
+        callback?: (err: AWSError, data: ClientCodeAws.Types.AssociateRoleToProjectOutput) => void
+    ): Request<ClientCodeAws.Types.AssociateRoleToProjectOutput, AWSError>
+    /**
+     *
+     */
     batchGetIssue(
         params: ClientCodeAws.Types.BatchGetIssueInput,
         callback?: (err: AWSError, data: ClientCodeAws.Types.BatchGetIssueOutput) => void
@@ -55,6 +81,19 @@ declare class ClientCodeAws extends Service {
     batchGetIssue(
         callback?: (err: AWSError, data: ClientCodeAws.Types.BatchGetIssueOutput) => void
     ): Request<ClientCodeAws.Types.BatchGetIssueOutput, AWSError>
+    /**
+     *
+     */
+    connectAwsAccount(
+        params: ClientCodeAws.Types.ConnectAwsAccountInput,
+        callback?: (err: AWSError, data: ClientCodeAws.Types.ConnectAwsAccountOutput) => void
+    ): Request<ClientCodeAws.Types.ConnectAwsAccountOutput, AWSError>
+    /**
+     *
+     */
+    connectAwsAccount(
+        callback?: (err: AWSError, data: ClientCodeAws.Types.ConnectAwsAccountOutput) => void
+    ): Request<ClientCodeAws.Types.ConnectAwsAccountOutput, AWSError>
     /**
      * Create a new access token for the current user
      */
@@ -110,6 +149,19 @@ declare class ClientCodeAws extends Service {
     /**
      *
      */
+    createConnection(
+        params: ClientCodeAws.Types.CreateConnectionInput,
+        callback?: (err: AWSError, data: ClientCodeAws.Types.CreateConnectionOutput) => void
+    ): Request<ClientCodeAws.Types.CreateConnectionOutput, AWSError>
+    /**
+     *
+     */
+    createConnection(
+        callback?: (err: AWSError, data: ClientCodeAws.Types.CreateConnectionOutput) => void
+    ): Request<ClientCodeAws.Types.CreateConnectionOutput, AWSError>
+    /**
+     *
+     */
     createDevelopmentWorkspace(
         params: ClientCodeAws.Types.CreateDevelopmentWorkspaceInput,
         callback?: (err: AWSError, data: ClientCodeAws.Types.CreateDevelopmentWorkspaceOutput) => void
@@ -149,6 +201,19 @@ declare class ClientCodeAws extends Service {
     /**
      *
      */
+    createExtensionInstallation(
+        params: ClientCodeAws.Types.CreateExtensionInstallationInput,
+        callback?: (err: AWSError, data: ClientCodeAws.Types.CreateExtensionInstallationOutput) => void
+    ): Request<ClientCodeAws.Types.CreateExtensionInstallationOutput, AWSError>
+    /**
+     *
+     */
+    createExtensionInstallation(
+        callback?: (err: AWSError, data: ClientCodeAws.Types.CreateExtensionInstallationOutput) => void
+    ): Request<ClientCodeAws.Types.CreateExtensionInstallationOutput, AWSError>
+    /**
+     *
+     */
     createExternalArtifactRepository(
         params: ClientCodeAws.Types.CreateExternalArtifactRepositoryInput,
         callback?: (err: AWSError, data: ClientCodeAws.Types.CreateArtifactRepositoryOutput) => void
@@ -159,6 +224,19 @@ declare class ClientCodeAws extends Service {
     createExternalArtifactRepository(
         callback?: (err: AWSError, data: ClientCodeAws.Types.CreateArtifactRepositoryOutput) => void
     ): Request<ClientCodeAws.Types.CreateArtifactRepositoryOutput, AWSError>
+    /**
+     *
+     */
+    createIssue(
+        params: ClientCodeAws.Types.CreateIssueInput,
+        callback?: (err: AWSError, data: ClientCodeAws.Types.CreateIssueOutput) => void
+    ): Request<ClientCodeAws.Types.CreateIssueOutput, AWSError>
+    /**
+     *
+     */
+    createIssue(
+        callback?: (err: AWSError, data: ClientCodeAws.Types.CreateIssueOutput) => void
+    ): Request<ClientCodeAws.Types.CreateIssueOutput, AWSError>
     /**
      *
      */
@@ -253,6 +331,19 @@ declare class ClientCodeAws extends Service {
     /**
      *
      */
+    createSecret(
+        params: ClientCodeAws.Types.CreateSecretInput,
+        callback?: (err: AWSError, data: ClientCodeAws.Types.CreateSecretOutput) => void
+    ): Request<ClientCodeAws.Types.CreateSecretOutput, AWSError>
+    /**
+     *
+     */
+    createSecret(
+        callback?: (err: AWSError, data: ClientCodeAws.Types.CreateSecretOutput) => void
+    ): Request<ClientCodeAws.Types.CreateSecretOutput, AWSError>
+    /**
+     *
+     */
     createSession(
         params: ClientCodeAws.Types.CreateSessionRequest,
         callback?: (err: AWSError, data: ClientCodeAws.Types.CreateSessionResponse) => void
@@ -263,6 +354,19 @@ declare class ClientCodeAws extends Service {
     createSession(
         callback?: (err: AWSError, data: ClientCodeAws.Types.CreateSessionResponse) => void
     ): Request<ClientCodeAws.Types.CreateSessionResponse, AWSError>
+    /**
+     *
+     */
+    createSourceBranch(
+        params: ClientCodeAws.Types.CreateSourceBranchInput,
+        callback?: (err: AWSError, data: ClientCodeAws.Types.CreateSourceBranchOutput) => void
+    ): Request<ClientCodeAws.Types.CreateSourceBranchOutput, AWSError>
+    /**
+     *
+     */
+    createSourceBranch(
+        callback?: (err: AWSError, data: ClientCodeAws.Types.CreateSourceBranchOutput) => void
+    ): Request<ClientCodeAws.Types.CreateSourceBranchOutput, AWSError>
     /**
      *
      */
@@ -357,6 +461,32 @@ declare class ClientCodeAws extends Service {
     /**
      *
      */
+    deleteConnection(
+        params: ClientCodeAws.Types.DeleteConnectionInput,
+        callback?: (err: AWSError, data: ClientCodeAws.Types.DeleteConnectionOutput) => void
+    ): Request<ClientCodeAws.Types.DeleteConnectionOutput, AWSError>
+    /**
+     *
+     */
+    deleteConnection(
+        callback?: (err: AWSError, data: ClientCodeAws.Types.DeleteConnectionOutput) => void
+    ): Request<ClientCodeAws.Types.DeleteConnectionOutput, AWSError>
+    /**
+     *
+     */
+    deleteDevelopmentWorkspace(
+        params: ClientCodeAws.Types.DeleteDevelopmentWorkspaceInput,
+        callback?: (err: AWSError, data: ClientCodeAws.Types.DeleteDevelopmentWorkspaceOutput) => void
+    ): Request<ClientCodeAws.Types.DeleteDevelopmentWorkspaceOutput, AWSError>
+    /**
+     *
+     */
+    deleteDevelopmentWorkspace(
+        callback?: (err: AWSError, data: ClientCodeAws.Types.DeleteDevelopmentWorkspaceOutput) => void
+    ): Request<ClientCodeAws.Types.DeleteDevelopmentWorkspaceOutput, AWSError>
+    /**
+     *
+     */
     deleteEnvironment(
         params: ClientCodeAws.Types.DeleteEnvironmentInput,
         callback?: (err: AWSError, data: ClientCodeAws.Types.DeleteEnvironmentOutput) => void
@@ -383,6 +513,19 @@ declare class ClientCodeAws extends Service {
     /**
      *
      */
+    deleteExtensionInstallation(
+        params: ClientCodeAws.Types.DeleteExtensionInstallationInput,
+        callback?: (err: AWSError, data: ClientCodeAws.Types.DeleteExtensionInstallationOutput) => void
+    ): Request<ClientCodeAws.Types.DeleteExtensionInstallationOutput, AWSError>
+    /**
+     *
+     */
+    deleteExtensionInstallation(
+        callback?: (err: AWSError, data: ClientCodeAws.Types.DeleteExtensionInstallationOutput) => void
+    ): Request<ClientCodeAws.Types.DeleteExtensionInstallationOutput, AWSError>
+    /**
+     *
+     */
     deleteNotificationChannel(
         params: ClientCodeAws.Types.DeleteNotificationChannelInput,
         callback?: (err: AWSError, data: ClientCodeAws.Types.DeleteNotificationChannelOutput) => void
@@ -393,6 +536,19 @@ declare class ClientCodeAws extends Service {
     deleteNotificationChannel(
         callback?: (err: AWSError, data: ClientCodeAws.Types.DeleteNotificationChannelOutput) => void
     ): Request<ClientCodeAws.Types.DeleteNotificationChannelOutput, AWSError>
+    /**
+     *
+     */
+    deleteNotificationClient(
+        params: ClientCodeAws.Types.DeleteNotificationClientInput,
+        callback?: (err: AWSError, data: ClientCodeAws.Types.DeleteNotificationClientOutput) => void
+    ): Request<ClientCodeAws.Types.DeleteNotificationClientOutput, AWSError>
+    /**
+     *
+     */
+    deleteNotificationClient(
+        callback?: (err: AWSError, data: ClientCodeAws.Types.DeleteNotificationClientOutput) => void
+    ): Request<ClientCodeAws.Types.DeleteNotificationClientOutput, AWSError>
     /**
      *
      */
@@ -432,6 +588,19 @@ declare class ClientCodeAws extends Service {
     deletePullRequestCommentContent(
         callback?: (err: AWSError, data: ClientCodeAws.Types.DeletePullRequestCommentContentOutput) => void
     ): Request<ClientCodeAws.Types.DeletePullRequestCommentContentOutput, AWSError>
+    /**
+     *
+     */
+    deleteSecret(
+        params: ClientCodeAws.Types.DeleteSecretInput,
+        callback?: (err: AWSError, data: ClientCodeAws.Types.DeleteSecretOutput) => void
+    ): Request<ClientCodeAws.Types.DeleteSecretOutput, AWSError>
+    /**
+     *
+     */
+    deleteSecret(
+        callback?: (err: AWSError, data: ClientCodeAws.Types.DeleteSecretOutput) => void
+    ): Request<ClientCodeAws.Types.DeleteSecretOutput, AWSError>
     /**
      *
      */
@@ -493,6 +662,19 @@ declare class ClientCodeAws extends Service {
     /**
      *
      */
+    describeOrganizationUsageReport(
+        params: ClientCodeAws.Types.DescribeOrganizationUsageReportInput,
+        callback?: (err: AWSError, data: ClientCodeAws.Types.DescribeOrganizationUsageReportOutput) => void
+    ): Request<ClientCodeAws.Types.DescribeOrganizationUsageReportOutput, AWSError>
+    /**
+     *
+     */
+    describeOrganizationUsageReport(
+        callback?: (err: AWSError, data: ClientCodeAws.Types.DescribeOrganizationUsageReportOutput) => void
+    ): Request<ClientCodeAws.Types.DescribeOrganizationUsageReportOutput, AWSError>
+    /**
+     *
+     */
     describeProjectMembers(
         params: ClientCodeAws.Types.DescribeProjectMembersInput,
         callback?: (err: AWSError, data: ClientCodeAws.Types.DescribeProjectMembersOutput) => void
@@ -519,6 +701,45 @@ declare class ClientCodeAws extends Service {
     /**
      *
      */
+    describeSubscription(
+        params: ClientCodeAws.Types.DescribeSubscriptionInput,
+        callback?: (err: AWSError, data: ClientCodeAws.Types.DescribeSubscriptionOutput) => void
+    ): Request<ClientCodeAws.Types.DescribeSubscriptionOutput, AWSError>
+    /**
+     *
+     */
+    describeSubscription(
+        callback?: (err: AWSError, data: ClientCodeAws.Types.DescribeSubscriptionOutput) => void
+    ): Request<ClientCodeAws.Types.DescribeSubscriptionOutput, AWSError>
+    /**
+     *
+     */
+    disassociateRoleFromProject(
+        params: ClientCodeAws.Types.DisassociateRoleFromProjectInput,
+        callback?: (err: AWSError, data: ClientCodeAws.Types.DisassociateRoleFromProjectOutput) => void
+    ): Request<ClientCodeAws.Types.DisassociateRoleFromProjectOutput, AWSError>
+    /**
+     *
+     */
+    disassociateRoleFromProject(
+        callback?: (err: AWSError, data: ClientCodeAws.Types.DisassociateRoleFromProjectOutput) => void
+    ): Request<ClientCodeAws.Types.DisassociateRoleFromProjectOutput, AWSError>
+    /**
+     *
+     */
+    disconnectAwsAccount(
+        params: ClientCodeAws.Types.DisconnectAwsAccountInput,
+        callback?: (err: AWSError, data: ClientCodeAws.Types.DisconnectAwsAccountOutput) => void
+    ): Request<ClientCodeAws.Types.DisconnectAwsAccountOutput, AWSError>
+    /**
+     *
+     */
+    disconnectAwsAccount(
+        callback?: (err: AWSError, data: ClientCodeAws.Types.DisconnectAwsAccountOutput) => void
+    ): Request<ClientCodeAws.Types.DisconnectAwsAccountOutput, AWSError>
+    /**
+     *
+     */
     disposeArtifactPackageVersions(
         params: ClientCodeAws.Types.DisposeArtifactPackageVersionsInput,
         callback?: (err: AWSError, data: ClientCodeAws.Types.ArtifactPackageVersionsBatchActionOutput) => void
@@ -542,6 +763,19 @@ declare class ClientCodeAws extends Service {
     getActionRunArtifactMetadata(
         callback?: (err: AWSError, data: ClientCodeAws.Types.GetActionRunArtifactMetadataOutput) => void
     ): Request<ClientCodeAws.Types.GetActionRunArtifactMetadataOutput, AWSError>
+    /**
+     *
+     */
+    getArtifactPackage(
+        params: ClientCodeAws.Types.GetArtifactPackageInput,
+        callback?: (err: AWSError, data: ClientCodeAws.Types.GetArtifactPackageOutput) => void
+    ): Request<ClientCodeAws.Types.GetArtifactPackageOutput, AWSError>
+    /**
+     *
+     */
+    getArtifactPackage(
+        callback?: (err: AWSError, data: ClientCodeAws.Types.GetArtifactPackageOutput) => void
+    ): Request<ClientCodeAws.Types.GetArtifactPackageOutput, AWSError>
     /**
      *
      */
@@ -597,6 +831,32 @@ declare class ClientCodeAws extends Service {
     /**
      *
      */
+    getAwsAccount(
+        params: ClientCodeAws.Types.GetAwsAccountInput,
+        callback?: (err: AWSError, data: ClientCodeAws.Types.GetAwsAccountOutput) => void
+    ): Request<ClientCodeAws.Types.GetAwsAccountOutput, AWSError>
+    /**
+     *
+     */
+    getAwsAccount(
+        callback?: (err: AWSError, data: ClientCodeAws.Types.GetAwsAccountOutput) => void
+    ): Request<ClientCodeAws.Types.GetAwsAccountOutput, AWSError>
+    /**
+     *
+     */
+    getAwsAccountRole(
+        params: ClientCodeAws.Types.GetAwsAccountRoleInput,
+        callback?: (err: AWSError, data: ClientCodeAws.Types.GetAwsAccountRoleOutput) => void
+    ): Request<ClientCodeAws.Types.GetAwsAccountRoleOutput, AWSError>
+    /**
+     *
+     */
+    getAwsAccountRole(
+        callback?: (err: AWSError, data: ClientCodeAws.Types.GetAwsAccountRoleOutput) => void
+    ): Request<ClientCodeAws.Types.GetAwsAccountRoleOutput, AWSError>
+    /**
+     *
+     */
     getBuild(
         params: ClientCodeAws.Types.GetBuildInput,
         callback?: (err: AWSError, data: ClientCodeAws.Types.BuildDetailsOutput) => void
@@ -649,6 +909,19 @@ declare class ClientCodeAws extends Service {
     /**
      *
      */
+    getComputeAction(
+        params: ClientCodeAws.Types.GetComputeActionInput,
+        callback?: (err: AWSError, data: ClientCodeAws.Types.ComputeActionDetailsOutput) => void
+    ): Request<ClientCodeAws.Types.ComputeActionDetailsOutput, AWSError>
+    /**
+     *
+     */
+    getComputeAction(
+        callback?: (err: AWSError, data: ClientCodeAws.Types.ComputeActionDetailsOutput) => void
+    ): Request<ClientCodeAws.Types.ComputeActionDetailsOutput, AWSError>
+    /**
+     *
+     */
     getComputeFleet(
         params: ClientCodeAws.Types.GetComputeFleetInput,
         callback?: (err: AWSError, data: ClientCodeAws.Types.ComputeFleetSummary) => void
@@ -664,14 +937,14 @@ declare class ClientCodeAws extends Service {
      */
     getConnection(
         params: ClientCodeAws.Types.GetConnectionInput,
-        callback?: (err: AWSError, data: ClientCodeAws.Types.GetConnectionOutput) => void
-    ): Request<ClientCodeAws.Types.GetConnectionOutput, AWSError>
+        callback?: (err: AWSError, data: ClientCodeAws.Types.ConnectionSummary) => void
+    ): Request<ClientCodeAws.Types.ConnectionSummary, AWSError>
     /**
      *
      */
     getConnection(
-        callback?: (err: AWSError, data: ClientCodeAws.Types.GetConnectionOutput) => void
-    ): Request<ClientCodeAws.Types.GetConnectionOutput, AWSError>
+        callback?: (err: AWSError, data: ClientCodeAws.Types.ConnectionSummary) => void
+    ): Request<ClientCodeAws.Types.ConnectionSummary, AWSError>
     /**
      *
      */
@@ -737,6 +1010,19 @@ declare class ClientCodeAws extends Service {
     getEnvironmentStack(
         callback?: (err: AWSError, data: ClientCodeAws.Types.GetEnvironmentStackOutput) => void
     ): Request<ClientCodeAws.Types.GetEnvironmentStackOutput, AWSError>
+    /**
+     *
+     */
+    getExtensionInstallation(
+        params: ClientCodeAws.Types.GetExtensionInstallationInput,
+        callback?: (err: AWSError, data: ClientCodeAws.Types.ExtensionInstallationSummary) => void
+    ): Request<ClientCodeAws.Types.ExtensionInstallationSummary, AWSError>
+    /**
+     *
+     */
+    getExtensionInstallation(
+        callback?: (err: AWSError, data: ClientCodeAws.Types.ExtensionInstallationSummary) => void
+    ): Request<ClientCodeAws.Types.ExtensionInstallationSummary, AWSError>
     /**
      *
      */
@@ -815,6 +1101,19 @@ declare class ClientCodeAws extends Service {
     getOrganization(
         callback?: (err: AWSError, data: ClientCodeAws.Types.GetOrganizationOutput) => void
     ): Request<ClientCodeAws.Types.GetOrganizationOutput, AWSError>
+    /**
+     *
+     */
+    getOrganizationInvitation(
+        params: ClientCodeAws.Types.GetOrganizationInvitationRequest,
+        callback?: (err: AWSError, data: ClientCodeAws.Types.GetOrganizationInvitationResponse) => void
+    ): Request<ClientCodeAws.Types.GetOrganizationInvitationResponse, AWSError>
+    /**
+     *
+     */
+    getOrganizationInvitation(
+        callback?: (err: AWSError, data: ClientCodeAws.Types.GetOrganizationInvitationResponse) => void
+    ): Request<ClientCodeAws.Types.GetOrganizationInvitationResponse, AWSError>
     /**
      *
      */
@@ -961,6 +1260,19 @@ declare class ClientCodeAws extends Service {
     /**
      *
      */
+    getSecret(
+        params: ClientCodeAws.Types.GetSecretInput,
+        callback?: (err: AWSError, data: ClientCodeAws.Types.SecretMetadata) => void
+    ): Request<ClientCodeAws.Types.SecretMetadata, AWSError>
+    /**
+     *
+     */
+    getSecret(
+        callback?: (err: AWSError, data: ClientCodeAws.Types.SecretMetadata) => void
+    ): Request<ClientCodeAws.Types.SecretMetadata, AWSError>
+    /**
+     *
+     */
     getSlackCredentials(
         params: ClientCodeAws.Types.GetSlackCredentialsInput,
         callback?: (err: AWSError, data: ClientCodeAws.Types.GetSlackCredentialsOutput) => void
@@ -971,6 +1283,45 @@ declare class ClientCodeAws extends Service {
     getSlackCredentials(
         callback?: (err: AWSError, data: ClientCodeAws.Types.GetSlackCredentialsOutput) => void
     ): Request<ClientCodeAws.Types.GetSlackCredentialsOutput, AWSError>
+    /**
+     *
+     */
+    getSoftwareCompositionAnalysisFinding(
+        params: ClientCodeAws.Types.GetSoftwareCompositionAnalysisFindingInput,
+        callback?: (err: AWSError, data: ClientCodeAws.Types.SoftwareCompositionAnalysisFindingOutput) => void
+    ): Request<ClientCodeAws.Types.SoftwareCompositionAnalysisFindingOutput, AWSError>
+    /**
+     *
+     */
+    getSoftwareCompositionAnalysisFinding(
+        callback?: (err: AWSError, data: ClientCodeAws.Types.SoftwareCompositionAnalysisFindingOutput) => void
+    ): Request<ClientCodeAws.Types.SoftwareCompositionAnalysisFindingOutput, AWSError>
+    /**
+     *
+     */
+    getSoftwareCompositionAnalysisReport(
+        params: ClientCodeAws.Types.GetSoftwareCompositionAnalysisReportInput,
+        callback?: (err: AWSError, data: ClientCodeAws.Types.GetSoftwareCompositionAnalysisReportOutput) => void
+    ): Request<ClientCodeAws.Types.GetSoftwareCompositionAnalysisReportOutput, AWSError>
+    /**
+     *
+     */
+    getSoftwareCompositionAnalysisReport(
+        callback?: (err: AWSError, data: ClientCodeAws.Types.GetSoftwareCompositionAnalysisReportOutput) => void
+    ): Request<ClientCodeAws.Types.GetSoftwareCompositionAnalysisReportOutput, AWSError>
+    /**
+     *
+     */
+    getSoftwareTestingReport(
+        params: ClientCodeAws.Types.GetSoftwareTestingReportInput,
+        callback?: (err: AWSError, data: ClientCodeAws.Types.GetSoftwareTestingReportOutput) => void
+    ): Request<ClientCodeAws.Types.GetSoftwareTestingReportOutput, AWSError>
+    /**
+     *
+     */
+    getSoftwareTestingReport(
+        callback?: (err: AWSError, data: ClientCodeAws.Types.GetSoftwareTestingReportOutput) => void
+    ): Request<ClientCodeAws.Types.GetSoftwareTestingReportOutput, AWSError>
     /**
      *
      */
@@ -1078,6 +1429,45 @@ declare class ClientCodeAws extends Service {
     /**
      *
      */
+    getTemplatePreview(
+        params: ClientCodeAws.Types.GetTemplatePreviewInput,
+        callback?: (err: AWSError, data: ClientCodeAws.Types.GetTemplatePreviewOutput) => void
+    ): Request<ClientCodeAws.Types.GetTemplatePreviewOutput, AWSError>
+    /**
+     *
+     */
+    getTemplatePreview(
+        callback?: (err: AWSError, data: ClientCodeAws.Types.GetTemplatePreviewOutput) => void
+    ): Request<ClientCodeAws.Types.GetTemplatePreviewOutput, AWSError>
+    /**
+     *
+     */
+    getTemplatePreviewFile(
+        params: ClientCodeAws.Types.GetTemplatePreviewFileInput,
+        callback?: (err: AWSError, data: ClientCodeAws.Types.GetTemplatePreviewFileOutput) => void
+    ): Request<ClientCodeAws.Types.GetTemplatePreviewFileOutput, AWSError>
+    /**
+     *
+     */
+    getTemplatePreviewFile(
+        callback?: (err: AWSError, data: ClientCodeAws.Types.GetTemplatePreviewFileOutput) => void
+    ): Request<ClientCodeAws.Types.GetTemplatePreviewFileOutput, AWSError>
+    /**
+     *
+     */
+    getTemplatePreviewFolder(
+        params: ClientCodeAws.Types.GetTemplatePreviewFolderInput,
+        callback?: (err: AWSError, data: ClientCodeAws.Types.GetTemplatePreviewFolderOutput) => void
+    ): Request<ClientCodeAws.Types.GetTemplatePreviewFolderOutput, AWSError>
+    /**
+     *
+     */
+    getTemplatePreviewFolder(
+        callback?: (err: AWSError, data: ClientCodeAws.Types.GetTemplatePreviewFolderOutput) => void
+    ): Request<ClientCodeAws.Types.GetTemplatePreviewFolderOutput, AWSError>
+    /**
+     *
+     */
     getTestAction(
         params: ClientCodeAws.Types.GetTestActionInput,
         callback?: (err: AWSError, data: ClientCodeAws.Types.TestActionOutput) => void
@@ -1130,6 +1520,19 @@ declare class ClientCodeAws extends Service {
     /**
      *
      */
+    getUserNotificationSettings(
+        params: ClientCodeAws.Types.GetUserNotificationSettingsInput,
+        callback?: (err: AWSError, data: ClientCodeAws.Types.GetUserNotificationSettingsOutput) => void
+    ): Request<ClientCodeAws.Types.GetUserNotificationSettingsOutput, AWSError>
+    /**
+     *
+     */
+    getUserNotificationSettings(
+        callback?: (err: AWSError, data: ClientCodeAws.Types.GetUserNotificationSettingsOutput) => void
+    ): Request<ClientCodeAws.Types.GetUserNotificationSettingsOutput, AWSError>
+    /**
+     *
+     */
     getWorkflow(
         params: ClientCodeAws.Types.GetWorkflowInput,
         callback?: (err: AWSError, data: ClientCodeAws.Types.WorkflowSummary) => void
@@ -1166,6 +1569,32 @@ declare class ClientCodeAws extends Service {
     getWorkflowState(
         callback?: (err: AWSError, data: ClientCodeAws.Types.GetWorkflowStateOutput) => void
     ): Request<ClientCodeAws.Types.GetWorkflowStateOutput, AWSError>
+    /**
+     *
+     */
+    linkSourceRepository(
+        params: ClientCodeAws.Types.LinkSourceRepositoryInput,
+        callback?: (err: AWSError, data: ClientCodeAws.Types.LinkSourceRepositoryOutput) => void
+    ): Request<ClientCodeAws.Types.LinkSourceRepositoryOutput, AWSError>
+    /**
+     *
+     */
+    linkSourceRepository(
+        callback?: (err: AWSError, data: ClientCodeAws.Types.LinkSourceRepositoryOutput) => void
+    ): Request<ClientCodeAws.Types.LinkSourceRepositoryOutput, AWSError>
+    /**
+     *
+     */
+    listActiveOrganizationInvitations(
+        params: ClientCodeAws.Types.ListActiveOrganizationInvitationsRequest,
+        callback?: (err: AWSError, data: ClientCodeAws.Types.ListActiveOrganizationInvitationsResponse) => void
+    ): Request<ClientCodeAws.Types.ListActiveOrganizationInvitationsResponse, AWSError>
+    /**
+     *
+     */
+    listActiveOrganizationInvitations(
+        callback?: (err: AWSError, data: ClientCodeAws.Types.ListActiveOrganizationInvitationsResponse) => void
+    ): Request<ClientCodeAws.Types.ListActiveOrganizationInvitationsResponse, AWSError>
     /**
      *
      */
@@ -1247,6 +1676,32 @@ declare class ClientCodeAws extends Service {
     /**
      *
      */
+    listAwsAccountRoles(
+        params: ClientCodeAws.Types.ListAwsAccountRolesInput,
+        callback?: (err: AWSError, data: ClientCodeAws.Types.ListAwsAccountRolesOutput) => void
+    ): Request<ClientCodeAws.Types.ListAwsAccountRolesOutput, AWSError>
+    /**
+     *
+     */
+    listAwsAccountRoles(
+        callback?: (err: AWSError, data: ClientCodeAws.Types.ListAwsAccountRolesOutput) => void
+    ): Request<ClientCodeAws.Types.ListAwsAccountRolesOutput, AWSError>
+    /**
+     *
+     */
+    listAwsAccounts(
+        params: ClientCodeAws.Types.ListAwsAccountsInput,
+        callback?: (err: AWSError, data: ClientCodeAws.Types.ListAwsAccountsOutput) => void
+    ): Request<ClientCodeAws.Types.ListAwsAccountsOutput, AWSError>
+    /**
+     *
+     */
+    listAwsAccounts(
+        callback?: (err: AWSError, data: ClientCodeAws.Types.ListAwsAccountsOutput) => void
+    ): Request<ClientCodeAws.Types.ListAwsAccountsOutput, AWSError>
+    /**
+     *
+     */
     listBuilds(
         params: ClientCodeAws.Types.ListBuildsInput,
         callback?: (err: AWSError, data: ClientCodeAws.Types.ListBuildsOutput) => void
@@ -1257,6 +1712,19 @@ declare class ClientCodeAws extends Service {
     listBuilds(
         callback?: (err: AWSError, data: ClientCodeAws.Types.ListBuildsOutput) => void
     ): Request<ClientCodeAws.Types.ListBuildsOutput, AWSError>
+    /**
+     *
+     */
+    listCloudFormationStackResources(
+        params: ClientCodeAws.Types.ListCloudFormationStackResourcesInput,
+        callback?: (err: AWSError, data: ClientCodeAws.Types.ListCloudFormationStackResourcesOutput) => void
+    ): Request<ClientCodeAws.Types.ListCloudFormationStackResourcesOutput, AWSError>
+    /**
+     *
+     */
+    listCloudFormationStackResources(
+        callback?: (err: AWSError, data: ClientCodeAws.Types.ListCloudFormationStackResourcesOutput) => void
+    ): Request<ClientCodeAws.Types.ListCloudFormationStackResourcesOutput, AWSError>
     /**
      *
      */
@@ -1351,29 +1819,16 @@ declare class ClientCodeAws extends Service {
     /**
      *
      */
-    listEmailStatisticsByResourceType(
-        params: ClientCodeAws.Types.ListEmailStatisticsByResourceTypeInput,
-        callback?: (err: AWSError, data: ClientCodeAws.Types.ListEmailStatisticsOutput) => void
-    ): Request<ClientCodeAws.Types.ListEmailStatisticsOutput, AWSError>
+    listDevelopmentWorkspace(
+        params: ClientCodeAws.Types.ListDevelopmentWorkspaceInput,
+        callback?: (err: AWSError, data: ClientCodeAws.Types.ListDevelopmentWorkspaceOutput) => void
+    ): Request<ClientCodeAws.Types.ListDevelopmentWorkspaceOutput, AWSError>
     /**
      *
      */
-    listEmailStatisticsByResourceType(
-        callback?: (err: AWSError, data: ClientCodeAws.Types.ListEmailStatisticsOutput) => void
-    ): Request<ClientCodeAws.Types.ListEmailStatisticsOutput, AWSError>
-    /**
-     *
-     */
-    listEmailStatisticsByUserIdResourceId(
-        params: ClientCodeAws.Types.ListEmailStatisticsByUserIdResourceIdInput,
-        callback?: (err: AWSError, data: ClientCodeAws.Types.ListEmailStatisticsOutput) => void
-    ): Request<ClientCodeAws.Types.ListEmailStatisticsOutput, AWSError>
-    /**
-     *
-     */
-    listEmailStatisticsByUserIdResourceId(
-        callback?: (err: AWSError, data: ClientCodeAws.Types.ListEmailStatisticsOutput) => void
-    ): Request<ClientCodeAws.Types.ListEmailStatisticsOutput, AWSError>
+    listDevelopmentWorkspace(
+        callback?: (err: AWSError, data: ClientCodeAws.Types.ListDevelopmentWorkspaceOutput) => void
+    ): Request<ClientCodeAws.Types.ListDevelopmentWorkspaceOutput, AWSError>
     /**
      *
      */
@@ -1413,6 +1868,19 @@ declare class ClientCodeAws extends Service {
     listEnvironments(
         callback?: (err: AWSError, data: ClientCodeAws.Types.ListEnvironmentsOutput) => void
     ): Request<ClientCodeAws.Types.ListEnvironmentsOutput, AWSError>
+    /**
+     *
+     */
+    listExtensionInstallations(
+        params: ClientCodeAws.Types.ListExtensionInstallationsInput,
+        callback?: (err: AWSError, data: ClientCodeAws.Types.ListExtensionInstallationsOutput) => void
+    ): Request<ClientCodeAws.Types.ListExtensionInstallationsOutput, AWSError>
+    /**
+     *
+     */
+    listExtensionInstallations(
+        callback?: (err: AWSError, data: ClientCodeAws.Types.ListExtensionInstallationsOutput) => void
+    ): Request<ClientCodeAws.Types.ListExtensionInstallationsOutput, AWSError>
     /**
      *
      */
@@ -1481,6 +1949,19 @@ declare class ClientCodeAws extends Service {
     /**
      *
      */
+    listPreviousProjects(
+        params: ClientCodeAws.Types.ListPreviousProjectsInput,
+        callback?: (err: AWSError, data: ClientCodeAws.Types.ListPreviousProjectsOutput) => void
+    ): Request<ClientCodeAws.Types.ListPreviousProjectsOutput, AWSError>
+    /**
+     *
+     */
+    listPreviousProjects(
+        callback?: (err: AWSError, data: ClientCodeAws.Types.ListPreviousProjectsOutput) => void
+    ): Request<ClientCodeAws.Types.ListPreviousProjectsOutput, AWSError>
+    /**
+     *
+     */
     listProjects(
         params: ClientCodeAws.Types.ListProjectsInput,
         callback?: (err: AWSError, data: ClientCodeAws.Types.ListProjectsOutput) => void
@@ -1517,6 +1998,77 @@ declare class ClientCodeAws extends Service {
     listRoleMappings(
         callback?: (err: AWSError, data: ClientCodeAws.Types.ListRoleMappingOutput) => void
     ): Request<ClientCodeAws.Types.ListRoleMappingOutput, AWSError>
+    /**
+     *
+     */
+    listSecrets(
+        params: ClientCodeAws.Types.ListSecretsInput,
+        callback?: (err: AWSError, data: ClientCodeAws.Types.ListSecretsOutput) => void
+    ): Request<ClientCodeAws.Types.ListSecretsOutput, AWSError>
+    /**
+     *
+     */
+    listSecrets(
+        callback?: (err: AWSError, data: ClientCodeAws.Types.ListSecretsOutput) => void
+    ): Request<ClientCodeAws.Types.ListSecretsOutput, AWSError>
+    /**
+     *
+     */
+    listSoftwareCompositionAnalysisFindingStatistics(
+        params: ClientCodeAws.Types.ListSoftwareCompositionAnalysisFindingsInput,
+        callback?: (
+            err: AWSError,
+            data: ClientCodeAws.Types.ListSoftwareCompositionAnalysisFindingStatisticsOutput
+        ) => void
+    ): Request<ClientCodeAws.Types.ListSoftwareCompositionAnalysisFindingStatisticsOutput, AWSError>
+    /**
+     *
+     */
+    listSoftwareCompositionAnalysisFindingStatistics(
+        callback?: (
+            err: AWSError,
+            data: ClientCodeAws.Types.ListSoftwareCompositionAnalysisFindingStatisticsOutput
+        ) => void
+    ): Request<ClientCodeAws.Types.ListSoftwareCompositionAnalysisFindingStatisticsOutput, AWSError>
+    /**
+     *
+     */
+    listSoftwareCompositionAnalysisFindings(
+        params: ClientCodeAws.Types.ListSoftwareCompositionAnalysisFindingsInput,
+        callback?: (err: AWSError, data: ClientCodeAws.Types.ListSoftwareCompositionAnalysisFindingsOutput) => void
+    ): Request<ClientCodeAws.Types.ListSoftwareCompositionAnalysisFindingsOutput, AWSError>
+    /**
+     *
+     */
+    listSoftwareCompositionAnalysisFindings(
+        callback?: (err: AWSError, data: ClientCodeAws.Types.ListSoftwareCompositionAnalysisFindingsOutput) => void
+    ): Request<ClientCodeAws.Types.ListSoftwareCompositionAnalysisFindingsOutput, AWSError>
+    /**
+     *
+     */
+    listSoftwareCompositionAnalysisReports(
+        params: ClientCodeAws.Types.ListSoftwareCompositionAnalysisReportsInput,
+        callback?: (err: AWSError, data: ClientCodeAws.Types.ListSoftwareCompositionAnalysisReportsOutput) => void
+    ): Request<ClientCodeAws.Types.ListSoftwareCompositionAnalysisReportsOutput, AWSError>
+    /**
+     *
+     */
+    listSoftwareCompositionAnalysisReports(
+        callback?: (err: AWSError, data: ClientCodeAws.Types.ListSoftwareCompositionAnalysisReportsOutput) => void
+    ): Request<ClientCodeAws.Types.ListSoftwareCompositionAnalysisReportsOutput, AWSError>
+    /**
+     *
+     */
+    listSoftwareTestingReports(
+        params: ClientCodeAws.Types.ListSoftwareTestingReportsInput,
+        callback?: (err: AWSError, data: ClientCodeAws.Types.ListSoftwareTestingReportsOutput) => void
+    ): Request<ClientCodeAws.Types.ListSoftwareTestingReportsOutput, AWSError>
+    /**
+     *
+     */
+    listSoftwareTestingReports(
+        callback?: (err: AWSError, data: ClientCodeAws.Types.ListSoftwareTestingReportsOutput) => void
+    ): Request<ClientCodeAws.Types.ListSoftwareTestingReportsOutput, AWSError>
     /**
      *
      */
@@ -1715,16 +2267,42 @@ declare class ClientCodeAws extends Service {
     /**
      *
      */
-    putIssue(
-        params: ClientCodeAws.Types.PutIssueInput,
-        callback?: (err: AWSError, data: ClientCodeAws.Types.PutIssueOutput) => void
-    ): Request<ClientCodeAws.Types.PutIssueOutput, AWSError>
+    mergeSourcePullRequestBySquash(
+        params: ClientCodeAws.Types.MergeSourcePullRequestBySquashInput,
+        callback?: (err: AWSError, data: ClientCodeAws.Types.MergeSourcePullRequestBySquashOutput) => void
+    ): Request<ClientCodeAws.Types.MergeSourcePullRequestBySquashOutput, AWSError>
     /**
      *
      */
-    putIssue(
-        callback?: (err: AWSError, data: ClientCodeAws.Types.PutIssueOutput) => void
-    ): Request<ClientCodeAws.Types.PutIssueOutput, AWSError>
+    mergeSourcePullRequestBySquash(
+        callback?: (err: AWSError, data: ClientCodeAws.Types.MergeSourcePullRequestBySquashOutput) => void
+    ): Request<ClientCodeAws.Types.MergeSourcePullRequestBySquashOutput, AWSError>
+    /**
+     *
+     */
+    putUserNotificationSettings(
+        params: ClientCodeAws.Types.PutUserNotificationSettingsInput,
+        callback?: (err: AWSError, data: ClientCodeAws.Types.PutUserNotificationSettingsOutput) => void
+    ): Request<ClientCodeAws.Types.PutUserNotificationSettingsOutput, AWSError>
+    /**
+     *
+     */
+    putUserNotificationSettings(
+        callback?: (err: AWSError, data: ClientCodeAws.Types.PutUserNotificationSettingsOutput) => void
+    ): Request<ClientCodeAws.Types.PutUserNotificationSettingsOutput, AWSError>
+    /**
+     *
+     */
+    putWatchIssueSetting(
+        params: ClientCodeAws.Types.PutWatchIssueSettingInput,
+        callback?: (err: AWSError, data: ClientCodeAws.Types.PutWatchIssueSettingOutput) => void
+    ): Request<ClientCodeAws.Types.PutWatchIssueSettingOutput, AWSError>
+    /**
+     *
+     */
+    putWatchIssueSetting(
+        callback?: (err: AWSError, data: ClientCodeAws.Types.PutWatchIssueSettingOutput) => void
+    ): Request<ClientCodeAws.Types.PutWatchIssueSettingOutput, AWSError>
     /**
      *
      */
@@ -1819,6 +2397,19 @@ declare class ClientCodeAws extends Service {
     /**
      *
      */
+    sendOrganizationInvitation(
+        params: ClientCodeAws.Types.SendOrganizationInvitationRequest,
+        callback?: (err: AWSError, data: ClientCodeAws.Types.SendOrganizationInvitationResponse) => void
+    ): Request<ClientCodeAws.Types.SendOrganizationInvitationResponse, AWSError>
+    /**
+     *
+     */
+    sendOrganizationInvitation(
+        callback?: (err: AWSError, data: ClientCodeAws.Types.SendOrganizationInvitationResponse) => void
+    ): Request<ClientCodeAws.Types.SendOrganizationInvitationResponse, AWSError>
+    /**
+     *
+     */
     sendProjectInvitation(
         params: ClientCodeAws.Types.SendProjectInvitationRequest,
         callback?: (err: AWSError, data: ClientCodeAws.Types.SendProjectInvitationResponse) => void
@@ -1829,6 +2420,19 @@ declare class ClientCodeAws extends Service {
     sendProjectInvitation(
         callback?: (err: AWSError, data: ClientCodeAws.Types.SendProjectInvitationResponse) => void
     ): Request<ClientCodeAws.Types.SendProjectInvitationResponse, AWSError>
+    /**
+     *
+     */
+    setSubscription(
+        params: ClientCodeAws.Types.SetSubscriptionInput,
+        callback?: (err: AWSError, data: ClientCodeAws.Types.SetSubscriptionOutput) => void
+    ): Request<ClientCodeAws.Types.SetSubscriptionOutput, AWSError>
+    /**
+     *
+     */
+    setSubscription(
+        callback?: (err: AWSError, data: ClientCodeAws.Types.SetSubscriptionOutput) => void
+    ): Request<ClientCodeAws.Types.SetSubscriptionOutput, AWSError>
     /**
      *
      */
@@ -1871,6 +2475,19 @@ declare class ClientCodeAws extends Service {
     /**
      *
      */
+    stopDevelopmentWorkspace(
+        params: ClientCodeAws.Types.StopDevelopmentWorkspaceInput,
+        callback?: (err: AWSError, data: ClientCodeAws.Types.StopDevelopmentWorkspaceOutput) => void
+    ): Request<ClientCodeAws.Types.StopDevelopmentWorkspaceOutput, AWSError>
+    /**
+     *
+     */
+    stopDevelopmentWorkspace(
+        callback?: (err: AWSError, data: ClientCodeAws.Types.StopDevelopmentWorkspaceOutput) => void
+    ): Request<ClientCodeAws.Types.StopDevelopmentWorkspaceOutput, AWSError>
+    /**
+     *
+     */
     synthFromTemplate(
         params: ClientCodeAws.Types.SynthFromTemplateInput,
         callback?: (err: AWSError, data: ClientCodeAws.Types.SynthFromTemplateOutput) => void
@@ -1881,6 +2498,19 @@ declare class ClientCodeAws extends Service {
     synthFromTemplate(
         callback?: (err: AWSError, data: ClientCodeAws.Types.SynthFromTemplateOutput) => void
     ): Request<ClientCodeAws.Types.SynthFromTemplateOutput, AWSError>
+    /**
+     *
+     */
+    updateArtifactPackageOriginConfiguration(
+        params: ClientCodeAws.Types.UpdateArtifactPackageOriginConfigurationInput,
+        callback?: (err: AWSError, data: ClientCodeAws.Types.UpdateArtifactPackageOriginConfigurationOutput) => void
+    ): Request<ClientCodeAws.Types.UpdateArtifactPackageOriginConfigurationOutput, AWSError>
+    /**
+     *
+     */
+    updateArtifactPackageOriginConfiguration(
+        callback?: (err: AWSError, data: ClientCodeAws.Types.UpdateArtifactPackageOriginConfigurationOutput) => void
+    ): Request<ClientCodeAws.Types.UpdateArtifactPackageOriginConfigurationOutput, AWSError>
     /**
      *
      */
@@ -1962,6 +2592,19 @@ declare class ClientCodeAws extends Service {
     /**
      *
      */
+    updateIssue(
+        params: ClientCodeAws.Types.UpdateIssueInput,
+        callback?: (err: AWSError, data: ClientCodeAws.Types.UpdateIssueOutput) => void
+    ): Request<ClientCodeAws.Types.UpdateIssueOutput, AWSError>
+    /**
+     *
+     */
+    updateIssue(
+        callback?: (err: AWSError, data: ClientCodeAws.Types.UpdateIssueOutput) => void
+    ): Request<ClientCodeAws.Types.UpdateIssueOutput, AWSError>
+    /**
+     *
+     */
     updateIssueStore(
         params: ClientCodeAws.Types.UpdateIssueStoreInput,
         callback?: (err: AWSError, data: ClientCodeAws.Types.UpdateIssueStoreOutput) => void
@@ -1972,6 +2615,19 @@ declare class ClientCodeAws extends Service {
     updateIssueStore(
         callback?: (err: AWSError, data: ClientCodeAws.Types.UpdateIssueStoreOutput) => void
     ): Request<ClientCodeAws.Types.UpdateIssueStoreOutput, AWSError>
+    /**
+     *
+     */
+    updateNotificationChannel(
+        params: ClientCodeAws.Types.UpdateNotificationChannelInput,
+        callback?: (err: AWSError, data: ClientCodeAws.Types.UpdateNotificationChannelOutput) => void
+    ): Request<ClientCodeAws.Types.UpdateNotificationChannelOutput, AWSError>
+    /**
+     *
+     */
+    updateNotificationChannel(
+        callback?: (err: AWSError, data: ClientCodeAws.Types.UpdateNotificationChannelOutput) => void
+    ): Request<ClientCodeAws.Types.UpdateNotificationChannelOutput, AWSError>
     /**
      *
      */
@@ -2066,6 +2722,19 @@ declare class ClientCodeAws extends Service {
     /**
      *
      */
+    updateSecret(
+        params: ClientCodeAws.Types.UpdateSecretInput,
+        callback?: (err: AWSError, data: ClientCodeAws.Types.UpdateSecretOutput) => void
+    ): Request<ClientCodeAws.Types.UpdateSecretOutput, AWSError>
+    /**
+     *
+     */
+    updateSecret(
+        callback?: (err: AWSError, data: ClientCodeAws.Types.UpdateSecretOutput) => void
+    ): Request<ClientCodeAws.Types.UpdateSecretOutput, AWSError>
+    /**
+     *
+     */
     updateSourcePullRequest(
         params: ClientCodeAws.Types.UpdateSourcePullRequestInput,
         callback?: (err: AWSError, data: ClientCodeAws.Types.UpdateSourcePullRequestOutput) => void
@@ -2076,6 +2745,32 @@ declare class ClientCodeAws extends Service {
     updateSourcePullRequest(
         callback?: (err: AWSError, data: ClientCodeAws.Types.UpdateSourcePullRequestOutput) => void
     ): Request<ClientCodeAws.Types.UpdateSourcePullRequestOutput, AWSError>
+    /**
+     *
+     */
+    updateSourcePullRequestApprovalStatus(
+        params: ClientCodeAws.Types.UpdateSourcePullRequestApprovalStatusInput,
+        callback?: (err: AWSError, data: ClientCodeAws.Types.UpdateSourcePullRequestApprovalStatusOutput) => void
+    ): Request<ClientCodeAws.Types.UpdateSourcePullRequestApprovalStatusOutput, AWSError>
+    /**
+     *
+     */
+    updateSourcePullRequestApprovalStatus(
+        callback?: (err: AWSError, data: ClientCodeAws.Types.UpdateSourcePullRequestApprovalStatusOutput) => void
+    ): Request<ClientCodeAws.Types.UpdateSourcePullRequestApprovalStatusOutput, AWSError>
+    /**
+     *
+     */
+    updateSourcePullRequestReviewers(
+        params: ClientCodeAws.Types.UpdateSourcePullRequestReviewersInput,
+        callback?: (err: AWSError, data: ClientCodeAws.Types.UpdateSourcePullRequestReviewersOutput) => void
+    ): Request<ClientCodeAws.Types.UpdateSourcePullRequestReviewersOutput, AWSError>
+    /**
+     *
+     */
+    updateSourcePullRequestReviewers(
+        callback?: (err: AWSError, data: ClientCodeAws.Types.UpdateSourcePullRequestReviewersOutput) => void
+    ): Request<ClientCodeAws.Types.UpdateSourcePullRequestReviewersOutput, AWSError>
     /**
      *
      */
@@ -2105,11 +2800,39 @@ declare class ClientCodeAws extends Service {
     /**
      *
      */
+    validateWorkflowDefinitionDraft(
+        params: ClientCodeAws.Types.ValidateWorkflowDefinitionDraftInput,
+        callback?: (err: AWSError, data: ClientCodeAws.Types.ValidateWorkflowDefinitionDraftOutput) => void
+    ): Request<ClientCodeAws.Types.ValidateWorkflowDefinitionDraftOutput, AWSError>
+    /**
+     *
+     */
+    validateWorkflowDefinitionDraft(
+        callback?: (err: AWSError, data: ClientCodeAws.Types.ValidateWorkflowDefinitionDraftOutput) => void
+    ): Request<ClientCodeAws.Types.ValidateWorkflowDefinitionDraftOutput, AWSError>
+    /**
+     *
+     */
     verifySession(
         callback?: (err: AWSError, data: ClientCodeAws.Types.VerifySessionResponse) => void
     ): Request<ClientCodeAws.Types.VerifySessionResponse, AWSError>
 }
 declare namespace ClientCodeAws {
+    export interface AcceptOrganizationInvitationRequest {
+        organizationInvitationId: String
+        organizationName: NameString
+        signupEmailAddress: String
+    }
+    export interface AcceptOrganizationInvitationResponse {
+        inviteeDisplayName?: String
+        inviteeEmailAddress: String
+        inviteeRole: OrganizationRoles
+        inviterUserName?: String
+        lastUpdatedTime: String
+        organizationName?: String
+        signupEmailAddress?: String
+        status: InvitationStatus
+    }
     export interface AcceptProjectInvitationRequest {
         organizationName: NameString
         projectInvitationId: String
@@ -2119,6 +2842,7 @@ declare namespace ClientCodeAws {
         projectInvitation: ProjectInvitation
     }
     export type ActionGroupNames = String[]
+    export type ActionNames = String[]
     export interface ActionRunSummaryData {
         summaryMessage: ActionRunSummaryDataMessage
         summaryType: ActionRunSummaryDataType
@@ -2139,6 +2863,7 @@ declare namespace ClientCodeAws {
         lastUpdatedTime?: SyntheticTimestamp_date_time
         name?: String
         outputArtifacts?: WorkflowRunActionArtifacts
+        outputVariables?: WorkflowRunActionOutputVariables
         startTime?: SyntheticTimestamp_date_time
         status?: String
     }
@@ -2157,14 +2882,61 @@ declare namespace ClientCodeAws {
         name: String
         value: String
     }
+    export interface AnalysisCounter {
+        count: Integer
+        name: String
+    }
+    export type AnalysisCounters = AnalysisCounter[]
+    export interface AnalysisFindingLocation {
+        logicalLocation?: AnalysisFindingLogicalLocation
+        physicalLocation?: AnalysisFindingPhysicalLocation
+    }
+    export type AnalysisFindingLocations = AnalysisFindingLocation[]
+    export interface AnalysisFindingLogicalLocation {
+        fullyQualifiedName: String
+    }
+    export interface AnalysisFindingMessage {
+        content: String
+        truncated: Boolean
+    }
+    export interface AnalysisFindingPhysicalLocation {
+        endCoordinate?: AnalysisFindingSourceCoordinate
+        path: String
+        startCoordinate?: AnalysisFindingSourceCoordinate
+    }
+    export interface AnalysisFindingRule {
+        description?: AnalysisFindingMessage
+        displayName?: String
+        helpUrl?: String
+        ruleId?: String
+    }
+    export type AnalysisFindingScore = number
+    export interface AnalysisFindingSeverity {
+        mappedSeverity: String
+        mappedSeverityValue: Integer
+        originalSeverity: String
+    }
+    export interface AnalysisFindingSourceCoordinate {
+        columnNumber?: Integer
+        lineNumber: Integer
+    }
     export interface AnswerInformation {
         answerId?: String
         userInput?: String
     }
     export type AnswerSection = AnswerInformation[]
+    export type ArtifactPackageAllowPublish = 'ALLOW' | 'BLOCK' | string
+    export type ArtifactPackageAllowUpstream = 'ALLOW' | 'BLOCK' | 'BLOCK_INGESTION' | string
     export type ArtifactPackageFormatString = string
     export type ArtifactPackageNameString = string
     export type ArtifactPackageNamespaceString = string
+    export interface ArtifactPackageOriginConfiguration {
+        restrictions?: ArtifactPackageOriginRestrictions
+    }
+    export interface ArtifactPackageOriginRestrictions {
+        publish?: ArtifactPackageAllowPublish
+        upstream?: ArtifactPackageAllowUpstream
+    }
     export interface ArtifactPackageSummary {
         format?: ArtifactPackageFormatString
         lastUpdatedTime?: String
@@ -2191,17 +2963,28 @@ declare namespace ClientCodeAws {
         versionRequirement?: ArtifactPackageVersionRequirement
     }
     export type ArtifactPackageVersionDependencyType = string
+    export interface ArtifactPackageVersionEntryPoint {
+        externalConnectionName?: ExternalConnectionNameString
+        projectName?: NameString
+        repositoryName?: ArtifactRepositoryNameString
+    }
     export interface ArtifactPackageVersionLicense {
         name?: String
         url?: String
     }
     export type ArtifactPackageVersionLicenseList = ArtifactPackageVersionLicense[]
+    export interface ArtifactPackageVersionOrigin {
+        entryPoint?: ArtifactPackageVersionEntryPoint
+        originType?: ArtifactPackageVersionOriginType
+    }
+    export type ArtifactPackageVersionOriginType = 'INTERNAL' | 'EXTERNAL' | 'UNKNOWN' | string
     export type ArtifactPackageVersionReadmeString = string
     export type ArtifactPackageVersionRequirement = string
     export type ArtifactPackageVersionRevisionMap = { [key: string]: ArtifactPackageVersionRevisionString }
     export type ArtifactPackageVersionRevisionString = string
     export type ArtifactPackageVersionStatusString = string
     export interface ArtifactPackageVersionSummary {
+        origin?: ArtifactPackageVersionOrigin
         revision?: ArtifactPackageVersionRevisionString
         status?: ArtifactPackageVersionStatusString
         version?: ArtifactPackageVersionValueString
@@ -2234,11 +3017,61 @@ declare namespace ClientCodeAws {
         upstreams?: UpstreamArtifactRepositoryList
     }
     export type ArtifactRepositorySummaryList = ArtifactRepositorySummary[]
+    export interface AssociateRoleToProjectInput {
+        awsAccountName: NameString
+        organizationName: NameString
+        /**
+         * Project name
+         */
+        projectName: NameString
+        /**
+         * Role name
+         */
+        roleName: NameString
+    }
+    export interface AssociateRoleToProjectOutput {
+        projectName: NameString
+        roleName: String
+    }
     export interface Author {
         datetime?: SyntheticTimestamp_date_time
         email?: String
         name?: String
     }
+    export interface AwsAccount {
+        accountConnectionToken?: String
+        /**
+         * Aws Account Id
+         */
+        awsAccountId: String
+        /**
+         * Account name given to AWS account on PRODUCT portal
+         */
+        awsAccountName: String
+        connectionRequestedFeatures?: ConnectionFeatures
+        createdTime?: Timestamp
+        description?: String
+        lastUpdatedTime?: Timestamp
+        /**
+         * PRODUCT organization name
+         */
+        organizationName: String
+        /**
+         * This will be personId who requested to add AWS account
+         */
+        requesterId: String
+        status: AwsAccountStatus
+    }
+    export type AwsAccountList = AwsAccount[]
+    export interface AwsAccountRole {
+        awsAccountName: String
+        createdTime?: Timestamp
+        roleArn: String
+        roleDescription?: String
+        roleName: String
+    }
+    export type AwsAccountRoleList = AwsAccountRole[]
+    export type AwsAccountStatus = 'pending' | 'connected' | 'disconnected' | 'deleted' | string
     export interface BatchGetIssueInput {
         identifiers: BatchGetIssueInputIdentifiersList
         issueStoreName: NameString
@@ -2296,6 +3129,7 @@ declare namespace ClientCodeAws {
     export interface BuildEnvironment {
         containerImage?: String
         debugSessionEnabled?: Boolean
+        outputVariables?: OutputVariables
         timeoutInMinutes?: Integer
         variables?: BuildVariables
     }
@@ -2390,6 +3224,13 @@ declare namespace ClientCodeAws {
         resolvedValue?: String
     }
     export type CloudFormationStackParametersList = CloudFormationStackParameter[]
+    export interface CloudFormationStackResourceSummary {
+        id?: String
+        name?: String
+        status?: String
+        type?: String
+    }
+    export type CloudFormationStackResourcesList = CloudFormationStackResourceSummary[]
     export type CloudFormationStackStatusFilterList = String[]
     export interface CloudFormationStackSummary {
         id?: String
@@ -2495,6 +3336,98 @@ declare namespace ClientCodeAws {
     export type CommentReactor = string
     export type CommentsForIssueList = CommentForIssueOutput[]
     export type CommentsOrderForIssue = 'CREATION_TIME_ASCENDING' | 'CREATION_TIME_DESCENDING' | string
+    export interface ComputeActionArtifact {
+        files?: ComputeActionFiles
+        location?: String
+        name?: String
+        packaging?: String
+        type?: String
+    }
+    export type ComputeActionArtifacts = ComputeActionArtifact[]
+    export interface ComputeActionComputeDetails {
+        computeType: String
+        environmentType: String
+        fleetName?: String
+    }
+    export interface ComputeActionDetailsOutput {
+        artifacts?: ComputeActionArtifacts
+        computeDetails?: ComputeActionComputeDetails
+        currentPhase?: String
+        endTime?: SyntheticTimestamp_date_time
+        environment?: ComputeActionEnvironment
+        fleetId?: String
+        lastUpdatedTime?: SyntheticTimestamp_date_time
+        phases?: ComputeActionPhaseMetaDataList
+        reports?: ComputeActionReports
+        sources?: ComputeActionSources
+        startTime?: SyntheticTimestamp_date_time
+        status?: String
+    }
+    export interface ComputeActionEnvironment {
+        containerImage?: String
+        debugSessionEnabled?: Boolean
+        timeoutInMinutes?: Integer
+        variables?: ComputeActionVariables
+    }
+    export type ComputeActionFiles = String[]
+    export interface ComputeActionPhaseContext {
+        message?: String
+        statusCode?: String
+    }
+    export type ComputeActionPhaseContextList = ComputeActionPhaseContext[]
+    export type ComputeActionPhaseMetaDataList = ComputeActionPhaseMetadata[]
+    export interface ComputeActionPhaseMetadata {
+        contexts?: ComputeActionPhaseContextList
+        durationInSeconds?: Integer
+        endTime?: SyntheticTimestamp_date_time
+        name?: String
+        startTime?: SyntheticTimestamp_date_time
+        status?: String
+        steps?: ComputeActionSteps
+    }
+    export interface ComputeActionReport {
+        files?: ComputeActionFiles
+        name?: String
+        sourceRepo?: String
+        type?: String
+    }
+    export type ComputeActionReports = ComputeActionReport[]
+    export interface ComputeActionSource {
+        /**
+         * An identifier for source of the build.
+         */
+        sourceIdentifier?: String
+        /**
+         * Information about the location of the source code to be built.
+         */
+        sourceLocation?: String
+        /**
+         * Information about the source being a primary/secondary.
+         */
+        sourceRank: String
+        /**
+         * The type of repository that contains the source code to be built.
+         */
+        sourceType: String
+        /**
+         * The source version for the corresponding source identifier.
+         */
+        sourceVersion?: String
+    }
+    export type ComputeActionSources = ComputeActionSource[]
+    export interface ComputeActionStep {
+        endTime?: SyntheticTimestamp_date_time
+        name?: String
+        startTime?: SyntheticTimestamp_date_time
+        status?: String
+    }
+    export type ComputeActionSteps = ComputeActionStep[]
+    export interface ComputeActionVariable {
+        name?: String
+        type?: String
+        value?: String
+    }
+    export type ComputeActionVariables = ComputeActionVariable[]
     export interface ComputeFleetSettings {
         architecture?: String
         disk?: Integer
@@ -2511,23 +3444,67 @@ declare namespace ClientCodeAws {
         id?: String
         lastUpdatedTime?: SyntheticTimestamp_date_time
         name?: String
+        overflowBehavior?: FleetOverflowBehavior
         resolvedInstanceType?: String
         status?: String
         statusContext?: FleetStatusContext
     }
-    export type ConnectionName = string
-    export type ConnectionProviderType = 'Bitbucket' | 'GITHUB' | string
-    export type ConnectionStatus = 'PENDING' | 'AVAILABLE' | 'ERROR' | string
+    export interface ConnectAwsAccountInput {
+        awsAccountDescription?: String
+        awsAccountId: String
+        awsAccountName: NameString
+        connectionRequestedFeatures?: ConnectionFeatures
+        organizationName: NameString
+    }
+    export interface ConnectAwsAccountOutput {
+        accountConnectionToken: String
+        /**
+         * Aws Account Id
+         */
+        awsAccountId: String
+        /**
+         * Account name given to AWS account on PRODUCT portal
+         */
+        awsAccountName: String
+        connectionRequestedFeatures?: ConnectionFeatures
+        createdTime?: Timestamp
+        description?: String
+        lastUpdatedTime?: Timestamp
+        /**
+         * PRODUCT organization name
+         */
+        organizationName: String
+        /**
+         * This will be personId who requested to add AWS account
+         */
+        requesterId: String
+        status: AwsAccountStatus
+    }
+    export interface ConnectionFeature {
+        /**
+         * Model that contains arbitrary data about the connection feature. For the ALLOW_BILLING feature, details is expected to conform to: { 'allowedTiers': { 'type': 'array', 'items': { 'type': 'string', 'enum': [ 'FREE', 'STANDARD', 'STANDARD_PLUS_WORKSPACES, 'CUSTOM' ] } } }
+         */
+        details?: String
+        /**
+         * The type of connection feature represented by this object.
+         */
+        type: ConnectionFeatureType
+    }
+    export type ConnectionFeatureType = 'ALLOW_BILLING' | string
+    export type ConnectionFeatures = ConnectionFeature[]
+    export type ConnectionStatus = 'pending' | 'connected' | 'disconnected' | string
     export type ConnectionSummaries = ConnectionSummary[]
     export interface ConnectionSummary {
-        name?: ConnectionName
-        provider?: ConnectionProviderType
-        status?: ConnectionStatus
+        creatorId: String
+        lastUpdatedTime: SyntheticTimestamp_date_time
+        name: NameString
+        organizationName: NameString
+        providerData: ProviderData
+        providerId: String
+        status: ConnectionStatus
         statusMessage?: String
-        updateTime?: String
     }
-    export type ContributorId = string
-    export type ContributorIds = ContributorId[]
+    export type ContributorIds = String[]
     export interface CoverageLineDetail {
         coverage: String
         isBranch: Boolean
@@ -2599,18 +3576,31 @@ declare namespace ClientCodeAws {
     }
     export interface CreateComputeFleetInput {
         computeSettings?: ComputeFleetSettings
-        desiredCapacity: Integer
+        desiredCapacity: CreateComputeFleetInputDesiredCapacityInteger
         name: NameString
         organizationName: NameString
+        overflowBehavior?: FleetOverflowBehavior
         projectName: NameString
     }
+    export type CreateComputeFleetInputDesiredCapacityInteger = number
     export interface CreateComputeFleetOutput {
         id?: String
         version?: String
     }
+    export interface CreateConnectionInput {
+        code: String
+        name: NameString
+        organizationName: NameString
+        providerId: String
+    }
+    export interface CreateConnectionOutput {
+        version?: String
+    }
     export interface CreateDevelopmentWorkspaceInput {
+        clientToken?: String
         ideRuntimes: IdeRuntimesInput
         organizationName: NameString
+        projectName: NameString
         repositories: RepositoriesInput
     }
     export interface CreateDevelopmentWorkspaceOutput {
@@ -2619,6 +3609,7 @@ declare namespace ClientCodeAws {
     export interface CreateEnvironmentInput {
         connectionId?: String
         description?: String
+        environmentType?: EnvironmentType
         name: NameString
         organizationName: NameString
         projectName: NameString
@@ -2638,12 +3629,40 @@ declare namespace ClientCodeAws {
     export interface CreateEnvironmentStackOutput {
         version?: String
     }
+    export interface CreateExtensionInstallationInput {
+        extensionId: String
+        extensionVersion: String
+        organizationName: NameString
+    }
+    export interface CreateExtensionInstallationOutput {
+        id: String
+    }
     export interface CreateExternalArtifactRepositoryInput {
         description?: ArtifactRepositoryDescriptionString
         externalConnection: ExternalConnectionNameString
         name: ArtifactRepositoryNameString
         organizationName: NameString
         projectName: NameString
+    }
+    export interface CreateIssueInput {
+        archived: Boolean
+        assigneeIds?: IssueAssigneeIds
+        blocked?: Boolean
+        description: String
+        estimate?: Estimate
+        issueStoreName: NameString
+        labelIds?: IssueLabelIds
+        organizationName: NameString
+        priority?: IssuePriority
+        projectName: NameString
+        statusId: String
+        title: CreateIssueInputTitleString
+    }
+    export type CreateIssueInputTitleString = string
+    export interface CreateIssueOutput {
+        changeStatus?: String
+        identifier?: String
+        shortId?: String
     }
     export interface CreateNotificationChannelInput {
         alternateChannelName?: NameString
@@ -2697,6 +3716,7 @@ declare namespace ClientCodeAws {
     export type CreateProjectInputDisplayNameString = string
     export type CreateProjectInputTemplateArnString = string
     export interface CreateProjectNotificationSettingsInput {
+        locale?: String
         organizationName: NameString
         projectName: NameString
         settings?: ProjectNotificationSettingsItemList
@@ -2743,6 +3763,17 @@ declare namespace ClientCodeAws {
          */
         version?: String
     }
+    export interface CreateSecretInput {
+        description?: String
+        name: NameString
+        organizationName: NameString
+        projectName: NameString
+        secretValue: String
+    }
+    export interface CreateSecretOutput {
+        referenceId?: String
+        version?: String
+    }
     export interface CreateSessionRequest {
         callbackRedirectUri?: String
         parameters?: LoginQueryParametersMap
@@ -2750,15 +3781,27 @@ declare namespace ClientCodeAws {
     export interface CreateSessionResponse {
         redirectLocation?: String
     }
+    export interface CreateSourceBranchInput {
+        branchName: SourceRepositoryBranchString
+        commitSpecifier?: String
+        organizationName: NameString
+        projectName: NameString
+        sourceRepositoryName: SourceRepositoryNameString
+    }
+    export interface CreateSourceBranchOutput {
+        branchName?: SourceRepositoryBranchString
+        commitId?: String
+        sourceRepositoryName?: SourceRepositoryNameString
+    }
     export interface CreateSourcePullRequestInput {
-        authorId?: ContributorId
-        coAuthorIds?: ContributorIds
+        authorId?: SourcePullRequestContributorId
+        coAuthorIds?: SourcePullRequestContributorIds
         description?: String
         destinationBranchReference?: SourceRepositoryBranchString
         organizationName: NameString
         projectName: NameString
         repositoryName: SourceRepositoryNameString
-        reviewerIds?: ContributorIds
+        reviewers?: PullRequestReviewers
         sourceBranchReference?: SourceRepositoryBranchString
         title?: SourcePullRequestTitle
     }
@@ -2835,6 +3878,23 @@ declare namespace ClientCodeAws {
     export interface DeleteComputeFleetOutput {
         version?: String
     }
+    export interface DeleteConnectionInput {
+        name: NameString
+        organizationName: NameString
+        providerId: String
+    }
+    export interface DeleteConnectionOutput {
+        version?: String
+    }
+    export interface DeleteDevelopmentWorkspaceInput {
+        clientToken?: String
+        developmentWorkspaceId: String
+        organizationName: NameString
+        projectName: NameString
+    }
+    export interface DeleteDevelopmentWorkspaceOutput {
+        developmentWorkspaceId?: String
+    }
     export interface DeleteEnvironmentInput {
         name: NameString
         organizationName: NameString
@@ -2854,6 +3914,13 @@ declare namespace ClientCodeAws {
     export interface DeleteEnvironmentStackOutput {
         version?: String
     }
+    export interface DeleteExtensionInstallationInput {
+        extensionId: String
+        organizationName: NameString
+    }
+    export interface DeleteExtensionInstallationOutput {
+        version?: String
+    }
     export interface DeleteNotificationChannelInput {
         notificationChannelId: String
         organizationName: NameString
@@ -2861,6 +3928,14 @@ declare namespace ClientCodeAws {
     }
     export interface DeleteNotificationChannelOutput {
         notificationChannelId?: String
+    }
+    export interface DeleteNotificationClientInput {
+        notificationClientId: String
+        organizationName: NameString
+        projectName: NameString
+    }
+    export interface DeleteNotificationClientOutput {
+        notificationClientId?: String
     }
     export interface DeleteOrganizationInput {
         name: NameString
@@ -2897,6 +3972,14 @@ declare namespace ClientCodeAws {
         /**
          * Document version of the comment document.
          */
+        version?: String
+    }
+    export interface DeleteSecretInput {
+        name: NameString
+        organizationName: NameString
+        projectName: NameString
+    }
+    export interface DeleteSecretOutput {
         version?: String
     }
     export interface DeleteSourceBranchInput {
@@ -2956,6 +4039,12 @@ declare namespace ClientCodeAws {
         items?: OrganizationMembersList
         nextToken?: String
     }
+    export interface DescribeOrganizationUsageReportInput {
+        organizationName: NameString
+    }
+    export interface DescribeOrganizationUsageReportOutput {
+        items?: OrganizationUsageReportList
+    }
     export interface DescribeProjectMembersInput {
         nextToken?: DescribeProjectMembersInputNextTokenString
         organizationName: NameString
@@ -2978,6 +4067,16 @@ declare namespace ClientCodeAws {
     export interface DescribeSourceRepositoryEndpointsOutput {
         items: SourceRepositoryEndpointsList
     }
+    export interface DescribeSubscriptionInput {
+        organizationName: NameString
+    }
+    export interface DescribeSubscriptionOutput {
+        /**
+         * Name of the AWS account that is responsible for the subscription, as provided to PRODUCT on sign-in.
+         */
+        awsAccountName?: NameString
+        subscriptionType?: String
+    }
     export interface DevelopmentWorkspaceAccessDetails {
         streamUrl: String
         tokenValue: String
@@ -2987,17 +4086,20 @@ declare namespace ClientCodeAws {
     export interface DevelopmentWorkspaceRepositorySummary {
         branchName?: String
         projectName: String
+        pullRequestNumber?: String
         repositoryName: String
+        sourceBranchName?: String
     }
     export interface DevelopmentWorkspaceSummary {
         creatorId: String
-        id: String
+        developmentWorkspaceId: String
         ide: IDEType
         labels?: DevelopmentWorkspaceLabels
         lastUpdatedTime: Timestamp
         repositories: DevelopmentWorkspaceRepositorySummaries
         status?: String
     }
+    export type DevelopmentWorkspaceSummaryList = DevelopmentWorkspaceSummary[]
     export interface DirectoryLevelCoverage {
         branchCoveragePercentage: TestPercent
         childDirectories?: StringList
@@ -3012,6 +4114,46 @@ declare namespace ClientCodeAws {
         totalLinesMissed: Integer
     }
     export type DirectoryLevelCoverages = DirectoryLevelCoverage[]
+    export interface DisassociateRoleFromProjectInput {
+        awsAccountName: NameString
+        organizationName: NameString
+        projectName: NameString
+        roleName: NameString
+    }
+    export interface DisassociateRoleFromProjectOutput {
+        projectName: NameString
+        /**
+         * Role name that is disassociated
+         */
+        roleName: String
+    }
+    export interface DisconnectAwsAccountInput {
+        awsAccountName: NameString
+        organizationName: NameString
+    }
+    export interface DisconnectAwsAccountOutput {
+        /**
+         * Aws Account Id
+         */
+        awsAccountId: String
+        /**
+         * Account name given to AWS account on PRODUCT portal
+         */
+        awsAccountName: String
+        connectionRequestedFeatures?: ConnectionFeatures
+        createdTime?: Timestamp
+        description?: String
+        lastUpdatedTime?: Timestamp
+        /**
+         * PRODUCT organization name
+         */
+        organizationName: String
+        /**
+         * This will be personId who requested to add AWS account
+         */
+        requesterId: String
+        status: AwsAccountStatus
+    }
     export interface DisposeArtifactPackageVersionsInput {
         expectedStatus?: ArtifactPackageVersionStatusString
         format: ArtifactPackageFormatString
@@ -3027,13 +4169,6 @@ declare namespace ClientCodeAws {
     export interface EmailAddress {
         email?: String
         verified?: Boolean
-    }
-    export type EmailStatisticsSummaries = EmailStatisticsSummary[]
-    export interface EmailStatisticsSummary {
-        eventType: String
-        numberDelivered: Integer
-        numberOpened: Integer
-        resourceType: String
     }
     export type EnvironmentDeploymentList = DeploymentDetails[]
     export interface EnvironmentDescriptor {
@@ -3052,10 +4187,18 @@ declare namespace ClientCodeAws {
     export interface EnvironmentSummary {
         connectionId?: String
         description?: String
+        environmentType?: EnvironmentType
         name?: String
         updateTime?: String
     }
+    export type EnvironmentType = 'DEVELOPMENT' | 'STAGING' | 'PRODUCTION' | string
     export type Estimate = number
+    export type ExtensionInstallationSummaries = ExtensionInstallationSummary[]
+    export interface ExtensionInstallationSummary {
+        extensionId: String
+        extensionVersion: String
+        organizationName: NameString
+    }
     export type ExternalConnectionNameString =
         | 'public:npmjs'
         | 'public:maven-central'
@@ -3075,6 +4218,7 @@ declare namespace ClientCodeAws {
         filters?: FilterList
         operation?: String
     }
+    export type FleetOverflowBehavior = 'ON_DEMAND' | 'QUEUE' | string
     export interface FleetStatusContext {
         code?: String
         message?: String
@@ -3090,9 +4234,23 @@ declare namespace ClientCodeAws {
     export interface GetActionRunArtifactMetadataOutput {
         downloadUrl?: String
     }
+    export interface GetArtifactPackageInput {
+        format: ArtifactPackageFormatString
+        name: ArtifactPackageNameString
+        namespace?: ArtifactPackageNamespaceString
+        organizationName: NameString
+        projectName: NameString
+        repositoryName: ArtifactRepositoryNameString
+    }
+    export interface GetArtifactPackageOutput {
+        format?: ArtifactPackageFormatString
+        name?: ArtifactPackageNameString
+        namespace?: ArtifactPackageNamespaceString
+        originConfiguration?: ArtifactPackageOriginConfiguration
+    }
     export interface GetArtifactPackageVersionInput {
         format: ArtifactPackageFormatString
-        name?: ArtifactPackageNameString
+        name: ArtifactPackageNameString
         namespace?: ArtifactPackageNamespaceString
         organizationName: NameString
         projectName: NameString
@@ -3106,6 +4264,7 @@ declare namespace ClientCodeAws {
         licenses?: ArtifactPackageVersionLicenseList
         name?: ArtifactPackageNameString
         namespace?: ArtifactPackageNamespaceString
+        origin?: ArtifactPackageVersionOrigin
         publishedTime?: String
         revision?: ArtifactPackageVersionRevisionString
         sourceCodeRepository?: String
@@ -3143,6 +4302,47 @@ declare namespace ClientCodeAws {
         name: ArtifactRepositoryNameString
         organizationName: NameString
         projectName: NameString
+    }
+    export interface GetAwsAccountInput {
+        awsAccountName: NameString
+        organizationName: NameString
+    }
+    export interface GetAwsAccountOutput {
+        accountConnectionToken?: String
+        /**
+         * Aws Account Id
+         */
+        awsAccountId: String
+        /**
+         * Account name given to AWS account on PRODUCT portal
+         */
+        awsAccountName: String
+        connectionRequestedFeatures?: ConnectionFeatures
+        createdTime?: Timestamp
+        description?: String
+        lastUpdatedTime?: Timestamp
+        /**
+         * PRODUCT organization name
+         */
+        organizationName: String
+        /**
+         * This will be personId who requested to add AWS account
+         */
+        requesterId: String
+        status: AwsAccountStatus
+    }
+    export interface GetAwsAccountRoleInput {
+        awsAccountName: NameString
+        organizationName: NameString
+        roleName: NameString
+    }
+    export interface GetAwsAccountRoleOutput {
+        awsAccountId: String
+        awsAccountName: String
+        createdTime?: Timestamp
+        roleArn: String
+        roleDescription?: String
+        roleName: String
     }
     export interface GetBuildInput {
         buildId: String
@@ -3212,21 +4412,22 @@ declare namespace ClientCodeAws {
     }
     export type GetCodeCoverageRunResultsInputIdString = string
     export type GetCodeCoverageRunResultsInputOrganizationNameString = string
+    export interface GetComputeActionInput {
+        computeActionId: String
+        organizationName: NameString
+        projectName: NameString
+        workflowId: String
+        workflowRunId: String
+    }
     export interface GetComputeFleetInput {
         name: NameString
         organizationName: NameString
         projectName: NameString
     }
     export interface GetConnectionInput {
-        name: ConnectionName
+        name: NameString
         organizationName: NameString
-    }
-    export interface GetConnectionOutput {
-        name?: ConnectionName
-        provider?: ConnectionProviderType
-        status?: ConnectionStatus
-        statusMessage?: String
-        updateTime?: String
+        providerId: String
     }
     export interface GetDeploymentInput {
         organizationName: NameString
@@ -3274,9 +4475,15 @@ declare namespace ClientCodeAws {
     export interface GetDevelopmentWorkspaceInput {
         developmentWorkspaceId: String
         organizationName: NameString
+        projectName: NameString
     }
     export interface GetDevelopmentWorkspaceOutput {
-        item: DevelopmentWorkspaceSummary
+        creatorId: String
+        ide: IDEType
+        labels?: DevelopmentWorkspaceLabels
+        lastUpdatedTime: Timestamp
+        repositories: DevelopmentWorkspaceRepositorySummaries
+        status: String
     }
     export interface GetEnvironmentInput {
         name: NameString
@@ -3286,6 +4493,7 @@ declare namespace ClientCodeAws {
     export interface GetEnvironmentOutput {
         connectionId?: String
         description?: String
+        environmentType?: EnvironmentType
         name?: String
         updateTime?: String
     }
@@ -3301,6 +4509,10 @@ declare namespace ClientCodeAws {
         environmentId?: String
         name?: String
         updateTime?: String
+    }
+    export interface GetExtensionInstallationInput {
+        extensionId: String
+        organizationName: NameString
     }
     export interface GetIssueInput {
         id: NameString
@@ -3346,6 +4558,20 @@ declare namespace ClientCodeAws {
     }
     export interface GetOrganizationInput {
         name: NameString
+    }
+    export interface GetOrganizationInvitationRequest {
+        organizationInvitationId: String
+        organizationName: NameString
+    }
+    export interface GetOrganizationInvitationResponse {
+        inviteeDisplayName?: String
+        inviteeEmailAddress: String
+        inviteeRole: OrganizationRoles
+        inviterUserName?: String
+        lastUpdatedTime: String
+        organizationName?: String
+        signupEmailAddress?: String
+        status: InvitationStatus
     }
     export interface GetOrganizationOutput {
         description?: String
@@ -3437,18 +4663,25 @@ declare namespace ClientCodeAws {
     export interface GetPullRequestRequirementStatusInput {
         organizationName: NameString
         projectName: NameString
+        revisionNumber?: String
         sourcePullRequestNumber: String
     }
     export interface GetPullRequestRequirementStatusOutput {
         destinationCommitSha1?: String
         mergeBaseCommitSha1?: String
-        mergeOptions?: MergeOptions
+        mergeOptions?: SourceMergeOptions
+        mergeRequirements?: SourcePullRequestMergeRequirements
         mergeRequirementsMet?: Boolean
         sourceCommitSha1?: String
     }
     export interface GetRoleMappingInput {
         id: String
         organizationName: NameString
+    }
+    export interface GetSecretInput {
+        name: NameString
+        organizationName: NameString
+        projectName: NameString
     }
     export interface GetSlackCredentialsInput {
         oAuthVersion: String
@@ -3459,6 +4692,52 @@ declare namespace ClientCodeAws {
         clientId: String
         scope: String
         state: String
+    }
+    export interface GetSoftwareCompositionAnalysisFindingInput {
+        findingId: GetSoftwareCompositionAnalysisFindingInputFindingIdString
+        organizationName: GetSoftwareCompositionAnalysisFindingInputOrganizationNameString
+        projectName: NameString
+    }
+    export type GetSoftwareCompositionAnalysisFindingInputFindingIdString = string
+    export type GetSoftwareCompositionAnalysisFindingInputOrganizationNameString = string
+    export interface GetSoftwareCompositionAnalysisReportInput {
+        organizationName: NameString
+        projectName: NameString
+        reportId: GetSoftwareCompositionAnalysisReportInputReportIdString
+    }
+    export type GetSoftwareCompositionAnalysisReportInputReportIdString = string
+    export interface GetSoftwareCompositionAnalysisReportOutput {
+        actionName: String
+        actionRunId: String
+        actionType: String
+        branchName: String
+        commitId: String
+        directoryLevelFindings: SoftwareCompositionAnalysisDirectoryLevelFindings
+        name: String
+        pullRequestId?: String
+        rawReportFiles: SoftwareCompositionAnalysisReportSourceFiles
+        reportId: String
+        repositoryName: String
+        scanRunTime: SyntheticTimestamp_date_time
+        scanStatistics: SoftwareCompositionAnalysisScanStatistics
+        toolDetails: SoftwareCompositionAnalysisToolDetails
+        workflowName: String
+    }
+    export interface GetSoftwareTestingReportInput {
+        organizationName: NameString
+        projectName: NameString
+        reportId: GetSoftwareTestingReportInputReportIdString
+    }
+    export type GetSoftwareTestingReportInputReportIdString = string
+    export interface GetSoftwareTestingReportOutput {
+        actionName: String
+        branchName: String
+        latestReportRun: SoftwareTestingReportRunDetails
+        reportId: String
+        reportName: String
+        reportType: String
+        repositoryName: String
+        workflowId: String
     }
     export interface GetSourceBranchInput {
         branchName: SourceRepositoryBranchString
@@ -3507,13 +4786,51 @@ declare namespace ClientCodeAws {
         version?: String
     }
     export interface GetTemplateOutput {
-        classAst?: String
-        declarationAst?: String
+        author: String
+        declarationAst: String
+        defaults: String
         description?: String
-        name?: String
-        packageUri?: String
-        publishDate?: String
-        version?: String
+        displayName: String
+        homepage?: String
+        keywords?: StringList
+        license?: String
+        mediaUrls?: StringList
+        name: String
+        packageUri: String
+        publishDate: String
+        readme?: String
+        referenceAsts?: ReferenceAstsMap
+        version: String
+    }
+    export interface GetTemplatePreviewFileInput {
+        filePath: String
+        organizationName: NameString
+        sessionId: String
+        sourceRepositoryName: NameString
+    }
+    export interface GetTemplatePreviewFileOutput {
+        fileContent: String
+        title: String
+    }
+    export interface GetTemplatePreviewFolderInput {
+        folderPath: String
+        organizationName: NameString
+        sessionId: String
+        sourceRepositoryName: NameString
+    }
+    export interface GetTemplatePreviewFolderOutput {
+        files: PreviewFiles
+        subFolders: PreviewFolders
+        title: String
+    }
+    export interface GetTemplatePreviewInput {
+        organizationName: NameString
+        sessionId: String
+    }
+    export interface GetTemplatePreviewOutput {
+        environments: PreviewEnvironments
+        sourceRepositories: PreviewSourceRepositories
+        workflows: PreviewWorkflows
     }
     export interface GetTestActionInput {
         organizationName: NameString
@@ -3543,6 +4860,7 @@ declare namespace ClientCodeAws {
         id: String
         name: String
         parentTestSummaryId?: String
+        reportFiles?: TestReportFiles
         repositoryName: String
         runCount?: Integer
         runNumber?: Integer
@@ -3565,6 +4883,13 @@ declare namespace ClientCodeAws {
         name: String
         phaseHistory: TestReportStatusPhaseHistory
     }
+    export interface GetUserNotificationSettingsInput {
+        organizationName: NameString
+    }
+    export interface GetUserNotificationSettingsOutput {
+        lastUpdateTime: SyntheticTimestamp_date_time
+        settings: UserNotificationSettingsItemList
+    }
     export interface GetWorkflowInput {
         organizationName: NameString
         projectName: GetWorkflowInputProjectNameString
@@ -3583,6 +4908,7 @@ declare namespace ClientCodeAws {
         endTime?: Timestamp
         lastUpdatedTime: Timestamp
         metadata?: WorkflowRunMetadata
+        runMode: String
         startTime: Timestamp
         status: String
         statusReasons?: WorkflowRunStatusReasons
@@ -3598,9 +4924,8 @@ declare namespace ClientCodeAws {
         workflowId: String
     }
     export interface GetWorkflowStateOutput {
-        actionStates: WorkflowStateActionStates
-        inboundTransitions?: InboundTransitions
-        triggerEvents?: TriggerEvents
+        actionStates: WorkflowActionStates
+        inboundTransitionStates?: InboundTransitionStates
         workflowId: String
     }
     export type IDEType = 'Cloud9' | 'IntelliJ' | 'VSCode' | string
@@ -3610,13 +4935,21 @@ declare namespace ClientCodeAws {
         workflowRunId?: String
     }
     export type InboundRuns = InboundRun[]
-    export interface InboundTransition {
+    export interface InboundTransitionState {
         actionGroupNames?: ActionGroupNames
-        disabledReason?: String
+        actionNames?: ActionNames
         inboundRuns?: InboundRuns
     }
-    export type InboundTransitions = InboundTransition[]
+    export type InboundTransitionStates = InboundTransitionState[]
     export type Integer = number
+    export type InvitationStatus =
+        | 'Member'
+        | 'Invitation Sending'
+        | 'Invitation Sent'
+        | 'Failure Sending'
+        | 'Invitation Cancelled'
+        | 'Invitation Resent'
+        | string
     export type IssueAssigneeIds = String[]
     export interface IssueComment {
         authorId?: String
@@ -3630,6 +4963,7 @@ declare namespace ClientCodeAws {
     export interface IssueMetadata {
         id: String
         lastUpdatedTime: Timestamp
+        shortId?: String
         version: Integer
     }
     export type IssueMetadataList = IssueMetadata[]
@@ -3694,6 +5028,23 @@ declare namespace ClientCodeAws {
         missedCount: Integer
         percentageCovered?: TestPercent
         threshold?: TestSuccessPercentageThreshold
+    }
+    export interface LinkSourceRepositoryInput {
+        connectionName: NameString
+        name: SourceRepositoryNameString
+        organizationName: NameString
+        projectName: NameString
+        providerCanonicalId: String
+    }
+    export interface LinkSourceRepositoryOutput {
+        id?: String
+        version?: String
+    }
+    export interface ListActiveOrganizationInvitationsRequest {
+        organizationName: NameString
+    }
+    export interface ListActiveOrganizationInvitationsResponse {
+        invitations: OrganizationInvitationList
     }
     export interface ListActiveProjectInvitationsRequest {
         organizationName: NameString
@@ -3795,6 +5146,21 @@ declare namespace ClientCodeAws {
         items?: ArtifactRepositorySummaryList
         nextToken?: String
     }
+    export interface ListAwsAccountRolesInput {
+        awsAccountName: NameString
+        organizationName: NameString
+        projectName?: NameString
+    }
+    export interface ListAwsAccountRolesOutput {
+        roles: AwsAccountRoleList
+    }
+    export interface ListAwsAccountsInput {
+        organizationName: NameString
+        projectName?: NameString
+    }
+    export interface ListAwsAccountsOutput {
+        awsAccounts: AwsAccountList
+    }
     export interface ListBuildsInput {
         name: String
         nextToken?: String
@@ -3806,6 +5172,16 @@ declare namespace ClientCodeAws {
     export interface ListBuildsOutput {
         items?: BuildList
         nextToken?: String
+    }
+    export interface ListCloudFormationStackResourcesInput {
+        awsConnectionId: String
+        organizationName: NameString
+        projectName: NameString
+        region: RegionString
+        stackName: NameString
+    }
+    export interface ListCloudFormationStackResourcesOutput {
+        items?: CloudFormationStackResourcesList
     }
     export interface ListCloudFormationStacksInput {
         awsConnectionId: String
@@ -3907,6 +5283,7 @@ declare namespace ClientCodeAws {
         nextToken?: ListConnectionsInputNextTokenString
         organizationName: NameString
         pageSize?: ListConnectionsInputPageSizeInteger
+        providerId: String
     }
     export type ListConnectionsInputNextTokenString = string
     export type ListConnectionsInputPageSizeInteger = number
@@ -3914,21 +5291,15 @@ declare namespace ClientCodeAws {
         items?: ConnectionSummaries
         nextToken?: String
     }
-    export interface ListEmailStatisticsByResourceTypeInput {
+    export interface ListDevelopmentWorkspaceInput {
+        maxResults?: Integer
+        nextToken?: String
         organizationName: NameString
         projectName: NameString
-        resourceType?: String
     }
-    export interface ListEmailStatisticsByUserIdResourceIdInput {
-        organizationName: NameString
-        projectName: NameString
-        resourceId?: NameString
-        userId?: NameString
-    }
-    export interface ListEmailStatisticsOutput {
-        eventTypeStats?: EmailStatisticsSummaries
-        statsEndDate?: String
-        statsStartDate?: String
+    export interface ListDevelopmentWorkspaceOutput {
+        items: DevelopmentWorkspaceSummaryList
+        nextToken?: String
     }
     export interface ListEnvironmentDeploymentsInput {
         environmentName: NameString
@@ -3957,6 +5328,17 @@ declare namespace ClientCodeAws {
     }
     export interface ListEnvironmentsOutput {
         items?: EnvironmentList
+        nextToken?: String
+    }
+    export interface ListExtensionInstallationsInput {
+        nextToken?: ListExtensionInstallationsInputNextTokenString
+        organizationName: NameString
+        pageSize?: ListExtensionInstallationsInputPageSizeInteger
+    }
+    export type ListExtensionInstallationsInputNextTokenString = string
+    export type ListExtensionInstallationsInputPageSizeInteger = number
+    export interface ListExtensionInstallationsOutput {
+        items?: ExtensionInstallationSummaries
         nextToken?: String
     }
     export interface ListIssuesInput {
@@ -4017,6 +5399,12 @@ declare namespace ClientCodeAws {
         items?: OrganizationSummaries
         nextToken?: String
     }
+    export interface ListPreviousProjectsInput {
+        organizationName: NameString
+    }
+    export interface ListPreviousProjectsOutput {
+        items?: PreviousProjectsSummaries
+    }
     export interface ListProjectsInput {
         nextToken?: ListProjectsInputNextTokenString
         organizationName: NameString
@@ -4070,6 +5458,69 @@ declare namespace ClientCodeAws {
     export type ListRoleMappingInputPageSizeInteger = number
     export interface ListRoleMappingOutput {
         items?: RoleMappingObjects
+        nextToken?: String
+    }
+    export interface ListSecretsInput {
+        nextToken?: ListSecretsInputNextTokenString
+        organizationName: NameString
+        pageSize?: ListSecretsInputPageSizeInteger
+        projectName: NameString
+    }
+    export type ListSecretsInputNextTokenString = string
+    export type ListSecretsInputPageSizeInteger = number
+    export interface ListSecretsOutput {
+        items?: SecretsSummary
+        nextToken?: String
+    }
+    export interface ListSoftwareCompositionAnalysisFindingStatisticsOutput {
+        categoryCounts: AnalysisCounters
+        mappedSeverityCounts: AnalysisCounters
+        originalSeverityCounts: AnalysisCounters
+        totalFindings: Integer
+        totalPages: Integer
+    }
+    export interface ListSoftwareCompositionAnalysisFindingsInput {
+        filter?: Filters
+        nextToken?: ListSoftwareCompositionAnalysisFindingsInputNextTokenString
+        order?: OrderingList
+        organizationName: ListSoftwareCompositionAnalysisFindingsInputOrganizationNameString
+        pageSize?: ListSoftwareCompositionAnalysisFindingsInputPageSizeInteger
+        projectName: NameString
+        reportSummaryId: ListSoftwareCompositionAnalysisFindingsInputReportSummaryIdString
+    }
+    export type ListSoftwareCompositionAnalysisFindingsInputNextTokenString = string
+    export type ListSoftwareCompositionAnalysisFindingsInputOrganizationNameString = string
+    export type ListSoftwareCompositionAnalysisFindingsInputPageSizeInteger = number
+    export type ListSoftwareCompositionAnalysisFindingsInputReportSummaryIdString = string
+    export interface ListSoftwareCompositionAnalysisFindingsOutput {
+        items?: SoftwareCompositionAnalysisFindingOutputItems
+        nextToken?: String
+    }
+    export interface ListSoftwareCompositionAnalysisReportsInput {
+        actionRunId?: ListSoftwareCompositionAnalysisReportsInputActionRunIdString
+        nextToken?: ListSoftwareCompositionAnalysisReportsInputNextTokenString
+        organizationName: NameString
+        pageSize?: ListSoftwareCompositionAnalysisReportsInputPageSizeInteger
+        projectName: NameString
+        sourceRepositoryBranchName?: NameString
+        sourceRepositoryName?: NameString
+    }
+    export type ListSoftwareCompositionAnalysisReportsInputActionRunIdString = string
+    export type ListSoftwareCompositionAnalysisReportsInputNextTokenString = string
+    export type ListSoftwareCompositionAnalysisReportsInputPageSizeInteger = number
+    export interface ListSoftwareCompositionAnalysisReportsOutput {
+        items: SoftwareCompositionAnalysisReportSummaries
+        nextToken?: String
+    }
+    export interface ListSoftwareTestingReportsInput {
+        nextToken?: String
+        organizationName: NameString
+        pageSize?: ListSoftwareTestingReportsInputPageSizeInteger
+        projectName: NameString
+    }
+    export type ListSoftwareTestingReportsInputPageSizeInteger = number
+    export interface ListSoftwareTestingReportsOutput {
+        items: SoftwareTestingReportSummaries
         nextToken?: String
     }
     export interface ListSourceBranchesInput {
@@ -4197,7 +5648,7 @@ declare namespace ClientCodeAws {
     }
     export type ListTestReportStatusesInputActionRunIdString = string
     export interface ListTestReportStatusesOutput {
-        items?: TestReportSatuses
+        items?: TestReportStatuses
     }
     export interface ListTestReportsInput {
         actionRunId?: ListTestReportsInputActionRunIdString
@@ -4251,16 +5702,26 @@ declare namespace ClientCodeAws {
     export type Long = number
     export type MaxAssigneesPerIssue = number
     export type MaxItems = number
+    export type MaxResults = number
     export type MergeOption = 'FAST_FORWARD_MERGE' | 'SQUASH_MERGE' | 'THREE_WAY_MERGE' | string
-    export type MergeOptions = MergeOption[]
     export interface MergeSourcePullRequestByFastForwardInput {
         organizationName: NameString
         projectName: NameString
-        sourceCommitId?: String
+        revisionNumber?: Integer
         sourcePullRequestNumber: String
     }
     export interface MergeSourcePullRequestByFastForwardOutput {
-        number?: SourcePullRequestNumber
+        number: SourcePullRequestNumber
+    }
+    export interface MergeSourcePullRequestBySquashInput {
+        commitMessage?: String
+        organizationName: NameString
+        projectName: NameString
+        revisionNumber?: Integer
+        sourcePullRequestNumber: String
+    }
+    export interface MergeSourcePullRequestBySquashOutput {
+        number: String
     }
     export type MetricAggregationType = 'MAX' | 'MIN' | 'SUM' | 'AVG' | 'COUNT' | 'PERCENTAGE' | string
     export interface MetricBucket {
@@ -4331,6 +5792,17 @@ declare namespace ClientCodeAws {
         key: String
     }
     export type OrderingList = Ordering[]
+    export type OrganizationInvitationList = OrganizationInvitationListMember[]
+    export interface OrganizationInvitationListMember {
+        inviteeDisplayName?: String
+        inviteeEmailAddress: String
+        inviteeRole: OrganizationRoles
+        inviterUserName?: String
+        lastUpdatedTime: String
+        organizationName?: String
+        signupEmailAddress?: String
+        status: InvitationStatus
+    }
     export interface OrganizationMember {
         displayName: String
         emailAddress: String
@@ -4339,6 +5811,7 @@ declare namespace ClientCodeAws {
         username: String
     }
     export type OrganizationMembersList = OrganizationMember[]
+    export type OrganizationRoles = 'Admin' | string
     export type OrganizationSummaries = OrganizationSummary[]
     export interface OrganizationSummary {
         description?: String
@@ -4346,8 +5819,53 @@ declare namespace ClientCodeAws {
         name?: NameString
         region?: String
     }
+    export interface OrganizationUsageReport {
+        limitAmount: Double
+        limitPeriod: String
+        resourceType: OrganizationUsageReportResourceType
+        usageAmount: Double
+    }
+    export type OrganizationUsageReportList = OrganizationUsageReport[]
+    export type OrganizationUsageReportResourceType =
+        | 'COMPUTE_PROVISIONED_SECONDS'
+        | 'COMPUTE_ON_DEMAND_SECONDS'
+        | 'STORAGE_BYTES'
+        | 'MDE_SECONDS'
+        | string
     export type OrganizationsList = String[]
+    export interface OutputVariable {
+        name?: String
+        value?: String
+    }
+    export type OutputVariables = OutputVariable[]
+    export type ParticipationType = 'WATCHER' | string
     export type PhaseType = 'SUCCEEDED' | 'FAILED' | 'IN_PROGRESS' | 'PENDING' | string
+    export interface PreviewEnvironment {
+        contents: String
+        digest?: String
+        name: String
+    }
+    export type PreviewEnvironments = PreviewEnvironment[]
+    export type PreviewFiles = String[]
+    export type PreviewFolders = String[]
+    export type PreviewSourceRepositories = PreviewSourceRepository[]
+    export interface PreviewSourceRepository {
+        digest?: String
+        name: String
+    }
+    export interface PreviewWorkflow {
+        contents: String
+        digest?: String
+        name: String
+        sourceRepositoryName: String
+    }
+    export type PreviewWorkflows = PreviewWorkflow[]
+    export type PreviousProjectsSummaries = PreviousProjectsSummary[]
+    export interface PreviousProjectsSummary {
+        description?: String
+        displayName?: String
+        name?: String
+    }
     export type ProjectAdditionalFieldsMap = { [key: string]: String }
     export type ProjectAdditionalFieldsMapKeyString = string
     export interface ProjectInvitation {
@@ -4387,6 +5905,9 @@ declare namespace ClientCodeAws {
         templateArn?: String
     }
     export type ProjectsList = String[]
+    export interface ProviderData {
+        account: NameString
+    }
     export interface PullRequestCommentObject {
         /**
          * Id for uniquely identifying a blob.
@@ -4458,34 +5979,41 @@ declare namespace ClientCodeAws {
     export type PullRequestCommentType = 'pullRequestLevel' | 'fileLevel' | 'lineLevel' | string
     export type PullRequestCommentsList = PullRequestCommentObject[]
     export type PullRequestCommentsOrder = 'CREATION_TIME_ASCENDING' | 'CREATION_TIME_DESCENDING' | string
-    export interface PutIssueInput {
-        archived: Boolean
-        assigneeIds?: IssueAssigneeIds
-        blocked?: Boolean
-        comments?: IssueComments
-        createdTime?: Timestamp
-        creatorId?: String
-        description: String
-        estimate?: Estimate
-        id?: String
-        issueStoreName: NameString
-        labelIds?: IssueLabelIds
-        lastUpdatedById?: String
-        lastUpdatedTime: Timestamp
-        organizationName: NameString
-        position?: Float
-        priority?: IssuePriority
-        projectName: NameString
-        references?: IssueReferences
-        statusId: String
-        title: PutIssueInputTitleString
-        version?: Integer
+    export interface PullRequestReviewer {
+        reviewerId: SourcePullRequestContributorId
+        reviewerType: SourcePullRequestReviewerType
     }
-    export type PutIssueInputTitleString = string
-    export interface PutIssueOutput {
-        changeStatus?: String
-        identifier?: String
-        shortId?: String
+    export type PullRequestReviewers = PullRequestReviewer[]
+    export interface PutUserNotificationSettingsInput {
+        organizationName: NameString
+        settings: UserNotificationSettingsItemList
+    }
+    export interface PutUserNotificationSettingsOutput {
+        documentId: String
+        version: String
+    }
+    export interface PutWatchIssueSettingInput {
+        /**
+         * Id for the issue the user wants to watch
+         */
+        id: NameString
+        issueStoreName: NameString
+        notificationWatchId?: String
+        organizationName: NameString
+        participationType?: ParticipationType
+        projectName: NameString
+        watchStatus: WatchStatus
+    }
+    export interface PutWatchIssueSettingOutput {
+        /**
+         * The documentId of this watch relationship
+         */
+        notificationWatchId?: String
+        /**
+         * The version of the document
+         */
+        version?: String
+        watchStatus?: WatchStatus
     }
     export interface QuestionInformation {
         answers?: AnswerSection
@@ -4493,7 +6021,17 @@ declare namespace ClientCodeAws {
         questionType?: String
     }
     export type QuestionSection = QuestionInformation[]
+    export interface ReasonTemplateVariable {
+        key: String
+        value: String
+    }
+    export type ReferenceAstsMap = { [key: string]: String }
+    export type ReferenceAstsMapKeyString = string
     export type RegionString = string
+    export interface RelatedLocations {
+        locations?: AnalysisFindingLocations
+        truncated: Boolean
+    }
     export interface RemoveUserFromRoleInput {
         organizationName: NameString
         projectName?: NameString
@@ -4592,7 +6130,6 @@ declare namespace ClientCodeAws {
         events?: SearchActionLogEvents
         nextToken?: String
     }
-    export type SearchCallOriginator = 'MENTIONS' | 'PARTNER' | 'QUICK_SEARCH' | 'FULL_SEARCH' | string
     export interface SearchCodeData {
         branch?: String
         code?: SearchCodeSnippets
@@ -4636,17 +6173,18 @@ declare namespace ClientCodeAws {
         description?: String
         issueStore?: String
         issueStoreId?: String
-        label?: SearchIssueLabels
+        labelId?: SearchIssueLabelIds
         lastUpdatedTime?: Timestamp
         priority?: String
         project?: String
         projectId?: String
+        shortId?: String
         status?: String
         statusId?: String
         statusValue?: String
         title?: String
     }
-    export type SearchIssueLabels = String[]
+    export type SearchIssueLabelIds = String[]
     export interface SearchOrderBy {
         fields?: SearchOrderByFields
         type: String
@@ -4668,9 +6206,10 @@ declare namespace ClientCodeAws {
     export interface SearchRequest {
         eagerRead?: Boolean
         maxItems?: MaxItems
+        maxResults?: MaxResults
+        noPaginate?: Boolean
         orderBy?: SearchOrderBy
         organizationName: NameString
-        originator?: SearchCallOriginator
         pagination?: Boolean
         term?: String
         token?: String
@@ -4685,7 +6224,34 @@ declare namespace ClientCodeAws {
         displayName?: String
         email?: String
         lastUpdatedTime?: Timestamp
+        project?: SearchUserProject
         username?: String
+    }
+    export type SearchUserProject = String[]
+    export interface SecretMetadata {
+        description?: String
+        lastUpdatedTime?: Timestamp
+        name?: NameString
+        referenceId?: String
+    }
+    export type SecretsSummary = SecretMetadata[]
+    export interface SendOrganizationInvitationRequest {
+        clientToken: String
+        inviteeDisplayName: String
+        inviteeEmailAddress: String
+        inviteeRole: String
+        organizationInvitationId?: String
+        organizationName: NameString
+    }
+    export interface SendOrganizationInvitationResponse {
+        inviteeDisplayName?: String
+        inviteeEmailAddress: String
+        inviteeRole: OrganizationRoles
+        inviterUserName?: String
+        lastUpdatedTime: String
+        organizationName?: String
+        signupEmailAddress?: String
+        status: InvitationStatus
     }
     export interface SendProjectInvitationRequest {
         clientToken: String
@@ -4699,7 +6265,17 @@ declare namespace ClientCodeAws {
     export interface SendProjectInvitationResponse {
         projectInvitation: ProjectInvitation
     }
-    export type SessionType = 'SSM' | 'SSH' | string
+    export interface SetSubscriptionInput {
+        /**
+         * Name of the AWS account that is responsible for the subscription, as provided to PRODUCT on sign-in.
+         */
+        awsAccountName: NameString
+        organizationName: NameString
+        subscriptionType: SubscriptionTypeString
+    }
+    export interface SetSubscriptionOutput {
+        subscriptionType?: SubscriptionTypeString
+    }
     export interface SlackChannelDetails {
         id: SlackChannelDetailsIdString
         workspaceId?: String
@@ -4707,6 +6283,84 @@ declare namespace ClientCodeAws {
     export type SlackChannelDetailsIdString = string
     export interface SlackClientDetails {
         oauthParameters: OAuthParameters
+    }
+    export interface SoftwareCompositionAnalysisDirectoryLevelFinding {
+        childDirectories: StringList
+        directoryStatistics: SoftwareCompositionAnalysisScanStatistics
+        name: String
+        parent?: String
+        path: String
+    }
+    export type SoftwareCompositionAnalysisDirectoryLevelFindings = SoftwareCompositionAnalysisDirectoryLevelFinding[]
+    export interface SoftwareCompositionAnalysisFindingListOutput {
+        branchName: String
+        commitId: String
+        findingId: String
+        lastUpdatedTime: SyntheticTimestamp_date_time
+        location?: AnalysisFindingLocation
+        name: String
+        recommendation?: AnalysisFindingMessage
+        relatedLocations?: RelatedLocations
+        reportSummaryId: String
+        repositoryName: String
+        score?: AnalysisFindingScore
+        severity: AnalysisFindingSeverity
+    }
+    export interface SoftwareCompositionAnalysisFindingOutput {
+        additionalToolProperties?: AdditionalProperties
+        branchName: String
+        category?: String
+        commitId: String
+        findingId: String
+        location?: AnalysisFindingLocation
+        message?: AnalysisFindingMessage
+        name: String
+        recommendation?: AnalysisFindingMessage
+        relatedLocations?: RelatedLocations
+        reportSummaryId: String
+        repositoryName: String
+        rule: AnalysisFindingRule
+        score?: AnalysisFindingScore
+        severity: AnalysisFindingSeverity
+    }
+    export type SoftwareCompositionAnalysisFindingOutputItems = SoftwareCompositionAnalysisFindingListOutput[]
+    export interface SoftwareCompositionAnalysisReportSourceFiles {
+        reportFiles: TestReportFiles
+        truncated: Boolean
+    }
+    export type SoftwareCompositionAnalysisReportSummaries = SoftwareCompositionAnalysisReportSummary[]
+    export interface SoftwareCompositionAnalysisReportSummary {
+        actionRunId: String
+        name: String
+        reportId: String
+        scanRunTime: SyntheticTimestamp_date_time
+    }
+    export interface SoftwareCompositionAnalysisScanStatistics {
+        categoryCounts?: AnalysisCounters
+        mappedSeverityCounts: AnalysisCounters
+        originalSeverityCounts?: AnalysisCounters
+        totalFindings: Integer
+        totalPackagesScanned: Integer
+    }
+    export interface SoftwareCompositionAnalysisToolDetails {
+        name: String
+        vendorName?: String
+    }
+    export interface SoftwareTestingReportRunDetails {
+        actionRunId: String
+        lastRunAt: SyntheticTimestamp_date_time
+        passingStatus: String
+        reportRunId: String
+    }
+    export type SoftwareTestingReportSummaries = SoftwareTestingReportSummary[]
+    export interface SoftwareTestingReportSummary {
+        actionName: String
+        branchName: String
+        reportId: String
+        reportName: String
+        reportType: String
+        repositoryName: String
+        workflowId: String
     }
     export interface SourceAutoInitializeInput {
         gitIgnoreType?: String
@@ -4786,13 +6440,29 @@ declare namespace ClientCodeAws {
         title?: String
         treeSha1?: String
     }
+    export type SourceMergeOptions = MergeOption[]
+    export interface SourceMergeRequirements {
+        requiredReviewers?: SourcePullRequestRequiredReviewers
+    }
+    export type SourcePullRequestApprovalStatus = 'APPROVED' | 'REVOKED' | string
     export type SourcePullRequestCoAuthors = SourcePullRequestContributor[]
     export interface SourcePullRequestContributor {
         id?: String
     }
+    export type SourcePullRequestContributorId = string
+    export type SourcePullRequestContributorIds = SourcePullRequestContributorId[]
+    export interface SourcePullRequestMergeRequirements {
+        requiredReviewersApprovalRule?: SourcePullRequestRequiredReviewersApprovalRule
+    }
     export type SourcePullRequestNumber = string
-    export type SourcePullRequestReviewers = SourcePullRequestContributor[]
-    export type SourcePullRequestStatus = 'OPEN' | 'CLOSED' | string
+    export type SourcePullRequestOptionalReviewers = SourcePullRequestContributor[]
+    export type SourcePullRequestRequiredReviewers = SourcePullRequestContributor[]
+    export interface SourcePullRequestRequiredReviewersApprovalRule {
+        reviewersApproved?: SourcePullRequestContributorIds
+        reviewersRequired?: SourcePullRequestContributorIds
+    }
+    export type SourcePullRequestReviewerType = 'OPTIONAL' | 'REQUIRED' | string
+    export type SourcePullRequestStatus = 'OPEN' | 'CLOSED' | 'MERGED' | string
     export interface SourcePullRequestSummary {
         authorId?: String
         coAuthors?: SourcePullRequestCoAuthors
@@ -4801,11 +6471,12 @@ declare namespace ClientCodeAws {
         destinationBranchReference?: SourceRepositoryBranchString
         id?: String
         lastUpdatedTime?: SyntheticTimestamp_date_time
+        mergeRequirements?: SourceMergeRequirements
         number?: SourcePullRequestNumber
+        optionalReviewers?: SourcePullRequestOptionalReviewers
         projectName?: NameString
         repositoryId?: String
         repositoryName?: SourceRepositoryNameString
-        reviewers?: SourcePullRequestReviewers
         sourceBranchReference?: SourceRepositoryBranchString
         status?: SourcePullRequestStatus
         title?: SourcePullRequestTitle
@@ -4819,6 +6490,10 @@ declare namespace ClientCodeAws {
         url?: String
     }
     export type SourceRepositoryEndpointsList = SourceRepositoryEndpointSummary[]
+    export interface SourceRepositoryMetadataSummary {
+        providerCanonicalId?: String
+        providerCanonicalUrl?: String
+    }
     export type SourceRepositoryNameString = string
     export interface SourceRepositorySummary {
         autoInitialize?: SourceAutoInitializeSummary
@@ -4827,15 +6502,18 @@ declare namespace ClientCodeAws {
         description?: SourceRepositoryDescriptionString
         id?: String
         lastUpdatedTime?: SyntheticTimestamp_date_time
+        metadata?: SourceRepositoryMetadataSummary
         name?: SourceRepositoryNameString
         projectName?: NameString
     }
     export type SourceRepositorySummaryList = SourceRepositorySummary[]
     export interface SourceRevisionSummary {
+        approvals?: StringList
         lastUpdatedTime?: SyntheticTimestamp_date_time
         mergeBaseCommitId?: String
         number?: Integer
         pullRequestId?: String
+        revokedApprovals?: StringList
         sourceCommitId?: String
     }
     export type SourceRevisionSummaryList = SourceRevisionSummary[]
@@ -4858,21 +6536,24 @@ declare namespace ClientCodeAws {
         relativePath?: String
     }
     export interface StartDevelopmentWorkspaceInput {
+        clientToken?: String
         developmentWorkspaceId: String
         organizationName: NameString
+        projectName: NameString
     }
     export interface StartDevelopmentWorkspaceOutput {
         developmentWorkspaceId: String
+        status: String
     }
     export interface StartSessionDevelopmentWorkspaceInput {
+        clientToken?: String
         developmentWorkspaceId: String
         organizationName: NameString
+        projectName: NameString
     }
     export interface StartSessionDevelopmentWorkspaceOutput {
         accessDetails: DevelopmentWorkspaceAccessDetails
         developmentWorkspaceId: String
-        sessionId: String
-        sessionType?: SessionType
     }
     export interface StartWorkflowRunInput {
         organizationName: StartWorkflowRunInputOrganizationNameString
@@ -4886,8 +6567,19 @@ declare namespace ClientCodeAws {
         id: String
         version?: String
     }
+    export interface StopDevelopmentWorkspaceInput {
+        clientToken?: String
+        developmentWorkspaceId: String
+        organizationName: NameString
+        projectName: NameString
+    }
+    export interface StopDevelopmentWorkspaceOutput {
+        developmentWorkspaceId: String
+        status: String
+    }
     export type String = string
     export type StringList = String[]
+    export type SubscriptionTypeString = 'FREE' | 'STANDARD' | 'STANDARD_PLUS_WORKSPACES' | string
     export interface SynthFromTemplateInput {
         applicationDefinition: String
         name: NameString
@@ -4922,13 +6614,18 @@ declare namespace ClientCodeAws {
     export type TemplateParamsMapKeyString = string
     export type TemplateSummaries = TemplateSummary[]
     export interface TemplateSummary {
+        author: String
         description?: String
-        name?: NameString
-        packageUri?: String
-        publishDate?: String
-        publisher?: NameString
-        version?: String
+        displayName: String
+        keywords?: StringList
+        license?: String
+        name: NameString
+        packageUri: String
+        publishDate: String
+        publisher: NameString
+        version: String
     }
+    export type TemplateVariables = ReasonTemplateVariable[]
     export interface TestActionArtifact {
         files?: TestActionFiles
         location?: String
@@ -5077,7 +6774,6 @@ declare namespace ClientCodeAws {
     }
     export type TestReportFileDetailsPathString = string
     export type TestReportFiles = TestReportFileDetails[]
-    export type TestReportSatuses = TestReportStatusSummary[]
     export interface TestReportStatusPhaseDetails {
         errorMessage?: String
         name: String
@@ -5090,6 +6786,7 @@ declare namespace ClientCodeAws {
         id: String
         name: String
     }
+    export type TestReportStatuses = TestReportStatusSummary[]
     export type TestReportSummaries = TestReportSummary[]
     export interface TestReportSummary {
         actionRunId: String
@@ -5112,13 +6809,18 @@ declare namespace ClientCodeAws {
         value?: TestPercent
     }
     export type Timestamp = Date
-    export interface TriggerEvent {
-        triggerEventActor?: String
-        triggerEventId?: String
-        triggerEventType?: String
-        workflowRunId?: String
+    export interface UpdateArtifactPackageOriginConfigurationInput {
+        format: ArtifactPackageFormatString
+        name: ArtifactPackageNameString
+        namespace?: ArtifactPackageNamespaceString
+        organizationName: NameString
+        projectName: NameString
+        repositoryName: ArtifactRepositoryNameString
+        restrictions: ArtifactPackageOriginRestrictions
     }
-    export type TriggerEvents = TriggerEvent[]
+    export interface UpdateArtifactPackageOriginConfigurationOutput {
+        originConfiguration?: ArtifactPackageOriginConfiguration
+    }
     export interface UpdateArtifactPackageVersionsStatusInput {
         expectedStatus?: ArtifactPackageVersionStatusString
         format: ArtifactPackageFormatString
@@ -5172,11 +6874,13 @@ declare namespace ClientCodeAws {
         version?: String
     }
     export interface UpdateComputeFleetInput {
-        desiredCapacity?: Integer
+        desiredCapacity?: UpdateComputeFleetInputDesiredCapacityInteger
         name: NameString
         organizationName: NameString
+        overflowBehavior?: FleetOverflowBehavior
         projectName: NameString
     }
+    export type UpdateComputeFleetInputDesiredCapacityInteger = number
     export interface UpdateComputeFleetOutput {
         version?: String
     }
@@ -5201,6 +6905,28 @@ declare namespace ClientCodeAws {
     export interface UpdateEnvironmentStackOutput {
         version?: String
     }
+    export interface UpdateIssueInput {
+        archived: Boolean
+        assigneeIds?: IssueAssigneeIds
+        blocked?: Boolean
+        description: String
+        estimate?: Estimate
+        id: NameString
+        issueStoreName: NameString
+        labelIds?: IssueLabelIds
+        organizationName: NameString
+        priority?: IssuePriority
+        projectName: NameString
+        statusId: String
+        title: UpdateIssueInputTitleString
+        version: Integer
+    }
+    export type UpdateIssueInputTitleString = string
+    export interface UpdateIssueOutput {
+        changeStatus?: String
+        identifier?: String
+        shortId?: String
+    }
     export interface UpdateIssueStoreInput {
         estimationType?: IssueStoreEstimationType
         issueStoreName: NameString
@@ -5213,6 +6939,15 @@ declare namespace ClientCodeAws {
     }
     export interface UpdateIssueStoreOutput {
         identifier?: String
+    }
+    export interface UpdateNotificationChannelInput {
+        alternateChannelName?: NameString
+        notificationChannelId: String
+        organizationName: NameString
+        projectName: NameString
+    }
+    export interface UpdateNotificationChannelOutput {
+        notificationChannelId?: String
     }
     export interface UpdateOnboardingInput {
         dismissed: Boolean
@@ -5252,6 +6987,7 @@ declare namespace ClientCodeAws {
     export type UpdateProjectInputDescriptionString = string
     export type UpdateProjectInputDisplayNameString = string
     export interface UpdateProjectNotificationSettingsInput {
+        locale?: String
         organizationName: NameString
         projectName: NameString
         settings?: ProjectNotificationSettingsItemList
@@ -5304,6 +7040,27 @@ declare namespace ClientCodeAws {
     export interface UpdateRoleMappingOutput {
         version?: String
     }
+    export interface UpdateSecretInput {
+        description?: String
+        name: NameString
+        organizationName: NameString
+        projectName: NameString
+        secretValue?: String
+    }
+    export interface UpdateSecretOutput {
+        referenceId?: String
+        version?: String
+    }
+    export interface UpdateSourcePullRequestApprovalStatusInput {
+        approvalStatus: SourcePullRequestApprovalStatus
+        organizationName: NameString
+        projectName: NameString
+        revisionNumber: String
+        sourcePullRequestNumber: String
+    }
+    export interface UpdateSourcePullRequestApprovalStatusOutput {
+        success?: Boolean
+    }
     export interface UpdateSourcePullRequestInput {
         description?: String
         organizationName: NameString
@@ -5314,6 +7071,18 @@ declare namespace ClientCodeAws {
     }
     export interface UpdateSourcePullRequestOutput {
         number?: SourcePullRequestNumber
+    }
+    export interface UpdateSourcePullRequestReviewersInput {
+        additionalOptionalReviewers?: ContributorIds
+        additionalRequiredReviewers?: ContributorIds
+        organizationName: NameString
+        projectName: NameString
+        removedOptionalReviewers?: ContributorIds
+        removedRequiredReviewers?: ContributorIds
+        sourcePullRequestNumber: String
+    }
+    export interface UpdateSourcePullRequestReviewersOutput {
+        success?: Boolean
     }
     export interface UpdateSourceRepositoryInput {
         autoInitialize?: SourceAutoInitializeInput
@@ -5343,10 +7112,35 @@ declare namespace ClientCodeAws {
         name?: ArtifactRepositoryNameString
     }
     export type UpstreamArtifactRepositoryList = UpstreamArtifactRepository[]
+    export interface UserNotificationSettingsItem {
+        enabled: Boolean
+        resourceType: UserNotificationSettingsResourceType
+    }
+    export type UserNotificationSettingsItemList = UserNotificationSettingsItem[]
+    export type UserNotificationSettingsResourceType = 'WORKFLOW' | string
+    export interface ValidateWorkflowDefinitionDraftInput {
+        organizationName: NameString
+        projectName: NameString
+        workflowDocumentContent: ValidateWorkflowDefinitionDraftInputWorkflowDocumentContentString
+    }
+    export type ValidateWorkflowDefinitionDraftInputWorkflowDocumentContentString = string
+    export interface ValidateWorkflowDefinitionDraftOutput {
+        reasons?: WorkflowStatusReasons
+    }
     export interface VerifySessionResponse {
         identity?: String
         self?: String
     }
+    export type WatchStatus = 'ENABLED' | 'DISABLED' | string
+    export interface WorkflowActionState {
+        actionRunId?: String
+        lastStatusChange?: Timestamp
+        name?: String
+        runSummary?: String
+        status?: String
+        workflowRunId?: String
+    }
+    export type WorkflowActionStates = WorkflowActionState[]
     export interface WorkflowDefinition {
         definition: String
         format: String
@@ -5369,6 +7163,11 @@ declare namespace ClientCodeAws {
         artifactName: String
     }
     export type WorkflowRunActionArtifacts = WorkflowRunActionArtifact[]
+    export interface WorkflowRunActionOutputVariable {
+        name: String
+        value: String
+    }
+    export type WorkflowRunActionOutputVariables = WorkflowRunActionOutputVariable[]
     export type WorkflowRunMetadata = { [key: string]: String }
     export interface WorkflowRunOrdering {
         /**
@@ -5393,6 +7192,7 @@ declare namespace ClientCodeAws {
         endTime?: SyntheticTimestamp_date_time
         lastUpdatedTime: SyntheticTimestamp_date_time
         metadata?: WorkflowRunMetadata
+        runMode: String
         startTime: SyntheticTimestamp_date_time
         status: String
         statusReasons?: WorkflowRunStatusReasons
@@ -5403,21 +7203,16 @@ declare namespace ClientCodeAws {
         workflowRunId: String
         workflowVersion: Integer
     }
-    export interface WorkflowStateActionState {
-        latestRun?: WorkflowStateActionStateLatestRun
-        name?: String
-    }
-    export interface WorkflowStateActionStateLatestRun {
-        lastStatusChange?: Timestamp
-        runSummary?: String
-        startTime?: Timestamp
-        status?: String
-        workflowRunId?: String
-    }
-    export type WorkflowStateActionStates = WorkflowStateActionState[]
     export interface WorkflowStatusReason {
+        endMark?: WorkflowStatusReasonMark
+        startMark?: WorkflowStatusReasonMark
         statusCode: String
         statusMessage?: String
+        templateVariables?: TemplateVariables
+    }
+    export interface WorkflowStatusReasonMark {
+        columnNumber: Integer
+        lineNumber: Integer
     }
     export type WorkflowStatusReasons = WorkflowStatusReason[]
     export type WorkflowSummaries = WorkflowSummary[]
