@@ -2,13 +2,13 @@
     "version": "2.0",
     "metadata": {
         "apiVersion": "2021-04-05",
-        "endpointPrefix": "moontide",
+        "endpointPrefix": "mde",
         "jsonVersion": "1.1",
         "protocol": "rest-json",
         "serviceFullName": "Amazon MDE",
         "serviceId": "MDE",
         "signatureVersion": "v4",
-        "signingName": "moontide",
+        "signingName": "mde",
         "uid": "mde-2021-04-05",
         "useModeledEndpointPrefix": true
     },
@@ -24,13 +24,14 @@
             "output": { "shape": "CreateEnvironmentResponse" },
             "errors": [
                 { "shape": "ServiceQuotaExceededException" },
+                { "shape": "InternalServerErrorException" },
                 { "shape": "ValidationException" },
                 { "shape": "AccessDeniedException" },
                 { "shape": "InternalServiceException" },
                 { "shape": "ConflictException" },
-                { "shape": "ThrottlingException" }
+                { "shape": "ThrottlingException" },
+                { "shape": "InternalServerException" }
             ],
-            "documentation": "<p>Create a new, running or stopped environment asynchronously.</p> <p>Use the EventBridge for notification when the environment is &quot;RUNNING&quot; and therefore ready to StartSession, <a href=\"TODO\">details</a>.</p>",
             "idempotent": true
         },
         "DeleteEnvironment": {
@@ -43,12 +44,13 @@
             "input": { "shape": "DeleteEnvironmentRequest" },
             "output": { "shape": "DeleteEnvironmentResponse" },
             "errors": [
+                { "shape": "InternalServerErrorException" },
                 { "shape": "ValidationException" },
                 { "shape": "AccessDeniedException" },
                 { "shape": "InternalServiceException" },
-                { "shape": "ConflictException" }
+                { "shape": "ConflictException" },
+                { "shape": "InternalServerException" }
             ],
-            "documentation": "<p>Delete an environment from the system.</p> <p>Running environments and sessions will be stopped.</p> <p>If the environment does not exist a ResourceNotFoundException will be thrown (unless the clientToken matches a previous successful request).</p>",
             "idempotent": true
         },
         "GetEnvironmentMetadata": {
@@ -61,11 +63,12 @@
             "input": { "shape": "GetEnvironmentMetadataRequest" },
             "output": { "shape": "GetEnvironmentMetadataResponse" },
             "errors": [
+                { "shape": "InternalServerErrorException" },
                 { "shape": "ValidationException" },
                 { "shape": "AccessDeniedException" },
-                { "shape": "InternalServiceException" }
-            ],
-            "documentation": "<p>Retrieve Environment information for a given EnvironmentId</p>"
+                { "shape": "InternalServiceException" },
+                { "shape": "InternalServerException" }
+            ]
         },
         "ListEnvironments": {
             "name": "ListEnvironments",
@@ -77,11 +80,12 @@
             "input": { "shape": "ListEnvironmentsRequest" },
             "output": { "shape": "ListEnvironmentsResponse" },
             "errors": [
+                { "shape": "InternalServerErrorException" },
                 { "shape": "ValidationException" },
                 { "shape": "AccessDeniedException" },
-                { "shape": "InternalServiceException" }
-            ],
-            "documentation": "<p>Return the environments for a given account</p>"
+                { "shape": "InternalServiceException" },
+                { "shape": "InternalServerException" }
+            ]
         },
         "ListSessions": {
             "name": "ListSessions",
@@ -93,13 +97,14 @@
             "input": { "shape": "ListSessionsRequest" },
             "output": { "shape": "ListSessionsResponse" },
             "errors": [
+                { "shape": "InternalServerErrorException" },
                 { "shape": "ValidationException" },
                 { "shape": "AccessDeniedException" },
                 { "shape": "InternalServiceException" },
                 { "shape": "ResourceNotFoundException" },
-                { "shape": "ThrottlingException" }
-            ],
-            "documentation": "<p>Return the Sessions for a given Environment</p>"
+                { "shape": "ThrottlingException" },
+                { "shape": "InternalServerException" }
+            ]
         },
         "ListTagsForResource": {
             "name": "ListTagsForResource",
@@ -114,8 +119,7 @@
                 { "shape": "ValidationException" },
                 { "shape": "InternalServiceException" },
                 { "shape": "ResourceNotFoundException" }
-            ],
-            "documentation": "<p>List tags for resource</p>"
+            ]
         },
         "StartEnvironment": {
             "name": "StartEnvironment",
@@ -127,13 +131,14 @@
             "input": { "shape": "StartEnvironmentRequest" },
             "output": { "shape": "StartEnvironmentResponse" },
             "errors": [
+                { "shape": "InternalServerErrorException" },
                 { "shape": "ValidationException" },
                 { "shape": "AccessDeniedException" },
                 { "shape": "InternalServiceException" },
                 { "shape": "ConflictException" },
-                { "shape": "ResourceNotFoundException" }
+                { "shape": "ResourceNotFoundException" },
+                { "shape": "InternalServerException" }
             ],
-            "documentation": "<p>Start a previously stopped environment</p>",
             "idempotent": true
         },
         "StartSession": {
@@ -147,14 +152,15 @@
             "output": { "shape": "StartSessionResponse" },
             "errors": [
                 { "shape": "ServiceQuotaExceededException" },
+                { "shape": "InternalServerErrorException" },
                 { "shape": "ValidationException" },
                 { "shape": "AccessDeniedException" },
                 { "shape": "InternalServiceException" },
                 { "shape": "ConflictException" },
                 { "shape": "ResourceNotFoundException" },
-                { "shape": "ThrottlingException" }
-            ],
-            "documentation": "<p>Start a session connected to a running environment, either SSM or SSH (via SSM).</p> <p>Multiple sessions can be connected to an environment at the same time.</p> <p>If the environment is not running a ValidationException is thrown. If we are unable to connect to the environment a ConflictException is thrown.</p>"
+                { "shape": "ThrottlingException" },
+                { "shape": "InternalServerException" }
+            ]
         },
         "StopEnvironment": {
             "name": "StopEnvironment",
@@ -166,13 +172,14 @@
             "input": { "shape": "StopEnvironmentRequest" },
             "output": { "shape": "StopEnvironmentResponse" },
             "errors": [
+                { "shape": "InternalServerErrorException" },
                 { "shape": "ValidationException" },
                 { "shape": "AccessDeniedException" },
                 { "shape": "InternalServiceException" },
                 { "shape": "ConflictException" },
-                { "shape": "ResourceNotFoundException" }
+                { "shape": "ResourceNotFoundException" },
+                { "shape": "InternalServerException" }
             ],
-            "documentation": "<p>Stop environment operation stops a running environment</p>",
             "idempotent": true
         },
         "StopSession": {
@@ -184,13 +191,14 @@
             },
             "input": { "shape": "StopSessionRequest" },
             "errors": [
+                { "shape": "InternalServerErrorException" },
                 { "shape": "ValidationException" },
                 { "shape": "AccessDeniedException" },
                 { "shape": "InternalServiceException" },
                 { "shape": "ConflictException" },
-                { "shape": "ResourceNotFoundException" }
+                { "shape": "ResourceNotFoundException" },
+                { "shape": "InternalServerException" }
             ],
-            "documentation": "<p>Stop an existing session. Stopped sessions cannot be refreshed or restarted.</p> <p>If the environment does not exist a ResourceNotFoundException will be thrown. If session is not found a ValidationException will be thrown. (REVIEW) If we are unable to contact to the environment a ConflictException will be thrown.</p>",
             "idempotent": true
         },
         "TagResource": {
@@ -206,8 +214,7 @@
                 { "shape": "ValidationException" },
                 { "shape": "InternalServiceException" },
                 { "shape": "ResourceNotFoundException" }
-            ],
-            "documentation": "<p>Tag resource operation</p>"
+            ]
         },
         "UntagResource": {
             "name": "UntagResource",
@@ -223,7 +230,26 @@
                 { "shape": "InternalServiceException" },
                 { "shape": "ResourceNotFoundException" }
             ],
-            "documentation": "<p>Untag resource operation</p>",
+            "idempotent": true
+        },
+        "UpdateEnvironment": {
+            "name": "UpdateEnvironment",
+            "http": {
+                "method": "POST",
+                "requestUri": "/environments/{environmentId}/update",
+                "responseCode": 200
+            },
+            "input": { "shape": "UpdateEnvironmentRequest" },
+            "output": { "shape": "UpdateEnvironmentResponse" },
+            "errors": [
+                { "shape": "InternalServerErrorException" },
+                { "shape": "ValidationException" },
+                { "shape": "AccessDeniedException" },
+                { "shape": "InternalServiceException" },
+                { "shape": "ConflictException" },
+                { "shape": "ResourceNotFoundException" },
+                { "shape": "InternalServerException" }
+            ],
             "idempotent": true
         }
     },
@@ -234,7 +260,6 @@
             "members": {
                 "message": { "shape": "String" }
             },
-            "documentation": "<p>User does not have sufficient access to perform this action</p>",
             "error": {
                 "httpStatusCode": 403,
                 "senderFault": true
@@ -244,16 +269,10 @@
         "AccessDetails": {
             "type": "structure",
             "members": {
-                "streamUrl": {
-                    "shape": "StreamUrl",
-                    "documentation": "<p>A websocket url to connect to the environment</p>"
-                },
-                "tokenValue": {
-                    "shape": "TokenValue",
-                    "documentation": "<p>An opaque token used to authenticate requests</p>"
-                }
+                "streamUrl": { "shape": "StreamUrl" },
+                "tokenValue": { "shape": "TokenValue" }
             },
-            "documentation": "<p>Access details for a session</p>"
+            "sensitive": true
         },
         "Arn": {
             "type": "string",
@@ -267,10 +286,9 @@
         },
         "ClientToken": {
             "type": "string",
-            "documentation": "<p>Client token for idempotent calls</p>",
-            "max": 64,
+            "max": 36,
             "min": 0,
-            "pattern": "^[!-~]*$"
+            "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[8|9|aA|bB][a-fA-F0-9]{3}-[a-fA-F0-9]{12}$"
         },
         "Command": {
             "type": "list",
@@ -288,16 +306,9 @@
             "required": ["message", "resourceId", "resourceType"],
             "members": {
                 "message": { "shape": "String" },
-                "resourceId": {
-                    "shape": "String",
-                    "documentation": "<p>The identifier of the resource affected</p>"
-                },
-                "resourceType": {
-                    "shape": "String",
-                    "documentation": "<p>The type of the resource affected</p>"
-                }
+                "resourceId": { "shape": "String" },
+                "resourceType": { "shape": "String" }
             },
-            "documentation": "<p>Operation requested on a resource in an inconsistent state</p>",
             "error": {
                 "httpStatusCode": 409,
                 "senderFault": true
@@ -308,87 +319,44 @@
             "type": "structure",
             "required": ["instanceType", "persistentStorage"],
             "members": {
+                "bootstrapRoleArn": { "shape": "IamRoleArn" },
                 "clientToken": {
                     "shape": "ClientToken",
                     "idempotencyToken": true
                 },
                 "definition": {
                     "shape": "Definition",
-                    "documentation": "<p>The <code>definition</code> parameter provides the image, repo or compose file that defines the container setup for the new environment.</p> <p>If no definition is provided then a default environment is used.</p>",
                     "deprecated": true,
                     "deprecatedMessage": "Devfile will replace Definition, SourceCode become top-level"
                 },
-                "devfile": {
-                    "shape": "DevfileConfiguration",
-                    "documentation": "<p>The optional devfile to use</p>"
-                },
-                "ides": {
-                    "shape": "IdeConfigurationList",
-                    "documentation": "<p>The optional IDEs to be used in the environment</p>"
-                },
-                "inactivityTimeoutMinutes": {
-                    "shape": "InactivityTimeoutMinutes",
-                    "documentation": "<p>The amount of idle time before the environment is automatically stopped</p>"
-                },
-                "instanceType": {
-                    "shape": "InstanceType",
-                    "documentation": "<p>The instance type to use for the MDE environment CPU and RAM</p>"
-                },
-                "persistentStorage": {
-                    "shape": "PersistentStorageConfiguration",
-                    "documentation": "<p>Persistent storage configuration</p>"
-                },
-                "roleArn": {
-                    "shape": "IamRoleArn",
-                    "documentation": "<p>The optional ARN of the role to be used within the environment</p>"
-                },
-                "sourceCode": {
-                    "shape": "SourceCodeConfigurationList",
-                    "documentation": "<p>List of source code to clone after environment creation</p>"
-                },
-                "start": {
-                    "shape": "Boolean",
-                    "documentation": "<p>Should the environment be started after successful creation (default: true)?</p>"
-                },
-                "tags": {
-                    "shape": "TagMap",
-                    "documentation": "<p>Tags to apply to the environment during creation</p>"
-                },
-                "vpcConfig": {
-                    "shape": "VpcConfig",
-                    "documentation": "<p>The optional VPC security groups and subnets that are attached to the environment</p>"
-                }
-            },
-            "documentation": "<p>Create a running environment asynchronously</p>"
+                "devfile": { "shape": "DevfileConfiguration" },
+                "envVariables": { "shape": "EnvironmentVariableList" },
+                "environmentInsights": { "shape": "EnvironmentInsights" },
+                "ides": { "shape": "IdeConfigurationList" },
+                "inactivityTimeoutMinutes": { "shape": "InactivityTimeoutMinutes" },
+                "instanceType": { "shape": "InstanceType" },
+                "persistentStorage": { "shape": "PersistentStorageConfiguration" },
+                "roleArn": { "shape": "IamRoleArn" },
+                "sourceCode": { "shape": "SourceCodeConfigurationList" },
+                "start": { "shape": "Boolean" },
+                "tags": { "shape": "TagMap" },
+                "vpcConfig": { "shape": "VpcConfig" }
+            }
         },
         "CreateEnvironmentResponse": {
             "type": "structure",
             "required": ["arn", "id", "status"],
             "members": {
-                "arn": {
-                    "shape": "Arn",
-                    "documentation": "<p>ARN for the Environment</p>"
-                },
-                "id": {
-                    "shape": "EnvironmentId",
-                    "documentation": "<p>Environment Identifier created for this instance, unique within the AWS Account</p>"
-                },
-                "status": {
-                    "shape": "EnvironmentStatus",
-                    "documentation": "<p>Status of the environment, e.g. PENDING</p>"
-                }
-            },
-            "documentation": "<p>The Environment being created</p>"
+                "arn": { "shape": "Arn" },
+                "id": { "shape": "EnvironmentId" },
+                "status": { "shape": "EnvironmentStatus" }
+            }
         },
         "Definition": {
             "type": "structure",
             "members": {
-                "shellImage": {
-                    "shape": "DefinitionShellImageString",
-                    "documentation": "<p>ECS compatible image to start</p>"
-                }
+                "shellImage": { "shape": "DefinitionShellImageString" }
             },
-            "documentation": "<p>Definition to use for the Environment</p>",
             "deprecated": true,
             "deprecatedMessage": "Devfile will replace Definition, SourceCode become top-level"
         },
@@ -418,80 +386,72 @@
             "type": "structure",
             "required": ["arn", "id", "status"],
             "members": {
-                "arn": {
-                    "shape": "Arn",
-                    "documentation": "<p>ARN for the Environment</p>"
-                },
-                "id": {
-                    "shape": "EnvironmentId",
-                    "documentation": "<p>Environment Identifier created for this instance, unique within the AWS Account</p>"
-                },
-                "status": {
-                    "shape": "EnvironmentStatus",
-                    "documentation": "<p>Status of the environment, e.g. DELETING</p>"
-                }
-            },
-            "documentation": "<p>The Environment being deleted</p>"
+                "arn": { "shape": "Arn" },
+                "id": { "shape": "EnvironmentId" },
+                "status": { "shape": "EnvironmentStatus" }
+            }
         },
         "DevfileAction": {
             "type": "structure",
             "required": ["location", "status", "updatedAt"],
             "members": {
-                "location": {
-                    "shape": "String",
-                    "documentation": "<p>The location of the devfile</p>"
-                },
-                "message": {
-                    "shape": "String",
-                    "documentation": "<p>A message about the status</p>"
-                },
-                "status": {
-                    "shape": "DevfileStatus",
-                    "documentation": "<p>The status of the devfile</p>"
-                },
-                "updatedAt": {
-                    "shape": "Timestamp",
-                    "documentation": "<p>The timestamp of the status</p>"
-                }
-            },
-            "documentation": "<p>The status of the devfile</p>"
+                "events": { "shape": "DevfileEvents" },
+                "location": { "shape": "String" },
+                "message": { "shape": "String" },
+                "status": { "shape": "DevfileStatus" },
+                "updatedAt": { "shape": "Timestamp" }
+            }
         },
         "DevfileConfiguration": {
             "type": "structure",
             "members": {
                 "filesystem": { "shape": "FilesystemConfiguration" },
+                "inline": { "shape": "InlineConfiguration" },
                 "uri": { "shape": "UriConfiguration" }
             },
-            "documentation": "<p>DevfileConfiguration determines the type of Devfile and is either a FilesystemConfiguration or UriConfiguration</p>",
             "union": true
+        },
+        "DevfileEvent": {
+            "type": "structure",
+            "required": ["status", "updatedAt"],
+            "members": {
+                "message": { "shape": "String" },
+                "status": { "shape": "DevfileEventStatus" },
+                "updatedAt": { "shape": "Timestamp" }
+            }
+        },
+        "DevfileEventStatus": {
+            "type": "string",
+            "enum": ["RUNNING", "SUCCESSFUL", "FAILED"]
+        },
+        "DevfileEvents": {
+            "type": "structure",
+            "members": {
+                "postStart": { "shape": "DevfileEvent" },
+                "preStop": { "shape": "DevfileEvent" }
+            }
         },
         "DevfileStatus": {
             "type": "string",
-            "documentation": "<p>Devfile status</p>",
             "enum": ["PENDING", "SUCCESSFUL", "FAILED"]
         },
         "EnvironmentActions": {
             "type": "structure",
             "members": {
-                "devfile": {
-                    "shape": "DevfileAction",
-                    "documentation": "<p>The devfile</p>"
-                },
-                "ides": {
-                    "shape": "IDEActionList",
-                    "documentation": "<p>The IDEs</p>"
-                },
-                "sourceCode": {
-                    "shape": "SourceCodeActionList",
-                    "documentation": "<p>The source code repositories</p>"
-                }
-            },
-            "documentation": "<p>The actions that happened inside of the environment</p>"
+                "devfile": { "shape": "DevfileAction" },
+                "ides": { "shape": "IDEActionList" },
+                "sourceCode": { "shape": "SourceCodeActionList" }
+            }
         },
         "EnvironmentId": {
             "type": "string",
-            "documentation": "<p>Environment Identifier, unique within an account</p>",
             "pattern": "^e-[0-9a-z]{8,63}$"
+        },
+        "EnvironmentInsights": {
+            "type": "structure",
+            "members": {
+                "enableLogs": { "shape": "Boolean" }
+            }
         },
         "EnvironmentStatus": {
             "type": "string",
@@ -505,62 +465,62 @@
             "type": "structure",
             "required": ["arn", "id"],
             "members": {
-                "arn": {
-                    "shape": "Arn",
-                    "documentation": "<p>ARN for the Environment</p>"
-                },
-                "createdAt": {
-                    "shape": "Timestamp",
-                    "documentation": "<p>Creation timestamp in UTC</p>"
-                },
-                "id": {
-                    "shape": "EnvironmentId",
-                    "documentation": "<p>Environment Identifier created for this instance, unique within the AWS Account</p>"
-                },
-                "ides": {
-                    "shape": "Ides",
-                    "documentation": "<p>The IDEs configured for the environment</p>"
-                },
-                "lastStartedAt": {
-                    "shape": "Timestamp",
-                    "documentation": "<p>Timestamp of the last start in UTC.</p>"
-                },
-                "status": {
-                    "shape": "EnvironmentStatus",
-                    "documentation": "<p>Actual status of the environment, such as RUNNING</p>"
-                },
-                "tags": {
-                    "shape": "TagMap",
-                    "documentation": "<p>Tags of the environment</p>"
-                },
-                "userArn": {
-                    "shape": "UserArn",
-                    "documentation": "<p>The ARN of the user that created the environment</p>"
-                }
+                "arn": { "shape": "Arn" },
+                "createdAt": { "shape": "Timestamp" },
+                "id": { "shape": "EnvironmentId" },
+                "ides": { "shape": "Ides" },
+                "lastStartedAt": { "shape": "Timestamp" },
+                "status": { "shape": "EnvironmentStatus" },
+                "tags": { "shape": "TagMap" },
+                "userArn": { "shape": "UserArn" }
+            }
+        },
+        "EnvironmentVariable": {
+            "type": "structure",
+            "required": ["name", "value"],
+            "members": {
+                "name": { "shape": "EnvironmentVariableNameString" },
+                "value": { "shape": "EnvironmentVariableValue" }
+            }
+        },
+        "EnvironmentVariableList": {
+            "type": "list",
+            "member": { "shape": "EnvironmentVariable" },
+            "max": 10,
+            "min": 0
+        },
+        "EnvironmentVariableNameString": {
+            "type": "string",
+            "max": 120,
+            "min": 1
+        },
+        "EnvironmentVariableValue": {
+            "type": "structure",
+            "members": {
+                "arn": { "shape": "EnvironmentVariableValueArnString" },
+                "string": { "shape": "SyntheticEnvironmentVariableValueString" }
             },
-            "documentation": "<p>Environment information</p>"
+            "union": true
+        },
+        "EnvironmentVariableValueArnString": {
+            "type": "string",
+            "max": 1224,
+            "min": 0,
+            "pattern": "^arn:[a-z0-9][-.a-z0-9]{0,62}:secretsmanager:[a-z0-9][-.a-z0-9]{0,62}:[a-z0-9][-.a-z0-9]{0,62}:secret:.{1,512}$"
         },
         "ExecCommandSessionConfiguration": {
             "type": "structure",
             "required": ["command"],
             "members": {
-                "command": {
-                    "shape": "Command",
-                    "documentation": "<p>The first list item is the command and the others are the arguments. A maximum of 10 arguments can be provided.</p>"
-                }
-            },
-            "documentation": "<p>ExecCommandSessionConfiguration configures an SSM session that executes a command</p>"
+                "command": { "shape": "Command" }
+            }
         },
         "FilesystemConfiguration": {
             "type": "structure",
             "required": ["path"],
             "members": {
-                "path": {
-                    "shape": "FilesystemConfigurationPathString",
-                    "documentation": "<p>The location of the devfile on the filesystem related to projects directory</p>"
-                }
-            },
-            "documentation": "<p>Devfile to use in the environment on the filesystem</p>"
+                "path": { "shape": "FilesystemConfigurationPathString" }
+            }
         },
         "FilesystemConfigurationPathString": {
             "type": "string",
@@ -582,115 +542,49 @@
             "type": "structure",
             "required": ["arn", "createdAt", "id", "instanceType", "status"],
             "members": {
-                "actions": {
-                    "shape": "EnvironmentActions",
-                    "documentation": "<p>The actions that happened inside of the environment</p>"
-                },
-                "arn": {
-                    "shape": "Arn",
-                    "documentation": "<p>ARN for the Environment</p>"
-                },
-                "createdAt": {
-                    "shape": "Timestamp",
-                    "documentation": "<p>Creation timestamp in UTC</p>"
-                },
+                "actions": { "shape": "EnvironmentActions" },
+                "arn": { "shape": "Arn" },
+                "bootstrapRoleArn": { "shape": "IamRoleArn" },
+                "createdAt": { "shape": "Timestamp" },
                 "definition": {
                     "shape": "Definition",
-                    "documentation": "<p>Definition used for this environment</p>",
                     "deprecated": true,
                     "deprecatedMessage": "Devfile will replace Definition, SourceCode become top-level"
                 },
-                "executionRoleArn": {
-                    "shape": "IamRoleArn",
-                    "documentation": "<p>The optional ARN of the execution role to be used for launching the environment</p>"
-                },
-                "id": {
-                    "shape": "EnvironmentId",
-                    "documentation": "<p>Environment Identifier created for this instance, unique within the AWS Account</p>"
-                },
-                "ides": {
-                    "shape": "Ides",
-                    "documentation": "<p>The IDEs configured for the environment</p>"
-                },
-                "inactivityTimeoutMinutes": {
-                    "shape": "InactivityTimeoutMinutes",
-                    "documentation": "<p>The amount of idle time before the environment is automatically stopped</p>"
-                },
-                "instanceType": {
-                    "shape": "InstanceType",
-                    "documentation": "<p>The optional Instance Type to use for the MDE environment CPU and RAM</p>"
-                },
-                "lastStartedAt": {
-                    "shape": "Timestamp",
-                    "documentation": "<p>Timestamp of the last start in UTC.</p>"
-                },
-                "maxRuntimeReachedAt": {
-                    "shape": "Timestamp",
-                    "documentation": "<p>Upper limit of Environment lifetime as a timestamp in UTC.</p> <p>Environments have a maximum duration of X hours and will be stopped after this time.</p>"
-                },
-                "persistentStorage": {
-                    "shape": "PersistentStorage",
-                    "documentation": "<p>Persistent storage configuration</p>"
-                },
-                "roleArn": {
-                    "shape": "IamRoleArn",
-                    "documentation": "<p>The optional ARN of the role to be used within the environment</p>"
-                },
-                "status": {
-                    "shape": "EnvironmentStatus",
-                    "documentation": "<p>Actual status of the environment, such as RUNNING</p>"
-                },
-                "statusReason": {
-                    "shape": "String",
-                    "documentation": "<p>Reason for the most recent status of the environment</p>"
-                },
-                "tags": {
-                    "shape": "TagMap",
-                    "documentation": "<p>Tags of the environment</p>"
-                },
-                "userArn": {
-                    "shape": "UserArn",
-                    "documentation": "<p>The ARN of the user that created the environment</p>"
-                },
-                "vpcConfig": {
-                    "shape": "VpcConfig",
-                    "documentation": "<p>The optional VPC security groups and subnets that are attached to the environment</p>"
-                }
+                "envVariables": { "shape": "EnvironmentVariableList" },
+                "id": { "shape": "EnvironmentId" },
+                "ides": { "shape": "Ides" },
+                "inactivityTimeoutMinutes": { "shape": "InactivityTimeoutMinutes" },
+                "instanceType": { "shape": "InstanceType" },
+                "lastStartedAt": { "shape": "Timestamp" },
+                "maxRuntimeReachedAt": { "shape": "Timestamp" },
+                "persistentStorage": { "shape": "PersistentStorage" },
+                "roleArn": { "shape": "IamRoleArn" },
+                "status": { "shape": "EnvironmentStatus" },
+                "statusReason": { "shape": "String" },
+                "tags": { "shape": "TagMap" },
+                "userArn": { "shape": "UserArn" },
+                "vpcConfig": { "shape": "VpcConfig" }
             }
         },
         "IDEAction": {
             "type": "structure",
             "required": ["runtime", "status", "updatedAt"],
             "members": {
-                "message": {
-                    "shape": "String",
-                    "documentation": "<p>A message about the status</p>"
-                },
-                "runtime": {
-                    "shape": "String",
-                    "documentation": "<p>The runtime of the IDE</p>"
-                },
-                "status": {
-                    "shape": "IDEStatus",
-                    "documentation": "<p>The status of the IDE</p>"
-                },
-                "updatedAt": {
-                    "shape": "Timestamp",
-                    "documentation": "<p>The timestamp of the status</p>"
-                }
-            },
-            "documentation": "<p>The status of the IDE</p>"
+                "message": { "shape": "String" },
+                "runtime": { "shape": "String" },
+                "status": { "shape": "IDEStatus" },
+                "updatedAt": { "shape": "Timestamp" }
+            }
         },
         "IDEActionList": {
             "type": "list",
             "member": { "shape": "IDEAction" },
-            "documentation": "<p>The list of IDEs and their status</p>",
             "max": 1,
             "min": 0
         },
         "IDEStatus": {
             "type": "string",
-            "documentation": "<p>IDE status</p>",
             "enum": ["PENDING", "SUCCESSFUL", "FAILED"]
         },
         "IamRoleArn": {
@@ -703,28 +597,19 @@
             "type": "structure",
             "required": ["runtime"],
             "members": {
-                "runtime": {
-                    "shape": "IdeRuntimeString",
-                    "documentation": "<p>The IDE runtime</p>"
-                }
-            },
-            "documentation": "<p>IDE to use for the environment</p>"
+                "runtime": { "shape": "IdeRuntimeString" }
+            }
         },
         "IdeConfiguration": {
             "type": "structure",
             "required": ["runtime"],
             "members": {
-                "runtime": {
-                    "shape": "IdeConfigurationRuntimeString",
-                    "documentation": "<p>The IDE runtime</p>"
-                }
-            },
-            "documentation": "<p>IDE configuration to use for the environment</p>"
+                "runtime": { "shape": "IdeConfigurationRuntimeString" }
+            }
         },
         "IdeConfigurationList": {
             "type": "list",
             "member": { "shape": "IdeConfiguration" },
-            "documentation": "<p>The list of IDE configurations</p>",
             "max": 1,
             "min": 0
         },
@@ -741,24 +626,65 @@
         "Ides": {
             "type": "list",
             "member": { "shape": "Ide" },
-            "documentation": "<p>The list of IDEs</p>",
             "max": 1,
             "min": 0
         },
         "InactivityTimeoutMinutes": {
             "type": "integer",
-            "documentation": "<p>The environment will be stopped after this number of minutes without user interaction. Send 0 to turn this feature off.</p>",
             "max": 1200,
             "min": 0
         },
+        "InlineConfiguration": {
+            "type": "structure",
+            "required": ["data"],
+            "members": {
+                "data": { "shape": "InlineConfigurationDataBlob" }
+            }
+        },
+        "InlineConfigurationDataBlob": {
+            "type": "blob",
+            "max": 1024,
+            "min": 1
+        },
         "InstanceType": {
             "type": "string",
-            "documentation": "<p>Supported MDE instance types</p>",
             "enum": ["dev.standard1.micro", "dev.standard1.small", "dev.standard1.medium", "dev.standard1.large"]
         },
         "Integer": {
             "type": "integer",
             "box": true
+        },
+        "InternalServerErrorException": {
+            "type": "structure",
+            "required": ["message"],
+            "members": {
+                "message": { "shape": "String" },
+                "retryAfterSeconds": {
+                    "shape": "Integer",
+                    "location": "header",
+                    "locationName": "Retry-After"
+                }
+            },
+            "error": { "httpStatusCode": 500 },
+            "exception": true,
+            "fault": true,
+            "retryable": { "throttling": false }
+        },
+        "InternalServerException": {
+            "type": "structure",
+            "required": ["message"],
+            "members": {
+                "message": { "shape": "String" },
+                "retryAfterSeconds": {
+                    "shape": "Integer",
+                    "location": "header",
+                    "locationName": "Retry-After"
+                }
+            },
+            "error": { "httpStatusCode": 500 },
+            "exception": true,
+            "fault": true,
+            "retryable": { "throttling": false }
         },
         "InternalServiceException": {
             "type": "structure",
@@ -767,12 +693,10 @@
                 "message": { "shape": "String" },
                 "retryAfterSeconds": {
                     "shape": "Integer",
-                    "documentation": "<p>Advice to clients on when the call can be safely retried</p>",
                     "location": "header",
                     "locationName": "Retry-After"
                 }
             },
-            "documentation": "<p>Unexpected error during processing of request</p>",
             "error": { "httpStatusCode": 500 },
             "exception": true,
             "fault": true,
@@ -788,7 +712,6 @@
                 },
                 "nextToken": {
                     "shape": "NextToken",
-                    "documentation": "<p>Next token for pagination</p>",
                     "location": "querystring",
                     "locationName": "nextToken"
                 }
@@ -797,14 +720,8 @@
         "ListEnvironmentsResponse": {
             "type": "structure",
             "members": {
-                "environmentSummaries": {
-                    "shape": "EnvironmentSummaries",
-                    "documentation": "<p>List of Environments</p>"
-                },
-                "nextToken": {
-                    "shape": "NextToken",
-                    "documentation": "<p>Next token for pagination</p>"
-                }
+                "environmentSummaries": { "shape": "EnvironmentSummaries" },
+                "nextToken": { "shape": "NextToken" }
             }
         },
         "ListSessionsRequest": {
@@ -841,7 +758,6 @@
             "members": {
                 "resourceArn": {
                     "shape": "String",
-                    "documentation": "<p>Resource to list tags for</p>",
                     "location": "uri",
                     "locationName": "resourceArn"
                 }
@@ -855,41 +771,28 @@
         },
         "MaxSize1000": {
             "type": "integer",
-            "documentation": "<p>Max size from 1 to 1000</p>",
             "max": 1000,
             "min": 1
         },
         "MaxSize200": {
             "type": "integer",
-            "documentation": "<p>Max size from 1 to 200</p>",
             "max": 200,
             "min": 1
         },
-        "NextToken": {
-            "type": "string",
-            "documentation": "<p>Next token for pagination</p>"
-        },
+        "NextToken": { "type": "string" },
         "PersistentStorage": {
             "type": "structure",
             "required": ["sizeInGiB"],
             "members": {
-                "sizeInGiB": {
-                    "shape": "PersistentStorageSizeInGiBInteger",
-                    "documentation": "<p>Size of the persistent storage in Gb (16,32,64), zero for no persistence</p>"
-                }
-            },
-            "documentation": "<p>Persistent storage configuration</p>"
+                "sizeInGiB": { "shape": "PersistentStorageSizeInGiBInteger" }
+            }
         },
         "PersistentStorageConfiguration": {
             "type": "structure",
             "required": ["sizeInGiB"],
             "members": {
-                "sizeInGiB": {
-                    "shape": "PersistentStorageConfigurationSizeInGiBInteger",
-                    "documentation": "<p>Size of the persistent storage in GiB (16,32,64), zero for no persistence</p>"
-                }
-            },
-            "documentation": "<p>Persistent storage configuration</p>"
+                "sizeInGiB": { "shape": "PersistentStorageConfigurationSizeInGiBInteger" }
+            }
         },
         "PersistentStorageConfigurationSizeInGiBInteger": {
             "type": "integer",
@@ -908,16 +811,9 @@
             "required": ["message", "resourceId", "resourceType"],
             "members": {
                 "message": { "shape": "String" },
-                "resourceId": {
-                    "shape": "String",
-                    "documentation": "<p>The hypothetical identifier of the resource affected</p>"
-                },
-                "resourceType": {
-                    "shape": "String",
-                    "documentation": "<p>The hypothetical type of the resource affected</p>"
-                }
+                "resourceId": { "shape": "String" },
+                "resourceType": { "shape": "String" }
             },
-            "documentation": "<p>Request references a resource which does not exist</p>",
             "error": {
                 "httpStatusCode": 404,
                 "senderFault": true
@@ -932,7 +828,6 @@
         },
         "SecurityGroupId": {
             "type": "string",
-            "documentation": "<p>Identifier of a Security Group</p>",
             "max": 255,
             "min": 1,
             "pattern": "^sg-[0-9a-f]{8,40}$"
@@ -940,7 +835,6 @@
         "SecurityGroupIds": {
             "type": "list",
             "member": { "shape": "SecurityGroupId" },
-            "documentation": "<p>A list of one or more groups IDs in the customer VPC</p>",
             "max": 5,
             "min": 1
         },
@@ -949,24 +843,11 @@
             "required": ["message", "quotaCode", "resourceId", "resourceType", "serviceCode"],
             "members": {
                 "message": { "shape": "String" },
-                "quotaCode": {
-                    "shape": "String",
-                    "documentation": "<p>The originating quota that was exceeded</p>"
-                },
-                "resourceId": {
-                    "shape": "String",
-                    "documentation": "<p>The identifier of the resource affected</p>"
-                },
-                "resourceType": {
-                    "shape": "String",
-                    "documentation": "<p>The type of the resource affected</p>"
-                },
-                "serviceCode": {
-                    "shape": "String",
-                    "documentation": "<p>The originating service of the exeeded quota</p>"
-                }
+                "quotaCode": { "shape": "String" },
+                "resourceId": { "shape": "String" },
+                "resourceType": { "shape": "String" },
+                "serviceCode": { "shape": "String" }
             },
-            "documentation": "<p>Request would cause a service quota to be exceeded</p>",
             "error": {
                 "httpStatusCode": 402,
                 "senderFault": true
@@ -979,12 +860,10 @@
                 "execCommand": { "shape": "ExecCommandSessionConfiguration" },
                 "ssh": { "shape": "SshSessionConfiguration" }
             },
-            "documentation": "<p>SessionConfiguration determines the type of Session and is either a ExecCommandSession or SshSession</p>",
             "union": true
         },
         "SessionId": {
             "type": "string",
-            "documentation": "<p>Session Identifier, unique within an environment</p>",
             "max": 96,
             "min": 1
         },
@@ -994,52 +873,30 @@
         },
         "SessionSummaries": {
             "type": "list",
-            "member": { "shape": "SessionSummary" },
-            "documentation": "<p>List of session summaries for an environment</p>"
+            "member": { "shape": "SessionSummary" }
         },
         "SessionSummary": {
             "type": "structure",
             "required": ["id"],
             "members": {
                 "id": { "shape": "SessionId" },
-                "startedAt": {
-                    "shape": "Timestamp",
-                    "documentation": "<p>Session creation timestamp in UTC</p>"
-                },
-                "status": {
-                    "shape": "SessionStatus",
-                    "documentation": "<p>Status of the session</p>"
-                }
-            },
-            "documentation": "<p>Session information</p>"
+                "startedAt": { "shape": "Timestamp" },
+                "status": { "shape": "SessionStatus" }
+            }
         },
         "SourceCodeAction": {
             "type": "structure",
             "required": ["status", "updatedAt", "uri"],
             "members": {
-                "message": {
-                    "shape": "String",
-                    "documentation": "<p>A message about the status</p>"
-                },
-                "status": {
-                    "shape": "SourceCodeStatus",
-                    "documentation": "<p>The status of the repository</p>"
-                },
-                "updatedAt": {
-                    "shape": "Timestamp",
-                    "documentation": "<p>The timestamp of the status</p>"
-                },
-                "uri": {
-                    "shape": "String",
-                    "documentation": "<p>The uri of the repository</p>"
-                }
-            },
-            "documentation": "<p>The status of the source code repository</p>"
+                "message": { "shape": "String" },
+                "status": { "shape": "SourceCodeStatus" },
+                "updatedAt": { "shape": "Timestamp" },
+                "uri": { "shape": "String" }
+            }
         },
         "SourceCodeActionList": {
             "type": "list",
             "member": { "shape": "SourceCodeAction" },
-            "documentation": "<p>The list of repositories and their status</p>",
             "max": 1,
             "min": 0
         },
@@ -1047,30 +904,19 @@
             "type": "structure",
             "required": ["uri"],
             "members": {
-                "branch": {
-                    "shape": "SourceCodeConfigurationBranchString",
-                    "documentation": "<p>The name of the branch to clone</p>"
-                },
-                "gitSecretArn": {
-                    "shape": "SecretArn",
-                    "documentation": "<p>Secret ARNs to use for authentication when cloning source code</p>"
-                },
-                "uri": {
-                    "shape": "SourceCodeConfigurationUriString",
-                    "documentation": "<p>The URI of the source code to clone</p>"
-                }
-            },
-            "documentation": "<p>Source code to clone into the created environment</p>"
+                "branch": { "shape": "SourceCodeConfigurationBranchString" },
+                "gitSecretArn": { "shape": "SecretArn" },
+                "uri": { "shape": "SourceCodeConfigurationUriString" }
+            }
         },
         "SourceCodeConfigurationBranchString": {
             "type": "string",
-            "max": 28,
+            "max": 256,
             "min": 1
         },
         "SourceCodeConfigurationList": {
             "type": "list",
             "member": { "shape": "SourceCodeConfiguration" },
-            "documentation": "<p>List of source code to clone into the created environment</p>",
             "max": 1,
             "min": 0
         },
@@ -1081,13 +927,11 @@
         },
         "SourceCodeStatus": {
             "type": "string",
-            "documentation": "<p>Source code repository status</p>",
             "enum": ["PENDING", "SUCCESSFUL", "FAILED"]
         },
         "SshSessionConfiguration": {
             "type": "structure",
-            "members": {},
-            "documentation": "<p>SSHSessionConfiguration configures an SSH session type</p>"
+            "members": {}
         },
         "StartEnvironmentRequest": {
             "type": "structure",
@@ -1097,52 +941,28 @@
                     "shape": "ClientToken",
                     "idempotencyToken": true
                 },
-                "definition": {
-                    "shape": "Definition",
-                    "documentation": "<p>New environment definition for the environment</p>"
-                },
-                "devfile": {
-                    "shape": "DevfileConfiguration",
-                    "documentation": "<p>The optional devfile to use</p>"
-                },
+                "definition": { "shape": "Definition" },
+                "devfile": { "shape": "DevfileConfiguration" },
+                "envVariables": { "shape": "EnvironmentVariableList" },
                 "environmentId": {
                     "shape": "EnvironmentId",
                     "location": "uri",
                     "locationName": "environmentId"
                 },
-                "ides": {
-                    "shape": "IdeConfigurationList",
-                    "documentation": "<p>New IDEs to be used in the environment</p>"
-                },
-                "inactivityTimeoutMinutes": {
-                    "shape": "InactivityTimeoutMinutes",
-                    "documentation": "<p>The amount of idle time before the environment is automatically stopped</p>"
-                },
-                "instanceType": {
-                    "shape": "InstanceType",
-                    "documentation": "<p>The optional instance type to use for the MDE environment CPU and RAM</p>"
-                }
-            },
-            "documentation": "<p>Start an environment asynchronously</p>"
+                "environmentInsights": { "shape": "EnvironmentInsights" },
+                "ides": { "shape": "IdeConfigurationList" },
+                "inactivityTimeoutMinutes": { "shape": "InactivityTimeoutMinutes" },
+                "instanceType": { "shape": "InstanceType" }
+            }
         },
         "StartEnvironmentResponse": {
             "type": "structure",
             "required": ["arn", "id", "status"],
             "members": {
-                "arn": {
-                    "shape": "Arn",
-                    "documentation": "<p>ARN for the Environment</p>"
-                },
-                "id": {
-                    "shape": "EnvironmentId",
-                    "documentation": "<p>Environment Identifier created for this instance, unique within the AWS Account</p>"
-                },
-                "status": {
-                    "shape": "EnvironmentStatus",
-                    "documentation": "<p>Status of the environment, e.g. STARTING</p>"
-                }
-            },
-            "documentation": "<p>The Environment being started</p>"
+                "arn": { "shape": "Arn" },
+                "id": { "shape": "EnvironmentId" },
+                "status": { "shape": "EnvironmentStatus" }
+            }
         },
         "StartSessionRequest": {
             "type": "structure",
@@ -1153,24 +973,15 @@
                     "location": "uri",
                     "locationName": "environmentId"
                 },
-                "sessionConfiguration": {
-                    "shape": "SessionConfiguration",
-                    "documentation": "<p>Session configuration</p>"
-                }
+                "sessionConfiguration": { "shape": "SessionConfiguration" }
             }
         },
         "StartSessionResponse": {
             "type": "structure",
             "required": ["accessDetails", "id"],
             "members": {
-                "accessDetails": {
-                    "shape": "AccessDetails",
-                    "documentation": "<p>Access details for the session, potentially new ones</p>"
-                },
-                "id": {
-                    "shape": "String",
-                    "documentation": "<p>Session Identifier</p>"
-                }
+                "accessDetails": { "shape": "AccessDetails" },
+                "id": { "shape": "String" }
             }
         },
         "StopEnvironmentRequest": {
@@ -1192,20 +1003,10 @@
             "type": "structure",
             "required": ["arn", "id", "status"],
             "members": {
-                "arn": {
-                    "shape": "Arn",
-                    "documentation": "<p>ARN for the Environment</p>"
-                },
-                "id": {
-                    "shape": "EnvironmentId",
-                    "documentation": "<p>Environment Identifier created for this instance, unique within the AWS Account</p>"
-                },
-                "status": {
-                    "shape": "EnvironmentStatus",
-                    "documentation": "<p>Status of the environment, e.g. STOPPING</p>"
-                }
-            },
-            "documentation": "<p>The Environment being stopped</p>"
+                "arn": { "shape": "Arn" },
+                "id": { "shape": "EnvironmentId" },
+                "status": { "shape": "EnvironmentStatus" }
+            }
         },
         "StopSessionRequest": {
             "type": "structure",
@@ -1213,7 +1014,6 @@
             "members": {
                 "clientToken": {
                     "shape": "ClientToken",
-                    "documentation": "<p>Client token for idempotent calls</p>",
                     "idempotencyToken": true,
                     "location": "header",
                     "locationName": "X-Amzn-ClientToken"
@@ -1230,14 +1030,10 @@
                 }
             }
         },
-        "StreamUrl": {
-            "type": "string",
-            "documentation": "<p>Websocket URL for interacting with an environment</p>"
-        },
+        "StreamUrl": { "type": "string" },
         "String": { "type": "string" },
         "SubnetId": {
             "type": "string",
-            "documentation": "<p>Identifier of a subnet</p>",
             "max": 255,
             "min": 1,
             "pattern": "^subnet-[0-9a-f]{8,40}$"
@@ -1245,9 +1041,14 @@
         "SubnetIds": {
             "type": "list",
             "member": { "shape": "SubnetId" },
-            "documentation": "<p>A list of one or more subnet IDs in the customer VPC</p>",
             "max": 16,
             "min": 1
+        },
+        "SyntheticEnvironmentVariableValueString": {
+            "type": "string",
+            "max": 1024,
+            "min": 0,
+            "sensitive": true
         },
         "TagKeys": {
             "type": "list",
@@ -1255,15 +1056,8 @@
         },
         "TagMap": {
             "type": "map",
-            "key": {
-                "shape": "TagMapKeyString",
-                "documentation": "<p>The key of the tag.</p> <p>Constraints: Tag keys are case-sensitive and accept a maximum of 128 Unicode characters. Valid characters are Unicode letters, digits, white space, and any of the following symbols: _ . : / = + - @ May not begin with <code>aws:</code>.</p>"
-            },
-            "value": {
-                "shape": "TagMapValueString",
-                "documentation": "<p>The value of the tag.</p> <p>Constraints: Tag values are case-sensitive and accept a maximum of 256 Unicode characters. Valid characters are Unicode letters, digits, white space, and any of the following symbols: _ . : / = + - @</p>"
-            },
-            "documentation": "<p>A collection of up to 50 unique tags</p>",
+            "key": { "shape": "TagMapKeyString" },
+            "value": { "shape": "TagMapValueString" },
             "max": 50,
             "min": 0
         },
@@ -1283,7 +1077,6 @@
             "members": {
                 "resourceArn": {
                     "shape": "String",
-                    "documentation": "<p>Resource to tag</p>",
                     "location": "uri",
                     "locationName": "resourceArn"
                 },
@@ -1299,22 +1092,14 @@
             "required": ["message", "quotaCode", "serviceCode"],
             "members": {
                 "message": { "shape": "String" },
-                "quotaCode": {
-                    "shape": "String",
-                    "documentation": "<p>The originating throttling quota that was exceeded</p>"
-                },
+                "quotaCode": { "shape": "String" },
                 "retryAfterSeconds": {
                     "shape": "Integer",
-                    "documentation": "<p>Advice to clients on when the call can be safely retried</p>",
                     "location": "header",
                     "locationName": "Retry-After"
                 },
-                "serviceCode": {
-                    "shape": "String",
-                    "documentation": "<p>The originating service for throttling</p>"
-                }
+                "serviceCode": { "shape": "String" }
             },
-            "documentation": "<p>Request was denied due to request throttling</p>",
             "error": {
                 "httpStatusCode": 429,
                 "senderFault": true
@@ -1323,23 +1108,18 @@
             "retryable": { "throttling": false }
         },
         "Timestamp": { "type": "timestamp" },
-        "TokenValue": {
-            "type": "string",
-            "documentation": "<p>Token used to authenticate</p>"
-        },
+        "TokenValue": { "type": "string" },
         "UntagResourceRequest": {
             "type": "structure",
             "required": ["resourceArn", "tagKeys"],
             "members": {
                 "resourceArn": {
                     "shape": "String",
-                    "documentation": "<p>Resource to untag</p>",
                     "location": "uri",
                     "locationName": "resourceArn"
                 },
                 "tagKeys": {
                     "shape": "TagKeys",
-                    "documentation": "<p>Keys to untag</p>",
                     "location": "querystring",
                     "locationName": "tagKeys"
                 }
@@ -1349,16 +1129,45 @@
             "type": "structure",
             "members": {}
         },
+        "UpdateBehavior": {
+            "type": "string",
+            "enum": ["restart"]
+        },
+        "UpdateEnvironmentRequest": {
+            "type": "structure",
+            "required": ["environmentId", "updateBehavior"],
+            "members": {
+                "clientToken": {
+                    "shape": "ClientToken",
+                    "idempotencyToken": true
+                },
+                "devfile": { "shape": "DevfileConfiguration" },
+                "environmentId": {
+                    "shape": "EnvironmentId",
+                    "location": "uri",
+                    "locationName": "environmentId"
+                },
+                "ides": { "shape": "IdeConfigurationList" },
+                "inactivityTimeoutMinutes": { "shape": "InactivityTimeoutMinutes" },
+                "instanceType": { "shape": "InstanceType" },
+                "updateBehavior": { "shape": "UpdateBehavior" }
+            }
+        },
+        "UpdateEnvironmentResponse": {
+            "type": "structure",
+            "required": ["arn", "id", "status"],
+            "members": {
+                "arn": { "shape": "Arn" },
+                "id": { "shape": "EnvironmentId" },
+                "status": { "shape": "EnvironmentStatus" }
+            }
+        },
         "UriConfiguration": {
             "type": "structure",
             "required": ["uri"],
             "members": {
-                "uri": {
-                    "shape": "UriConfigurationUriString",
-                    "documentation": "<p>The uri to the devfile in the public Devfile Registry</p>"
-                }
-            },
-            "documentation": "<p>Devfile to use in the environment from the public Devfile Registry</p>"
+                "uri": { "shape": "UriConfigurationUriString" }
+            }
         },
         "UriConfigurationUriString": {
             "type": "string",
@@ -1374,7 +1183,6 @@
                 "message": { "shape": "String" },
                 "reason": { "shape": "ValidationExceptionReason" }
             },
-            "documentation": "<p>Request failed validation</p>",
             "error": {
                 "httpStatusCode": 400,
                 "senderFault": true
@@ -1385,25 +1193,16 @@
             "type": "structure",
             "required": ["message", "name"],
             "members": {
-                "message": {
-                    "shape": "String",
-                    "documentation": "<p>The validation error message</p>"
-                },
-                "name": {
-                    "shape": "String",
-                    "documentation": "<p>The name of the field</p>"
-                }
-            },
-            "documentation": "<p>Information about a field passed inside the request that failed validation</p>"
+                "message": { "shape": "String" },
+                "name": { "shape": "String" }
+            }
         },
         "ValidationExceptionFieldList": {
             "type": "list",
-            "member": { "shape": "ValidationExceptionField" },
-            "documentation": "<p>The list of fields that validation when reason is 'fieldValidationFailed'</p>"
+            "member": { "shape": "ValidationExceptionField" }
         },
         "ValidationExceptionReason": {
             "type": "string",
-            "documentation": "<p>Possible reasons a request failed validation</p>",
             "enum": ["cannotParse", "fieldValidationFailed", "other"]
         },
         "VpcConfig": {
@@ -1411,9 +1210,7 @@
             "members": {
                 "securityGroupIds": { "shape": "SecurityGroupIds" },
                 "subnetIds": { "shape": "SubnetIds" }
-            },
-            "documentation": "<p>Customer VPC Configuration that the environment accesses</p>"
+            }
         }
-    },
-    "documentation": "<p>Managed Development Environments allow developers to easily create and reproduce as many development environments as they want - be it per software project or for individual experimentation. Using an MDE simplifies and standardizes development environments by codifying them into repeatable toolchains and by automating the creation and configuration of them on burstable compute. As MDE automates away all the manual and tedious work involved with creating and caring for development environments, developers can work more productively and focus on developing code.</p>"
+    }
 }
