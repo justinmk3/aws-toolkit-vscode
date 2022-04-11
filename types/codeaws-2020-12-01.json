@@ -738,6 +738,43 @@
                 }
             ]
         },
+        "CreateLink": {
+            "name": "CreateLink",
+            "http": {
+                "method": "POST",
+                "requestUri": "/"
+            },
+            "input": {
+                "shape": "CreateLinkRequest"
+            },
+            "output": {
+                "shape": "CreateLinkResponse"
+            },
+            "errors": [
+                {
+                    "shape": "ThrottlingException"
+                },
+                {
+                    "shape": "ConflictException"
+                },
+                {
+                    "shape": "ValidationException"
+                },
+                {
+                    "shape": "ServiceQuotaExceededException"
+                },
+                {
+                    "shape": "ResourceNotFoundException"
+                },
+                {
+                    "shape": "AccessDeniedException"
+                },
+                {
+                    "shape": "SessionNotValidException"
+                }
+            ],
+            "idempotent": true
+        },
         "CreateNotificationChannel": {
             "name": "CreateNotificationChannel",
             "http": {
@@ -848,6 +885,9 @@
             "errors": [
                 {
                     "shape": "ThrottlingException"
+                },
+                {
+                    "shape": "ConflictException"
                 },
                 {
                     "shape": "ValidationException"
@@ -1479,6 +1519,37 @@
             ],
             "idempotent": true
         },
+        "DeleteLink": {
+            "name": "DeleteLink",
+            "http": {
+                "method": "POST",
+                "requestUri": "/"
+            },
+            "input": {
+                "shape": "DeleteLinkRequest"
+            },
+            "output": {
+                "shape": "DeleteLinkResponse"
+            },
+            "errors": [
+                {
+                    "shape": "ThrottlingException"
+                },
+                {
+                    "shape": "ValidationException"
+                },
+                {
+                    "shape": "ResourceNotFoundException"
+                },
+                {
+                    "shape": "AccessDeniedException"
+                },
+                {
+                    "shape": "SessionNotValidException"
+                }
+            ],
+            "idempotent": true
+        },
         "DeleteNotificationChannel": {
             "name": "DeleteNotificationChannel",
             "http": {
@@ -1827,6 +1898,36 @@
             },
             "output": {
                 "shape": "DescribeAccessResponse"
+            },
+            "errors": [
+                {
+                    "shape": "ThrottlingException"
+                },
+                {
+                    "shape": "ValidationException"
+                },
+                {
+                    "shape": "ResourceNotFoundException"
+                },
+                {
+                    "shape": "AccessDeniedException"
+                },
+                {
+                    "shape": "SessionNotValidException"
+                }
+            ]
+        },
+        "DescribeLinks": {
+            "name": "DescribeLinks",
+            "http": {
+                "method": "POST",
+                "requestUri": "/"
+            },
+            "input": {
+                "shape": "DescribeLinksRequest"
+            },
+            "output": {
+                "shape": "DescribeLinksResponse"
             },
             "errors": [
                 {
@@ -2822,6 +2923,36 @@
                 }
             ]
         },
+        "GetEnvironmentResourceMetadata": {
+            "name": "GetEnvironmentResourceMetadata",
+            "http": {
+                "method": "POST",
+                "requestUri": "/"
+            },
+            "input": {
+                "shape": "GetEnvironmentResourceMetadataRequest"
+            },
+            "output": {
+                "shape": "GetEnvironmentResourceMetadataResponse"
+            },
+            "errors": [
+                {
+                    "shape": "ThrottlingException"
+                },
+                {
+                    "shape": "ValidationException"
+                },
+                {
+                    "shape": "ResourceNotFoundException"
+                },
+                {
+                    "shape": "AccessDeniedException"
+                },
+                {
+                    "shape": "SessionNotValidException"
+                }
+            ]
+        },
         "GetEnvironmentStack": {
             "name": "GetEnvironmentStack",
             "http": {
@@ -3550,6 +3681,36 @@
             },
             "output": {
                 "shape": "SecretMetadata"
+            },
+            "errors": [
+                {
+                    "shape": "ThrottlingException"
+                },
+                {
+                    "shape": "ValidationException"
+                },
+                {
+                    "shape": "ResourceNotFoundException"
+                },
+                {
+                    "shape": "AccessDeniedException"
+                },
+                {
+                    "shape": "SessionNotValidException"
+                }
+            ]
+        },
+        "GetSecretValue": {
+            "name": "GetSecretValue",
+            "http": {
+                "method": "POST",
+                "requestUri": "/"
+            },
+            "input": {
+                "shape": "GetSecretValueInput"
+            },
+            "output": {
+                "shape": "GetSecretValueOutput"
             },
             "errors": [
                 {
@@ -6903,37 +7064,6 @@
             },
             "output": {
                 "shape": "PutUserNotificationSettingsResponse"
-            },
-            "errors": [
-                {
-                    "shape": "ThrottlingException"
-                },
-                {
-                    "shape": "ValidationException"
-                },
-                {
-                    "shape": "ResourceNotFoundException"
-                },
-                {
-                    "shape": "AccessDeniedException"
-                },
-                {
-                    "shape": "SessionNotValidException"
-                }
-            ],
-            "idempotent": true
-        },
-        "PutWatchIssueSetting": {
-            "name": "PutWatchIssueSetting",
-            "http": {
-                "method": "POST",
-                "requestUri": "/"
-            },
-            "input": {
-                "shape": "PutWatchIssueSettingRequest"
-            },
-            "output": {
-                "shape": "PutWatchIssueSettingResponse"
             },
             "errors": [
                 {
@@ -11572,6 +11702,9 @@
                 "blocked": {
                     "shape": "Boolean"
                 },
+                "customFields": {
+                    "shape": "CreateIssueInputCustomFieldsList"
+                },
                 "description": {
                     "shape": "CreateIssueInputDescriptionString"
                 },
@@ -11600,6 +11733,14 @@
                     "shape": "CreateIssueInputTitleString"
                 }
             }
+        },
+        "CreateIssueInputCustomFieldsList": {
+            "type": "list",
+            "member": {
+                "shape": "IssueCustomField"
+            },
+            "max": 50,
+            "min": 0
         },
         "CreateIssueInputDescriptionString": {
             "type": "string",
@@ -11646,6 +11787,9 @@
                 "blocked": {
                     "shape": "Boolean"
                 },
+                "customFields": {
+                    "shape": "CreateIssueRequestMigrationCustomFieldsList"
+                },
                 "description": {
                     "shape": "CreateIssueRequestMigrationDescriptionString"
                 },
@@ -11675,6 +11819,14 @@
                 }
             }
         },
+        "CreateIssueRequestMigrationCustomFieldsList": {
+            "type": "list",
+            "member": {
+                "shape": "IssueCustomFieldMigration"
+            },
+            "max": 50,
+            "min": 0
+        },
         "CreateIssueRequestMigrationDescriptionString": {
             "type": "string",
             "max": 32768,
@@ -11687,10 +11839,8 @@
         },
         "CreateIssueResponseMigration": {
             "type": "structure",
+            "required": ["id"],
             "members": {
-                "changeStatus": {
-                    "shape": "String"
-                },
                 "id": {
                     "shape": "String"
                 }
@@ -11772,6 +11922,33 @@
             "members": {
                 "id": {
                     "shape": "Uuid"
+                }
+            }
+        },
+        "CreateLinkRequest": {
+            "type": "structure",
+            "required": ["destination", "linkType", "organizationName", "source"],
+            "members": {
+                "destination": {
+                    "shape": "LinkComponent"
+                },
+                "linkType": {
+                    "shape": "LinkType"
+                },
+                "organizationName": {
+                    "shape": "NameString"
+                },
+                "source": {
+                    "shape": "LinkComponent"
+                }
+            }
+        },
+        "CreateLinkResponse": {
+            "type": "structure",
+            "required": ["linkId"],
+            "members": {
+                "linkId": {
+                    "shape": "LinkId"
                 }
             }
         },
@@ -12508,6 +12685,27 @@
                 }
             }
         },
+        "DeleteLinkRequest": {
+            "type": "structure",
+            "required": ["linkId", "organizationName"],
+            "members": {
+                "linkId": {
+                    "shape": "LinkId"
+                },
+                "organizationName": {
+                    "shape": "NameString"
+                }
+            }
+        },
+        "DeleteLinkResponse": {
+            "type": "structure",
+            "required": ["linkId"],
+            "members": {
+                "linkId": {
+                    "shape": "LinkId"
+                }
+            }
+        },
         "DeleteNotificationChannelRequest": {
             "type": "structure",
             "required": ["id", "organizationName", "projectName"],
@@ -12844,6 +13042,69 @@
                 }
             }
         },
+        "DescribeLinksRequest": {
+            "type": "structure",
+            "required": ["organizationName", "sourcePath"],
+            "members": {
+                "linkType": {
+                    "shape": "LinkType"
+                },
+                "maxResults": {
+                    "shape": "DescribeLinksRequestMaxResultsInteger"
+                },
+                "nextToken": {
+                    "shape": "DescribeLinksRequestNextTokenString"
+                },
+                "organizationName": {
+                    "shape": "NameString"
+                },
+                "sourcePath": {
+                    "shape": "ResourceRefList"
+                }
+            }
+        },
+        "DescribeLinksRequestMaxResultsInteger": {
+            "type": "integer",
+            "box": true,
+            "min": 1
+        },
+        "DescribeLinksRequestNextTokenString": {
+            "type": "string",
+            "min": 1
+        },
+        "DescribeLinksResponse": {
+            "type": "structure",
+            "required": ["items"],
+            "members": {
+                "items": {
+                    "shape": "DescribeLinksSummaryList"
+                },
+                "nextToken": {
+                    "shape": "String"
+                }
+            }
+        },
+        "DescribeLinksSummary": {
+            "type": "structure",
+            "required": ["destination", "linkId", "linkType"],
+            "members": {
+                "destination": {
+                    "shape": "LinkComponent"
+                },
+                "linkId": {
+                    "shape": "LinkId"
+                },
+                "linkType": {
+                    "shape": "LinkType"
+                }
+            }
+        },
+        "DescribeLinksSummaryList": {
+            "type": "list",
+            "member": {
+                "shape": "DescribeLinksSummary"
+            }
+        },
         "DescribeOrganizationMembersInput": {
             "type": "structure",
             "required": ["organizationName"],
@@ -13018,36 +13279,40 @@
             "required": ["projectName", "repositoryName"],
             "members": {
                 "branchName": {
-                    "shape": "String"
+                    "shape": "SourceRepositoryBranchString"
                 },
                 "projectName": {
-                    "shape": "String"
+                    "shape": "NameString"
                 },
                 "pullRequestNumber": {
                     "shape": "String"
                 },
                 "repositoryName": {
-                    "shape": "String"
+                    "shape": "SourceRepositoryNameString"
                 },
                 "sourceBranchName": {
-                    "shape": "String"
+                    "shape": "SourceRepositoryBranchString"
                 }
             }
         },
         "DevelopmentWorkspaceSessionConfiguration": {
             "type": "structure",
+            "required": ["sessionType"],
             "members": {
                 "executeCommandSessionConfiguration": {
                     "shape": "ExecuteCommandSessionConfiguration"
+                },
+                "sessionType": {
+                    "shape": "WorkspaceSessionType"
                 }
             }
         },
         "DevelopmentWorkspaceSummary": {
             "type": "structure",
-            "required": ["creatorId", "developmentWorkspaceId", "ide", "lastUpdatedTime", "repositories"],
+            "required": ["creatorId", "developmentWorkspaceId", "ide", "lastUpdatedTime", "repositories", "status"],
             "members": {
                 "creatorId": {
-                    "shape": "String"
+                    "shape": "DevelopmentWorkspaceSummaryCreatorIdString"
                 },
                 "developmentWorkspaceId": {
                     "shape": "Uuid"
@@ -13065,9 +13330,14 @@
                     "shape": "DevelopmentWorkspaceRepositorySummaries"
                 },
                 "status": {
-                    "shape": "String"
+                    "shape": "WorkspaceStatus"
                 }
             }
+        },
+        "DevelopmentWorkspaceSummaryCreatorIdString": {
+            "type": "string",
+            "max": 1024,
+            "min": 0
         },
         "DevelopmentWorkspaceSummaryList": {
             "type": "list",
@@ -13362,6 +13632,17 @@
                 "shape": "EnvironmentSummary"
             }
         },
+        "EnvironmentResourceMetadataFilterList": {
+            "type": "list",
+            "member": {
+                "shape": "EnvironmentResourceMetadataFilterListMemberString"
+            }
+        },
+        "EnvironmentResourceMetadataFilterListMemberString": {
+            "type": "string",
+            "max": 100,
+            "min": 1
+        },
         "EnvironmentStackList": {
             "type": "list",
             "member": {
@@ -13421,7 +13702,7 @@
         },
         "ExecuteCommandSessionConfiguration": {
             "type": "structure",
-            "required": ["arguments", "command"],
+            "required": ["command"],
             "members": {
                 "arguments": {
                     "shape": "ExecuteCommandSessionConfigurationArguments"
@@ -14601,6 +14882,47 @@
                 }
             }
         },
+        "GetEnvironmentResourceMetadataRequest": {
+            "type": "structure",
+            "required": ["actionName", "environmentName", "organizationName", "projectName", "roleArn", "serviceName"],
+            "members": {
+                "actionName": {
+                    "shape": "NameString"
+                },
+                "environmentName": {
+                    "shape": "NameString"
+                },
+                "filters": {
+                    "shape": "EnvironmentResourceMetadataFilterList"
+                },
+                "organizationName": {
+                    "shape": "NameString"
+                },
+                "params": {
+                    "shape": "String"
+                },
+                "projectName": {
+                    "shape": "NameString"
+                },
+                "regionName": {
+                    "shape": "RegionString"
+                },
+                "roleArn": {
+                    "shape": "String"
+                },
+                "serviceName": {
+                    "shape": "NameString"
+                }
+            }
+        },
+        "GetEnvironmentResourceMetadataResponse": {
+            "type": "structure",
+            "members": {
+                "data": {
+                    "shape": "String"
+                }
+            }
+        },
         "GetEnvironmentStackInput": {
             "type": "structure",
             "required": ["environmentName", "name", "organizationName", "projectName"],
@@ -15245,6 +15567,29 @@
                 },
                 "projectName": {
                     "shape": "NameString"
+                }
+            }
+        },
+        "GetSecretValueInput": {
+            "type": "structure",
+            "required": ["name", "organizationName", "projectName"],
+            "members": {
+                "name": {
+                    "shape": "NameString"
+                },
+                "organizationName": {
+                    "shape": "NameString"
+                },
+                "projectName": {
+                    "shape": "NameString"
+                }
+            }
+        },
+        "GetSecretValueOutput": {
+            "type": "structure",
+            "members": {
+                "value": {
+                    "shape": "String"
                 }
             }
         },
@@ -16557,6 +16902,80 @@
                 "shape": "IssueComment"
             }
         },
+        "IssueCustomField": {
+            "type": "structure",
+            "required": ["name", "type", "value"],
+            "members": {
+                "name": {
+                    "shape": "IssueCustomFieldNameString"
+                },
+                "type": {
+                    "shape": "IssueCustomFieldType"
+                },
+                "value": {
+                    "shape": "IssueCustomFieldValueString"
+                }
+            }
+        },
+        "IssueCustomFieldMigration": {
+            "type": "structure",
+            "required": ["name", "type", "value"],
+            "members": {
+                "name": {
+                    "shape": "IssueCustomFieldMigrationNameString"
+                },
+                "type": {
+                    "shape": "IssueCustomFieldTypeMigration"
+                },
+                "value": {
+                    "shape": "IssueCustomFieldMigrationValueString"
+                }
+            }
+        },
+        "IssueCustomFieldMigrationNameString": {
+            "type": "string",
+            "max": 50,
+            "min": 1
+        },
+        "IssueCustomFieldMigrationValueString": {
+            "type": "string",
+            "max": 1000,
+            "min": 1
+        },
+        "IssueCustomFieldNameString": {
+            "type": "string",
+            "max": 50,
+            "min": 1
+        },
+        "IssueCustomFieldType": {
+            "type": "string",
+            "enum": ["TEXT", "NUMBER", "DATE", "BOOLEAN"]
+        },
+        "IssueCustomFieldTypeMigration": {
+            "type": "string",
+            "enum": ["TEXT", "NUMBER", "DATE", "BOOLEAN"]
+        },
+        "IssueCustomFieldValueString": {
+            "type": "string",
+            "max": 1000,
+            "min": 1
+        },
+        "IssueCustomFields": {
+            "type": "list",
+            "member": {
+                "shape": "IssueCustomField"
+            },
+            "max": 50,
+            "min": 0
+        },
+        "IssueCustomFieldsMigration": {
+            "type": "list",
+            "member": {
+                "shape": "IssueCustomFieldMigration"
+            },
+            "max": 50,
+            "min": 0
+        },
         "IssueLabelIdListMigration": {
             "type": "list",
             "member": {
@@ -16618,6 +17037,9 @@
                 },
                 "creator": {
                     "shape": "String"
+                },
+                "customFields": {
+                    "shape": "IssueCustomFields"
                 },
                 "description": {
                     "shape": "String"
@@ -16690,6 +17112,9 @@
                 },
                 "createdBy": {
                     "shape": "String"
+                },
+                "customFields": {
+                    "shape": "IssueCustomFieldsMigration"
                 },
                 "description": {
                     "shape": "IssueObjectMigrationDescriptionString"
@@ -16983,6 +17408,18 @@
                 }
             }
         },
+        "LinkComponent": {
+            "type": "structure",
+            "required": ["resourcePath"],
+            "members": {
+                "resourceId": {
+                    "shape": "ResourceMap"
+                },
+                "resourcePath": {
+                    "shape": "ResourceRefList"
+                }
+            }
+        },
         "LinkExtensionIssueScopeInput": {
             "type": "structure",
             "required": ["connectionName", "name", "organizationName", "projectName", "providerCanonicalId"],
@@ -17014,6 +17451,10 @@
                     "shape": "String"
                 }
             }
+        },
+        "LinkId": {
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}_[0-9a-zA-Z_]{4,62}_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
         },
         "LinkSourceRepositoryInput": {
             "type": "structure",
@@ -17050,6 +17491,10 @@
         "LinkStatus": {
             "type": "string",
             "enum": ["linked", "linking", "unlinked"]
+        },
+        "LinkType": {
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z_]{4,62}$"
         },
         "ListAccessTokensRequest": {
             "type": "structure",
@@ -20866,45 +21311,6 @@
                 }
             }
         },
-        "PutWatchIssueSettingRequest": {
-            "type": "structure",
-            "required": ["id", "issueStoreName", "organizationName", "participationType", "projectName", "watchStatus"],
-            "members": {
-                "id": {
-                    "shape": "NameString"
-                },
-                "issueStoreName": {
-                    "shape": "NameString"
-                },
-                "notificationWatchId": {
-                    "shape": "NameString"
-                },
-                "organizationName": {
-                    "shape": "NameString"
-                },
-                "participationType": {
-                    "shape": "NameString"
-                },
-                "projectName": {
-                    "shape": "NameString"
-                },
-                "watchStatus": {
-                    "shape": "WatchStatus"
-                }
-            }
-        },
-        "PutWatchIssueSettingResponse": {
-            "type": "structure",
-            "required": ["notificationWatchId", "watchStatus"],
-            "members": {
-                "notificationWatchId": {
-                    "shape": "String"
-                },
-                "watchStatus": {
-                    "shape": "WatchStatus"
-                }
-            }
-        },
         "QuestionInformation": {
             "type": "structure",
             "members": {
@@ -21104,6 +21510,23 @@
                 }
             },
             "exception": true
+        },
+        "ResourceRef": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "shape": "String"
+                },
+                "type": {
+                    "shape": "String"
+                }
+            }
+        },
+        "ResourceRefList": {
+            "type": "list",
+            "member": {
+                "shape": "ResourceRef"
+            }
         },
         "ResourceType": {
             "type": "string"
@@ -23471,7 +23894,7 @@
         },
         "StartSessionDevelopmentWorkspaceRequest": {
             "type": "structure",
-            "required": ["developmentWorkspaceId", "organizationName", "projectName"],
+            "required": ["developmentWorkspaceId", "organizationName", "projectName", "sessionConfiguration"],
             "members": {
                 "clientToken": {
                     "shape": "ClientToken"
@@ -23502,6 +23925,15 @@
                 },
                 "developmentWorkspaceId": {
                     "shape": "Uuid"
+                },
+                "organizationName": {
+                    "shape": "NameString"
+                },
+                "projectName": {
+                    "shape": "NameString"
+                },
+                "sessionConfiguration": {
+                    "shape": "DevelopmentWorkspaceSessionConfiguration"
                 },
                 "sessionId": {
                     "shape": "StartSessionDevelopmentWorkspaceResponseSessionIdString"
@@ -25421,6 +25853,9 @@
                 "blocked": {
                     "shape": "Boolean"
                 },
+                "customFields": {
+                    "shape": "UpdateIssueInputCustomFieldsList"
+                },
                 "description": {
                     "shape": "UpdateIssueInputDescriptionString"
                 },
@@ -25455,6 +25890,14 @@
                     "shape": "Integer"
                 }
             }
+        },
+        "UpdateIssueInputCustomFieldsList": {
+            "type": "list",
+            "member": {
+                "shape": "IssueCustomField"
+            },
+            "max": 50,
+            "min": 0
         },
         "UpdateIssueInputDescriptionString": {
             "type": "string",
@@ -25497,11 +25940,14 @@
                 "archived": {
                     "shape": "Boolean"
                 },
-                "assigneeIdsList": {
+                "assigneeIds": {
                     "shape": "IssueAssigneeIdListMigration"
                 },
                 "blocked": {
                     "shape": "Boolean"
+                },
+                "customFields": {
+                    "shape": "UpdateIssueRequestMigrationCustomFieldsList"
                 },
                 "description": {
                     "shape": "UpdateIssueRequestMigrationDescriptionString"
@@ -25538,6 +25984,14 @@
                 }
             }
         },
+        "UpdateIssueRequestMigrationCustomFieldsList": {
+            "type": "list",
+            "member": {
+                "shape": "IssueCustomFieldMigration"
+            },
+            "max": 50,
+            "min": 0
+        },
         "UpdateIssueRequestMigrationDescriptionString": {
             "type": "string",
             "max": 32768,
@@ -25550,10 +26004,8 @@
         },
         "UpdateIssueResponseMigration": {
             "type": "structure",
+            "required": ["id"],
             "members": {
-                "changeStatus": {
-                    "shape": "String"
-                },
                 "id": {
                     "shape": "String"
                 }
@@ -26090,10 +26542,6 @@
                 }
             }
         },
-        "WatchStatus": {
-            "type": "string",
-            "enum": ["ENABLED", "DISABLED"]
-        },
         "WorkflowActionState": {
             "type": "structure",
             "members": {
@@ -26434,6 +26882,10 @@
                     "shape": "Integer"
                 }
             }
+        },
+        "WorkspaceSessionType": {
+            "type": "string",
+            "enum": ["SSM", "SSH"]
         },
         "WorkspaceStatus": {
             "type": "string",
