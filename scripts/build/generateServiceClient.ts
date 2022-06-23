@@ -218,6 +218,10 @@ ${fileContents}
             serviceJsonPath: 'types/mde-2020-04-05.normal.json',
             serviceName: 'ClientMde',
         },
+        {
+            serviceJsonPath: 'src/codewhisperer/client/service-2.json',
+            serviceName: 'CodeWhispererClient',
+        },
     ]
     await generateServiceClients(serviceClientDefinitions)
 })()
