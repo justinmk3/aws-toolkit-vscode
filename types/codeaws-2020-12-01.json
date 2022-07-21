@@ -874,23 +874,6 @@
             ],
             "idempotent": true
         },
-        "DeleteSSHPublicKey": {
-            "name": "DeleteSSHPublicKey",
-            "http": {
-                "method": "POST",
-                "requestUri": "/"
-            },
-            "input": { "shape": "DeleteSSHPublicKeyRequest" },
-            "output": { "shape": "DeleteSSHPublicKeyResponse" },
-            "errors": [
-                { "shape": "ThrottlingException" },
-                { "shape": "ValidationException" },
-                { "shape": "ResourceNotFoundException" },
-                { "shape": "AccessDeniedException" },
-                { "shape": "SessionNotValidException" }
-            ],
-            "idempotent": true
-        },
         "DeleteSecret": {
             "name": "DeleteSecret",
             "http": {
@@ -1126,8 +1109,8 @@
                 "method": "POST",
                 "requestUri": "/"
             },
-            "input": { "shape": "GetActionRunArtifactMetadataInput" },
-            "output": { "shape": "GetActionRunArtifactMetadataOutput" },
+            "input": { "shape": "GetActionRunArtifactMetadataRequest" },
+            "output": { "shape": "GetActionRunArtifactMetadataResponse" },
             "errors": [
                 { "shape": "ThrottlingException" },
                 { "shape": "ValidationException" },
@@ -1348,22 +1331,6 @@
                 { "shape": "SessionNotValidException" }
             ]
         },
-        "GetComputeAction": {
-            "name": "GetComputeAction",
-            "http": {
-                "method": "POST",
-                "requestUri": "/"
-            },
-            "input": { "shape": "GetComputeActionInput" },
-            "output": { "shape": "ComputeActionDetailsOutput" },
-            "errors": [
-                { "shape": "ThrottlingException" },
-                { "shape": "ValidationException" },
-                { "shape": "ResourceNotFoundException" },
-                { "shape": "AccessDeniedException" },
-                { "shape": "SessionNotValidException" }
-            ]
-        },
         "GetComputeFleet": {
             "name": "GetComputeFleet",
             "http": {
@@ -1452,54 +1419,6 @@
             },
             "input": { "shape": "GetEnvironmentDeploymentRequest" },
             "output": { "shape": "GetEnvironmentDeploymentResponse" },
-            "errors": [
-                { "shape": "ThrottlingException" },
-                { "shape": "ValidationException" },
-                { "shape": "ResourceNotFoundException" },
-                { "shape": "AccessDeniedException" },
-                { "shape": "SessionNotValidException" }
-            ]
-        },
-        "GetEnvironmentDeploymentV2": {
-            "name": "GetEnvironmentDeploymentV2",
-            "http": {
-                "method": "POST",
-                "requestUri": "/"
-            },
-            "input": { "shape": "GetEnvironmentDeploymentV2Request" },
-            "output": { "shape": "GetEnvironmentDeploymentV2Response" },
-            "errors": [
-                { "shape": "ThrottlingException" },
-                { "shape": "ValidationException" },
-                { "shape": "ResourceNotFoundException" },
-                { "shape": "AccessDeniedException" },
-                { "shape": "SessionNotValidException" }
-            ]
-        },
-        "GetEnvironmentResourceMetadata": {
-            "name": "GetEnvironmentResourceMetadata",
-            "http": {
-                "method": "POST",
-                "requestUri": "/"
-            },
-            "input": { "shape": "GetEnvironmentResourceMetadataRequest" },
-            "output": { "shape": "GetEnvironmentResourceMetadataResponse" },
-            "errors": [
-                { "shape": "ThrottlingException" },
-                { "shape": "ValidationException" },
-                { "shape": "ResourceNotFoundException" },
-                { "shape": "AccessDeniedException" },
-                { "shape": "SessionNotValidException" }
-            ]
-        },
-        "GetEnvironmentResourceMetadataMigration": {
-            "name": "GetEnvironmentResourceMetadataMigration",
-            "http": {
-                "method": "POST",
-                "requestUri": "/"
-            },
-            "input": { "shape": "GetEnvironmentResourceMetadataMigrationRequest" },
-            "output": { "shape": "GetEnvironmentResourceMetadataMigrationResponse" },
             "errors": [
                 { "shape": "ThrottlingException" },
                 { "shape": "ValidationException" },
@@ -1628,22 +1547,6 @@
             },
             "input": { "shape": "GetNotificationClientRequest" },
             "output": { "shape": "GetNotificationClientResponse" },
-            "errors": [
-                { "shape": "ThrottlingException" },
-                { "shape": "ValidationException" },
-                { "shape": "ResourceNotFoundException" },
-                { "shape": "AccessDeniedException" },
-                { "shape": "SessionNotValidException" }
-            ]
-        },
-        "GetNotificationClientMigration": {
-            "name": "GetNotificationClientMigration",
-            "http": {
-                "method": "POST",
-                "requestUri": "/"
-            },
-            "input": { "shape": "GetNotificationClientMigrationRequest" },
-            "output": { "shape": "GetNotificationClientMigrationResponse" },
             "errors": [
                 { "shape": "ThrottlingException" },
                 { "shape": "ValidationException" },
@@ -1782,22 +1685,6 @@
                 { "shape": "SessionNotValidException" }
             ]
         },
-        "GetProjectStatus": {
-            "name": "GetProjectStatus",
-            "http": {
-                "method": "POST",
-                "requestUri": "/"
-            },
-            "input": { "shape": "GetProjectStatusInput" },
-            "output": { "shape": "GetProjectStatusOutput" },
-            "errors": [
-                { "shape": "ThrottlingException" },
-                { "shape": "ValidationException" },
-                { "shape": "ResourceNotFoundException" },
-                { "shape": "AccessDeniedException" },
-                { "shape": "SessionNotValidException" }
-            ]
-        },
         "GetPullRequestRequirementStatus": {
             "name": "GetPullRequestRequirementStatus",
             "http": {
@@ -1806,22 +1693,6 @@
             },
             "input": { "shape": "GetPullRequestRequirementStatusInput" },
             "output": { "shape": "GetPullRequestRequirementStatusOutput" },
-            "errors": [
-                { "shape": "ThrottlingException" },
-                { "shape": "ValidationException" },
-                { "shape": "ResourceNotFoundException" },
-                { "shape": "AccessDeniedException" },
-                { "shape": "SessionNotValidException" }
-            ]
-        },
-        "GetSSHPublicKey": {
-            "name": "GetSSHPublicKey",
-            "http": {
-                "method": "POST",
-                "requestUri": "/"
-            },
-            "input": { "shape": "GetSSHPublicKeyRequest" },
-            "output": { "shape": "GetSSHPublicKeyResponse" },
             "errors": [
                 { "shape": "ThrottlingException" },
                 { "shape": "ValidationException" },
@@ -1893,29 +1764,14 @@
                 { "shape": "SessionNotValidException" }
             ]
         },
-        "GetSlackCredentialsMigration": {
-            "name": "GetSlackCredentialsMigration",
-            "http": {
-                "method": "POST",
-                "requestUri": "/"
-            },
-            "input": { "shape": "GetSlackCredentialsMigrationRequest" },
-            "output": { "shape": "GetSlackCredentialsMigrationResponse" },
-            "errors": [
-                { "shape": "ThrottlingException" },
-                { "shape": "ValidationException" },
-                { "shape": "AccessDeniedException" },
-                { "shape": "SessionNotValidException" }
-            ]
-        },
         "GetSoftwareCompositionAnalysisFinding": {
             "name": "GetSoftwareCompositionAnalysisFinding",
             "http": {
                 "method": "POST",
                 "requestUri": "/"
             },
-            "input": { "shape": "GetSoftwareCompositionAnalysisFindingInput" },
-            "output": { "shape": "SoftwareCompositionAnalysisFindingOutput" },
+            "input": { "shape": "GetSoftwareCompositionAnalysisFindingRequest" },
+            "output": { "shape": "GetSoftwareCompositionAnalysisFindingResponse" },
             "errors": [
                 { "shape": "ThrottlingException" },
                 { "shape": "ValidationException" },
@@ -1948,8 +1804,8 @@
                 "method": "POST",
                 "requestUri": "/"
             },
-            "input": { "shape": "GetSoftwareCompositionAnalysisReportInput" },
-            "output": { "shape": "GetSoftwareCompositionAnalysisReportOutput" },
+            "input": { "shape": "GetSoftwareCompositionAnalysisReportRequest" },
+            "output": { "shape": "GetSoftwareCompositionAnalysisReportResponse" },
             "errors": [
                 { "shape": "ThrottlingException" },
                 { "shape": "ValidationException" },
@@ -1967,23 +1823,6 @@
             },
             "input": { "shape": "GetSoftwareCompositionAnalysisReportInputMigration" },
             "output": { "shape": "GetSoftwareCompositionAnalysisReportOutputMigration" },
-            "errors": [
-                { "shape": "ThrottlingException" },
-                { "shape": "ValidationException" },
-                { "shape": "ServiceQuotaExceededException" },
-                { "shape": "ResourceNotFoundException" },
-                { "shape": "AccessDeniedException" },
-                { "shape": "SessionNotValidException" }
-            ]
-        },
-        "GetSoftwareTestingReport": {
-            "name": "GetSoftwareTestingReport",
-            "http": {
-                "method": "POST",
-                "requestUri": "/"
-            },
-            "input": { "shape": "GetSoftwareTestingReportInput" },
-            "output": { "shape": "GetSoftwareTestingReportOutput" },
             "errors": [
                 { "shape": "ThrottlingException" },
                 { "shape": "ValidationException" },
@@ -2106,40 +1945,6 @@
                 { "shape": "SessionNotValidException" }
             ]
         },
-        "GetStaticAnalysisFinding": {
-            "name": "GetStaticAnalysisFinding",
-            "http": {
-                "method": "POST",
-                "requestUri": "/"
-            },
-            "input": { "shape": "GetStaticAnalysisFindingRequest" },
-            "output": { "shape": "GetStaticAnalysisFindingResponse" },
-            "errors": [
-                { "shape": "ThrottlingException" },
-                { "shape": "ValidationException" },
-                { "shape": "ServiceQuotaExceededException" },
-                { "shape": "ResourceNotFoundException" },
-                { "shape": "AccessDeniedException" },
-                { "shape": "SessionNotValidException" }
-            ]
-        },
-        "GetStaticAnalysisReport": {
-            "name": "GetStaticAnalysisReport",
-            "http": {
-                "method": "POST",
-                "requestUri": "/"
-            },
-            "input": { "shape": "GetStaticAnalysisReportRequest" },
-            "output": { "shape": "GetStaticAnalysisReportResponse" },
-            "errors": [
-                { "shape": "ThrottlingException" },
-                { "shape": "ValidationException" },
-                { "shape": "ServiceQuotaExceededException" },
-                { "shape": "ResourceNotFoundException" },
-                { "shape": "AccessDeniedException" },
-                { "shape": "SessionNotValidException" }
-            ]
-        },
         "GetTestCaseResult": {
             "name": "GetTestCaseResult",
             "http": {
@@ -2208,23 +2013,6 @@
                 { "shape": "SessionNotValidException" }
             ]
         },
-        "GetTestReportStatus": {
-            "name": "GetTestReportStatus",
-            "http": {
-                "method": "POST",
-                "requestUri": "/"
-            },
-            "input": { "shape": "GetTestReportStatusRequest" },
-            "output": { "shape": "GetTestReportStatusResponse" },
-            "errors": [
-                { "shape": "ThrottlingException" },
-                { "shape": "ValidationException" },
-                { "shape": "ServiceQuotaExceededException" },
-                { "shape": "ResourceNotFoundException" },
-                { "shape": "AccessDeniedException" },
-                { "shape": "SessionNotValidException" }
-            ]
-        },
         "GetTestReportStatusMigration": {
             "name": "GetTestReportStatusMigration",
             "http": {
@@ -2280,8 +2068,8 @@
                 "method": "POST",
                 "requestUri": "/"
             },
-            "input": { "shape": "GetWorkflowInput" },
-            "output": { "shape": "WorkflowSummary" },
+            "input": { "shape": "GetWorkflowRequest" },
+            "output": { "shape": "GetWorkflowResponse" },
             "errors": [
                 { "shape": "ThrottlingException" },
                 { "shape": "ValidationException" },
@@ -2296,8 +2084,8 @@
                 "method": "POST",
                 "requestUri": "/"
             },
-            "input": { "shape": "GetWorkflowRunInput" },
-            "output": { "shape": "GetWorkflowRunOutput" },
+            "input": { "shape": "GetWorkflowRunRequest" },
+            "output": { "shape": "GetWorkflowRunResponse" },
             "errors": [
                 { "shape": "ThrottlingException" },
                 { "shape": "ValidationException" },
@@ -2305,24 +2093,6 @@
                 { "shape": "AccessDeniedException" },
                 { "shape": "SessionNotValidException" }
             ]
-        },
-        "ImportSSHPublicKey": {
-            "name": "ImportSSHPublicKey",
-            "http": {
-                "method": "POST",
-                "requestUri": "/"
-            },
-            "input": { "shape": "ImportSSHPublicKeyRequest" },
-            "output": { "shape": "ImportSSHPublicKeyResponse" },
-            "errors": [
-                { "shape": "ThrottlingException" },
-                { "shape": "ConflictException" },
-                { "shape": "ValidationException" },
-                { "shape": "ServiceQuotaExceededException" },
-                { "shape": "AccessDeniedException" },
-                { "shape": "SessionNotValidException" }
-            ],
-            "idempotent": true
         },
         "LinkAccountToEnvironment": {
             "name": "LinkAccountToEnvironment",
@@ -2752,14 +2522,14 @@
                 { "shape": "SessionNotValidException" }
             ]
         },
-        "ListEnvironmentDeploymentTargets": {
-            "name": "ListEnvironmentDeploymentTargets",
+        "ListDevelopmentWorkspaceMigration": {
+            "name": "ListDevelopmentWorkspaceMigration",
             "http": {
                 "method": "POST",
                 "requestUri": "/"
             },
-            "input": { "shape": "ListEnvironmentDeploymentTargetsRequest" },
-            "output": { "shape": "ListEnvironmentDeploymentTargetsResponse" },
+            "input": { "shape": "ListDevelopmentWorkspaceRequestMigration" },
+            "output": { "shape": "ListDevelopmentWorkspaceResponseMigration" },
             "errors": [
                 { "shape": "ThrottlingException" },
                 { "shape": "ValidationException" },
@@ -2768,14 +2538,14 @@
                 { "shape": "SessionNotValidException" }
             ]
         },
-        "ListEnvironmentDeploymentTargetsMigration": {
-            "name": "ListEnvironmentDeploymentTargetsMigration",
+        "ListEnvironmentDeploymentTargets": {
+            "name": "ListEnvironmentDeploymentTargets",
             "http": {
                 "method": "POST",
                 "requestUri": "/"
             },
-            "input": { "shape": "ListEnvironmentDeploymentTargetsMigrationRequest" },
-            "output": { "shape": "ListEnvironmentDeploymentTargetsMigrationResponse" },
+            "input": { "shape": "ListEnvironmentDeploymentTargetsRequest" },
+            "output": { "shape": "ListEnvironmentDeploymentTargetsResponse" },
             "errors": [
                 { "shape": "ThrottlingException" },
                 { "shape": "ValidationException" },
@@ -2800,22 +2570,6 @@
                 { "shape": "SessionNotValidException" }
             ]
         },
-        "ListEnvironmentDeploymentsV2": {
-            "name": "ListEnvironmentDeploymentsV2",
-            "http": {
-                "method": "POST",
-                "requestUri": "/"
-            },
-            "input": { "shape": "ListEnvironmentDeploymentsV2Request" },
-            "output": { "shape": "ListEnvironmentDeploymentsV2Response" },
-            "errors": [
-                { "shape": "ThrottlingException" },
-                { "shape": "ValidationException" },
-                { "shape": "ResourceNotFoundException" },
-                { "shape": "AccessDeniedException" },
-                { "shape": "SessionNotValidException" }
-            ]
-        },
         "ListEnvironments": {
             "name": "ListEnvironments",
             "http": {
@@ -2824,6 +2578,22 @@
             },
             "input": { "shape": "ListEnvironmentsRequest" },
             "output": { "shape": "ListEnvironmentsResponse" },
+            "errors": [
+                { "shape": "ThrottlingException" },
+                { "shape": "ValidationException" },
+                { "shape": "ResourceNotFoundException" },
+                { "shape": "AccessDeniedException" },
+                { "shape": "SessionNotValidException" }
+            ]
+        },
+        "ListEventLog": {
+            "name": "ListEventLog",
+            "http": {
+                "method": "POST",
+                "requestUri": "/"
+            },
+            "input": { "shape": "ListEventLogRequest" },
+            "output": { "shape": "ListEventLogResponse" },
             "errors": [
                 { "shape": "ThrottlingException" },
                 { "shape": "ValidationException" },
@@ -2960,22 +2730,6 @@
                 { "shape": "SessionNotValidException" }
             ]
         },
-        "ListNotificationClientsMigration": {
-            "name": "ListNotificationClientsMigration",
-            "http": {
-                "method": "POST",
-                "requestUri": "/"
-            },
-            "input": { "shape": "ListNotificationClientsMigrationRequest" },
-            "output": { "shape": "ListNotificationClientsMigrationResponse" },
-            "errors": [
-                { "shape": "ThrottlingException" },
-                { "shape": "ValidationException" },
-                { "shape": "ResourceNotFoundException" },
-                { "shape": "AccessDeniedException" },
-                { "shape": "SessionNotValidException" }
-            ]
-        },
         "ListOnboarding": {
             "name": "ListOnboarding",
             "http": {
@@ -3056,20 +2810,6 @@
                 { "shape": "SessionNotValidException" }
             ]
         },
-        "ListSSHPublicKeys": {
-            "name": "ListSSHPublicKeys",
-            "http": {
-                "method": "POST",
-                "requestUri": "/"
-            },
-            "output": { "shape": "ListSSHPublicKeysResponse" },
-            "errors": [
-                { "shape": "ThrottlingException" },
-                { "shape": "ValidationException" },
-                { "shape": "AccessDeniedException" },
-                { "shape": "SessionNotValidException" }
-            ]
-        },
         "ListSecrets": {
             "name": "ListSecrets",
             "http": {
@@ -3102,23 +2842,6 @@
                 { "shape": "SessionNotValidException" }
             ]
         },
-        "ListSoftwareCompositionAnalysisFindingStatistics": {
-            "name": "ListSoftwareCompositionAnalysisFindingStatistics",
-            "http": {
-                "method": "POST",
-                "requestUri": "/"
-            },
-            "input": { "shape": "ListSoftwareCompositionAnalysisFindingsInput" },
-            "output": { "shape": "ListSoftwareCompositionAnalysisFindingStatisticsOutput" },
-            "errors": [
-                { "shape": "ThrottlingException" },
-                { "shape": "ValidationException" },
-                { "shape": "ServiceQuotaExceededException" },
-                { "shape": "ResourceNotFoundException" },
-                { "shape": "AccessDeniedException" },
-                { "shape": "SessionNotValidException" }
-            ]
-        },
         "ListSoftwareCompositionAnalysisFindingStatisticsMigration": {
             "name": "ListSoftwareCompositionAnalysisFindingStatisticsMigration",
             "http": {
@@ -3142,8 +2865,8 @@
                 "method": "POST",
                 "requestUri": "/"
             },
-            "input": { "shape": "ListSoftwareCompositionAnalysisFindingsInput" },
-            "output": { "shape": "ListSoftwareCompositionAnalysisFindingsOutput" },
+            "input": { "shape": "ListSoftwareCompositionAnalysisFindingsRequest" },
+            "output": { "shape": "ListSoftwareCompositionAnalysisFindingsResponse" },
             "errors": [
                 { "shape": "ThrottlingException" },
                 { "shape": "ValidationException" },
@@ -3170,14 +2893,31 @@
                 { "shape": "SessionNotValidException" }
             ]
         },
+        "ListSoftwareCompositionAnalysisFindingsStatistics": {
+            "name": "ListSoftwareCompositionAnalysisFindingsStatistics",
+            "http": {
+                "method": "POST",
+                "requestUri": "/"
+            },
+            "input": { "shape": "ListSoftwareCompositionAnalysisFindingsStatisticsRequest" },
+            "output": { "shape": "ListSoftwareCompositionAnalysisFindingsStatisticsResponse" },
+            "errors": [
+                { "shape": "ThrottlingException" },
+                { "shape": "ValidationException" },
+                { "shape": "ServiceQuotaExceededException" },
+                { "shape": "ResourceNotFoundException" },
+                { "shape": "AccessDeniedException" },
+                { "shape": "SessionNotValidException" }
+            ]
+        },
         "ListSoftwareCompositionAnalysisReports": {
             "name": "ListSoftwareCompositionAnalysisReports",
             "http": {
                 "method": "POST",
                 "requestUri": "/"
             },
-            "input": { "shape": "ListSoftwareCompositionAnalysisReportsInput" },
-            "output": { "shape": "ListSoftwareCompositionAnalysisReportsOutput" },
+            "input": { "shape": "ListSoftwareCompositionAnalysisReportsRequest" },
+            "output": { "shape": "ListSoftwareCompositionAnalysisReportsResponse" },
             "errors": [
                 { "shape": "ThrottlingException" },
                 { "shape": "ValidationException" },
@@ -3199,22 +2939,6 @@
                 { "shape": "ThrottlingException" },
                 { "shape": "ValidationException" },
                 { "shape": "ServiceQuotaExceededException" },
-                { "shape": "ResourceNotFoundException" },
-                { "shape": "AccessDeniedException" },
-                { "shape": "SessionNotValidException" }
-            ]
-        },
-        "ListSoftwareTestingReports": {
-            "name": "ListSoftwareTestingReports",
-            "http": {
-                "method": "POST",
-                "requestUri": "/"
-            },
-            "input": { "shape": "ListSoftwareTestingReportsInput" },
-            "output": { "shape": "ListSoftwareTestingReportsOutput" },
-            "errors": [
-                { "shape": "ThrottlingException" },
-                { "shape": "ValidationException" },
                 { "shape": "ResourceNotFoundException" },
                 { "shape": "AccessDeniedException" },
                 { "shape": "SessionNotValidException" }
@@ -3332,57 +3056,6 @@
                 { "shape": "SessionNotValidException" }
             ]
         },
-        "ListStaticAnalysisFindingStatistics": {
-            "name": "ListStaticAnalysisFindingStatistics",
-            "http": {
-                "method": "POST",
-                "requestUri": "/"
-            },
-            "input": { "shape": "ListStaticAnalysisFindingsStatisticsRequest" },
-            "output": { "shape": "ListStaticAnalysisFindingStatisticsResponse" },
-            "errors": [
-                { "shape": "ThrottlingException" },
-                { "shape": "ValidationException" },
-                { "shape": "ServiceQuotaExceededException" },
-                { "shape": "ResourceNotFoundException" },
-                { "shape": "AccessDeniedException" },
-                { "shape": "SessionNotValidException" }
-            ]
-        },
-        "ListStaticAnalysisFindings": {
-            "name": "ListStaticAnalysisFindings",
-            "http": {
-                "method": "POST",
-                "requestUri": "/"
-            },
-            "input": { "shape": "ListStaticAnalysisFindingsRequest" },
-            "output": { "shape": "ListStaticAnalysisFindingsResponse" },
-            "errors": [
-                { "shape": "ThrottlingException" },
-                { "shape": "ValidationException" },
-                { "shape": "ServiceQuotaExceededException" },
-                { "shape": "ResourceNotFoundException" },
-                { "shape": "AccessDeniedException" },
-                { "shape": "SessionNotValidException" }
-            ]
-        },
-        "ListStaticAnalysisReports": {
-            "name": "ListStaticAnalysisReports",
-            "http": {
-                "method": "POST",
-                "requestUri": "/"
-            },
-            "input": { "shape": "ListStaticAnalysisReportsRequest" },
-            "output": { "shape": "ListStaticAnalysisReportsResponse" },
-            "errors": [
-                { "shape": "ThrottlingException" },
-                { "shape": "ValidationException" },
-                { "shape": "ServiceQuotaExceededException" },
-                { "shape": "ResourceNotFoundException" },
-                { "shape": "AccessDeniedException" },
-                { "shape": "SessionNotValidException" }
-            ]
-        },
         "ListTestCaseResults": {
             "name": "ListTestCaseResults",
             "http": {
@@ -3449,23 +3122,6 @@
                 { "shape": "SessionNotValidException" }
             ]
         },
-        "ListTestReportStatuses": {
-            "name": "ListTestReportStatuses",
-            "http": {
-                "method": "POST",
-                "requestUri": "/"
-            },
-            "input": { "shape": "ListTestReportStatusesRequest" },
-            "output": { "shape": "ListTestReportStatusesResponse" },
-            "errors": [
-                { "shape": "ThrottlingException" },
-                { "shape": "ValidationException" },
-                { "shape": "ServiceQuotaExceededException" },
-                { "shape": "ResourceNotFoundException" },
-                { "shape": "AccessDeniedException" },
-                { "shape": "SessionNotValidException" }
-            ]
-        },
         "ListTestReportStatusesMigration": {
             "name": "ListTestReportStatusesMigration",
             "http": {
@@ -3523,8 +3179,8 @@
                 "method": "POST",
                 "requestUri": "/"
             },
-            "input": { "shape": "ListWorkflowRunsInput" },
-            "output": { "shape": "ListWorkflowRunsOutput" },
+            "input": { "shape": "ListWorkflowRunsRequest" },
+            "output": { "shape": "ListWorkflowRunsResponse" },
             "errors": [
                 { "shape": "ThrottlingException" },
                 { "shape": "ValidationException" },
@@ -3539,8 +3195,8 @@
                 "method": "POST",
                 "requestUri": "/"
             },
-            "input": { "shape": "ListWorkflowsInput" },
-            "output": { "shape": "ListWorkflowsOutput" },
+            "input": { "shape": "ListWorkflowsRequest" },
+            "output": { "shape": "ListWorkflowsResponse" },
             "errors": [
                 { "shape": "ThrottlingException" },
                 { "shape": "ValidationException" },
@@ -3783,8 +3439,8 @@
                 "method": "POST",
                 "requestUri": "/"
             },
-            "input": { "shape": "StartWorkflowRunInput" },
-            "output": { "shape": "StartWorkflowRunOutput" },
+            "input": { "shape": "StartWorkflowRunRequest" },
+            "output": { "shape": "StartWorkflowRunResponse" },
             "errors": [
                 { "shape": "ThrottlingException" },
                 { "shape": "ValidationException" },
@@ -4287,12 +3943,12 @@
     "shapes": {
         "AcceptOrganizationInvitationRequest": {
             "type": "structure",
-            "required": ["organizationInvitationId", "organizationName", "signupEmailAddress"],
+            "required": ["id", "organizationName", "signupEmailAddress"],
             "members": {
                 "id": { "shape": "AcceptOrganizationInvitationRequestIdString" },
                 "organizationInvitationId": { "shape": "String" },
                 "organizationName": { "shape": "NameString" },
-                "signupEmailAddress": { "shape": "String" }
+                "signupEmailAddress": { "shape": "EmailAddressString" }
             }
         },
         "AcceptOrganizationInvitationRequestIdString": {
@@ -4302,16 +3958,24 @@
         },
         "AcceptOrganizationInvitationResponse": {
             "type": "structure",
-            "required": ["inviteeEmailAddress", "inviteeRole", "lastUpdatedTime", "status", "timestamp"],
+            "required": [
+                "id",
+                "inviteeEmailAddress",
+                "inviteeRole",
+                "lastUpdatedTime",
+                "organizationName",
+                "status",
+                "timestamp"
+            ],
             "members": {
                 "id": { "shape": "String" },
                 "inviteeDisplayName": { "shape": "String" },
-                "inviteeEmailAddress": { "shape": "String" },
+                "inviteeEmailAddress": { "shape": "EmailAddressString" },
                 "inviteeRole": { "shape": "OrganizationInviteeRole" },
                 "inviterUserName": { "shape": "String" },
-                "lastUpdatedTime": { "shape": "String" },
+                "lastUpdatedTime": { "shape": "SyntheticTimestamp_date_time" },
                 "organizationName": { "shape": "String" },
-                "signupEmailAddress": { "shape": "String" },
+                "signupEmailAddress": { "shape": "EmailAddressString" },
                 "status": { "shape": "InvitationStatus" },
                 "timestamp": { "shape": "SyntheticTimestamp_date_time" }
             }
@@ -4367,6 +4031,12 @@
             "type": "string",
             "max": 100,
             "min": 1
+        },
+        "AccessTokenSecret": {
+            "type": "string",
+            "max": 4000,
+            "min": 1,
+            "sensitive": true
         },
         "AccessTokenSummaries": {
             "type": "list",
@@ -4514,44 +4184,9 @@
             "type": "list",
             "member": { "shape": "String" }
         },
-        "ActionRunPhaseContext": {
-            "type": "structure",
-            "members": {
-                "message": { "shape": "String" },
-                "messageType": { "shape": "ActionRunPhaseContextCode" }
-            }
-        },
-        "ActionRunPhaseContextCode": {
-            "type": "string",
-            "enum": ["FAULT", "CLIENT_ERROR", "INFO"]
-        },
-        "ActionRunPhaseContextList": {
-            "type": "list",
-            "member": { "shape": "ActionRunPhaseContext" }
-        },
-        "ActionRunPhaseMetadata": {
-            "type": "structure",
-            "members": {
-                "contexts": { "shape": "ActionRunPhaseContextList" },
-                "durationInSeconds": { "shape": "Integer" },
-                "endTime": { "shape": "SyntheticTimestamp_date_time" },
-                "name": { "shape": "ActionRunPhaseName" },
-                "startTime": { "shape": "SyntheticTimestamp_date_time" },
-                "status": { "shape": "ActionRunPhaseStatus" },
-                "steps": { "shape": "ActionRunSteps" }
-            }
-        },
-        "ActionRunPhaseMetadataList": {
-            "type": "list",
-            "member": { "shape": "ActionRunPhaseMetadata" }
-        },
         "ActionRunPhaseName": {
             "type": "string",
             "enum": ["QUEUED", "PROVISIONING", "WAIT_FOR_DEPLOYMENT", "DOWNLOAD_SOURCE", "BUILD", "UPLOAD_ARTIFACTS"]
-        },
-        "ActionRunPhaseStatus": {
-            "type": "string",
-            "enum": ["SUBMITTED", "IN_PROGRESS", "STOPPED", "TIMED_OUT", "SUCCEEDED", "FAILED", "FAULT"]
         },
         "ActionRunReport": {
             "type": "structure",
@@ -4587,23 +4222,6 @@
         "ActionRunStatus": {
             "type": "string",
             "enum": ["SUBMITTED", "IN_PROGRESS", "STOPPED", "TIMED_OUT", "SUCCEEDED", "FAILED", "FAULT"]
-        },
-        "ActionRunStep": {
-            "type": "structure",
-            "members": {
-                "endTime": { "shape": "SyntheticTimestamp_date_time" },
-                "name": { "shape": "String" },
-                "startTime": { "shape": "SyntheticTimestamp_date_time" },
-                "status": { "shape": "ActionRunStepStatus" }
-            }
-        },
-        "ActionRunStepStatus": {
-            "type": "string",
-            "enum": ["SUCCEEDED", "FAILED", "IN_PROGRESS", "PENDING"]
-        },
-        "ActionRunSteps": {
-            "type": "list",
-            "member": { "shape": "ActionRunStep" }
         },
         "ActionRunSuccessCriteria": {
             "type": "structure",
@@ -4642,8 +4260,7 @@
             "type": "structure",
             "members": {
                 "actionRunId": { "shape": "String" },
-                "actionRunSummary": { "shape": "String" },
-                "actionRunSummaryData": { "shape": "ActionRunSummaryData" },
+                "actionRunSummary": { "shape": "ActionRunSummaryData" },
                 "endTime": { "shape": "SyntheticTimestamp_date_time" },
                 "inputArtifacts": { "shape": "WorkflowRunActionArtifacts" },
                 "lastUpdatedTime": { "shape": "SyntheticTimestamp_date_time" },
@@ -4738,34 +4355,9 @@
             "type": "list",
             "member": { "shape": "AnalysisCounterMigration" }
         },
-        "AnalysisFindingEstimate": {
-            "type": "structure",
-            "members": {
-                "debtUnit": { "shape": "AnalysisFindingEstimateDebtUnitString" },
-                "debtValue": { "shape": "AnalysisFindingEstimateDebtValueString" },
-                "effortUnit": { "shape": "AnalysisFindingEstimateEffortUnitString" },
-                "effortValue": { "shape": "AnalysisFindingEstimateEffortValueString" }
-            }
-        },
-        "AnalysisFindingEstimateDebtUnitString": {
+        "AnalysisFindingCategory": {
             "type": "string",
-            "max": 1024,
-            "min": 1
-        },
-        "AnalysisFindingEstimateDebtValueString": {
-            "type": "string",
-            "max": 1024,
-            "min": 1
-        },
-        "AnalysisFindingEstimateEffortUnitString": {
-            "type": "string",
-            "max": 1024,
-            "min": 1
-        },
-        "AnalysisFindingEstimateEffortValueString": {
-            "type": "string",
-            "max": 1024,
-            "min": 1
+            "enum": ["Security"]
         },
         "AnalysisFindingLocation": {
             "type": "structure",
@@ -4841,27 +4433,6 @@
                 "path": { "shape": "String" },
                 "startCoordinate": { "shape": "AnalysisFindingSourceCoordinateMigration" }
             }
-        },
-        "AnalysisFindingRange": {
-            "type": "structure",
-            "required": ["from", "to"],
-            "members": {
-                "from": { "shape": "Integer" },
-                "to": { "shape": "Integer" }
-            }
-        },
-        "AnalysisFindingRecommendation": {
-            "type": "structure",
-            "members": {
-                "fix": { "shape": "AnalysisFindingRange" },
-                "fixType": { "shape": "AnalysisFindingRecommendationFixTypeString" },
-                "message": { "shape": "AnalysisFindingMessage" }
-            }
-        },
-        "AnalysisFindingRecommendationFixTypeString": {
-            "type": "string",
-            "max": 1024,
-            "min": 0
         },
         "AnalysisFindingRule": {
             "type": "structure",
@@ -4941,17 +4512,6 @@
                 "columnNumber": { "shape": "Integer" },
                 "lineNumber": { "shape": "Integer" }
             }
-        },
-        "AnalysisFindingTag": {
-            "type": "string",
-            "max": 1024,
-            "min": 1
-        },
-        "AnalysisFindingTags": {
-            "type": "list",
-            "member": { "shape": "AnalysisFindingTag" },
-            "max": 1024,
-            "min": 0
         },
         "AnswerInformation": {
             "type": "structure",
@@ -5389,7 +4949,7 @@
         },
         "BatchUpdateIssueStoreStatusesRequestItemsList": {
             "type": "list",
-            "member": { "shape": "IssueStoreStatus" },
+            "member": { "shape": "IssueStoreStatusMigration" },
             "max": 256,
             "min": 1
         },
@@ -5403,7 +4963,7 @@
         },
         "BatchUpdateIssueStoreStatusesResponseItemsList": {
             "type": "list",
-            "member": { "shape": "IssueStoreStatus" },
+            "member": { "shape": "IssueStoreStatusMigration" },
             "max": 256,
             "min": 0
         },
@@ -5627,18 +5187,6 @@
             "type": "list",
             "member": { "shape": "BuildVariable" }
         },
-        "Categories": {
-            "type": "list",
-            "member": { "shape": "Category" }
-        },
-        "Category": {
-            "type": "structure",
-            "members": {
-                "mappedSeverityCounts": { "shape": "AnalysisCounters" },
-                "name": { "shape": "String" },
-                "originalSeverityCounts": { "shape": "AnalysisCounters" }
-            }
-        },
         "CfnStackDeploymentTargetInfo": {
             "type": "structure",
             "members": {
@@ -5691,6 +5239,72 @@
                 "repositoryName": { "shape": "String" },
                 "sourceRepository": { "shape": "String" }
             }
+        },
+        "CodeCoverageResultsFilter": {
+            "type": "structure",
+            "required": ["key", "value"],
+            "members": {
+                "comparisonOperator": { "shape": "CodeCoverageResultsFilterComparisonOperator" },
+                "key": { "shape": "CodeCoverageResultsFilterKey" },
+                "value": { "shape": "String" }
+            }
+        },
+        "CodeCoverageResultsFilterComparisonOperator": {
+            "type": "string",
+            "enum": ["LT", "GT", "NOT_CONTAINS", "CONTAINS", "NE", "EQ"]
+        },
+        "CodeCoverageResultsFilterKey": {
+            "type": "string",
+            "enum": [
+                "missedBranchesCount",
+                "branchCoveragePercentage",
+                "missedLinesCount",
+                "lineCoveragePercentage",
+                "name"
+            ]
+        },
+        "CodeCoverageResultsFilterOperation": {
+            "type": "string",
+            "enum": ["OR", "AND"]
+        },
+        "CodeCoverageResultsFilters": {
+            "type": "structure",
+            "members": {
+                "filters": { "shape": "CodeCoverageResultsFiltersList" },
+                "operation": { "shape": "CodeCoverageResultsFilterOperation" }
+            }
+        },
+        "CodeCoverageResultsFiltersList": {
+            "type": "list",
+            "member": { "shape": "CodeCoverageResultsFilter" }
+        },
+        "CodeCoverageResultsOrderByDirection": {
+            "type": "string",
+            "enum": ["DESCENDING", "ASCENDING"]
+        },
+        "CodeCoverageResultsOrderByField": {
+            "type": "structure",
+            "required": ["direction", "fieldName"],
+            "members": {
+                "direction": { "shape": "CodeCoverageResultsOrderByDirection" },
+                "fieldName": { "shape": "CodeCoverageResultsOrderByFieldName" }
+            }
+        },
+        "CodeCoverageResultsOrderByFieldName": {
+            "type": "string",
+            "enum": [
+                "branchCoveragePercentage",
+                "coveredBranchesCount",
+                "lineCoveragePercentage",
+                "coveredLinesCount",
+                "name"
+            ]
+        },
+        "CodeCoverageResultsOrderByFields": {
+            "type": "list",
+            "member": { "shape": "CodeCoverageResultsOrderByField" },
+            "max": 3,
+            "min": 0
         },
         "CodeCoverageRunResultListOutputMigration": {
             "type": "structure",
@@ -5821,177 +5435,6 @@
         "CommentsOrderForIssue": {
             "type": "string",
             "enum": ["CREATION_TIME_ASCENDING", "CREATION_TIME_DESCENDING"]
-        },
-        "ComputeActionAccountConnection": {
-            "type": "structure",
-            "members": {
-                "accountConnectionName": { "shape": "ComputeActionAccountConnectionAccountConnectionNameString" },
-                "roleName": { "shape": "ComputeActionAccountConnectionRoleNameString" }
-            }
-        },
-        "ComputeActionAccountConnectionAccountConnectionNameString": {
-            "type": "string",
-            "max": 2500,
-            "min": 1
-        },
-        "ComputeActionAccountConnectionRoleNameString": {
-            "type": "string",
-            "max": 2500,
-            "min": 1
-        },
-        "ComputeActionArtifact": {
-            "type": "structure",
-            "members": {
-                "files": { "shape": "ComputeActionFiles" },
-                "location": { "shape": "String" },
-                "name": { "shape": "String" },
-                "packaging": { "shape": "String" },
-                "type": { "shape": "String" }
-            }
-        },
-        "ComputeActionArtifacts": {
-            "type": "list",
-            "member": { "shape": "ComputeActionArtifact" }
-        },
-        "ComputeActionComputeDetails": {
-            "type": "structure",
-            "required": ["computeType", "environmentType"],
-            "members": {
-                "computeType": { "shape": "String" },
-                "environmentType": { "shape": "String" },
-                "fleetName": { "shape": "String" }
-            }
-        },
-        "ComputeActionConnectionDetails": {
-            "type": "structure",
-            "required": ["connections"],
-            "members": {
-                "connections": { "shape": "ComputeActionConnectionDetailsConnectionsList" },
-                "environmentName": { "shape": "ComputeActionConnectionDetailsEnvironmentNameString" }
-            }
-        },
-        "ComputeActionConnectionDetailsConnectionsList": {
-            "type": "list",
-            "member": { "shape": "ComputeActionAccountConnection" },
-            "max": 10,
-            "min": 1
-        },
-        "ComputeActionConnectionDetailsEnvironmentNameString": {
-            "type": "string",
-            "max": 2500,
-            "min": 1
-        },
-        "ComputeActionDetailsOutput": {
-            "type": "structure",
-            "members": {
-                "artifacts": { "shape": "ComputeActionArtifacts" },
-                "computeDetails": { "shape": "ComputeActionComputeDetails" },
-                "connectionDetails": { "shape": "ComputeActionConnectionDetails" },
-                "currentPhase": { "shape": "String" },
-                "endTime": { "shape": "SyntheticTimestamp_date_time" },
-                "environment": { "shape": "ComputeActionEnvironment" },
-                "fleetId": { "shape": "String" },
-                "lastUpdatedTime": { "shape": "SyntheticTimestamp_date_time" },
-                "phases": { "shape": "ComputeActionPhaseMetaDataList" },
-                "reports": { "shape": "ComputeActionReports" },
-                "sources": { "shape": "ComputeActionSources" },
-                "startTime": { "shape": "SyntheticTimestamp_date_time" },
-                "status": { "shape": "String" }
-            }
-        },
-        "ComputeActionEnvironment": {
-            "type": "structure",
-            "members": {
-                "containerImage": { "shape": "String" },
-                "debugSessionEnabled": { "shape": "Boolean" },
-                "outputVariables": { "shape": "OutputVariables" },
-                "timeoutInMinutes": { "shape": "Integer" },
-                "variables": { "shape": "ComputeActionVariables" }
-            }
-        },
-        "ComputeActionFiles": {
-            "type": "list",
-            "member": { "shape": "String" }
-        },
-        "ComputeActionPhaseContext": {
-            "type": "structure",
-            "members": {
-                "message": { "shape": "String" },
-                "statusCode": { "shape": "String" }
-            }
-        },
-        "ComputeActionPhaseContextList": {
-            "type": "list",
-            "member": { "shape": "ComputeActionPhaseContext" }
-        },
-        "ComputeActionPhaseMetaDataList": {
-            "type": "list",
-            "member": { "shape": "ComputeActionPhaseMetadata" }
-        },
-        "ComputeActionPhaseMetadata": {
-            "type": "structure",
-            "members": {
-                "contexts": { "shape": "ComputeActionPhaseContextList" },
-                "durationInSeconds": { "shape": "Integer" },
-                "endTime": { "shape": "SyntheticTimestamp_date_time" },
-                "name": { "shape": "String" },
-                "startTime": { "shape": "SyntheticTimestamp_date_time" },
-                "status": { "shape": "String" },
-                "steps": { "shape": "ComputeActionSteps" }
-            }
-        },
-        "ComputeActionReport": {
-            "type": "structure",
-            "members": {
-                "files": { "shape": "ComputeActionFiles" },
-                "name": { "shape": "String" },
-                "sourceRepo": { "shape": "String" },
-                "type": { "shape": "String" }
-            }
-        },
-        "ComputeActionReports": {
-            "type": "list",
-            "member": { "shape": "ComputeActionReport" }
-        },
-        "ComputeActionSource": {
-            "type": "structure",
-            "required": ["sourceRank", "sourceType"],
-            "members": {
-                "sourceIdentifier": { "shape": "String" },
-                "sourceLocation": { "shape": "String" },
-                "sourceRank": { "shape": "String" },
-                "sourceType": { "shape": "String" },
-                "sourceVersion": { "shape": "String" }
-            }
-        },
-        "ComputeActionSources": {
-            "type": "list",
-            "member": { "shape": "ComputeActionSource" }
-        },
-        "ComputeActionStep": {
-            "type": "structure",
-            "members": {
-                "endTime": { "shape": "SyntheticTimestamp_date_time" },
-                "name": { "shape": "String" },
-                "startTime": { "shape": "SyntheticTimestamp_date_time" },
-                "status": { "shape": "String" }
-            }
-        },
-        "ComputeActionSteps": {
-            "type": "list",
-            "member": { "shape": "ComputeActionStep" }
-        },
-        "ComputeActionVariable": {
-            "type": "structure",
-            "members": {
-                "name": { "shape": "String" },
-                "type": { "shape": "String" },
-                "value": { "shape": "String" }
-            }
-        },
-        "ComputeActionVariables": {
-            "type": "list",
-            "member": { "shape": "ComputeActionVariable" }
         },
         "ComputeFleetSettings": {
             "type": "structure",
@@ -6204,13 +5647,8 @@
             "type": "structure",
             "required": ["secret"],
             "members": {
-                "secret": { "shape": "CreateAccessTokenResponseSecretString" }
+                "secret": { "shape": "AccessTokenSecret" }
             }
-        },
-        "CreateAccessTokenResponseSecretString": {
-            "type": "string",
-            "max": 4000,
-            "min": 1
         },
         "CreateArtifactRepositoryInput": {
             "type": "structure",
@@ -6370,10 +5808,11 @@
                 "description": { "shape": "String" },
                 "environmentType": { "shape": "EnvironmentType" },
                 "id": { "shape": "String" },
+                "lastUpdatedTime": { "shape": "SyntheticTimestamp_date_time" },
                 "name": { "shape": "NameString" },
                 "organizationName": { "shape": "NameString" },
                 "projectName": { "shape": "NameString" },
-                "version": { "shape": "String" }
+                "updateTime": { "shape": "SyntheticTimestamp_date_time" }
             }
         },
         "CreateExtensionInstallationMigrationInput": {
@@ -6513,7 +5952,7 @@
             "required": ["highLevelStatus", "issueStoreName", "name", "organizationName", "projectName"],
             "members": {
                 "active": { "shape": "Boolean" },
-                "highLevelStatus": { "shape": "IssueStoreHighLevelStatus" },
+                "highLevelStatus": { "shape": "IssueStoreHighLevelStatusMigration" },
                 "issueStoreName": { "shape": "NameString" },
                 "name": { "shape": "CreateIssueStoreStatusRequestNameString" },
                 "order": { "shape": "Integer" },
@@ -6596,7 +6035,7 @@
         },
         "CreateOrganizationRequest": {
             "type": "structure",
-            "required": ["displayName", "name"],
+            "required": ["displayName", "name", "regionName"],
             "members": {
                 "description": { "shape": "CreateOrganizationRequestDescriptionString" },
                 "displayName": { "shape": "CreateOrganizationRequestDisplayNameString" },
@@ -6617,12 +6056,10 @@
         "CreateOrganizationResponse": {
             "type": "structure",
             "members": {
-                "id": {
-                    "shape": "String",
-                    "deprecated": true,
-                    "deprecatedMessage": "field no longer in Rococo recommended schema"
-                },
-                "versionId": { "shape": "String" }
+                "description": { "shape": "String" },
+                "displayName": { "shape": "String" },
+                "name": { "shape": "NameString" },
+                "regionName": { "shape": "RegionString" }
             }
         },
         "CreateProjectRequest": {
@@ -6632,9 +6069,7 @@
                 "description": { "shape": "CreateProjectRequestDescriptionString" },
                 "displayName": { "shape": "CreateProjectRequestDisplayNameString" },
                 "name": { "shape": "NameString" },
-                "organizationName": { "shape": "NameString" },
-                "templateArn": { "shape": "CreateProjectRequestTemplateArnString" },
-                "templateParams": { "shape": "TemplateParamsMap" }
+                "organizationName": { "shape": "NameString" }
             }
         },
         "CreateProjectRequestDescriptionString": {
@@ -6647,19 +6082,13 @@
             "max": 200,
             "min": 1
         },
-        "CreateProjectRequestTemplateArnString": {
-            "type": "string",
-            "min": 1
-        },
         "CreateProjectResponse": {
             "type": "structure",
             "members": {
-                "id": {
-                    "shape": "String",
-                    "deprecated": true,
-                    "deprecatedMessage": "field no longer in Rococo recommended schema"
-                },
-                "versionId": { "shape": "String" }
+                "description": { "shape": "String" },
+                "displayName": { "shape": "String" },
+                "name": { "shape": "NameString" },
+                "organizationName": { "shape": "NameString" }
             }
         },
         "CreatePullRequestCommentInput": {
@@ -6978,8 +6407,7 @@
             "members": {
                 "name": { "shape": "NameString" },
                 "organizationName": { "shape": "NameString" },
-                "projectName": { "shape": "NameString" },
-                "version": { "shape": "String" }
+                "projectName": { "shape": "NameString" }
             }
         },
         "DeleteExtensionInstallationMigrationInput": {
@@ -7046,20 +6474,6 @@
             "members": {
                 "id": { "shape": "String" },
                 "version": { "shape": "String" }
-            }
-        },
-        "DeleteSSHPublicKeyRequest": {
-            "type": "structure",
-            "required": ["SSHPublicKeyId"],
-            "members": {
-                "SSHPublicKeyId": { "shape": "SSHPublicKeyIdString" }
-            }
-        },
-        "DeleteSSHPublicKeyResponse": {
-            "type": "structure",
-            "required": ["SSHPublicKeyId"],
-            "members": {
-                "SSHPublicKeyId": { "shape": "SSHPublicKeyIdString" }
             }
         },
         "DeleteSecretInput": {
@@ -7137,24 +6551,6 @@
             "type": "structure",
             "members": {
                 "version": { "shape": "String" }
-            }
-        },
-        "DeploymentDetailsV2": {
-            "type": "structure",
-            "required": ["deploymentTargetType", "environmentId", "lastUpdatedTime"],
-            "members": {
-                "cfnStackDeploymentInfo": { "shape": "EnvironmentDeploymentCloudFormationStackDeploymentInfoV2" },
-                "connection": { "shape": "EnvironmentDeploymentConnectionInfoV2" },
-                "deploymentMessage": { "shape": "String" },
-                "deploymentStatus": { "shape": "String" },
-                "deploymentTargetId": { "shape": "String" },
-                "deploymentTargetType": { "shape": "String" },
-                "ecsServiceDeploymentInfo": { "shape": "EnvironmentDeploymentEcsServiceDeploymentInfoV2" },
-                "environmentId": { "shape": "String" },
-                "lastUpdatedTime": { "shape": "SyntheticTimestamp_date_time" },
-                "sourceInfo": { "shape": "EnvironmentDeploymentSourceInfoV2" },
-                "triggerInfo": { "shape": "EnvironmentDeploymentTriggerInfoV2" },
-                "workflowActionInfo": { "shape": "EnvironmentDeploymentWorkflowActionInfoV2" }
             }
         },
         "DeploymentTargetInfo": {
@@ -7355,7 +6751,16 @@
         },
         "DevelopmentWorkspaceSummary": {
             "type": "structure",
-            "required": ["creatorId", "id", "lastUpdatedTime", "repositories", "status"],
+            "required": [
+                "creatorId",
+                "id",
+                "inactivityTimeoutMinutes",
+                "instanceType",
+                "lastUpdatedTime",
+                "persistentStorage",
+                "repositories",
+                "status"
+            ],
             "members": {
                 "alias": { "shape": "DevelopmentWorkspaceSummaryAliasString" },
                 "creatorId": { "shape": "DevelopmentWorkspaceSummaryCreatorIdString" },
@@ -7461,10 +6866,6 @@
             "type": "list",
             "member": { "shape": "String" }
         },
-        "EnvironmentDeploymentCloudFormationStackDeploymenAlarmArnsListV2": {
-            "type": "list",
-            "member": { "shape": "String" }
-        },
         "EnvironmentDeploymentCloudFormationStackDeploymentChangeSet": {
             "type": "structure",
             "required": ["changeSetId", "changeSetName", "status"],
@@ -7484,44 +6885,11 @@
                 "resourceType": { "shape": "String" }
             }
         },
-        "EnvironmentDeploymentCloudFormationStackDeploymentChangeSetChangeV2": {
-            "type": "structure",
-            "required": ["logicalResourceId", "resourceType"],
-            "members": {
-                "logicalResourceId": { "shape": "String" },
-                "resourceType": { "shape": "String" }
-            }
-        },
         "EnvironmentDeploymentCloudFormationStackDeploymentChangeSetChangesList": {
             "type": "list",
             "member": { "shape": "EnvironmentDeploymentCloudFormationStackDeploymentChangeSetChange" }
         },
-        "EnvironmentDeploymentCloudFormationStackDeploymentChangeSetChangesListV2": {
-            "type": "list",
-            "member": { "shape": "EnvironmentDeploymentCloudFormationStackDeploymentChangeSetChangeV2" }
-        },
-        "EnvironmentDeploymentCloudFormationStackDeploymentChangeSetV2": {
-            "type": "structure",
-            "required": ["changeSetId", "changeSetName", "status"],
-            "members": {
-                "changeSetId": { "shape": "String" },
-                "changeSetName": { "shape": "String" },
-                "changes": { "shape": "EnvironmentDeploymentCloudFormationStackDeploymentChangeSetChangesListV2" },
-                "status": { "shape": "String" },
-                "statusReason": { "shape": "String" }
-            }
-        },
         "EnvironmentDeploymentCloudFormationStackDeploymentEvent": {
-            "type": "structure",
-            "required": ["logicalResourceId", "resourceStatus", "timestamp"],
-            "members": {
-                "logicalResourceId": { "shape": "String" },
-                "resourceStatus": { "shape": "String" },
-                "resourceStatusReason": { "shape": "String" },
-                "timestamp": { "shape": "SyntheticTimestamp_date_time" }
-            }
-        },
-        "EnvironmentDeploymentCloudFormationStackDeploymentEventV2": {
             "type": "structure",
             "required": ["logicalResourceId", "resourceStatus", "timestamp"],
             "members": {
@@ -7534,10 +6902,6 @@
         "EnvironmentDeploymentCloudFormationStackDeploymentEventsList": {
             "type": "list",
             "member": { "shape": "EnvironmentDeploymentCloudFormationStackDeploymentEvent" }
-        },
-        "EnvironmentDeploymentCloudFormationStackDeploymentEventsListV2": {
-            "type": "list",
-            "member": { "shape": "EnvironmentDeploymentCloudFormationStackDeploymentEventV2" }
         },
         "EnvironmentDeploymentCloudFormationStackDeploymentInfo": {
             "type": "structure",
@@ -7561,39 +6925,7 @@
                 "statusReason": { "shape": "String" }
             }
         },
-        "EnvironmentDeploymentCloudFormationStackDeploymentInfoV2": {
-            "type": "structure",
-            "members": {
-                "changeSet": { "shape": "EnvironmentDeploymentCloudFormationStackDeploymentChangeSetV2" },
-                "description": { "shape": "String" },
-                "outputs": { "shape": "EnvironmentDeploymentCloudFormationStackDeploymentOutputsListV2" },
-                "parameters": { "shape": "EnvironmentDeploymentCloudFormationStackDeploymentParametersListV2" },
-                "region": { "shape": "RegionString" },
-                "resourceCount": { "shape": "Integer" },
-                "rollbackConfiguration": {
-                    "shape": "EnvironmentDeploymentCloudFormationStackDeploymentRollbackConfigurationV2"
-                },
-                "rollbackOnFailure": { "shape": "Boolean" },
-                "stackEvents": { "shape": "EnvironmentDeploymentCloudFormationStackDeploymentEventsListV2" },
-                "stackId": { "shape": "String" },
-                "stackName": { "shape": "String" },
-                "stackRoleArn": { "shape": "String" },
-                "stackTemplate": { "shape": "String" },
-                "status": { "shape": "String" },
-                "statusReason": { "shape": "String" }
-            }
-        },
         "EnvironmentDeploymentCloudFormationStackDeploymentOutput": {
-            "type": "structure",
-            "required": ["outputKey", "outputValue"],
-            "members": {
-                "description": { "shape": "String" },
-                "exportName": { "shape": "String" },
-                "outputKey": { "shape": "String" },
-                "outputValue": { "shape": "String" }
-            }
-        },
-        "EnvironmentDeploymentCloudFormationStackDeploymentOutputV2": {
             "type": "structure",
             "required": ["outputKey", "outputValue"],
             "members": {
@@ -7607,20 +6939,7 @@
             "type": "list",
             "member": { "shape": "EnvironmentDeploymentCloudFormationStackDeploymentOutput" }
         },
-        "EnvironmentDeploymentCloudFormationStackDeploymentOutputsListV2": {
-            "type": "list",
-            "member": { "shape": "EnvironmentDeploymentCloudFormationStackDeploymentOutputV2" }
-        },
         "EnvironmentDeploymentCloudFormationStackDeploymentParameter": {
-            "type": "structure",
-            "required": ["parameterKey", "parameterValue"],
-            "members": {
-                "parameterKey": { "shape": "String" },
-                "parameterValue": { "shape": "String" },
-                "resolvedValue": { "shape": "String" }
-            }
-        },
-        "EnvironmentDeploymentCloudFormationStackDeploymentParameterV2": {
             "type": "structure",
             "required": ["parameterKey", "parameterValue"],
             "members": {
@@ -7633,10 +6952,6 @@
             "type": "list",
             "member": { "shape": "EnvironmentDeploymentCloudFormationStackDeploymentParameter" }
         },
-        "EnvironmentDeploymentCloudFormationStackDeploymentParametersListV2": {
-            "type": "list",
-            "member": { "shape": "EnvironmentDeploymentCloudFormationStackDeploymentParameterV2" }
-        },
         "EnvironmentDeploymentCloudFormationStackDeploymentRollbackConfiguration": {
             "type": "structure",
             "required": ["alarmArns"],
@@ -7645,25 +6960,7 @@
                 "monitoringTime": { "shape": "Integer" }
             }
         },
-        "EnvironmentDeploymentCloudFormationStackDeploymentRollbackConfigurationV2": {
-            "type": "structure",
-            "required": ["alarmArns"],
-            "members": {
-                "alarmArns": { "shape": "EnvironmentDeploymentCloudFormationStackDeploymenAlarmArnsListV2" },
-                "monitoringTime": { "shape": "Integer" }
-            }
-        },
         "EnvironmentDeploymentConnectionInfo": {
-            "type": "structure",
-            "required": ["accountConnectionName", "roleName"],
-            "members": {
-                "accountConnectionId": { "shape": "Uuid" },
-                "accountConnectionName": { "shape": "NameString" },
-                "roleId": { "shape": "Uuid" },
-                "roleName": { "shape": "NameString" }
-            }
-        },
-        "EnvironmentDeploymentConnectionInfoV2": {
             "type": "structure",
             "required": ["accountConnectionName", "roleName"],
             "members": {
@@ -7685,26 +6982,17 @@
                 "deploymentTargetType": { "shape": "String" },
                 "ecsServiceDeploymentInfo": { "shape": "EnvironmentDeploymentEcsServiceDeploymentInfo" },
                 "environmentId": { "shape": "String" },
+                "environmentName": { "shape": "NameString" },
                 "id": { "shape": "Uuid" },
                 "lastUpdatedTime": { "shape": "SyntheticTimestamp_date_time" },
+                "organizationName": { "shape": "NameString" },
+                "projectName": { "shape": "NameString" },
                 "sourceInfo": { "shape": "EnvironmentDeploymentSourceInfo" },
                 "triggerInfo": { "shape": "EnvironmentDeploymentTriggerInfo" },
                 "workflowActionInfo": { "shape": "EnvironmentDeploymentWorkflowActionInfo" }
             }
         },
         "EnvironmentDeploymentEcsServiceDeploymentInfo": {
-            "type": "structure",
-            "members": {
-                "clusterName": { "shape": "String" },
-                "codedeployApplicationName": { "shape": "String" },
-                "codedeployDeploymentGroupName": { "shape": "String" },
-                "codedeployDeploymentId": { "shape": "String" },
-                "deploymentController": { "shape": "String" },
-                "region": { "shape": "RegionString" },
-                "serviceName": { "shape": "String" }
-            }
-        },
-        "EnvironmentDeploymentEcsServiceDeploymentInfoV2": {
             "type": "structure",
             "members": {
                 "clusterName": { "shape": "String" },
@@ -7752,14 +7040,6 @@
                 "sourceRepositoryName": { "shape": "String" }
             }
         },
-        "EnvironmentDeploymentSourceInfoV2": {
-            "type": "structure",
-            "members": {
-                "sourceBranchName": { "shape": "String" },
-                "sourceCommitId": { "shape": "String" },
-                "sourceRepositoryName": { "shape": "String" }
-            }
-        },
         "EnvironmentDeploymentTargetDetails": {
             "type": "structure",
             "members": {
@@ -7767,7 +7047,10 @@
                 "deploymentTargetInfo": { "shape": "DeploymentTargetInfo" },
                 "ecsServiceInfo": { "shape": "EcsServiceDeploymentTargetInfo" },
                 "environmentId": { "shape": "String" },
+                "environmentName": { "shape": "NameString" },
                 "lastUpdatedTime": { "shape": "SyntheticTimestamp_date_time" },
+                "organizationName": { "shape": "NameString" },
+                "projectName": { "shape": "NameString" },
                 "workflowId": { "shape": "String" },
                 "workflowName": { "shape": "String" }
             }
@@ -7777,16 +7060,6 @@
             "member": { "shape": "EnvironmentDeploymentTargetDetails" }
         },
         "EnvironmentDeploymentTriggerInfo": {
-            "type": "structure",
-            "required": ["triggerEventType"],
-            "members": {
-                "triggerEventActor": { "shape": "String" },
-                "triggerEventId": { "shape": "String" },
-                "triggerEventType": { "shape": "String" },
-                "triggerEventUser": { "shape": "String" }
-            }
-        },
-        "EnvironmentDeploymentTriggerInfoV2": {
             "type": "structure",
             "required": ["triggerEventType"],
             "members": {
@@ -7807,24 +7080,9 @@
                 "workflowId": { "shape": "String" }
             }
         },
-        "EnvironmentDeploymentWorkflowActionInfoV2": {
-            "type": "structure",
-            "required": ["workflowActionExecutionId", "workflowId"],
-            "members": {
-                "workflowActionExecutionId": { "shape": "String" },
-                "workflowActionIdentifier": { "shape": "String" },
-                "workflowActionName": { "shape": "String" },
-                "workflowExecutionId": { "shape": "String" },
-                "workflowId": { "shape": "String" }
-            }
-        },
         "EnvironmentDeploymentsList": {
             "type": "list",
             "member": { "shape": "EnvironmentDeploymentDetails" }
-        },
-        "EnvironmentDeploymentsV2List": {
-            "type": "list",
-            "member": { "shape": "DeploymentDetailsV2" }
         },
         "EnvironmentFilter": {
             "type": "structure",
@@ -7875,22 +7133,16 @@
             "max": 1,
             "min": 0
         },
-        "EnvironmentResourceMetadataFilterList": {
-            "type": "list",
-            "member": { "shape": "EnvironmentResourceMetadataFilterListMemberString" }
-        },
-        "EnvironmentResourceMetadataFilterListMemberString": {
-            "type": "string",
-            "max": 100,
-            "min": 1
-        },
         "EnvironmentSummary": {
             "type": "structure",
             "members": {
                 "description": { "shape": "String" },
                 "environmentType": { "shape": "EnvironmentType" },
+                "lastUpdatedTime": { "shape": "SyntheticTimestamp_date_time" },
                 "name": { "shape": "NameString" },
-                "updateTime": { "shape": "String" }
+                "organizationName": { "shape": "NameString" },
+                "projectName": { "shape": "NameString" },
+                "updateTime": { "shape": "SyntheticTimestamp_date_time" }
             }
         },
         "EnvironmentType": {
@@ -7906,6 +7158,46 @@
             "type": "integer",
             "max": 10,
             "min": 1
+        },
+        "EventLogEntries": {
+            "type": "list",
+            "member": { "shape": "EventLogEntry" }
+        },
+        "EventLogEntry": {
+            "type": "structure",
+            "required": [
+                "awsRequestId",
+                "eventCategory",
+                "eventName",
+                "eventSource",
+                "eventTime",
+                "eventType",
+                "projectId",
+                "readonly",
+                "requestPayload",
+                "requestPayloadContentType",
+                "responsePayload",
+                "responsePayloadContentType"
+            ],
+            "members": {
+                "awsRequestId": { "shape": "String" },
+                "errorCode": { "shape": "String" },
+                "eventCategory": { "shape": "String" },
+                "eventName": { "shape": "String" },
+                "eventSource": { "shape": "String" },
+                "eventTime": { "shape": "String" },
+                "eventType": { "shape": "String" },
+                "projectId": { "shape": "String" },
+                "protocol": { "shape": "String" },
+                "readonly": { "shape": "Boolean" },
+                "requestPayload": { "shape": "String" },
+                "requestPayloadContentType": { "shape": "String" },
+                "resourceTypes": { "shape": "StringList" },
+                "responsePayload": { "shape": "String" },
+                "responsePayloadContentType": { "shape": "String" },
+                "sourceIpAddress": { "shape": "SourceIpAddress" },
+                "userInformation": { "shape": "UserInformation" }
+            }
         },
         "ExecuteCommandSessionConfiguration": {
             "type": "structure",
@@ -8044,36 +7336,38 @@
             "type": "float",
             "box": true
         },
-        "GetActionRunArtifactMetadataInput": {
+        "GetActionRunArtifactMetadataRequest": {
             "type": "structure",
-            "required": ["artifactActionId", "artifactName", "organizationName", "projectName"],
+            "required": ["actionRunId", "name", "organizationName", "projectName", "workflowId", "workflowRunId"],
             "members": {
-                "artifactActionId": { "shape": "String" },
-                "artifactName": { "shape": "ArtifactNameString" },
+                "actionRunId": { "shape": "Uuid" },
+                "name": { "shape": "ArtifactNameString" },
                 "organizationName": { "shape": "NameString" },
-                "projectName": { "shape": "GetActionRunArtifactMetadataInputProjectNameString" }
+                "projectName": { "shape": "GetActionRunArtifactMetadataRequestProjectNameString" },
+                "workflowId": { "shape": "Uuid" },
+                "workflowRunId": { "shape": "Uuid" }
             }
         },
-        "GetActionRunArtifactMetadataInputProjectNameString": {
+        "GetActionRunArtifactMetadataRequestProjectNameString": {
             "type": "string",
             "min": 1,
             "pattern": "^[a-zA-Z0-9]+(?:[-_\\.][a-zA-Z0-9]+)*$"
         },
-        "GetActionRunArtifactMetadataOutput": {
+        "GetActionRunArtifactMetadataResponse": {
             "type": "structure",
             "members": {
-                "downloadUrl": { "shape": "String" }
+                "downloadUrl": { "shape": "SensitiveString" }
             }
         },
         "GetActionRunRequest": {
             "type": "structure",
             "required": ["id", "organizationName", "projectName", "workflowId", "workflowRunId"],
             "members": {
-                "id": { "shape": "String" },
+                "id": { "shape": "Uuid" },
                 "organizationName": { "shape": "NameString" },
                 "projectName": { "shape": "NameString" },
-                "workflowId": { "shape": "String" },
-                "workflowRunId": { "shape": "String" }
+                "workflowId": { "shape": "Uuid" },
+                "workflowRunId": { "shape": "Uuid" }
             }
         },
         "GetActionRunResponse": {
@@ -8086,7 +7380,6 @@
                 "environment": { "shape": "ActionRunEnvironment" },
                 "id": { "shape": "String" },
                 "lastUpdatedTime": { "shape": "SyntheticTimestamp_date_time" },
-                "phases": { "shape": "ActionRunPhaseMetadataList" },
                 "reports": { "shape": "ActionRunReports" },
                 "startTime": { "shape": "SyntheticTimestamp_date_time" },
                 "status": { "shape": "ActionRunStatus" },
@@ -8397,7 +7690,6 @@
                 "repositoryName"
             ],
             "members": {
-                "additionalProperties": { "shape": "AdditionalProperties" },
                 "branchCoveragePercentage": { "shape": "ThresholdPercentage" },
                 "branchName": { "shape": "String" },
                 "codeCoverageReportId": { "shape": "String" },
@@ -8411,8 +7703,7 @@
                 "missedBranchesCount": { "shape": "Integer" },
                 "missedLinesCount": { "shape": "Integer" },
                 "name": { "shape": "String" },
-                "repositoryName": { "shape": "String" },
-                "sourceRepository": { "shape": "String" }
+                "repositoryName": { "shape": "String" }
             }
         },
         "GetCodeCoverageRunResultsInputMigration": {
@@ -8432,17 +7723,6 @@
             "type": "string",
             "min": 1,
             "pattern": "^[a-zA-Z0-9]+(?:[-_\\.][a-zA-Z0-9]+)*$"
-        },
-        "GetComputeActionInput": {
-            "type": "structure",
-            "required": ["computeActionId", "organizationName", "projectName", "workflowId", "workflowRunId"],
-            "members": {
-                "computeActionId": { "shape": "Uuid" },
-                "organizationName": { "shape": "NameString" },
-                "projectName": { "shape": "NameString" },
-                "workflowId": { "shape": "Uuid" },
-                "workflowRunId": { "shape": "Uuid" }
-            }
         },
         "GetComputeFleetInput": {
             "type": "structure",
@@ -8485,8 +7765,11 @@
             "required": [
                 "creatorId",
                 "id",
+                "inactivityTimeoutMinutes",
+                "instanceType",
                 "lastUpdatedTime",
                 "organizationName",
+                "persistentStorage",
                 "projectName",
                 "repositories",
                 "status"
@@ -8547,26 +7830,6 @@
                 "workflowActionInfo": { "shape": "EnvironmentDeploymentWorkflowActionInfo" }
             }
         },
-        "GetEnvironmentDeploymentV2Request": {
-            "type": "structure",
-            "required": ["deploymentId", "environmentName", "organizationName", "projectName"],
-            "members": {
-                "deploymentId": { "shape": "NameString" },
-                "environmentName": { "shape": "NameString" },
-                "organizationName": { "shape": "NameString" },
-                "projectName": { "shape": "NameString" }
-            }
-        },
-        "GetEnvironmentDeploymentV2Response": {
-            "type": "structure",
-            "members": {
-                "deploymentId": { "shape": "NameString" },
-                "details": { "shape": "DeploymentDetailsV2" },
-                "environmentName": { "shape": "NameString" },
-                "organizationName": { "shape": "NameString" },
-                "projectName": { "shape": "NameString" }
-            }
-        },
         "GetEnvironmentRequest": {
             "type": "structure",
             "required": ["name", "organizationName", "projectName"],
@@ -8576,113 +7839,16 @@
                 "projectName": { "shape": "NameString" }
             }
         },
-        "GetEnvironmentResourceMetadataMigrationRequest": {
-            "type": "structure",
-            "required": ["actionName", "environmentName", "organizationName", "projectName", "roleArn", "serviceName"],
-            "members": {
-                "actionName": { "shape": "GetEnvironmentResourceMetadataMigrationRequestActionNameString" },
-                "environmentName": { "shape": "GetEnvironmentResourceMetadataMigrationRequestEnvironmentNameString" },
-                "filters": { "shape": "EnvironmentResourceMetadataFilterList" },
-                "organizationName": { "shape": "NameString" },
-                "params": { "shape": "GetEnvironmentResourceMetadataMigrationRequestParamsString" },
-                "projectName": { "shape": "NameString" },
-                "regionName": { "shape": "RegionString" },
-                "roleArn": { "shape": "GetEnvironmentResourceMetadataMigrationRequestRoleArnString" },
-                "serviceName": { "shape": "GetEnvironmentResourceMetadataMigrationRequestServiceNameString" }
-            }
-        },
-        "GetEnvironmentResourceMetadataMigrationRequestActionNameString": {
-            "type": "string",
-            "max": 256,
-            "min": 1,
-            "pattern": "^[a-zA-Z0-9]+(?:[-_\\.][a-zA-Z0-9]+)*$"
-        },
-        "GetEnvironmentResourceMetadataMigrationRequestEnvironmentNameString": {
-            "type": "string",
-            "max": 2500,
-            "min": 1,
-            "pattern": "^[a-zA-Z0-9]+(?:[-_\\.][a-zA-Z0-9]+)*$"
-        },
-        "GetEnvironmentResourceMetadataMigrationRequestParamsString": {
-            "type": "string",
-            "max": 5000,
-            "min": 1
-        },
-        "GetEnvironmentResourceMetadataMigrationRequestRoleArnString": {
-            "type": "string",
-            "max": 2500,
-            "min": 1
-        },
-        "GetEnvironmentResourceMetadataMigrationRequestServiceNameString": {
-            "type": "string",
-            "max": 256,
-            "min": 1,
-            "pattern": "^[a-zA-Z0-9]+(?:[-_\\.][a-zA-Z0-9]+)*$"
-        },
-        "GetEnvironmentResourceMetadataMigrationResponse": {
-            "type": "structure",
-            "members": {
-                "data": { "shape": "String" }
-            }
-        },
-        "GetEnvironmentResourceMetadataRequest": {
-            "type": "structure",
-            "required": ["actionName", "environmentName", "organizationName", "projectName", "roleArn", "serviceName"],
-            "members": {
-                "actionName": { "shape": "GetEnvironmentResourceMetadataRequestActionNameString" },
-                "environmentName": { "shape": "GetEnvironmentResourceMetadataRequestEnvironmentNameString" },
-                "filters": { "shape": "EnvironmentResourceMetadataFilterList" },
-                "organizationName": { "shape": "NameString" },
-                "params": { "shape": "GetEnvironmentResourceMetadataRequestParamsString" },
-                "projectName": { "shape": "NameString" },
-                "regionName": { "shape": "RegionString" },
-                "roleArn": { "shape": "GetEnvironmentResourceMetadataRequestRoleArnString" },
-                "serviceName": { "shape": "GetEnvironmentResourceMetadataRequestServiceNameString" }
-            }
-        },
-        "GetEnvironmentResourceMetadataRequestActionNameString": {
-            "type": "string",
-            "max": 256,
-            "min": 1,
-            "pattern": "^[a-zA-Z0-9]+(?:[-_\\.][a-zA-Z0-9]+)*$"
-        },
-        "GetEnvironmentResourceMetadataRequestEnvironmentNameString": {
-            "type": "string",
-            "max": 2500,
-            "min": 1,
-            "pattern": "^[a-zA-Z0-9]+(?:[-_\\.][a-zA-Z0-9]+)*$"
-        },
-        "GetEnvironmentResourceMetadataRequestParamsString": {
-            "type": "string",
-            "max": 5000,
-            "min": 1
-        },
-        "GetEnvironmentResourceMetadataRequestRoleArnString": {
-            "type": "string",
-            "max": 2500,
-            "min": 1
-        },
-        "GetEnvironmentResourceMetadataRequestServiceNameString": {
-            "type": "string",
-            "max": 256,
-            "min": 1,
-            "pattern": "^[a-zA-Z0-9]+(?:[-_\\.][a-zA-Z0-9]+)*$"
-        },
-        "GetEnvironmentResourceMetadataResponse": {
-            "type": "structure",
-            "members": {
-                "data": { "shape": "String" }
-            }
-        },
         "GetEnvironmentResponse": {
             "type": "structure",
             "members": {
                 "description": { "shape": "String" },
                 "environmentType": { "shape": "EnvironmentType" },
+                "lastUpdatedTime": { "shape": "SyntheticTimestamp_date_time" },
                 "name": { "shape": "NameString" },
                 "organizationName": { "shape": "NameString" },
                 "projectName": { "shape": "NameString" },
-                "updateTime": { "shape": "String" }
+                "updateTime": { "shape": "SyntheticTimestamp_date_time" }
             }
         },
         "GetExtensionInstallationMigrationInput": {
@@ -8787,24 +7953,6 @@
                 "type": { "shape": "NotificationChannelType" }
             }
         },
-        "GetNotificationClientMigrationRequest": {
-            "type": "structure",
-            "required": ["id", "organizationName", "projectName"],
-            "members": {
-                "id": { "shape": "NameString" },
-                "organizationName": { "shape": "NameString" },
-                "projectName": { "shape": "NameString" }
-            }
-        },
-        "GetNotificationClientMigrationResponse": {
-            "type": "structure",
-            "required": ["details", "id", "type"],
-            "members": {
-                "details": { "shape": "NotificationClientDetails" },
-                "id": { "shape": "NameString" },
-                "type": { "shape": "NotificationClientType" }
-            }
-        },
         "GetNotificationClientRequest": {
             "type": "structure",
             "required": ["id", "organizationName"],
@@ -8832,7 +7980,7 @@
         },
         "GetOrganizationInvitationRequest": {
             "type": "structure",
-            "required": ["organizationInvitationId", "organizationName"],
+            "required": ["id", "organizationName"],
             "members": {
                 "id": { "shape": "GetOrganizationInvitationRequestIdString" },
                 "organizationInvitationId": { "shape": "String" },
@@ -8846,16 +7994,24 @@
         },
         "GetOrganizationInvitationResponse": {
             "type": "structure",
-            "required": ["inviteeEmailAddress", "inviteeRole", "lastUpdatedTime", "status", "timestamp"],
+            "required": [
+                "id",
+                "inviteeEmailAddress",
+                "inviteeRole",
+                "lastUpdatedTime",
+                "organizationName",
+                "status",
+                "timestamp"
+            ],
             "members": {
                 "id": { "shape": "String" },
                 "inviteeDisplayName": { "shape": "String" },
-                "inviteeEmailAddress": { "shape": "String" },
+                "inviteeEmailAddress": { "shape": "EmailAddressString" },
                 "inviteeRole": { "shape": "OrganizationInviteeRole" },
                 "inviterUserName": { "shape": "String" },
-                "lastUpdatedTime": { "shape": "String" },
+                "lastUpdatedTime": { "shape": "SyntheticTimestamp_date_time" },
                 "organizationName": { "shape": "String" },
-                "signupEmailAddress": { "shape": "String" },
+                "signupEmailAddress": { "shape": "EmailAddressString" },
                 "status": { "shape": "InvitationStatus" },
                 "timestamp": { "shape": "SyntheticTimestamp_date_time" }
             }
@@ -8869,16 +8025,12 @@
         },
         "GetOrganizationResponse": {
             "type": "structure",
+            "required": ["name", "regionName"],
             "members": {
                 "description": { "shape": "String" },
                 "displayName": { "shape": "String" },
-                "id": {
-                    "shape": "String",
-                    "deprecated": true,
-                    "deprecatedMessage": "field no longer in Rococo recommended schema"
-                },
-                "name": { "shape": "String" },
-                "regionName": { "shape": "String" }
+                "name": { "shape": "NameString" },
+                "regionName": { "shape": "RegionString" }
             }
         },
         "GetPersonByUserNameRequest": {
@@ -8964,37 +8116,12 @@
         },
         "GetProjectResponse": {
             "type": "structure",
+            "required": ["name"],
             "members": {
-                "additionalFields": { "shape": "ProjectAdditionalFieldsMap" },
                 "description": { "shape": "String" },
                 "displayName": { "shape": "String" },
-                "externalId": { "shape": "String" },
-                "id": {
-                    "shape": "String",
-                    "deprecated": true,
-                    "deprecatedMessage": "field no longer in Rococo recommended schema"
-                },
                 "name": { "shape": "String" },
-                "templateArn": { "shape": "String" },
-                "templateParams": { "shape": "TemplateParamsMap" },
-                "versionId": { "shape": "String" }
-            }
-        },
-        "GetProjectStatusInput": {
-            "type": "structure",
-            "required": ["organizationName", "projectName"],
-            "members": {
-                "organizationName": { "shape": "NameString" },
-                "projectName": { "shape": "NameString" }
-            }
-        },
-        "GetProjectStatusOutput": {
-            "type": "structure",
-            "members": {
-                "lastUpdatedTime": { "shape": "String" },
-                "reason": { "shape": "String" },
-                "status": { "shape": "String" },
-                "version": { "shape": "String" }
+                "organizationName": { "shape": "NameString" }
             }
         },
         "GetPullRequestRequirementStatusInput": {
@@ -9016,22 +8143,6 @@
                 "mergeRequirements": { "shape": "SourcePullRequestMergeRequirements" },
                 "mergeRequirementsMet": { "shape": "Boolean" },
                 "sourceCommitSha1": { "shape": "String" }
-            }
-        },
-        "GetSSHPublicKeyRequest": {
-            "type": "structure",
-            "required": ["SSHPublicKeyId"],
-            "members": {
-                "SSHPublicKeyId": { "shape": "SSHPublicKeyIdString" }
-            }
-        },
-        "GetSSHPublicKeyResponse": {
-            "type": "structure",
-            "required": ["SSHPublicKeyBody", "importDate", "name"],
-            "members": {
-                "SSHPublicKeyBody": { "shape": "SSHPublicKeyBodyString" },
-                "importDate": { "shape": "SSHPublicKeyImportDateTimestamp" },
-                "name": { "shape": "SSHPublicKeyNameString" }
             }
         },
         "GetSecretInput": {
@@ -9067,24 +8178,6 @@
                 "value": { "shape": "String" }
             }
         },
-        "GetSlackCredentialsMigrationRequest": {
-            "type": "structure",
-            "required": ["oAuthVersion", "organizationName", "projectName"],
-            "members": {
-                "oAuthVersion": { "shape": "OAuthVersion" },
-                "organizationName": { "shape": "NameString" },
-                "projectName": { "shape": "NameString" }
-            }
-        },
-        "GetSlackCredentialsMigrationResponse": {
-            "type": "structure",
-            "required": ["clientId", "scope", "state"],
-            "members": {
-                "clientId": { "shape": "SlackClientId" },
-                "scope": { "shape": "SlackPermissionScope" },
-                "state": { "shape": "Uuid" }
-            }
-        },
         "GetSlackCredentialsRequest": {
             "type": "structure",
             "required": ["oAuthVersion", "organizationName", "projectName"],
@@ -9102,19 +8195,6 @@
                 "scope": { "shape": "SlackPermissionScope" },
                 "state": { "shape": "Uuid" }
             }
-        },
-        "GetSoftwareCompositionAnalysisFindingInput": {
-            "type": "structure",
-            "required": ["findingId", "organizationName", "projectName"],
-            "members": {
-                "findingId": { "shape": "GetSoftwareCompositionAnalysisFindingInputFindingIdString" },
-                "organizationName": { "shape": "GetSoftwareCompositionAnalysisFindingInputOrganizationNameString" },
-                "projectName": { "shape": "NameString" }
-            }
-        },
-        "GetSoftwareCompositionAnalysisFindingInputFindingIdString": {
-            "type": "string",
-            "min": 1
         },
         "GetSoftwareCompositionAnalysisFindingInputMigration": {
             "type": "structure",
@@ -9136,19 +8216,61 @@
             "min": 1,
             "pattern": "^[a-zA-Z0-9]+(?:[-_\\.][a-zA-Z0-9]+)*$"
         },
-        "GetSoftwareCompositionAnalysisFindingInputOrganizationNameString": {
-            "type": "string",
-            "min": 1,
-            "pattern": "^[a-zA-Z0-9]+(?:[-_\\.][a-zA-Z0-9]+)*$"
-        },
-        "GetSoftwareCompositionAnalysisReportInput": {
+        "GetSoftwareCompositionAnalysisFindingRequest": {
             "type": "structure",
-            "required": ["organizationName", "projectName", "reportId"],
+            "required": ["id", "organizationName", "projectName"],
             "members": {
+                "id": { "shape": "GetSoftwareCompositionAnalysisFindingRequestIdString" },
                 "organizationName": { "shape": "NameString" },
-                "projectName": { "shape": "NameString" },
-                "reportId": { "shape": "GetSoftwareCompositionAnalysisReportInputReportIdString" }
+                "projectName": { "shape": "NameString" }
             }
+        },
+        "GetSoftwareCompositionAnalysisFindingRequestIdString": {
+            "type": "string",
+            "max": 1024,
+            "min": 1,
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+        },
+        "GetSoftwareCompositionAnalysisFindingResponse": {
+            "type": "structure",
+            "required": [
+                "branchName",
+                "commitId",
+                "id",
+                "name",
+                "repositoryName",
+                "rule",
+                "severity",
+                "softwareCompositionAnalysisReportId"
+            ],
+            "members": {
+                "branchName": { "shape": "String" },
+                "category": { "shape": "AnalysisFindingCategory" },
+                "commitId": { "shape": "String" },
+                "id": { "shape": "Uuid" },
+                "location": { "shape": "AnalysisFindingLocation" },
+                "message": { "shape": "AnalysisFindingMessage" },
+                "name": { "shape": "GetSoftwareCompositionAnalysisFindingResponseNameString" },
+                "recommendation": { "shape": "AnalysisFindingMessage" },
+                "relatedLocations": { "shape": "RelatedAnalysisFindingLocations" },
+                "repositoryName": { "shape": "String" },
+                "rule": { "shape": "AnalysisFindingRule" },
+                "score": { "shape": "AnalysisFindingScore" },
+                "severity": { "shape": "AnalysisFindingSeverity" },
+                "softwareCompositionAnalysisReportId": {
+                    "shape": "GetSoftwareCompositionAnalysisFindingResponseSoftwareCompositionAnalysisReportIdString"
+                }
+            }
+        },
+        "GetSoftwareCompositionAnalysisFindingResponseNameString": {
+            "type": "string",
+            "max": 3000,
+            "min": 1
+        },
+        "GetSoftwareCompositionAnalysisFindingResponseSoftwareCompositionAnalysisReportIdString": {
+            "type": "string",
+            "max": 256,
+            "min": 0
         },
         "GetSoftwareCompositionAnalysisReportInputMigration": {
             "type": "structure",
@@ -9162,47 +8284,6 @@
         "GetSoftwareCompositionAnalysisReportInputMigrationReportIdString": {
             "type": "string",
             "min": 1
-        },
-        "GetSoftwareCompositionAnalysisReportInputReportIdString": {
-            "type": "string",
-            "min": 1
-        },
-        "GetSoftwareCompositionAnalysisReportOutput": {
-            "type": "structure",
-            "required": [
-                "actionName",
-                "actionRunId",
-                "actionType",
-                "branchName",
-                "commitId",
-                "directoryLevelFindings",
-                "name",
-                "rawReportFiles",
-                "reportId",
-                "repositoryName",
-                "scanRunTime",
-                "scanStatistics",
-                "toolDetails",
-                "workflowName"
-            ],
-            "members": {
-                "actionName": { "shape": "String" },
-                "actionRunId": { "shape": "String" },
-                "actionType": { "shape": "String" },
-                "branchName": { "shape": "String" },
-                "commitId": { "shape": "String" },
-                "directoryLevelFindings": { "shape": "SoftwareCompositionAnalysisDirectoryLevelFindings" },
-                "name": { "shape": "String" },
-                "pullRequestId": { "shape": "String" },
-                "rawReportFiles": { "shape": "SoftwareCompositionAnalysisReportSourceFiles" },
-                "reportId": { "shape": "String" },
-                "repositoryName": { "shape": "String" },
-                "scanRunTime": { "shape": "SyntheticTimestamp_date_time" },
-                "scanStatistics": { "shape": "SoftwareCompositionAnalysisScanStatistics" },
-                "sourceRepository": { "shape": "String" },
-                "toolDetails": { "shape": "SoftwareCompositionAnalysisToolDetails" },
-                "workflowName": { "shape": "String" }
-            }
         },
         "GetSoftwareCompositionAnalysisReportOutputMigration": {
             "type": "structure",
@@ -9241,14 +8322,54 @@
                 "workflowName": { "shape": "String" }
             }
         },
-        "GetSoftwareTestingReportInput": {
+        "GetSoftwareCompositionAnalysisReportRequest": {
             "type": "structure",
-            "required": ["organizationName", "projectName", "reportId"],
+            "required": ["id", "organizationName", "projectName"],
             "members": {
+                "id": { "shape": "GetSoftwareCompositionAnalysisReportRequestIdString" },
                 "organizationName": { "shape": "NameString" },
-                "projectName": { "shape": "NameString" },
-                "reportId": { "shape": "GetSoftwareTestingReportInputReportIdString" }
+                "projectName": { "shape": "NameString" }
             }
+        },
+        "GetSoftwareCompositionAnalysisReportRequestIdString": {
+            "type": "string",
+            "max": 256,
+            "min": 1
+        },
+        "GetSoftwareCompositionAnalysisReportResponse": {
+            "type": "structure",
+            "required": [
+                "actionName",
+                "actionRunId",
+                "branchName",
+                "commitId",
+                "name",
+                "repositoryName",
+                "scanRunTime",
+                "scanStatistics",
+                "softwareCompositionAnalysisReportId",
+                "toolDetails",
+                "workflowName"
+            ],
+            "members": {
+                "actionName": { "shape": "String" },
+                "actionRunId": { "shape": "String" },
+                "branchName": { "shape": "String" },
+                "commitId": { "shape": "String" },
+                "name": { "shape": "GetSoftwareCompositionAnalysisReportResponseNameString" },
+                "pullRequestId": { "shape": "String" },
+                "repositoryName": { "shape": "String" },
+                "scanRunTime": { "shape": "SyntheticTimestamp_date_time" },
+                "scanStatistics": { "shape": "SoftwareCompositionAnalysisScanStatistics" },
+                "softwareCompositionAnalysisReportId": { "shape": "Uuid" },
+                "toolDetails": { "shape": "SoftwareCompositionAnalysisToolDetails" },
+                "workflowName": { "shape": "String" }
+            }
+        },
+        "GetSoftwareCompositionAnalysisReportResponseNameString": {
+            "type": "string",
+            "max": 3000,
+            "min": 1
         },
         "GetSoftwareTestingReportInputMigration": {
             "type": "structure",
@@ -9262,34 +8383,6 @@
         "GetSoftwareTestingReportInputMigrationReportIdString": {
             "type": "string",
             "min": 1
-        },
-        "GetSoftwareTestingReportInputReportIdString": {
-            "type": "string",
-            "min": 1
-        },
-        "GetSoftwareTestingReportOutput": {
-            "type": "structure",
-            "required": [
-                "actionName",
-                "branchName",
-                "latestReportRun",
-                "reportId",
-                "reportName",
-                "reportType",
-                "repositoryName",
-                "workflowId"
-            ],
-            "members": {
-                "actionName": { "shape": "String" },
-                "branchName": { "shape": "String" },
-                "latestReportRun": { "shape": "SoftwareTestingReportRunDetails" },
-                "reportId": { "shape": "String" },
-                "reportName": { "shape": "String" },
-                "reportType": { "shape": "String" },
-                "repositoryName": { "shape": "String" },
-                "sourceRepository": { "shape": "String" },
-                "workflowId": { "shape": "String" }
-            }
         },
         "GetSoftwareTestingReportOutputMigration": {
             "type": "structure",
@@ -9373,140 +8466,6 @@
                 "organizationName": { "shape": "NameString" },
                 "projectName": { "shape": "NameString" },
                 "sourceRepositoryName": { "shape": "SourceRepositoryNameString" }
-            }
-        },
-        "GetStaticAnalysisFindingRequest": {
-            "type": "structure",
-            "required": ["id", "organizationName", "projectName"],
-            "members": {
-                "id": { "shape": "GetStaticAnalysisFindingRequestIdString" },
-                "organizationName": { "shape": "NameString" },
-                "projectName": { "shape": "NameString" }
-            }
-        },
-        "GetStaticAnalysisFindingRequestIdString": {
-            "type": "string",
-            "max": 1024,
-            "min": 1
-        },
-        "GetStaticAnalysisFindingResponse": {
-            "type": "structure",
-            "required": [
-                "branchName",
-                "commitId",
-                "id",
-                "name",
-                "reportSummaryId",
-                "repositoryName",
-                "rule",
-                "severity"
-            ],
-            "members": {
-                "additionalToolProperties": { "shape": "AdditionalProperties" },
-                "branchName": { "shape": "GetStaticAnalysisFindingResponseBranchNameString" },
-                "category": { "shape": "GetStaticAnalysisFindingResponseCategoryString" },
-                "commitId": { "shape": "GetStaticAnalysisFindingResponseCommitIdString" },
-                "estimate": { "shape": "AnalysisFindingEstimate" },
-                "id": { "shape": "String" },
-                "location": { "shape": "AnalysisFindingLocation" },
-                "message": { "shape": "AnalysisFindingMessage" },
-                "name": { "shape": "GetStaticAnalysisFindingResponseNameString" },
-                "recommendation": { "shape": "AnalysisFindingRecommendation" },
-                "relatedLocations": { "shape": "RelatedLocations" },
-                "reportSummaryId": { "shape": "GetStaticAnalysisFindingResponseReportSummaryIdString" },
-                "repositoryName": { "shape": "GetStaticAnalysisFindingResponseRepositoryNameString" },
-                "rule": { "shape": "AnalysisFindingRule" },
-                "score": { "shape": "AnalysisFindingScore" },
-                "severity": { "shape": "AnalysisFindingSeverity" },
-                "sourceRepository": { "shape": "String" },
-                "status": { "shape": "GetStaticAnalysisFindingResponseStatusString" },
-                "tags": { "shape": "AnalysisFindingTags" }
-            }
-        },
-        "GetStaticAnalysisFindingResponseBranchNameString": {
-            "type": "string",
-            "max": 1024,
-            "min": 0
-        },
-        "GetStaticAnalysisFindingResponseCategoryString": {
-            "type": "string",
-            "max": 1024,
-            "min": 0
-        },
-        "GetStaticAnalysisFindingResponseCommitIdString": {
-            "type": "string",
-            "max": 1024,
-            "min": 0
-        },
-        "GetStaticAnalysisFindingResponseNameString": {
-            "type": "string",
-            "max": 3000,
-            "min": 1
-        },
-        "GetStaticAnalysisFindingResponseReportSummaryIdString": {
-            "type": "string",
-            "max": 256,
-            "min": 0
-        },
-        "GetStaticAnalysisFindingResponseRepositoryNameString": {
-            "type": "string",
-            "max": 1024,
-            "min": 1
-        },
-        "GetStaticAnalysisFindingResponseStatusString": {
-            "type": "string",
-            "max": 256,
-            "min": 0
-        },
-        "GetStaticAnalysisReportRequest": {
-            "type": "structure",
-            "required": ["id", "organizationName", "projectName"],
-            "members": {
-                "id": { "shape": "GetStaticAnalysisReportRequestIdString" },
-                "organizationName": { "shape": "NameString" },
-                "projectName": { "shape": "NameString" }
-            }
-        },
-        "GetStaticAnalysisReportRequestIdString": {
-            "type": "string",
-            "max": 256,
-            "min": 1
-        },
-        "GetStaticAnalysisReportResponse": {
-            "type": "structure",
-            "required": [
-                "actionName",
-                "actionRunId",
-                "actionType",
-                "branchName",
-                "commitId",
-                "directoryLevelFindings",
-                "id",
-                "name",
-                "rawReportFiles",
-                "repositoryName",
-                "scanRunTime",
-                "scanStatistics",
-                "toolDetails",
-                "workflowId"
-            ],
-            "members": {
-                "actionName": { "shape": "String" },
-                "actionRunId": { "shape": "String" },
-                "actionType": { "shape": "String" },
-                "branchName": { "shape": "String" },
-                "commitId": { "shape": "String" },
-                "directoryLevelFindings": { "shape": "StaticAnalysisDirectoryLevelFindings" },
-                "id": { "shape": "String" },
-                "name": { "shape": "String" },
-                "pullRequestId": { "shape": "String" },
-                "rawReportFiles": { "shape": "StaticAnalysisReportSourceFiles" },
-                "repositoryName": { "shape": "String" },
-                "scanRunTime": { "shape": "SyntheticTimestamp_date_time" },
-                "scanStatistics": { "shape": "StaticAnalysisScanStatistics" },
-                "sourceRepository": { "shape": "String" },
-                "toolDetails": { "shape": "StaticAnalysisToolDetails" },
-                "workflowId": { "shape": "String" }
             }
         },
         "GetTestCaseResultRequest": {
@@ -9703,30 +8662,6 @@
                 "phaseHistory": { "shape": "TestReportStatusPhaseHistoryMigration" }
             }
         },
-        "GetTestReportStatusRequest": {
-            "type": "structure",
-            "required": ["id", "organizationName", "projectName"],
-            "members": {
-                "id": { "shape": "GetTestReportStatusRequestIdString" },
-                "organizationName": { "shape": "NameString" },
-                "projectName": { "shape": "NameString" }
-            }
-        },
-        "GetTestReportStatusRequestIdString": {
-            "type": "string",
-            "min": 1
-        },
-        "GetTestReportStatusResponse": {
-            "type": "structure",
-            "required": ["actionRunId", "id", "name", "phaseHistory"],
-            "members": {
-                "actionRunId": { "shape": "String" },
-                "id": { "shape": "String" },
-                "lastUpdatedTime": { "shape": "SyntheticTimestamp_date_time" },
-                "name": { "shape": "String" },
-                "phaseHistory": { "shape": "TestReportStatusPhaseHistory" }
-            }
-        },
         "GetUserDetailsRequest": {
             "type": "structure",
             "members": {
@@ -9769,62 +8704,90 @@
                 "settings": { "shape": "UserNotificationSettingsItemList" }
             }
         },
-        "GetWorkflowInput": {
+        "GetWorkflowRequest": {
             "type": "structure",
-            "required": ["organizationName", "projectName", "workflowId"],
+            "required": ["id", "organizationName", "projectName"],
             "members": {
+                "id": { "shape": "Uuid" },
                 "organizationName": { "shape": "NameString" },
-                "projectName": { "shape": "GetWorkflowInputProjectNameString" },
-                "workflowId": { "shape": "String" },
-                "workflowVersion": { "shape": "Integer" }
+                "projectName": { "shape": "GetWorkflowRequestProjectNameString" },
+                "version": { "shape": "Integer" }
             }
         },
-        "GetWorkflowInputProjectNameString": {
+        "GetWorkflowRequestProjectNameString": {
             "type": "string",
             "min": 1,
             "pattern": "^[a-zA-Z0-9]+(?:[-_\\.][a-zA-Z0-9]+)*$"
         },
-        "GetWorkflowRunInput": {
+        "GetWorkflowResponse": {
             "type": "structure",
-            "required": ["organizationName", "projectName", "workflowRunId"],
+            "required": [
+                "creationTime",
+                "definition",
+                "id",
+                "lastUpdatedTime",
+                "name",
+                "runMode",
+                "sourceBranchName",
+                "sourceRepositoryName",
+                "status",
+                "version"
+            ],
             "members": {
-                "organizationName": { "shape": "NameString" },
-                "projectName": { "shape": "GetWorkflowRunInputProjectNameString" },
-                "workflowRunId": { "shape": "String" }
+                "creationTime": { "shape": "SyntheticTimestamp_date_time" },
+                "definition": { "shape": "WorkflowDefinition" },
+                "id": { "shape": "Uuid" },
+                "lastUpdatedTime": { "shape": "SyntheticTimestamp_date_time" },
+                "name": { "shape": "String" },
+                "runMode": { "shape": "String" },
+                "sourceBranchName": { "shape": "SourceRepositoryBranchString" },
+                "sourceRepositoryName": { "shape": "SourceRepositoryNameString" },
+                "status": { "shape": "String" },
+                "version": { "shape": "Integer" }
             }
         },
-        "GetWorkflowRunInputProjectNameString": {
+        "GetWorkflowRunRequest": {
+            "type": "structure",
+            "required": ["id", "organizationName", "projectName", "workflowId"],
+            "members": {
+                "id": { "shape": "Uuid" },
+                "organizationName": { "shape": "NameString" },
+                "projectName": { "shape": "GetWorkflowRunRequestProjectNameString" },
+                "workflowId": { "shape": "Uuid" }
+            }
+        },
+        "GetWorkflowRunRequestProjectNameString": {
             "type": "string",
             "min": 1,
             "pattern": "^[a-zA-Z0-9]+(?:[-_\\.][a-zA-Z0-9]+)*$"
         },
-        "GetWorkflowRunOutput": {
+        "GetWorkflowRunResponse": {
             "type": "structure",
             "required": [
                 "actionStates",
+                "id",
                 "lastUpdatedTime",
-                "runMode",
                 "startTime",
                 "status",
                 "triggerEventId",
                 "triggerEventType",
-                "workflow",
-                "workflowRunId"
+                "workflowId",
+                "workflowVersion"
             ],
             "members": {
                 "actionStates": { "shape": "ActionStates" },
-                "endTime": { "shape": "Timestamp" },
-                "lastUpdatedTime": { "shape": "Timestamp" },
+                "endTime": { "shape": "SyntheticTimestamp_date_time" },
+                "id": { "shape": "Uuid" },
+                "lastUpdatedTime": { "shape": "SyntheticTimestamp_date_time" },
                 "metadata": { "shape": "WorkflowRunMetadata" },
-                "runMode": { "shape": "String" },
-                "startTime": { "shape": "Timestamp" },
+                "startTime": { "shape": "SyntheticTimestamp_date_time" },
                 "status": { "shape": "String" },
                 "statusReasons": { "shape": "WorkflowRunStatusReasons" },
                 "triggerEventActor": { "shape": "String" },
                 "triggerEventId": { "shape": "String" },
                 "triggerEventType": { "shape": "String" },
-                "workflow": { "shape": "WorkflowSummary" },
-                "workflowRunId": { "shape": "String" }
+                "workflowId": { "shape": "Uuid" },
+                "workflowVersion": { "shape": "Integer" }
             }
         },
         "Ide": {
@@ -9872,22 +8835,6 @@
             "member": { "shape": "Ide" },
             "max": 1,
             "min": 0
-        },
-        "ImportSSHPublicKeyRequest": {
-            "type": "structure",
-            "required": ["SSHPublicKeyBody", "name"],
-            "members": {
-                "SSHPublicKeyBody": { "shape": "SSHPublicKeyBodyString" },
-                "name": { "shape": "SSHPublicKeyNameString" }
-            }
-        },
-        "ImportSSHPublicKeyResponse": {
-            "type": "structure",
-            "required": ["SSHPublicKeyId", "importDate"],
-            "members": {
-                "SSHPublicKeyId": { "shape": "SSHPublicKeyIdString" },
-                "importDate": { "shape": "SSHPublicKeyImportDateTimestamp" }
-            }
         },
         "InactivityTimeoutMinutes": {
             "type": "integer",
@@ -10141,6 +9088,10 @@
             "type": "string",
             "enum": ["BACKLOG", "NOT_STARTED", "STARTED", "COMPLETED"]
         },
+        "IssueStoreHighLevelStatusMigration": {
+            "type": "string",
+            "enum": ["DRAFT", "BACKLOG", "NOT_STARTED", "STARTED", "COMPLETED"]
+        },
         "IssueStoreLabelColor": {
             "type": "string",
             "max": 7,
@@ -10194,6 +9145,17 @@
         "IssueStoreStatusList": {
             "type": "list",
             "member": { "shape": "IssueStoreStatus" }
+        },
+        "IssueStoreStatusMigration": {
+            "type": "structure",
+            "required": ["active", "highLevelStatus", "id", "name", "order"],
+            "members": {
+                "active": { "shape": "Boolean" },
+                "highLevelStatus": { "shape": "IssueStoreHighLevelStatusMigration" },
+                "id": { "shape": "String" },
+                "name": { "shape": "ApmNameString" },
+                "order": { "shape": "Integer" }
+            }
         },
         "IssueStoreStatusNameString": {
             "type": "string",
@@ -10396,6 +9358,7 @@
         },
         "ListActiveOrganizationInvitationsResponse": {
             "type": "structure",
+            "required": ["items"],
             "members": {
                 "invitations": { "shape": "OrganizationInvitationList" },
                 "items": { "shape": "OrganizationInvitationList" },
@@ -10781,10 +9744,10 @@
             "required": ["codeCoverageReportId", "organizationName", "projectName"],
             "members": {
                 "codeCoverageReportId": { "shape": "ListCodeCoverageResultsRequestCodeCoverageReportIdString" },
-                "filters": { "shape": "FilterList" },
+                "filters": { "shape": "CodeCoverageResultsFilters" },
                 "maxResults": { "shape": "ListCodeCoverageResultsRequestMaxResultsInteger" },
                 "nextToken": { "shape": "ListCodeCoverageResultsRequestNextTokenString" },
-                "order": { "shape": "OrderingList" },
+                "orderBy": { "shape": "CodeCoverageResultsOrderByFields" },
                 "organizationName": { "shape": "NameString" },
                 "projectName": { "shape": "NameString" }
             }
@@ -11024,6 +9987,28 @@
             "max": 50,
             "min": 1
         },
+        "ListDevelopmentWorkspaceRequestMigration": {
+            "type": "structure",
+            "required": ["organizationName", "projectName"],
+            "members": {
+                "filters": { "shape": "Filters" },
+                "maxResults": { "shape": "ListDevelopmentWorkspaceRequestMigrationMaxResultsInteger" },
+                "nextToken": { "shape": "ListDevelopmentWorkspaceRequestMigrationNextTokenString" },
+                "organizationName": { "shape": "NameString" },
+                "projectName": { "shape": "NameString" }
+            }
+        },
+        "ListDevelopmentWorkspaceRequestMigrationMaxResultsInteger": {
+            "type": "integer",
+            "box": true,
+            "max": 50,
+            "min": 1
+        },
+        "ListDevelopmentWorkspaceRequestMigrationNextTokenString": {
+            "type": "string",
+            "max": 2048,
+            "min": 1
+        },
         "ListDevelopmentWorkspaceRequestNextTokenString": {
             "type": "string",
             "max": 2048,
@@ -11039,42 +10024,25 @@
                 "projectName": { "shape": "NameString" }
             }
         },
-        "ListDevelopmentWorkspaceResponseNextTokenString": {
+        "ListDevelopmentWorkspaceResponseMigration": {
+            "type": "structure",
+            "required": ["items", "organizationName", "projectName"],
+            "members": {
+                "items": { "shape": "DevelopmentWorkspaceSummaryList" },
+                "nextToken": { "shape": "ListDevelopmentWorkspaceResponseMigrationNextTokenString" },
+                "organizationName": { "shape": "NameString" },
+                "projectName": { "shape": "NameString" }
+            }
+        },
+        "ListDevelopmentWorkspaceResponseMigrationNextTokenString": {
             "type": "string",
             "max": 2048,
             "min": 1
         },
-        "ListEnvironmentDeploymentTargetsMigrationRequest": {
-            "type": "structure",
-            "required": ["environmentName", "organizationName", "projectName"],
-            "members": {
-                "environmentName": { "shape": "NameString" },
-                "maxResults": { "shape": "ListEnvironmentDeploymentTargetsMigrationRequestMaxResultsInteger" },
-                "nextToken": { "shape": "ListEnvironmentDeploymentTargetsMigrationRequestNextTokenString" },
-                "organizationName": { "shape": "NameString" },
-                "projectName": { "shape": "NameString" }
-            }
-        },
-        "ListEnvironmentDeploymentTargetsMigrationRequestMaxResultsInteger": {
-            "type": "integer",
-            "box": true,
-            "max": 50,
-            "min": 1
-        },
-        "ListEnvironmentDeploymentTargetsMigrationRequestNextTokenString": {
+        "ListDevelopmentWorkspaceResponseNextTokenString": {
             "type": "string",
-            "max": 64,
+            "max": 2048,
             "min": 1
-        },
-        "ListEnvironmentDeploymentTargetsMigrationResponse": {
-            "type": "structure",
-            "members": {
-                "environmentName": { "shape": "NameString" },
-                "items": { "shape": "EnvironmentDeploymentTargetsList" },
-                "nextToken": { "shape": "String" },
-                "organizationName": { "shape": "NameString" },
-                "projectName": { "shape": "NameString" }
-            }
         },
         "ListEnvironmentDeploymentTargetsRequest": {
             "type": "structure",
@@ -11101,11 +10069,8 @@
         "ListEnvironmentDeploymentTargetsResponse": {
             "type": "structure",
             "members": {
-                "environmentName": { "shape": "NameString" },
                 "items": { "shape": "EnvironmentDeploymentTargetsList" },
-                "nextToken": { "shape": "String" },
-                "organizationName": { "shape": "NameString" },
-                "projectName": { "shape": "NameString" }
+                "nextToken": { "shape": "String" }
             }
         },
         "ListEnvironmentDeploymentsRequest": {
@@ -11135,11 +10100,8 @@
         "ListEnvironmentDeploymentsResponse": {
             "type": "structure",
             "members": {
-                "environmentName": { "shape": "NameString" },
                 "items": { "shape": "EnvironmentDeploymentsList" },
                 "nextToken": { "shape": "String" },
-                "organizationName": { "shape": "NameString" },
-                "projectName": { "shape": "NameString" },
                 "totalCount": { "shape": "ListEnvironmentDeploymentsResponseTotalCountInteger" }
             }
         },
@@ -11148,49 +10110,24 @@
             "box": true,
             "min": 0
         },
-        "ListEnvironmentDeploymentsV2Request": {
-            "type": "structure",
-            "required": ["environmentName", "organizationName", "projectName"],
-            "members": {
-                "environmentName": { "shape": "NameString" },
-                "maxResults": { "shape": "ListEnvironmentDeploymentsV2RequestMaxResultsInteger" },
-                "nextToken": { "shape": "ListEnvironmentDeploymentsV2RequestNextTokenString" },
-                "organizationName": { "shape": "NameString" },
-                "projectName": { "shape": "NameString" }
-            }
-        },
-        "ListEnvironmentDeploymentsV2RequestMaxResultsInteger": {
-            "type": "integer",
-            "box": true,
-            "max": 50,
-            "min": 1
-        },
-        "ListEnvironmentDeploymentsV2RequestNextTokenString": {
-            "type": "string",
-            "max": 1640,
-            "min": 1
-        },
-        "ListEnvironmentDeploymentsV2Response": {
-            "type": "structure",
-            "members": {
-                "environmentName": { "shape": "NameString" },
-                "items": { "shape": "EnvironmentDeploymentsV2List" },
-                "nextToken": { "shape": "String" },
-                "organizationName": { "shape": "NameString" },
-                "projectName": { "shape": "NameString" }
-            }
-        },
         "ListEnvironmentsRequest": {
             "type": "structure",
             "required": ["organizationName", "projectName"],
             "members": {
                 "filters": { "shape": "EnvironmentFilterList" },
+                "maxResults": { "shape": "ListEnvironmentsRequestMaxResultsInteger" },
                 "nextToken": { "shape": "ListEnvironmentsRequestNextTokenString" },
                 "organizationName": { "shape": "NameString" },
                 "pageSize": { "shape": "ListEnvironmentsRequestPageSizeInteger" },
                 "projectName": { "shape": "NameString" },
                 "sortBy": { "shape": "EnvironmentOrderingList" }
             }
+        },
+        "ListEnvironmentsRequestMaxResultsInteger": {
+            "type": "integer",
+            "box": true,
+            "max": 100,
+            "min": 1
         },
         "ListEnvironmentsRequestNextTokenString": {
             "type": "string",
@@ -11206,16 +10143,52 @@
             "type": "structure",
             "members": {
                 "items": { "shape": "EnvironmentList" },
-                "nextToken": { "shape": "String" },
-                "organizationName": { "shape": "NameString" },
-                "projectName": { "shape": "NameString" },
+                "nextToken": { "shape": "ListEnvironmentsResponseNextTokenString" },
                 "totalCount": { "shape": "ListEnvironmentsResponseTotalCountInteger" }
             }
+        },
+        "ListEnvironmentsResponseNextTokenString": {
+            "type": "string",
+            "min": 1
         },
         "ListEnvironmentsResponseTotalCountInteger": {
             "type": "integer",
             "box": true,
             "min": 0
+        },
+        "ListEventLogRequest": {
+            "type": "structure",
+            "required": ["endTime", "organizationName", "startTime"],
+            "members": {
+                "endTime": { "shape": "String" },
+                "eventCategory": { "shape": "String" },
+                "eventName": { "shape": "String" },
+                "eventSource": { "shape": "String" },
+                "maxResults": { "shape": "ListEventLogRequestMaxResultsInteger" },
+                "nextToken": { "shape": "ListEventLogRequestNextTokenString" },
+                "organizationName": { "shape": "NameString" },
+                "projectName": { "shape": "NameString" },
+                "sortBy": { "shape": "SortParam" },
+                "startTime": { "shape": "String" }
+            }
+        },
+        "ListEventLogRequestMaxResultsInteger": {
+            "type": "integer",
+            "box": true,
+            "max": 100,
+            "min": 1
+        },
+        "ListEventLogRequestNextTokenString": {
+            "type": "string",
+            "min": 1
+        },
+        "ListEventLogResponse": {
+            "type": "structure",
+            "required": ["items"],
+            "members": {
+                "items": { "shape": "EventLogEntries" },
+                "nextToken": { "shape": "String" }
+            }
         },
         "ListExtensionInstallationsMigrationInput": {
             "type": "structure",
@@ -11309,7 +10282,7 @@
         },
         "ListIssueStoreStatusesResponseItemsList": {
             "type": "list",
-            "member": { "shape": "IssueStoreStatus" },
+            "member": { "shape": "IssueStoreStatusMigration" },
             "max": 256,
             "min": 0
         },
@@ -11385,34 +10358,6 @@
             "required": ["items"],
             "members": {
                 "items": { "shape": "NotificationChannelSummaries" },
-                "nextToken": { "shape": "String" }
-            }
-        },
-        "ListNotificationClientsMigrationRequest": {
-            "type": "structure",
-            "required": ["organizationName", "projectName"],
-            "members": {
-                "maxResults": { "shape": "ListNotificationClientsMigrationRequestMaxResultsInteger" },
-                "nextToken": { "shape": "ListNotificationClientsMigrationRequestNextTokenString" },
-                "organizationName": { "shape": "NameString" },
-                "projectName": { "shape": "NameString" }
-            }
-        },
-        "ListNotificationClientsMigrationRequestMaxResultsInteger": {
-            "type": "integer",
-            "box": true,
-            "max": 64,
-            "min": 1
-        },
-        "ListNotificationClientsMigrationRequestNextTokenString": {
-            "type": "string",
-            "min": 1
-        },
-        "ListNotificationClientsMigrationResponse": {
-            "type": "structure",
-            "required": ["items"],
-            "members": {
-                "items": { "shape": "NotificationClientSummaries" },
                 "nextToken": { "shape": "String" }
             }
         },
@@ -11501,7 +10446,8 @@
         "ListPreviousProjectsResponse": {
             "type": "structure",
             "members": {
-                "items": { "shape": "PreviousProjectsSummaries" }
+                "items": { "shape": "PreviousProjectsSummaries" },
+                "organizationName": { "shape": "NameString" }
             }
         },
         "ListProjectsRequest": {
@@ -11510,8 +10456,7 @@
             "members": {
                 "maxResults": { "shape": "ListProjectsRequestMaxResultsInteger" },
                 "nextToken": { "shape": "ListProjectsRequestNextTokenString" },
-                "organizationName": { "shape": "NameString" },
-                "status": { "shape": "String" }
+                "organizationName": { "shape": "NameString" }
             }
         },
         "ListProjectsRequestMaxResultsInteger": {
@@ -11528,7 +10473,8 @@
             "type": "structure",
             "members": {
                 "items": { "shape": "ProjectSummaries" },
-                "nextToken": { "shape": "String" }
+                "nextToken": { "shape": "String" },
+                "organizationName": { "shape": "NameString" }
             }
         },
         "ListPullRequestCommentsInput": {
@@ -11557,13 +10503,6 @@
             "members": {
                 "items": { "shape": "PullRequestCommentsList" },
                 "nextToken": { "shape": "String" }
-            }
-        },
-        "ListSSHPublicKeysResponse": {
-            "type": "structure",
-            "required": ["items"],
-            "members": {
-                "items": { "shape": "SSHPublicKeySummaryList" }
             }
         },
         "ListSecretsInput": {
@@ -11618,23 +10557,6 @@
                 "nextToken": { "shape": "String" }
             }
         },
-        "ListSoftwareCompositionAnalysisFindingStatisticsOutput": {
-            "type": "structure",
-            "required": [
-                "categoryCounts",
-                "mappedSeverityCounts",
-                "originalSeverityCounts",
-                "totalFindings",
-                "totalPages"
-            ],
-            "members": {
-                "categoryCounts": { "shape": "AnalysisCounters" },
-                "mappedSeverityCounts": { "shape": "AnalysisCounters" },
-                "originalSeverityCounts": { "shape": "AnalysisCounters" },
-                "totalFindings": { "shape": "Integer" },
-                "totalPages": { "shape": "Integer" }
-            }
-        },
         "ListSoftwareCompositionAnalysisFindingStatisticsOutputMigration": {
             "type": "structure",
             "required": [
@@ -11650,19 +10572,6 @@
                 "originalSeverityCounts": { "shape": "AnalysisCountersMigration" },
                 "totalFindings": { "shape": "Integer" },
                 "totalPages": { "shape": "Integer" }
-            }
-        },
-        "ListSoftwareCompositionAnalysisFindingsInput": {
-            "type": "structure",
-            "required": ["organizationName", "projectName", "reportSummaryId"],
-            "members": {
-                "filter": { "shape": "FilterList" },
-                "nextToken": { "shape": "ListSoftwareCompositionAnalysisFindingsInputNextTokenString" },
-                "order": { "shape": "OrderingList" },
-                "organizationName": { "shape": "ListSoftwareCompositionAnalysisFindingsInputOrganizationNameString" },
-                "pageSize": { "shape": "ListSoftwareCompositionAnalysisFindingsInputPageSizeInteger" },
-                "projectName": { "shape": "NameString" },
-                "reportSummaryId": { "shape": "ListSoftwareCompositionAnalysisFindingsInputReportSummaryIdString" }
             }
         },
         "ListSoftwareCompositionAnalysisFindingsInputMigration": {
@@ -11700,31 +10609,6 @@
             "type": "string",
             "min": 1
         },
-        "ListSoftwareCompositionAnalysisFindingsInputNextTokenString": {
-            "type": "string",
-            "min": 1
-        },
-        "ListSoftwareCompositionAnalysisFindingsInputOrganizationNameString": {
-            "type": "string",
-            "min": 1,
-            "pattern": "^[a-zA-Z0-9]+(?:[-_\\.][a-zA-Z0-9]+)*$"
-        },
-        "ListSoftwareCompositionAnalysisFindingsInputPageSizeInteger": {
-            "type": "integer",
-            "box": true,
-            "min": 1
-        },
-        "ListSoftwareCompositionAnalysisFindingsInputReportSummaryIdString": {
-            "type": "string",
-            "min": 1
-        },
-        "ListSoftwareCompositionAnalysisFindingsOutput": {
-            "type": "structure",
-            "members": {
-                "items": { "shape": "SoftwareCompositionAnalysisFindingOutputItems" },
-                "nextToken": { "shape": "String" }
-            }
-        },
         "ListSoftwareCompositionAnalysisFindingsOutputMigration": {
             "type": "structure",
             "members": {
@@ -11732,22 +10616,124 @@
                 "nextToken": { "shape": "String" }
             }
         },
-        "ListSoftwareCompositionAnalysisReportsInput": {
+        "ListSoftwareCompositionAnalysisFindingsRequest": {
             "type": "structure",
-            "required": ["organizationName", "projectName"],
+            "required": ["organizationName", "projectName", "softwareCompositionAnalysisReportId"],
             "members": {
-                "actionRunId": { "shape": "ListSoftwareCompositionAnalysisReportsInputActionRunIdString" },
-                "nextToken": { "shape": "ListSoftwareCompositionAnalysisReportsInputNextTokenString" },
+                "filters": { "shape": "SoftwareCompositionAnalysisFindingsFilters" },
+                "maxResults": { "shape": "ListSoftwareCompositionAnalysisFindingsRequestMaxResultsInteger" },
+                "nextToken": { "shape": "ListSoftwareCompositionAnalysisFindingsRequestNextTokenString" },
+                "orderBy": { "shape": "SoftwareCompositionAnalysisFindingsOrderByFields" },
                 "organizationName": { "shape": "NameString" },
-                "pageSize": { "shape": "ListSoftwareCompositionAnalysisReportsInputPageSizeInteger" },
                 "projectName": { "shape": "NameString" },
-                "sourceRepositoryBranchName": { "shape": "NameString" },
-                "sourceRepositoryName": { "shape": "NameString" }
+                "softwareCompositionAnalysisReportId": {
+                    "shape": "ListSoftwareCompositionAnalysisFindingsRequestSoftwareCompositionAnalysisReportIdString"
+                }
             }
         },
-        "ListSoftwareCompositionAnalysisReportsInputActionRunIdString": {
+        "ListSoftwareCompositionAnalysisFindingsRequestMaxResultsInteger": {
+            "type": "integer",
+            "box": true,
+            "max": 50
+        },
+        "ListSoftwareCompositionAnalysisFindingsRequestNextTokenString": {
             "type": "string",
             "min": 1
+        },
+        "ListSoftwareCompositionAnalysisFindingsRequestSoftwareCompositionAnalysisReportIdString": {
+            "type": "string",
+            "max": 256,
+            "min": 1
+        },
+        "ListSoftwareCompositionAnalysisFindingsResponse": {
+            "type": "structure",
+            "members": {
+                "items": { "shape": "ListSoftwareCompositionAnalysisFindingsResponseItems" },
+                "nextToken": { "shape": "String" }
+            }
+        },
+        "ListSoftwareCompositionAnalysisFindingsResponseItem": {
+            "type": "structure",
+            "required": ["id", "name", "severity", "softwareCompositionAnalysisReportId"],
+            "members": {
+                "id": { "shape": "Uuid" },
+                "location": { "shape": "AnalysisFindingLocation" },
+                "name": { "shape": "ListSoftwareCompositionAnalysisFindingsResponseItemNameString" },
+                "recommendation": { "shape": "AnalysisFindingMessage" },
+                "relatedLocations": { "shape": "RelatedAnalysisFindingLocations" },
+                "score": { "shape": "AnalysisFindingScore" },
+                "severity": { "shape": "AnalysisFindingSeverity" },
+                "softwareCompositionAnalysisReportId": {
+                    "shape": "ListSoftwareCompositionAnalysisFindingsResponseItemSoftwareCompositionAnalysisReportIdString"
+                }
+            }
+        },
+        "ListSoftwareCompositionAnalysisFindingsResponseItemNameString": {
+            "type": "string",
+            "max": 3000,
+            "min": 1
+        },
+        "ListSoftwareCompositionAnalysisFindingsResponseItemSoftwareCompositionAnalysisReportIdString": {
+            "type": "string",
+            "max": 256,
+            "min": 0
+        },
+        "ListSoftwareCompositionAnalysisFindingsResponseItems": {
+            "type": "list",
+            "member": { "shape": "ListSoftwareCompositionAnalysisFindingsResponseItem" }
+        },
+        "ListSoftwareCompositionAnalysisFindingsStatisticsRequest": {
+            "type": "structure",
+            "required": ["organizationName", "projectName", "softwareCompositionAnalysisReportId"],
+            "members": {
+                "filter": { "shape": "FilterList" },
+                "maxResults": { "shape": "ListSoftwareCompositionAnalysisFindingsStatisticsRequestMaxResultsInteger" },
+                "nextToken": { "shape": "ListSoftwareCompositionAnalysisFindingsStatisticsRequestNextTokenString" },
+                "order": { "shape": "OrderingList" },
+                "organizationName": {
+                    "shape": "ListSoftwareCompositionAnalysisFindingsStatisticsRequestOrganizationNameString"
+                },
+                "projectName": { "shape": "NameString" },
+                "softwareCompositionAnalysisReportId": {
+                    "shape": "ListSoftwareCompositionAnalysisFindingsStatisticsRequestSoftwareCompositionAnalysisReportIdString"
+                }
+            }
+        },
+        "ListSoftwareCompositionAnalysisFindingsStatisticsRequestMaxResultsInteger": {
+            "type": "integer",
+            "box": true,
+            "max": 50
+        },
+        "ListSoftwareCompositionAnalysisFindingsStatisticsRequestNextTokenString": {
+            "type": "string",
+            "min": 1
+        },
+        "ListSoftwareCompositionAnalysisFindingsStatisticsRequestOrganizationNameString": {
+            "type": "string",
+            "min": 1,
+            "pattern": "^[a-zA-Z0-9]+(?:[-_\\.][a-zA-Z0-9]+)*$"
+        },
+        "ListSoftwareCompositionAnalysisFindingsStatisticsRequestSoftwareCompositionAnalysisReportIdString": {
+            "type": "string",
+            "max": 256,
+            "min": 1
+        },
+        "ListSoftwareCompositionAnalysisFindingsStatisticsResponse": {
+            "type": "structure",
+            "required": [
+                "categoryCounts",
+                "mappedSeverityCounts",
+                "originalSeverityCounts",
+                "totalFindings",
+                "totalPages"
+            ],
+            "members": {
+                "categoryCounts": { "shape": "AnalysisCounters" },
+                "mappedSeverityCounts": { "shape": "AnalysisCounters" },
+                "originalSeverityCounts": { "shape": "AnalysisCounters" },
+                "totalFindings": { "shape": "Integer" },
+                "totalPages": { "shape": "Integer" }
+            }
         },
         "ListSoftwareCompositionAnalysisReportsInputMigration": {
             "type": "structure",
@@ -11775,23 +10761,6 @@
             "box": true,
             "min": 1
         },
-        "ListSoftwareCompositionAnalysisReportsInputNextTokenString": {
-            "type": "string",
-            "min": 1
-        },
-        "ListSoftwareCompositionAnalysisReportsInputPageSizeInteger": {
-            "type": "integer",
-            "box": true,
-            "min": 1
-        },
-        "ListSoftwareCompositionAnalysisReportsOutput": {
-            "type": "structure",
-            "required": ["items"],
-            "members": {
-                "items": { "shape": "SoftwareCompositionAnalysisReportSummaries" },
-                "nextToken": { "shape": "String" }
-            }
-        },
         "ListSoftwareCompositionAnalysisReportsOutputMigration": {
             "type": "structure",
             "required": ["items"],
@@ -11800,22 +10769,37 @@
                 "nextToken": { "shape": "String" }
             }
         },
-        "ListSoftwareTestingReportsInput": {
+        "ListSoftwareCompositionAnalysisReportsRequest": {
             "type": "structure",
-            "required": ["organizationName", "projectName"],
+            "required": ["actionRunId", "organizationName", "projectName"],
             "members": {
-                "branchName": { "shape": "String" },
-                "lastRunAt": { "shape": "String" },
-                "nextToken": { "shape": "String" },
+                "actionRunId": { "shape": "ListSoftwareCompositionAnalysisReportsRequestActionRunIdString" },
+                "maxResults": { "shape": "ListSoftwareCompositionAnalysisReportsRequestMaxResultsInteger" },
+                "nextToken": { "shape": "ListSoftwareCompositionAnalysisReportsRequestNextTokenString" },
                 "organizationName": { "shape": "NameString" },
-                "pageSize": { "shape": "ListSoftwareTestingReportsInputPageSizeInteger" },
-                "passingStatus": { "shape": "String" },
-                "projectName": { "shape": "NameString" },
-                "reportName": { "shape": "String" },
-                "reportType": { "shape": "String" },
-                "repositoryName": { "shape": "String" },
-                "sortBy": { "shape": "SortParam" },
-                "workflowId": { "shape": "String" }
+                "projectName": { "shape": "NameString" }
+            }
+        },
+        "ListSoftwareCompositionAnalysisReportsRequestActionRunIdString": {
+            "type": "string",
+            "max": 1024,
+            "min": 1
+        },
+        "ListSoftwareCompositionAnalysisReportsRequestMaxResultsInteger": {
+            "type": "integer",
+            "box": true,
+            "max": 50
+        },
+        "ListSoftwareCompositionAnalysisReportsRequestNextTokenString": {
+            "type": "string",
+            "min": 1
+        },
+        "ListSoftwareCompositionAnalysisReportsResponse": {
+            "type": "structure",
+            "required": ["items"],
+            "members": {
+                "items": { "shape": "SoftwareCompositionAnalysisReportSummaries" },
+                "nextToken": { "shape": "String" }
             }
         },
         "ListSoftwareTestingReportsInputMigration": {
@@ -11840,19 +10824,6 @@
             "type": "integer",
             "box": true,
             "min": 1
-        },
-        "ListSoftwareTestingReportsInputPageSizeInteger": {
-            "type": "integer",
-            "box": true,
-            "min": 1
-        },
-        "ListSoftwareTestingReportsOutput": {
-            "type": "structure",
-            "required": ["items"],
-            "members": {
-                "items": { "shape": "SoftwareTestingReportSummaries" },
-                "nextToken": { "shape": "String" }
-            }
         },
         "ListSoftwareTestingReportsOutputMigration": {
             "type": "structure",
@@ -12001,119 +10972,6 @@
                 "nextToken": { "shape": "String" }
             }
         },
-        "ListStaticAnalysisFindingStatisticsResponse": {
-            "type": "structure",
-            "required": [
-                "categoryCounts",
-                "mappedSeverityCounts",
-                "originalSeverityCounts",
-                "totalFindings",
-                "totalPages"
-            ],
-            "members": {
-                "categoryCounts": { "shape": "AnalysisCounters" },
-                "mappedSeverityCounts": { "shape": "AnalysisCounters" },
-                "originalSeverityCounts": { "shape": "AnalysisCounters" },
-                "totalFindings": { "shape": "Integer" },
-                "totalPages": { "shape": "Integer" }
-            }
-        },
-        "ListStaticAnalysisFindingsRequest": {
-            "type": "structure",
-            "required": ["organizationName", "projectName", "reportSummaryId"],
-            "members": {
-                "filter": { "shape": "FilterList" },
-                "maxResults": { "shape": "ListStaticAnalysisFindingsRequestMaxResultsInteger" },
-                "nextToken": { "shape": "ListStaticAnalysisFindingsRequestNextTokenString" },
-                "order": { "shape": "OrderingList" },
-                "organizationName": { "shape": "NameString" },
-                "projectName": { "shape": "NameString" },
-                "reportSummaryId": { "shape": "ListStaticAnalysisFindingsRequestReportSummaryIdString" }
-            }
-        },
-        "ListStaticAnalysisFindingsRequestMaxResultsInteger": {
-            "type": "integer",
-            "box": true,
-            "max": 50
-        },
-        "ListStaticAnalysisFindingsRequestNextTokenString": {
-            "type": "string",
-            "min": 1
-        },
-        "ListStaticAnalysisFindingsRequestReportSummaryIdString": {
-            "type": "string",
-            "max": 256,
-            "min": 1
-        },
-        "ListStaticAnalysisFindingsResponse": {
-            "type": "structure",
-            "members": {
-                "items": { "shape": "StaticAnalysisFindingResponseItems" },
-                "nextToken": { "shape": "String" }
-            }
-        },
-        "ListStaticAnalysisFindingsStatisticsRequest": {
-            "type": "structure",
-            "required": ["organizationName", "projectName", "reportSummaryId"],
-            "members": {
-                "filter": { "shape": "FilterList" },
-                "maxResults": { "shape": "ListStaticAnalysisFindingsStatisticsRequestMaxResultsInteger" },
-                "nextToken": { "shape": "ListStaticAnalysisFindingsStatisticsRequestNextTokenString" },
-                "order": { "shape": "OrderingList" },
-                "organizationName": { "shape": "NameString" },
-                "projectName": { "shape": "NameString" },
-                "reportSummaryId": { "shape": "ListStaticAnalysisFindingsStatisticsRequestReportSummaryIdString" }
-            }
-        },
-        "ListStaticAnalysisFindingsStatisticsRequestMaxResultsInteger": {
-            "type": "integer",
-            "box": true,
-            "max": 50
-        },
-        "ListStaticAnalysisFindingsStatisticsRequestNextTokenString": {
-            "type": "string",
-            "min": 1
-        },
-        "ListStaticAnalysisFindingsStatisticsRequestReportSummaryIdString": {
-            "type": "string",
-            "max": 256,
-            "min": 1
-        },
-        "ListStaticAnalysisReportsRequest": {
-            "type": "structure",
-            "required": ["organizationName", "projectName"],
-            "members": {
-                "actionRunId": { "shape": "ListStaticAnalysisReportsRequestActionRunIdString" },
-                "maxResults": { "shape": "ListStaticAnalysisReportsRequestMaxResultsInteger" },
-                "nextToken": { "shape": "ListStaticAnalysisReportsRequestNextTokenString" },
-                "organizationName": { "shape": "NameString" },
-                "projectName": { "shape": "NameString" },
-                "sourceRepositoryBranchName": { "shape": "NameString" },
-                "sourceRepositoryName": { "shape": "NameString" }
-            }
-        },
-        "ListStaticAnalysisReportsRequestActionRunIdString": {
-            "type": "string",
-            "max": 1024,
-            "min": 1
-        },
-        "ListStaticAnalysisReportsRequestMaxResultsInteger": {
-            "type": "integer",
-            "box": true,
-            "max": 50
-        },
-        "ListStaticAnalysisReportsRequestNextTokenString": {
-            "type": "string",
-            "min": 1
-        },
-        "ListStaticAnalysisReportsResponse": {
-            "type": "structure",
-            "required": ["items"],
-            "members": {
-                "items": { "shape": "StaticAnalysisReportSummaries" },
-                "nextToken": { "shape": "String" }
-            }
-        },
         "ListTestCaseResultItem": {
             "type": "structure",
             "required": [
@@ -12154,10 +11012,10 @@
             "type": "structure",
             "required": ["organizationName", "projectName", "testReportId"],
             "members": {
-                "filter": { "shape": "FilterList" },
+                "filters": { "shape": "TestCasesFilters" },
                 "maxResults": { "shape": "ListTestCaseResultsRequestMaxResultsInteger" },
                 "nextToken": { "shape": "ListTestCaseResultsRequestNextTokenString" },
-                "order": { "shape": "OrderingList" },
+                "orderBy": { "shape": "TestCasesOrderByFields" },
                 "organizationName": { "shape": "NameString" },
                 "projectName": { "shape": "NameString" },
                 "testReportId": { "shape": "ListTestCaseResultsRequestTestReportIdString" }
@@ -12287,37 +11145,6 @@
                 "items": { "shape": "TestReportStatuses" }
             }
         },
-        "ListTestReportStatusesRequest": {
-            "type": "structure",
-            "required": ["actionRunId", "organizationName", "projectName"],
-            "members": {
-                "actionRunId": { "shape": "ListTestReportStatusesRequestActionRunIdString" },
-                "maxResults": { "shape": "ListTestReportStatusesRequestMaxResultsInteger" },
-                "nextToken": { "shape": "ListTestReportStatusesRequestNextTokenString" },
-                "organizationName": { "shape": "NameString" },
-                "projectName": { "shape": "NameString" }
-            }
-        },
-        "ListTestReportStatusesRequestActionRunIdString": {
-            "type": "string",
-            "min": 1
-        },
-        "ListTestReportStatusesRequestMaxResultsInteger": {
-            "type": "integer",
-            "box": true,
-            "max": 50
-        },
-        "ListTestReportStatusesRequestNextTokenString": {
-            "type": "string",
-            "min": 1
-        },
-        "ListTestReportStatusesResponse": {
-            "type": "structure",
-            "members": {
-                "items": { "shape": "TestReportStatuses" },
-                "nextToken": { "shape": "String" }
-            }
-        },
         "ListTestReportsInputMigration": {
             "type": "structure",
             "required": ["organizationName", "projectName"],
@@ -12392,34 +11219,35 @@
                 "nextToken": { "shape": "String" }
             }
         },
-        "ListWorkflowRunsInput": {
+        "ListWorkflowRunsRequest": {
             "type": "structure",
             "required": ["organizationName", "projectName", "workflowId"],
             "members": {
-                "filters": { "shape": "WorkflowFilters" },
-                "nextToken": { "shape": "ListWorkflowRunsInputNextTokenString" },
+                "filters": { "shape": "WorkflowRunFilters" },
+                "maxResults": { "shape": "ListWorkflowRunsRequestMaxResultsInteger" },
+                "nextToken": { "shape": "ListWorkflowRunsRequestNextTokenString" },
                 "organizationName": { "shape": "NameString" },
-                "pageSize": { "shape": "ListWorkflowRunsInputPageSizeInteger" },
-                "projectName": { "shape": "ListWorkflowRunsInputProjectNameString" },
+                "projectName": { "shape": "ListWorkflowRunsRequestProjectNameString" },
                 "sortBy": { "shape": "WorkflowRunOrderingList" },
-                "workflowId": { "shape": "NameString" }
+                "workflowId": { "shape": "Uuid" }
             }
         },
-        "ListWorkflowRunsInputNextTokenString": {
+        "ListWorkflowRunsRequestMaxResultsInteger": {
+            "type": "integer",
+            "box": true,
+            "max": 50,
+            "min": 1
+        },
+        "ListWorkflowRunsRequestNextTokenString": {
             "type": "string",
             "min": 1
         },
-        "ListWorkflowRunsInputPageSizeInteger": {
-            "type": "integer",
-            "box": true,
-            "min": 1
-        },
-        "ListWorkflowRunsInputProjectNameString": {
+        "ListWorkflowRunsRequestProjectNameString": {
             "type": "string",
             "min": 1,
             "pattern": "^[a-zA-Z0-9]+(?:[-_\\.][a-zA-Z0-9]+)*$"
         },
-        "ListWorkflowRunsOutput": {
+        "ListWorkflowRunsResponse": {
             "type": "structure",
             "members": {
                 "items": { "shape": "WorkflowRunSummaries" },
@@ -12427,32 +11255,33 @@
                 "totalCount": { "shape": "Integer" }
             }
         },
-        "ListWorkflowsInput": {
+        "ListWorkflowsRequest": {
             "type": "structure",
             "required": ["organizationName", "projectName"],
             "members": {
                 "filters": { "shape": "WorkflowFilters" },
-                "nextToken": { "shape": "ListWorkflowsInputNextTokenString" },
-                "organizationName": { "shape": "ListWorkflowsInputOrganizationNameString" },
-                "pageSize": { "shape": "ListWorkflowsInputPageSizeInteger" },
+                "maxResults": { "shape": "ListWorkflowsRequestMaxResultsInteger" },
+                "nextToken": { "shape": "ListWorkflowsRequestNextTokenString" },
+                "organizationName": { "shape": "ListWorkflowsRequestOrganizationNameString" },
                 "projectName": { "shape": "NameString" }
             }
         },
-        "ListWorkflowsInputNextTokenString": {
+        "ListWorkflowsRequestMaxResultsInteger": {
+            "type": "integer",
+            "box": true,
+            "max": 100,
+            "min": 1
+        },
+        "ListWorkflowsRequestNextTokenString": {
             "type": "string",
             "min": 1
         },
-        "ListWorkflowsInputOrganizationNameString": {
+        "ListWorkflowsRequestOrganizationNameString": {
             "type": "string",
             "min": 1,
             "pattern": "^[a-zA-Z0-9]+(?:[-_\\.][a-zA-Z0-9]+)*$"
         },
-        "ListWorkflowsInputPageSizeInteger": {
-            "type": "integer",
-            "box": true,
-            "min": 1
-        },
-        "ListWorkflowsOutput": {
+        "ListWorkflowsResponse": {
             "type": "structure",
             "members": {
                 "items": { "shape": "WorkflowSummaries" },
@@ -12595,7 +11424,8 @@
         },
         "OAuthCode": {
             "type": "string",
-            "pattern": "^[0-9a-f.]{64,128}$"
+            "pattern": "^[0-9a-f.]{64,128}$",
+            "sensitive": true
         },
         "OAuthParameters": {
             "type": "structure",
@@ -12655,15 +11485,22 @@
         },
         "OrganizationInvitationListMember": {
             "type": "structure",
-            "required": ["inviteeEmailAddress", "inviteeRole", "lastUpdatedTime", "status", "timestamp"],
+            "required": [
+                "inviteeEmailAddress",
+                "inviteeRole",
+                "lastUpdatedTime",
+                "organizationName",
+                "status",
+                "timestamp"
+            ],
             "members": {
                 "inviteeDisplayName": { "shape": "String" },
-                "inviteeEmailAddress": { "shape": "String" },
+                "inviteeEmailAddress": { "shape": "EmailAddressString" },
                 "inviteeRole": { "shape": "OrganizationInviteeRole" },
                 "inviterUserName": { "shape": "String" },
-                "lastUpdatedTime": { "shape": "String" },
+                "lastUpdatedTime": { "shape": "SyntheticTimestamp_date_time" },
                 "organizationName": { "shape": "String" },
-                "signupEmailAddress": { "shape": "String" },
+                "signupEmailAddress": { "shape": "EmailAddressString" },
                 "status": { "shape": "InvitationStatus" },
                 "timestamp": { "shape": "SyntheticTimestamp_date_time" }
             }
@@ -12708,11 +11545,12 @@
         },
         "OrganizationSummary": {
             "type": "structure",
+            "required": ["name", "regionName"],
             "members": {
                 "description": { "shape": "String" },
                 "displayName": { "shape": "String" },
                 "name": { "shape": "NameString" },
-                "regionName": { "shape": "String" }
+                "regionName": { "shape": "RegionString" }
             }
         },
         "OrganizationUsageReport": {
@@ -12772,20 +11610,12 @@
         },
         "PreviousProjectsSummary": {
             "type": "structure",
+            "required": ["name"],
             "members": {
                 "description": { "shape": "String" },
                 "displayName": { "shape": "String" },
                 "name": { "shape": "String" }
             }
-        },
-        "ProjectAdditionalFieldsMap": {
-            "type": "map",
-            "key": { "shape": "ProjectAdditionalFieldsMapKeyString" },
-            "value": { "shape": "String" }
-        },
-        "ProjectAdditionalFieldsMapKeyString": {
-            "type": "string",
-            "min": 1
         },
         "ProjectInvitation": {
             "type": "structure",
@@ -12885,11 +11715,11 @@
         },
         "ProjectSummary": {
             "type": "structure",
+            "required": ["name"],
             "members": {
                 "description": { "shape": "String" },
                 "displayName": { "shape": "String" },
-                "name": { "shape": "String" },
-                "templateArn": { "shape": "String" }
+                "name": { "shape": "String" }
             }
         },
         "ProviderDataMigration": {
@@ -13018,7 +11848,7 @@
             "min": 3,
             "pattern": "^(us(?:-gov)?|af|ap|ca|cn|eu|sa)-(central|(?:north|south)?(?:east|west)?)-(\\d+)$"
         },
-        "RelatedLocations": {
+        "RelatedAnalysisFindingLocations": {
             "type": "structure",
             "required": ["truncated"],
             "members": {
@@ -13109,45 +11939,24 @@
         "RevokeSessionRequest": {
             "type": "structure",
             "members": {
-                "callbackUri": { "shape": "String" }
+                "callbackUri": { "shape": "RevokeSessionRequestCallbackUriString" }
             }
+        },
+        "RevokeSessionRequestCallbackUriString": {
+            "type": "string",
+            "max": 4000,
+            "min": 1
         },
         "RevokeSessionResponse": {
             "type": "structure",
             "members": {
-                "redirect": { "shape": "String" }
+                "redirect": { "shape": "RevokeSessionResponseRedirectString" }
             }
         },
-        "SSHPublicKeyBodyString": {
+        "RevokeSessionResponseRedirectString": {
             "type": "string",
-            "max": 5000,
+            "max": 4000,
             "min": 1
-        },
-        "SSHPublicKeyIdString": {
-            "type": "string",
-            "pattern": "^[A-Fa-f0-9]{64}$"
-        },
-        "SSHPublicKeyImportDateTimestamp": {
-            "type": "timestamp",
-            "timestampFormat": "iso8601"
-        },
-        "SSHPublicKeyNameString": {
-            "type": "string",
-            "max": 100,
-            "min": 1
-        },
-        "SSHPublicKeySummary": {
-            "type": "structure",
-            "required": ["SSHPublicKeyId", "importDate", "name"],
-            "members": {
-                "SSHPublicKeyId": { "shape": "SSHPublicKeyIdString" },
-                "importDate": { "shape": "SSHPublicKeyImportDateTimestamp" },
-                "name": { "shape": "SSHPublicKeyNameString" }
-            }
-        },
-        "SSHPublicKeySummaryList": {
-            "type": "list",
-            "member": { "shape": "SSHPublicKeySummary" }
         },
         "SavedView": {
             "type": "structure",
@@ -13513,7 +12322,6 @@
                 "inviteeDisplayName": { "shape": "SendOrganizationInvitationRequestInviteeDisplayNameString" },
                 "inviteeEmailAddress": { "shape": "EmailAddressString" },
                 "inviteeRole": { "shape": "String" },
-                "organizationInvitationId": { "shape": "String" },
                 "organizationName": { "shape": "NameString" }
             }
         },
@@ -13524,15 +12332,22 @@
         },
         "SendOrganizationInvitationResponse": {
             "type": "structure",
-            "required": ["inviteeEmailAddress", "inviteeRole", "lastUpdatedTime", "status", "timestamp"],
+            "required": [
+                "inviteeEmailAddress",
+                "inviteeRole",
+                "lastUpdatedTime",
+                "organizationName",
+                "status",
+                "timestamp"
+            ],
             "members": {
                 "inviteeDisplayName": { "shape": "String" },
                 "inviteeEmailAddress": { "shape": "String" },
                 "inviteeRole": { "shape": "OrganizationInviteeRole" },
                 "inviterUserName": { "shape": "String" },
-                "lastUpdatedTime": { "shape": "String" },
+                "lastUpdatedTime": { "shape": "SyntheticTimestamp_date_time" },
                 "organizationName": { "shape": "String" },
-                "signupEmailAddress": { "shape": "String" },
+                "signupEmailAddress": { "shape": "EmailAddressString" },
                 "status": { "shape": "InvitationStatus" },
                 "timestamp": { "shape": "SyntheticTimestamp_date_time" }
             }
@@ -13640,17 +12455,6 @@
             "min": 11,
             "pattern": "^[A-Z0-9]+$"
         },
-        "SoftwareCompositionAnalysisDirectoryLevelFinding": {
-            "type": "structure",
-            "required": ["childDirectories", "directoryStatistics", "name", "path"],
-            "members": {
-                "childDirectories": { "shape": "StringList" },
-                "directoryStatistics": { "shape": "SoftwareCompositionAnalysisScanStatistics" },
-                "name": { "shape": "String" },
-                "parent": { "shape": "String" },
-                "path": { "shape": "String" }
-            }
-        },
         "SoftwareCompositionAnalysisDirectoryLevelFindingMigration": {
             "type": "structure",
             "required": ["childDirectories", "directoryStatistics", "name", "path"],
@@ -13662,41 +12466,9 @@
                 "path": { "shape": "String" }
             }
         },
-        "SoftwareCompositionAnalysisDirectoryLevelFindings": {
-            "type": "list",
-            "member": { "shape": "SoftwareCompositionAnalysisDirectoryLevelFinding" }
-        },
         "SoftwareCompositionAnalysisDirectoryLevelFindingsMigration": {
             "type": "list",
             "member": { "shape": "SoftwareCompositionAnalysisDirectoryLevelFindingMigration" }
-        },
-        "SoftwareCompositionAnalysisFindingListOutput": {
-            "type": "structure",
-            "required": [
-                "branchName",
-                "commitId",
-                "findingId",
-                "lastUpdatedTime",
-                "name",
-                "reportSummaryId",
-                "repositoryName",
-                "severity"
-            ],
-            "members": {
-                "branchName": { "shape": "String" },
-                "commitId": { "shape": "String" },
-                "findingId": { "shape": "String" },
-                "lastUpdatedTime": { "shape": "SyntheticTimestamp_date_time" },
-                "location": { "shape": "AnalysisFindingLocation" },
-                "name": { "shape": "String" },
-                "recommendation": { "shape": "AnalysisFindingMessage" },
-                "relatedLocations": { "shape": "RelatedLocations" },
-                "reportSummaryId": { "shape": "String" },
-                "repositoryName": { "shape": "String" },
-                "score": { "shape": "AnalysisFindingScore" },
-                "severity": { "shape": "AnalysisFindingSeverity" },
-                "sourceRepository": { "shape": "String" }
-            }
         },
         "SoftwareCompositionAnalysisFindingListOutputMigration": {
             "type": "structure",
@@ -13725,41 +12497,6 @@
                 "severity": { "shape": "AnalysisFindingSeverityMigration" },
                 "sourceRepository": { "shape": "String" }
             }
-        },
-        "SoftwareCompositionAnalysisFindingOutput": {
-            "type": "structure",
-            "required": [
-                "branchName",
-                "commitId",
-                "findingId",
-                "name",
-                "reportSummaryId",
-                "repositoryName",
-                "rule",
-                "severity"
-            ],
-            "members": {
-                "additionalToolProperties": { "shape": "AdditionalProperties" },
-                "branchName": { "shape": "String" },
-                "category": { "shape": "String" },
-                "commitId": { "shape": "String" },
-                "findingId": { "shape": "String" },
-                "location": { "shape": "AnalysisFindingLocation" },
-                "message": { "shape": "AnalysisFindingMessage" },
-                "name": { "shape": "String" },
-                "recommendation": { "shape": "AnalysisFindingMessage" },
-                "relatedLocations": { "shape": "RelatedLocations" },
-                "reportSummaryId": { "shape": "String" },
-                "repositoryName": { "shape": "String" },
-                "rule": { "shape": "AnalysisFindingRule" },
-                "score": { "shape": "AnalysisFindingScore" },
-                "severity": { "shape": "AnalysisFindingSeverity" },
-                "sourceRepository": { "shape": "String" }
-            }
-        },
-        "SoftwareCompositionAnalysisFindingOutputItems": {
-            "type": "list",
-            "member": { "shape": "SoftwareCompositionAnalysisFindingListOutput" }
         },
         "SoftwareCompositionAnalysisFindingOutputItemsMigration": {
             "type": "list",
@@ -13796,13 +12533,103 @@
                 "sourceRepository": { "shape": "String" }
             }
         },
-        "SoftwareCompositionAnalysisReportSourceFiles": {
+        "SoftwareCompositionAnalysisFindingsFilter": {
             "type": "structure",
-            "required": ["reportFiles", "truncated"],
+            "required": ["key", "value"],
             "members": {
-                "reportFiles": { "shape": "TestReportFiles" },
-                "truncated": { "shape": "Boolean" }
+                "comparisonOperator": { "shape": "SoftwareCompositionAnalysisFindingsFilterComparisonOperator" },
+                "key": { "shape": "SoftwareCompositionAnalysisFindingsFilterKey" },
+                "value": { "shape": "String" }
             }
+        },
+        "SoftwareCompositionAnalysisFindingsFilterComparisonOperator": {
+            "type": "string",
+            "enum": ["NOT_CONTAINS", "CONTAINS", "NE", "EQ"]
+        },
+        "SoftwareCompositionAnalysisFindingsFilterKey": {
+            "type": "string",
+            "enum": ["rule.ruleId", "severity.mappedSeverityValue", "score", "name"]
+        },
+        "SoftwareCompositionAnalysisFindingsFilterOperation": {
+            "type": "string",
+            "enum": ["OR", "AND"]
+        },
+        "SoftwareCompositionAnalysisFindingsFilters": {
+            "type": "structure",
+            "members": {
+                "filters": { "shape": "SoftwareCompositionAnalysisFindingsFiltersList" },
+                "operation": { "shape": "SoftwareCompositionAnalysisFindingsFilterOperation" }
+            }
+        },
+        "SoftwareCompositionAnalysisFindingsFiltersList": {
+            "type": "list",
+            "member": { "shape": "SoftwareCompositionAnalysisFindingsFilter" }
+        },
+        "SoftwareCompositionAnalysisFindingsOrderByDirection": {
+            "type": "string",
+            "enum": ["DESCENDING", "ASCENDING"]
+        },
+        "SoftwareCompositionAnalysisFindingsOrderByField": {
+            "type": "structure",
+            "required": ["direction", "fieldName"],
+            "members": {
+                "direction": { "shape": "SoftwareCompositionAnalysisFindingsOrderByDirection" },
+                "fieldName": { "shape": "SoftwareCompositionAnalysisFindingsOrderByFieldName" }
+            }
+        },
+        "SoftwareCompositionAnalysisFindingsOrderByFieldName": {
+            "type": "string",
+            "enum": ["rule.ruleId", "severity.mappedSeverityValue", "score", "name"]
+        },
+        "SoftwareCompositionAnalysisFindingsOrderByFields": {
+            "type": "list",
+            "member": { "shape": "SoftwareCompositionAnalysisFindingsOrderByField" },
+            "max": 3,
+            "min": 0
+        },
+        "SoftwareCompositionAnalysisReportCategoryCount": {
+            "type": "structure",
+            "required": ["count", "name"],
+            "members": {
+                "count": { "shape": "Integer" },
+                "name": { "shape": "SoftwareCompositionAnalysisReportCategoryName" }
+            }
+        },
+        "SoftwareCompositionAnalysisReportCategoryCounts": {
+            "type": "list",
+            "member": { "shape": "SoftwareCompositionAnalysisReportCategoryCount" }
+        },
+        "SoftwareCompositionAnalysisReportCategoryName": {
+            "type": "string",
+            "enum": ["SECURITY"]
+        },
+        "SoftwareCompositionAnalysisReportMappedSeverityCount": {
+            "type": "structure",
+            "required": ["count", "name"],
+            "members": {
+                "count": { "shape": "Integer" },
+                "name": { "shape": "SoftwareCompositionAnalysisReportMappedSeverityName" }
+            }
+        },
+        "SoftwareCompositionAnalysisReportMappedSeverityCounts": {
+            "type": "list",
+            "member": { "shape": "SoftwareCompositionAnalysisReportMappedSeverityCount" }
+        },
+        "SoftwareCompositionAnalysisReportMappedSeverityName": {
+            "type": "string",
+            "enum": ["INFORMATIONAL", "LOW", "MEDIUM", "HIGH", "CRITICAL"]
+        },
+        "SoftwareCompositionAnalysisReportOriginalSeverityCount": {
+            "type": "structure",
+            "required": ["count", "name"],
+            "members": {
+                "count": { "shape": "Integer" },
+                "name": { "shape": "String" }
+            }
+        },
+        "SoftwareCompositionAnalysisReportOriginalSeverityCounts": {
+            "type": "list",
+            "member": { "shape": "SoftwareCompositionAnalysisReportOriginalSeverityCount" }
         },
         "SoftwareCompositionAnalysisReportSourceFilesMigration": {
             "type": "structure",
@@ -13822,14 +12649,13 @@
         },
         "SoftwareCompositionAnalysisReportSummary": {
             "type": "structure",
-            "required": ["actionRunId", "name", "reportId", "repositoryName", "scanRunTime"],
+            "required": ["actionRunId", "name", "repositoryName", "scanRunTime", "softwareCompositionAnalysisReportId"],
             "members": {
                 "actionRunId": { "shape": "String" },
                 "name": { "shape": "String" },
-                "reportId": { "shape": "String" },
                 "repositoryName": { "shape": "String" },
                 "scanRunTime": { "shape": "SyntheticTimestamp_date_time" },
-                "sourceRepository": { "shape": "String" }
+                "softwareCompositionAnalysisReportId": { "shape": "Uuid" }
             }
         },
         "SoftwareCompositionAnalysisReportSummaryMigration": {
@@ -13848,9 +12674,9 @@
             "type": "structure",
             "required": ["mappedSeverityCounts", "totalFindings", "totalPackagesScanned"],
             "members": {
-                "categoryCounts": { "shape": "AnalysisCounters" },
-                "mappedSeverityCounts": { "shape": "AnalysisCounters" },
-                "originalSeverityCounts": { "shape": "AnalysisCounters" },
+                "categoryCounts": { "shape": "SoftwareCompositionAnalysisReportCategoryCounts" },
+                "mappedSeverityCounts": { "shape": "SoftwareCompositionAnalysisReportMappedSeverityCounts" },
+                "originalSeverityCounts": { "shape": "SoftwareCompositionAnalysisReportOriginalSeverityCounts" },
                 "totalFindings": { "shape": "Integer" },
                 "totalPackagesScanned": { "shape": "Integer" }
             }
@@ -13882,16 +12708,6 @@
                 "vendorName": { "shape": "String" }
             }
         },
-        "SoftwareTestingReportRunDetails": {
-            "type": "structure",
-            "required": ["actionRunId", "lastRunAt", "passingStatus", "reportRunId"],
-            "members": {
-                "actionRunId": { "shape": "String" },
-                "lastRunAt": { "shape": "SyntheticTimestamp_date_time" },
-                "passingStatus": { "shape": "String" },
-                "reportRunId": { "shape": "String" }
-            }
-        },
         "SoftwareTestingReportRunDetailsMigration": {
             "type": "structure",
             "required": ["actionRunId", "lastRunAt", "passingStatus", "reportRunId"],
@@ -13902,37 +12718,9 @@
                 "reportRunId": { "shape": "String" }
             }
         },
-        "SoftwareTestingReportSummaries": {
-            "type": "list",
-            "member": { "shape": "SoftwareTestingReportSummary" }
-        },
         "SoftwareTestingReportSummariesMigration": {
             "type": "list",
             "member": { "shape": "SoftwareTestingReportSummaryMigration" }
-        },
-        "SoftwareTestingReportSummary": {
-            "type": "structure",
-            "required": [
-                "actionName",
-                "branchName",
-                "latestReportRun",
-                "reportId",
-                "reportName",
-                "reportType",
-                "repositoryName",
-                "workflowId"
-            ],
-            "members": {
-                "actionName": { "shape": "String" },
-                "branchName": { "shape": "String" },
-                "latestReportRun": { "shape": "SoftwareTestingReportRunDetails" },
-                "reportId": { "shape": "String" },
-                "reportName": { "shape": "String" },
-                "reportType": { "shape": "String" },
-                "repositoryName": { "shape": "String" },
-                "sourceRepository": { "shape": "String" },
-                "workflowId": { "shape": "String" }
-            }
         },
         "SoftwareTestingReportSummaryMigration": {
             "type": "structure",
@@ -14415,7 +13203,7 @@
             "max": 96,
             "min": 1
         },
-        "StartWorkflowRunInput": {
+        "StartWorkflowRunRequest": {
             "type": "structure",
             "required": ["organizationName", "projectName", "workflowId"],
             "members": {
@@ -14423,145 +13211,32 @@
                     "shape": "ClientToken",
                     "idempotencyToken": true
                 },
-                "organizationName": { "shape": "StartWorkflowRunInputOrganizationNameString" },
-                "projectName": { "shape": "StartWorkflowRunInputProjectNameString" },
-                "workflowId": { "shape": "StartWorkflowRunInputWorkflowIdString" }
+                "organizationName": { "shape": "StartWorkflowRunRequestOrganizationNameString" },
+                "projectName": { "shape": "StartWorkflowRunRequestProjectNameString" },
+                "workflowId": { "shape": "StartWorkflowRunRequestWorkflowIdString" }
             }
         },
-        "StartWorkflowRunInputOrganizationNameString": {
+        "StartWorkflowRunRequestOrganizationNameString": {
             "type": "string",
             "min": 1,
             "pattern": "^[a-zA-Z0-9]+(?:[-_\\.][a-zA-Z0-9]+)*$"
         },
-        "StartWorkflowRunInputProjectNameString": {
+        "StartWorkflowRunRequestProjectNameString": {
             "type": "string",
             "min": 1,
             "pattern": "^[a-zA-Z0-9]+(?:[-_\\.][a-zA-Z0-9]+)*$"
         },
-        "StartWorkflowRunInputWorkflowIdString": {
+        "StartWorkflowRunRequestWorkflowIdString": {
             "type": "string",
-            "min": 1
+            "min": 1,
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
         },
-        "StartWorkflowRunOutput": {
+        "StartWorkflowRunResponse": {
             "type": "structure",
             "required": ["id", "workflowId"],
             "members": {
-                "id": { "shape": "String" },
-                "version": { "shape": "String" },
-                "workflowId": { "shape": "String" }
-            }
-        },
-        "StaticAnalysisDirectoryLevelFinding": {
-            "type": "structure",
-            "required": ["childDirectories", "directoryStatistics", "name", "path"],
-            "members": {
-                "childDirectories": { "shape": "StringList" },
-                "directoryStatistics": { "shape": "StaticAnalysisScanStatistics" },
-                "name": { "shape": "String" },
-                "parent": { "shape": "String" },
-                "path": { "shape": "String" }
-            }
-        },
-        "StaticAnalysisDirectoryLevelFindings": {
-            "type": "list",
-            "member": { "shape": "StaticAnalysisDirectoryLevelFinding" }
-        },
-        "StaticAnalysisFindingListItem": {
-            "type": "structure",
-            "required": [
-                "branchName",
-                "commitId",
-                "id",
-                "lastUpdatedTime",
-                "name",
-                "reportSummaryId",
-                "repositoryName",
-                "severity"
-            ],
-            "members": {
-                "branchName": { "shape": "StaticAnalysisFindingListItemBranchNameString" },
-                "commitId": { "shape": "StaticAnalysisFindingListItemCommitIdString" },
-                "id": { "shape": "String" },
-                "lastUpdatedTime": { "shape": "SyntheticTimestamp_date_time" },
-                "location": { "shape": "AnalysisFindingLocation" },
-                "name": { "shape": "StaticAnalysisFindingListItemNameString" },
-                "recommendation": { "shape": "AnalysisFindingRecommendation" },
-                "relatedLocations": { "shape": "RelatedLocations" },
-                "reportSummaryId": { "shape": "StaticAnalysisFindingListItemReportSummaryIdString" },
-                "repositoryName": { "shape": "StaticAnalysisFindingListItemRepositoryNameString" },
-                "score": { "shape": "AnalysisFindingScore" },
-                "severity": { "shape": "AnalysisFindingSeverity" },
-                "sourceRepository": { "shape": "String" }
-            }
-        },
-        "StaticAnalysisFindingListItemBranchNameString": {
-            "type": "string",
-            "max": 1024,
-            "min": 0
-        },
-        "StaticAnalysisFindingListItemCommitIdString": {
-            "type": "string",
-            "max": 1024,
-            "min": 0
-        },
-        "StaticAnalysisFindingListItemNameString": {
-            "type": "string",
-            "max": 3000,
-            "min": 1
-        },
-        "StaticAnalysisFindingListItemReportSummaryIdString": {
-            "type": "string",
-            "max": 1024,
-            "min": 0
-        },
-        "StaticAnalysisFindingListItemRepositoryNameString": {
-            "type": "string",
-            "max": 1024,
-            "min": 0
-        },
-        "StaticAnalysisFindingResponseItems": {
-            "type": "list",
-            "member": { "shape": "StaticAnalysisFindingListItem" }
-        },
-        "StaticAnalysisReportSourceFiles": {
-            "type": "structure",
-            "required": ["reportFiles", "truncated"],
-            "members": {
-                "reportFiles": { "shape": "TestReportFiles" },
-                "truncated": { "shape": "Boolean" }
-            }
-        },
-        "StaticAnalysisReportSummaries": {
-            "type": "list",
-            "member": { "shape": "StaticAnalysisReportSummary" }
-        },
-        "StaticAnalysisReportSummary": {
-            "type": "structure",
-            "required": ["actionRunId", "id", "name", "repositoryName", "scanRunTime"],
-            "members": {
-                "actionRunId": { "shape": "String" },
-                "id": { "shape": "String" },
-                "name": { "shape": "String" },
-                "repositoryName": { "shape": "String" },
-                "scanRunTime": { "shape": "SyntheticTimestamp_date_time" },
-                "sourceRepository": { "shape": "String" }
-            }
-        },
-        "StaticAnalysisScanStatistics": {
-            "type": "structure",
-            "required": ["categories", "totalFindings"],
-            "members": {
-                "categories": { "shape": "Categories" },
-                "totalFindings": { "shape": "Integer" },
-                "totalPackagesScanned": { "shape": "Integer" }
-            }
-        },
-        "StaticAnalysisToolDetails": {
-            "type": "structure",
-            "required": ["name"],
-            "members": {
-                "name": { "shape": "String" },
-                "vendorName": { "shape": "String" }
+                "id": { "shape": "Uuid" },
+                "workflowId": { "shape": "Uuid" }
             }
         },
         "StopDevelopmentWorkspaceRequest": {
@@ -14625,15 +13300,6 @@
         "SyntheticTimestamp_date_time": {
             "type": "timestamp",
             "timestampFormat": "iso8601"
-        },
-        "TemplateParamsMap": {
-            "type": "map",
-            "key": { "shape": "TemplateParamsMapKeyString" },
-            "value": { "shape": "String" }
-        },
-        "TemplateParamsMapKeyString": {
-            "type": "string",
-            "min": 1
         },
         "TemplateVariables": {
             "type": "list",
@@ -14701,6 +13367,60 @@
                 "testGroupIds": { "shape": "StringList" },
                 "totalRuns": { "shape": "Integer" }
             }
+        },
+        "TestCasesFilter": {
+            "type": "structure",
+            "required": ["key", "value"],
+            "members": {
+                "comparisonOperator": { "shape": "TestCasesFilterComparisonOperator" },
+                "key": { "shape": "TestCasesFilterKey" },
+                "value": { "shape": "String" }
+            }
+        },
+        "TestCasesFilterComparisonOperator": {
+            "type": "string",
+            "enum": ["NOT_CONTAINS", "CONTAINS", "NE", "EQ"]
+        },
+        "TestCasesFilterKey": {
+            "type": "string",
+            "enum": ["durationInNanoseconds", "message", "result", "shortName"]
+        },
+        "TestCasesFilterOperation": {
+            "type": "string",
+            "enum": ["OR", "AND"]
+        },
+        "TestCasesFilters": {
+            "type": "structure",
+            "members": {
+                "filters": { "shape": "TestCasesFiltersList" },
+                "operation": { "shape": "TestCasesFilterOperation" }
+            }
+        },
+        "TestCasesFiltersList": {
+            "type": "list",
+            "member": { "shape": "TestCasesFilter" }
+        },
+        "TestCasesOrderByDirection": {
+            "type": "string",
+            "enum": ["DESCENDING", "ASCENDING"]
+        },
+        "TestCasesOrderByField": {
+            "type": "structure",
+            "required": ["direction", "fieldName"],
+            "members": {
+                "direction": { "shape": "TestCasesOrderByDirection" },
+                "fieldName": { "shape": "TestCasesOrderByFieldName" }
+            }
+        },
+        "TestCasesOrderByFieldName": {
+            "type": "string",
+            "enum": ["durationInNanoseconds", "message", "result", "shortName"]
+        },
+        "TestCasesOrderByFields": {
+            "type": "list",
+            "member": { "shape": "TestCasesOrderByField" },
+            "max": 3,
+            "min": 0
         },
         "TestGroup": {
             "type": "structure",
@@ -14903,7 +13623,10 @@
             "exception": true,
             "retryable": { "throttling": false }
         },
-        "Timestamp": { "type": "timestamp" },
+        "Timestamp": {
+            "type": "timestamp",
+            "timestampFormat": "iso8601"
+        },
         "UnlinkAccountFromEnvironmentRequest": {
             "type": "structure",
             "required": ["environmentName", "name", "organizationName", "projectName"],
@@ -15123,10 +13846,10 @@
             "members": {
                 "description": { "shape": "String" },
                 "environmentType": { "shape": "EnvironmentType" },
+                "lastUpdatedTime": { "shape": "SyntheticTimestamp_date_time" },
                 "name": { "shape": "String" },
                 "organizationName": { "shape": "NameString" },
-                "projectName": { "shape": "NameString" },
-                "version": { "shape": "String" }
+                "projectName": { "shape": "NameString" }
             }
         },
         "UpdateIssueInput": {
@@ -15311,12 +14034,11 @@
         },
         "UpdateOrganizationRequest": {
             "type": "structure",
-            "required": ["name"],
+            "required": ["displayName", "name"],
             "members": {
                 "description": { "shape": "UpdateOrganizationRequestDescriptionString" },
                 "displayName": { "shape": "UpdateOrganizationRequestDisplayNameString" },
-                "name": { "shape": "NameString" },
-                "versionId": { "shape": "String" }
+                "name": { "shape": "NameString" }
             }
         },
         "UpdateOrganizationRequestDescriptionString": {
@@ -15332,18 +14054,19 @@
         "UpdateOrganizationResponse": {
             "type": "structure",
             "members": {
-                "versionId": { "shape": "String" }
+                "description": { "shape": "String" },
+                "displayName": { "shape": "String" },
+                "name": { "shape": "NameString" }
             }
         },
         "UpdateProjectRequest": {
             "type": "structure",
-            "required": ["name", "organizationName"],
+            "required": ["displayName", "name", "organizationName"],
             "members": {
                 "description": { "shape": "UpdateProjectRequestDescriptionString" },
                 "displayName": { "shape": "UpdateProjectRequestDisplayNameString" },
                 "name": { "shape": "NameString" },
-                "organizationName": { "shape": "NameString" },
-                "versionId": { "shape": "String" }
+                "organizationName": { "shape": "NameString" }
             }
         },
         "UpdateProjectRequestDescriptionString": {
@@ -15359,7 +14082,10 @@
         "UpdateProjectResponse": {
             "type": "structure",
             "members": {
-                "versionId": { "shape": "String" }
+                "description": { "shape": "String" },
+                "displayName": { "shape": "String" },
+                "name": { "shape": "NameString" },
+                "organizationName": { "shape": "NameString" }
             }
         },
         "UpdatePullRequestCommentContentInput": {
@@ -15583,14 +14309,19 @@
         },
         "ValidationExceptionReason": {
             "type": "string",
-            "enum": ["unknownOperation", "cannotParse", "fieldValidationFailed"]
+            "enum": ["unknownOperation", "cannotParse", "fieldValidationFailed", "unsatisfiedRequirement"]
         },
         "VerifySessionResponse": {
             "type": "structure",
             "members": {
-                "identity": { "shape": "String" },
+                "identity": { "shape": "VerifySessionResponseIdentityString" },
                 "self": { "shape": "String" }
             }
+        },
+        "VerifySessionResponseIdentityString": {
+            "type": "string",
+            "max": 256,
+            "min": 1
         },
         "WorkflowDefinition": {
             "type": "structure",
@@ -15606,35 +14337,28 @@
             "required": ["condition", "name", "value"],
             "members": {
                 "condition": { "shape": "WorkflowFilterComparator" },
-                "name": { "shape": "WorkflowFilterNameString" },
-                "value": { "shape": "String" }
+                "name": { "shape": "WorkflowFilterKey" },
+                "value": { "shape": "WorkflowFilterValueString" }
             }
         },
         "WorkflowFilterComparator": {
             "type": "string",
-            "enum": ["EQUALS", "LTE", "GTE", "BEGINS_WITH"]
+            "enum": ["EQUALS", "NOT_EQUALS", "BEGINS_WITH"]
         },
-        "WorkflowFilterList": {
+        "WorkflowFilterKey": {
+            "type": "string",
+            "enum": ["name", "sourceRepositoryName"]
+        },
+        "WorkflowFilterValueString": {
+            "type": "string",
+            "max": 100,
+            "min": 0
+        },
+        "WorkflowFilters": {
             "type": "list",
             "member": { "shape": "WorkflowFilter" },
             "max": 5,
             "min": 0
-        },
-        "WorkflowFilterNameString": {
-            "type": "string",
-            "min": 1
-        },
-        "WorkflowFilterOperation": {
-            "type": "string",
-            "enum": ["AND"]
-        },
-        "WorkflowFilters": {
-            "type": "structure",
-            "required": ["filters", "operation"],
-            "members": {
-                "filters": { "shape": "WorkflowFilterList" },
-                "operation": { "shape": "WorkflowFilterOperation" }
-            }
         },
         "WorkflowRunActionArtifact": {
             "type": "structure",
@@ -15660,6 +14384,34 @@
             "type": "list",
             "member": { "shape": "WorkflowRunActionOutputVariable" }
         },
+        "WorkflowRunFilter": {
+            "type": "structure",
+            "required": ["condition", "name", "value"],
+            "members": {
+                "condition": { "shape": "WorkflowRunFilterComparator" },
+                "name": { "shape": "WorkflowRunFilterKey" },
+                "value": { "shape": "WorkflowRunFilterValueString" }
+            }
+        },
+        "WorkflowRunFilterComparator": {
+            "type": "string",
+            "enum": ["EQUALS", "NOT_EQUALS", "LTE", "GTE", "BEGINS_WITH"]
+        },
+        "WorkflowRunFilterKey": {
+            "type": "string",
+            "enum": ["runStatus", "triggerEventId", "lastUpdatedTime"]
+        },
+        "WorkflowRunFilterValueString": {
+            "type": "string",
+            "max": 100,
+            "min": 0
+        },
+        "WorkflowRunFilters": {
+            "type": "list",
+            "member": { "shape": "WorkflowRunFilter" },
+            "max": 5,
+            "min": 0
+        },
         "WorkflowRunMetadata": {
             "type": "map",
             "key": { "shape": "String" },
@@ -15679,7 +14431,7 @@
         },
         "WorkflowRunOrderingKey": {
             "type": "string",
-            "enum": ["lastUpdatedTime"]
+            "enum": ["startTime", "endTime", "lastUpdatedTime"]
         },
         "WorkflowRunOrderingList": {
             "type": "list",
@@ -15706,29 +14458,27 @@
         "WorkflowRunSummary": {
             "type": "structure",
             "required": [
+                "id",
                 "lastUpdatedTime",
-                "runMode",
                 "startTime",
                 "status",
                 "triggerEventId",
                 "triggerEventType",
                 "workflowId",
-                "workflowRunId",
                 "workflowVersion"
             ],
             "members": {
                 "endTime": { "shape": "SyntheticTimestamp_date_time" },
+                "id": { "shape": "Uuid" },
                 "lastUpdatedTime": { "shape": "SyntheticTimestamp_date_time" },
                 "metadata": { "shape": "WorkflowRunMetadata" },
-                "runMode": { "shape": "String" },
                 "startTime": { "shape": "SyntheticTimestamp_date_time" },
                 "status": { "shape": "String" },
                 "statusReasons": { "shape": "WorkflowRunStatusReasons" },
                 "triggerEventActor": { "shape": "String" },
                 "triggerEventId": { "shape": "String" },
                 "triggerEventType": { "shape": "String" },
-                "workflowId": { "shape": "String" },
-                "workflowRunId": { "shape": "String" },
+                "workflowId": { "shape": "Uuid" },
                 "workflowVersion": { "shape": "Integer" }
             }
         },
@@ -15763,28 +14513,27 @@
             "type": "structure",
             "required": [
                 "creationTime",
+                "definition",
+                "id",
                 "lastUpdatedTime",
+                "name",
                 "runMode",
-                "sourceBranch",
-                "sourceRepository",
-                "workflowDefinition",
-                "workflowId",
-                "workflowName",
-                "workflowStatus",
-                "workflowVersion"
+                "sourceBranchName",
+                "sourceRepositoryName",
+                "status",
+                "version"
             ],
             "members": {
-                "creationTime": { "shape": "Timestamp" },
-                "lastUpdatedTime": { "shape": "Timestamp" },
+                "creationTime": { "shape": "SyntheticTimestamp_date_time" },
+                "definition": { "shape": "WorkflowDefinition" },
+                "id": { "shape": "Uuid" },
+                "lastUpdatedTime": { "shape": "SyntheticTimestamp_date_time" },
+                "name": { "shape": "String" },
                 "runMode": { "shape": "String" },
-                "sourceBranch": { "shape": "SourceBranchSummary" },
-                "sourceRepository": { "shape": "SourceRepositorySummary" },
-                "workflowDefinition": { "shape": "WorkflowDefinition" },
-                "workflowId": { "shape": "String" },
-                "workflowName": { "shape": "String" },
-                "workflowStatus": { "shape": "String" },
-                "workflowStatusReasons": { "shape": "WorkflowStatusReasons" },
-                "workflowVersion": { "shape": "Integer" }
+                "sourceBranchName": { "shape": "SourceRepositoryBranchString" },
+                "sourceRepositoryName": { "shape": "SourceRepositoryNameString" },
+                "status": { "shape": "String" },
+                "version": { "shape": "Integer" }
             }
         },
         "WorkspaceSessionType": {
