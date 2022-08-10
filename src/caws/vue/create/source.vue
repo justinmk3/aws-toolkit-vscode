@@ -156,7 +156,13 @@ export default defineComponent({
             }
 
             const url = this.model.repositoryUrl
-            if (!url || url?.match(/^[\w]+@/)) {
+            if (
+                url &&
+                (url.match(/^https?:\/\/quokka\.codes/) !== null ||
+                    url.match(/^https?:\/\/[^:]*@git\.service\.quokka\.codes/) !== null)
+            ) {
+                return 'URL is from quokka.codes. Use `Select a quokka.codes Repository` instead.'
+            } else if (!url || url?.match(/^[\w]+@/)) {
                 return
             } else if (!VALID_SCHEMES.some(scheme => url?.startsWith(scheme))) {
                 return `URL must use one of the following schemes: ${VALID_SCHEMES.join(', ')}`
