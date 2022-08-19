@@ -38,7 +38,7 @@ function getLocalCommands() {
             iconPath: getIcon('vscode-add'),
         }),
         CawsCommands.declared.listCommands.build().asTreeNode({
-            label: 'View Additional quokka.codes Commands',
+            label: 'Show quokka.codes Commands',
             iconPath: getIcon('vscode-list-flat'), // TODO(sijaden): use better icon
         }),
     ]
