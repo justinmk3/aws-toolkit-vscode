@@ -2,7 +2,7 @@
     <div class="modes mb-16">
         <label class="mode-container" :data-disabled="model.type !== 'linked'">
             <input class="radio" type="radio" name="mode" id="from-caws" v-model="model.type" value="linked" />
-            <span class="ml-8 option-label" style="padding: 0px">Select a quokka.codes Repository</span>
+            <span class="ml-8 option-label" style="padding: 0px">Use an existing quokka.codes Repository</span>
         </label>
 
         <label class="mode-container" :data-disabled="model.type !== 'none'">
