@@ -103,7 +103,7 @@ export function getHostNameFromEnv(env: DevelopmentWorkspaceId): string {
 }
 
 export async function autoConnect(authProvider: CawsAuthenticationProvider) {
-    const currentSession = authProvider.getActiveSession()
+    const currentSession = await authProvider.getSession()
     if (currentSession !== undefined) {
         return currentSession
     }
@@ -112,10 +112,10 @@ export async function autoConnect(authProvider: CawsAuthenticationProvider) {
         getLogger().info(`quokka.codes: trying to auto-connect with user: ${account.label}`)
 
         try {
-            const creds = await authProvider.createSession(account)
+            const session = await authProvider.login(account)
             getLogger().info(`quokka.codes: auto-connected with user: ${account.label}`)
 
-            return creds
+            return session
         } catch (err) {
             getLogger().debug(`quokka.codes: unable to auto-connect with user "${account.label}": %O`, err)
         }
@@ -130,7 +130,7 @@ export function createClientFactory(authProvider: CawsAuthenticationProvider): (
         const creds = await autoConnect(authProvider)
 
         if (creds) {
-            await client.setCredentials(creds.accessDetails, creds.accountDetails.metadata)
+            await client.setCredentials(authProvider.createCredentialsProvider(), creds.accountDetails.metadata)
         }
 
         return client
