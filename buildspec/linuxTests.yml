@@ -12,9 +12,6 @@ phases:
 
     pre_build:
         commands:
-            - |
-                git fetch --all
-                git branch -a
             # If present, log into CodeArtifact. Provides a nice safety net in case NPM is down.
             # Should only affect tests run through IDEs team-hosted CodeBuild.
             - |
@@ -29,6 +26,9 @@ phases:
 
     build:
         commands:
+            - |
+                git fetch --all
+                git branch -a
             - npm run testCompile
             - npm run lint
             - xvfb-run npm test --silent
