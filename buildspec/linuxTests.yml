@@ -10,31 +10,32 @@ phases:
         runtime-versions:
             nodejs: 14
 
-    pre_build:
-        commands:
-            # If present, log into CodeArtifact. Provides a nice safety net in case NPM is down.
-            # Should only affect tests run through IDEs team-hosted CodeBuild.
-            - |
-                if [ "$TOOLKITS_CODEARTIFACT_DOMAIN" ] && [ "$TOOLKITS_CODEARTIFACT_REPO" ] && [ "$TOOLKITS_ACCOUNT_ID" ]; then
-                    if aws codeartifact login --tool npm --domain "$TOOLKITS_CODEARTIFACT_DOMAIN" --domain-owner "$TOOLKITS_ACCOUNT_ID" --repository "$TOOLKITS_CODEARTIFACT_REPO" > /dev/null 2>&1; then
-                        echo "Connected to CodeArtifact"
-                    else
-                        echo "CodeArtifact connection failed. Falling back to npm"
-                    fi
-                fi
-            - npm ci --unsafe-perm
+    # pre_build:
+    #     commands:
+    #         # If present, log into CodeArtifact. Provides a nice safety net in case NPM is down.
+    #         # Should only affect tests run through IDEs team-hosted CodeBuild.
+    #         # - |
+    #         #     if [ "$TOOLKITS_CODEARTIFACT_DOMAIN" ] && [ "$TOOLKITS_CODEARTIFACT_REPO" ] && [ "$TOOLKITS_ACCOUNT_ID" ]; then
+    #         #         if aws codeartifact login --tool npm --domain "$TOOLKITS_CODEARTIFACT_DOMAIN" --domain-owner "$TOOLKITS_ACCOUNT_ID" --repository "$TOOLKITS_CODEARTIFACT_REPO" > /dev/null 2>&1; then
+    #         #             echo "Connected to CodeArtifact"
+    #         #         else
+    #         #             echo "CodeArtifact connection failed. Falling back to npm"
+    #         #         fi
+    #         #     fi
+    #         # - npm ci --unsafe-perm
 
     build:
         commands:
             - |
+                find .
                 git fetch --all
                 git branch -a
-            - npm run testCompile
-            - npm run lint
-            - xvfb-run npm test --silent
-            - VCS_COMMIT_ID="${CODEBUILD_RESOLVED_SOURCE_VERSION}"
-            - CI_BUILD_URL=$(echo $CODEBUILD_BUILD_URL | sed 's/#/%23/g') # Encode `#` in the URL because otherwise the url is clipped in the Codecov.io site
-            - CI_BUILD_ID="${CODEBUILD_BUILD_ID}"
+            # - npm run testCompile
+            # - npm run lint
+            # - xvfb-run npm test --silent
+            # - VCS_COMMIT_ID="${CODEBUILD_RESOLVED_SOURCE_VERSION}"
+            # - CI_BUILD_URL=$(echo $CODEBUILD_BUILD_URL | sed 's/#/%23/g') # Encode `#` in the URL because otherwise the url is clipped in the Codecov.io site
+            # - CI_BUILD_ID="${CODEBUILD_BUILD_ID}"
 
 reports:
     unit-test:
