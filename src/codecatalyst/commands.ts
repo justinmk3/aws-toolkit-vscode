@@ -48,16 +48,16 @@ async function login(authProvider: CodeCatalystAuthenticationProvider, client: C
 
         return client.setCredentials(authProvider.createCredentialsProvider(), accountDetails.metadata)
     } catch (err) {
-        throw ToolkitError.chain(err, 'Failed to connect to quokka.codes', { code: 'NotConnected' })
+        throw ToolkitError.chain(err, 'Failed to connect to CodeCatalyst', { code: 'NotConnected' })
     }
 }
 
-/** "List quokka.codes Commands" command. */
+/** "List CodeCatalyst Commands" command. */
 export async function listCommands(): Promise<void> {
-    vscode.commands.executeCommand('workbench.action.quickOpen', '> quokka.codes')
+    vscode.commands.executeCommand('workbench.action.quickOpen', '> CodeCatalyst')
 }
 
-/** "Clone quokka.codes Repository" command. */
+/** "Clone CodeCatalyst Repository" command. */
 export async function cloneCodeCatalystRepo(client: ConnectedCodeCatalystClient, url?: vscode.Uri): Promise<void> {
     async function getPat() {
         // FIXME: make it easier to go from auth -> client so we don't need to do this
@@ -76,7 +76,7 @@ export async function cloneCodeCatalystRepo(client: ConnectedCodeCatalystClient,
     } else {
         const [_, org, project, repo] = url.path.slice(1).split('/')
         if (!org || !project || !repo) {
-            throw new Error(`Invalid quokka.codes URL: unable to parse repository`)
+            throw new Error(`Invalid CodeCatalyst URL: unable to parse repository`)
         }
         const resource = { name: repo, project, org }
         const uri = toCodeCatalystGitUri(client.identity.name, await getPat(), resource)
@@ -86,9 +86,9 @@ export async function cloneCodeCatalystRepo(client: ConnectedCodeCatalystClient,
 
 /**
  * Implements commands:
- * - "Open quokka.codes Organization"
- * - "Open quokka.codes Project"
- * - "Open quokka.codes Repository"
+ * - "Open CodeCatalyst Organization"
+ * - "Open CodeCatalyst Project"
+ * - "Open CodeCatalyst Repository"
  */
 export async function openCodeCatalystResource(
     client: ConnectedCodeCatalystClient,
