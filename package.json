@@ -742,10 +742,6 @@
         "menus": {
             "commandPalette": [
                 {
-                    "command": "aws.apig.copyUrl",
-                    "when": "false"
-                },
-                {
                     "command": "aws.apig.invokeRemoteRestApi",
                     "when": "false"
                 },
@@ -771,6 +767,10 @@
                 },
                 {
                     "command": "aws.copyName",
+                    "when": "false"
+                },
+                {
+                    "command": "aws.copyUrl",
                     "when": "false"
                 },
                 {
@@ -1489,19 +1489,19 @@
                     "group": "2@2"
                 },
                 {
-                    "command": "aws.apig.copyUrl",
-                    "when": "view == aws.explorer && viewItem =~ /^(awsApiGatewayNode)$/",
-                    "group": "2@0"
-                },
-                {
                     "command": "aws.s3.copyPath",
                     "when": "view == aws.explorer && viewItem =~ /^(awsS3FolderNode|awsS3FileNode)$/",
                     "group": "2@3"
                 },
                 {
+                    "command": "aws.copyUrl",
+                    "when": "view == aws.explorer && viewItem =~ /^(awsApiGatewayNode|awsS3FolderNode|awsS3FileNode)$/",
+                    "group": "2@4"
+                },
+                {
                     "command": "aws.s3.presignedURL",
                     "when": "view == aws.explorer && viewItem =~ /^(awsS3FileNode)$/",
-                    "group": "2@4"
+                    "group": "2@5"
                 },
                 {
                     "command": "aws.iot.detachCert",
@@ -1737,8 +1737,8 @@
                 }
             },
             {
-                "command": "aws.apig.copyUrl",
-                "title": "%AWS.command.apig.copyUrl%",
+                "command": "aws.copyUrl",
+                "title": "%AWS.command.copyUrl%",
                 "category": "%AWS.title%",
                 "cloud9": {
                     "cn": {

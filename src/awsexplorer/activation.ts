@@ -149,6 +149,7 @@ async function registerAwsExplorerCommands(
         ),
         Commands.register('aws.copyArn', async (node: AWSResourceNode) => await copyArnCommand(node)),
         Commands.register('aws.copyName', async (node: AWSResourceNode) => await copyNameCommand(node)),
+        Commands.register('aws.copyName', async (node: AWSResourceNode) => await copyUrlCommand(node)),
         Commands.register('aws.refreshAwsExplorerNode', async (element: AWSTreeNodeBase | undefined) => {
             awsExplorer.refresh(element)
         }),

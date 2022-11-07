@@ -21,8 +21,38 @@ import { TreeShim } from '../../shared/treeview/utils'
 export async function copyArnCommand(
     node: AWSResourceNode | TreeShim<AWSResourceNode>,
     window = Window.vscode(),
-    env = Env.vscode(),
-    commands = Commands.vscode()
+    env = Env.vscode()
+): Promise<void> {
+    node = node instanceof TreeShim ? node.node.resource : node
+
+    try {
+        copyToClipboard(node.arn, 'ARN', window, env)
+    } catch (e) {
+        const logsItem = localize('AWS.generic.message.viewLogs', 'View Logs...')
+        window
+            .showErrorMessage(
+                localize(
+                    'AWS.explorerNode.noArnFound',
+                    'Could not find an ARN for selected {0} Explorer node',
+                    getIdeProperties().company
+                ),
+                logsItem
+            )
+            .then(selection => {
+                if (selection === logsItem) {
+                    showLogOutputChannel()
+                }
+            })
+    }
+}
+
+/**
+ * Copies the URL of the resource represented by the given node.
+ */
+export async function copyUrlCommand(
+    node: AWSResourceNode | TreeShim<AWSResourceNode>,
+    window = Window.vscode(),
+    env = Env.vscode()
 ): Promise<void> {
     node = node instanceof TreeShim ? node.node.resource : node
 
