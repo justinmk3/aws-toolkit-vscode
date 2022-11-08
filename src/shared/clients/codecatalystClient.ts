@@ -47,7 +47,7 @@ export function getCodeCatalystConfig(): CodeCatalystConfig {
         return {
             region: 'us-east-1',
             endpoint: 'https://public.codecatalyst.global.api.aws',
-            hostname: 'quokka.codes',
+            hostname: 'codecatalyst.aws',
             gitHostname: 'git.service.quokka.codes',
         }
     }
