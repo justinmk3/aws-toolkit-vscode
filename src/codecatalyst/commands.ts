@@ -18,7 +18,7 @@ import {
     ConnectedCodeCatalystClient,
     CodeCatalystResource,
 } from '../shared/clients/codecatalystClient'
-import { createClientFactory, DevEnvironmentId, getConnectedDevEnv, openDevEnv, toCodeCatalystGitUri } from './model'
+import { createClientFactory, DevEnvironmentId, getConnectedDevEnv, getRepoCloneUrl, openDevEnv } from './model'
 import { showConfigureDevEnv } from './vue/configure/backend'
 import { showCreateDevEnv } from './vue/create/backend'
 import { CancellationError } from '../shared/utilities/timeoutUtils'
@@ -56,12 +56,16 @@ export async function cloneCodeCatalystRepo(client: ConnectedCodeCatalystClient,
         resource = { name: repo, project, org }
     }
 
-    const cloneUrl = await client.getRepoCloneUrls({
-        spaceName: resource.org,
-        projectName: resource.project,
-        sourceRepositoryName: resource.name,
-    })
-    const uri = toCodeCatalystGitUri(client.identity.name, await getPat(), cloneUrl.https)
+    const uri = await getRepoCloneUrl(
+        client,
+        {
+            spaceName: resource.org,
+            projectName: resource.project,
+            sourceRepositoryName: resource.name,
+        },
+        client.identity.name,
+        await getPat()
+    )
     await vscode.commands.executeCommand('git.clone', uri)
 }
 
