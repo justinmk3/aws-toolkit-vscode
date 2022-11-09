@@ -51,11 +51,16 @@ export class CodeCatalystRemoteSourceProvider implements RemoteSourceProvider {
             const intoRemote = async (repo: CodeCatalystRepo): Promise<RemoteSource> => {
                 const resource = { name: repo.name, project: repo.project.name, org: repo.org.name }
                 const pat = await this.authProvider.getPat(client)
-                const cloneUrl = toCodeCatalystGitUri(client.identity.name, pat, resource)
+                const cloneUrl = await client.getRepoCloneUrls({
+                    spaceName: resource.org,
+                    projectName: resource.project,
+                    sourceRepositoryName: resource.name,
+                })
+                const url = toCodeCatalystGitUri(client.identity.name, pat, cloneUrl.https)
 
                 return {
                     name: createRepoLabel(repo),
-                    url: cloneUrl,
+                    url: url,
                     description: repo.description,
                 }
             }

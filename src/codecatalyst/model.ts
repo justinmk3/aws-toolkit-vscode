@@ -252,16 +252,15 @@ export async function getDevfileLocation(client: DevEnvClient, root?: vscode.Uri
     return vscode.Uri.joinPath(rootDirectory, devfileLocation)
 }
 
-interface RepoIdentifier {
-    readonly name: string
-    readonly project: string
-    readonly org: string
-}
-
-export function toCodeCatalystGitUri(username: string, token: string, repo: RepoIdentifier): string {
-    const { name, project, org } = repo
-
-    return `https://${username}:${token}@${getCodeCatalystConfig().gitHostname}/v1/${org}/${project}/${name}`
+export function toCodeCatalystGitUri(username: string, token: string, cloneUrl: string): string {
+    // "https://user@git.gamma.…" => "git.gamma.…"
+    let url = cloneUrl.replace(/https:\/\/[^@\/]+@/, '')
+    if (url === cloneUrl) {
+        // URL didn't change, so it's missing the "user@" part.
+        // "https://git.gamma.…" => "git.gamma.…"
+        url = cloneUrl.replace('https://', '')
+    }
+    return `https://${username}:${token}@${url}`
 }
 
 /**

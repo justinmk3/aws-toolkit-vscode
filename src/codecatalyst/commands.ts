@@ -41,23 +41,28 @@ export async function cloneCodeCatalystRepo(client: ConnectedCodeCatalystClient,
         return auth.getPat(client)
     }
 
+    let resource: { name: string; project: string; org: string }
     if (!url) {
         const r = await selectCodeCatalystResource(client, 'repo')
         if (!r) {
             throw new CancellationError('user')
         }
-        const resource = { name: r.name, project: r.project.name, org: r.org.name }
-        const uri = toCodeCatalystGitUri(client.identity.name, await getPat(), resource)
-        await vscode.commands.executeCommand('git.clone', uri)
+        resource = { name: r.name, project: r.project.name, org: r.org.name }
     } else {
         const [_, org, project, repo] = url.path.slice(1).split('/')
         if (!org || !project || !repo) {
             throw new Error(`Invalid CodeCatalyst URL: unable to parse repository`)
         }
-        const resource = { name: repo, project, org }
-        const uri = toCodeCatalystGitUri(client.identity.name, await getPat(), resource)
-        await vscode.commands.executeCommand('git.clone', uri)
+        resource = { name: repo, project, org }
     }
+
+    const cloneUrl = await client.getRepoCloneUrls({
+        spaceName: resource.org,
+        projectName: resource.project,
+        sourceRepositoryName: resource.name,
+    })
+    const uri = toCodeCatalystGitUri(client.identity.name, await getPat(), cloneUrl.https)
+    await vscode.commands.executeCommand('git.clone', uri)
 }
 
 /**

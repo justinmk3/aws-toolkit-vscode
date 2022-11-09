@@ -498,6 +498,12 @@ class CodeCatalystClientInternal {
         return this.call(this.sdkClient.createSourceRepositoryBranch(args), false)
     }
 
+    public async getRepoCloneUrls(
+        args: codecatalyst.GetSourceRepositoryCloneUrlsRequest
+    ): Promise<codecatalyst.GetSourceRepositoryCloneUrlsResponse> {
+        return this.call(this.sdkClient.getSourceRepositoryCloneUrls(args), false)
+    }
+
     public async createDevEnvironment(args: codecatalyst.CreateDevEnvironmentRequest): Promise<DevEnvironment> {
         const { id } = await this.call(this.sdkClient.createDevEnvironment(fixAliasInRequest(args)), false)
 
