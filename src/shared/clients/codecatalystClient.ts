@@ -319,8 +319,14 @@ class CodeCatalystClientInternal {
         })
     }
 
+    private fromPageable<TRequest, TResponse>(fn: Function, args: TRequest): AsyncCollection<TResponse> {
+        const requester = async (r: TRequest) => this.call(fn(r), true, { items: [] })
+        const collection = pageableToCollection(requester, args, 'nextToken' as any, 'items' as any)
+        return collection as any
+    }
+
     /**
-     * Creates a PAT.
+     * Creates a new personal access token (PAT).
      *
      * @param args.name Name of the token
      * @param args.expires PAT expires on this date, or undefined.
@@ -329,6 +335,13 @@ class CodeCatalystClientInternal {
     public async createAccessToken(
         args: codecatalyst.CreateAccessTokenRequest
     ): Promise<codecatalyst.CreateAccessTokenResponse> {
+        const requester = async (request: codecatalyst.ListAccessTokensRequest) =>
+            this.call(this.sdkClient.listAccessTokens(request), true, { items: [] })
+        const collection = pageableToCollection(requester, {}, 'nextToken', 'items')
+        // const collection = this.fromPageable(this.sdkClient.listAccessTokens, args)
+        for await (const o of collection) {
+            this.log.error(`xxxxxxx ${o}`)
+        }
         return this.call(this.sdkClient.createAccessToken(args), false)
     }
 

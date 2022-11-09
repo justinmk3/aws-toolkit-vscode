@@ -308,14 +308,14 @@ export function isAsyncIterable(obj: any): obj is AsyncIterable<unknown> {
 }
 
 /**
- * Converts a 'paged' API request to a collection of sequential API requests
- * based off a 'mark' (the paginated token field) and a `prop` which is an
+ * Converts a "paged" API request to a collection of sequential API requests
+ * based off a `mark` (the paginated token field) and a `prop` which is an
  * Accumulable property on the response interface.
  *
- * @param requester Asynchronous function to make the API requests with
- * @param request Initial request to apply to the API calls
- * @param mark A property name of the paginated token field shared by the input/output shapes
- * @param prop A property name of an 'Accumulable' field in the output shape
+ * @param requester Asynchronous function to make the API requests with.
+ * @param request Initial request to apply to the API calls.
+ * @param mark Property name (ex: "nextToken") of the paginated token field shared by the input/output shapes.
+ * @param prop Property name (ex: "items") of an "Accumulable" field in the output shape.
  * @returns An {@link AsyncCollection} resolving to the type described by the `prop` field
  */
 export function pageableToCollection<
