@@ -211,6 +211,7 @@ export class AuthWebview extends VueWebview {
             await setupFunc()
             return
         } catch (e) {
+            getLogger().error('xxx: %O', e)
             if (
                 CancellationError.isUserCancelled(e) ||
                 (e instanceof ToolkitError && (CancellationError.isUserCancelled(e.cause) || e.cancelled === true))
@@ -236,7 +237,7 @@ export class AuthWebview extends VueWebview {
                 return { id: 'badStartUrl', text: `Connection failed. Please verify your start URL.` }
             }
 
-            getLogger().error('AuthWebview: Failed to setup: %s', (e as Error).message)
+            getLogger().error('AuthWebview: Failed to setup: %O', e)
             return { id: 'defaultFailure', text: 'Failed to setup.' }
         }
     }
