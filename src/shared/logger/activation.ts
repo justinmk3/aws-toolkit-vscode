@@ -9,9 +9,9 @@ import * as vscode from 'vscode'
 import * as nls from 'vscode-nls'
 import * as fs from 'fs-extra'
 import { Logger, LogLevel, getLogger } from '.'
-import { setLogger } from './logger'
+import { ConsoleLogger, setLogger } from './logger'
 import { logOutputChannel } from './outputChannel'
-import { WinstonToolkitLogger } from './winstonToolkitLogger'
+// import { WinstonToolkitLogger } from '../../nodejs/logger/winstonToolkitLogger'
 import { waitUntil } from '../utilities/timeoutUtils'
 import { cleanLogFiles } from './util'
 import { Settings } from '../settings'
@@ -111,20 +111,20 @@ export function makeLogger(
     },
     disposables?: vscode.Disposable[]
 ): Logger {
-    const logger = new WinstonToolkitLogger(opts.staticLogLevel ?? getLogLevel())
+    const logger = new ConsoleLogger()
     // debug console can show ANSI colors, output channels can not
     // if we're outputting to an output channel, any other output doesn't need ANSI color codes since we have a better display from them in the IDE
     // don't alter logfile output for now since that should be more diagnostic. On the fence about this...
-    const stripAnsi = opts.useDebugConsole || false
-    for (const logPath of opts.logPaths ?? []) {
-        logger.logToFile(logPath)
-    }
-    for (const outputChannel of opts.outputChannels ?? []) {
-        logger.logToOutputChannel(outputChannel, stripAnsi)
-    }
-    if (opts.useDebugConsole) {
-        logger.logToDebugConsole()
-    }
+    // const stripAnsi = opts.useDebugConsole || false
+    // for (const logPath of opts.logPaths ?? []) {
+    //     logger.logToFile(logPath)
+    // }
+    // for (const outputChannel of opts.outputChannels ?? []) {
+    //     logger.logToOutputChannel(outputChannel, stripAnsi)
+    // }
+    // if (opts.useDebugConsole) {
+    //     logger.logToDebugConsole()
+    // }
 
     if (!opts.staticLogLevel) {
         vscode.workspace.onDidChangeConfiguration(
