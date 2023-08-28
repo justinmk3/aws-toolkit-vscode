@@ -8,19 +8,18 @@ import globals from '../extensionGlobals'
 
 const MESSAGE = Symbol.for('message') // eslint-disable-line @typescript-eslint/naming-convention
 
-interface LogEntry {
+export interface LogEntry {
     level: string
     message: string
     [MESSAGE]: string
 }
 
 /**
- * This transport sends log statements to console.log
- * It is primarily intended for testing, where having the log output could assist in diagnosing issues.
+ * Logger transport that sends log statements to console.log. Useful in web-browser mode, or for testing.
  */
 export class ConsoleLogTransport extends Transport {
-    public constructor(options: Transport.TransportStreamOptions) {
-        super(options)
+    public constructor() {
+        super()
     }
 
     public override log(info: LogEntry, next: () => void): void {

@@ -8,7 +8,7 @@ import assert from 'assert'
 import * as path from 'path'
 import * as filesystemUtilities from '../../../shared/filesystemUtilities'
 import * as vscode from 'vscode'
-import { WinstonToolkitLogger } from '../../../shared/logger/winstonToolkitLogger'
+import { WinstonToolkitLogger } from '../../../nodejs/logger/winstonToolkitLogger'
 import { MockOutputChannel } from '../../mockOutputChannel'
 import { waitUntil } from '../../../shared/utilities/timeoutUtils'
 

@@ -5,6 +5,9 @@
 
 import * as vscode from 'vscode'
 import { getLogger } from './shared/logger/logger'
+import { activate as activateLogger } from './shared/logger/activation'
+import { initialize } from './shared/extensionGlobals'
+import { getIdeProperties } from './shared/extensionUtilities'
 
 // The following is required so that the copyFiles script does not fail.
 // I'm assuming this generates something when run that the script can use.
@@ -18,6 +21,15 @@ export async function activate(context: vscode.ExtensionContext) {
     )
 
     getLogger().info('yay')
+
+    // await initializeComputeRegion()
+    // const activationStartedOn = Date.now()
+    // localize = nls.loadMessageBundle()
+    initialize(context)
+    // initializeManifestPaths(context)
+
+    const toolkitOutputChannel = vscode.window.createOutputChannel(`${getIdeProperties().company} Toolkit`)
+    await activateLogger(context, toolkitOutputChannel)
 }
 
 export async function deactivate() {}

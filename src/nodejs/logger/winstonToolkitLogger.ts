@@ -6,12 +6,50 @@
 import { normalize } from 'path'
 import * as vscode from 'vscode'
 import * as winston from 'winston'
-import { ConsoleLogTransport } from './consoleLogTransport'
-import { DebugConsoleTransport } from './debugConsoleTransport'
-import { Logger, LogLevel, compareLogLevel } from './logger'
-import { OutputChannelTransport } from './outputChannelTransport'
-import { isSourceMappingAvailable } from '../vscode/env'
-import { formatError, ToolkitError, UnknownError } from '../errors'
+import Transport from 'winston-transport'
+import * as consoleLogTransport from '../../shared/logger/consoleLogTransport'
+import * as outputChannelTransport from '../../shared/logger/outputChannelTransport'
+import { DebugConsoleTransport } from '../../shared/logger/debugConsoleTransport'
+import { Logger, LogLevel, compareLogLevel } from '../../shared/logger/logger'
+import { isSourceMappingAvailable } from '../../shared/vscode/env'
+import { formatError, ToolkitError, UnknownError } from '../../shared/errors'
+import globals from '../../shared/extensionGlobals'
+
+export class WinstonOutputChannelTransport extends Transport {
+    private transport: outputChannelTransport.OutputChannelTransport
+
+    public constructor(
+        options: Transport.TransportStreamOptions & {
+            outputChannel: vscode.OutputChannel
+            stripAnsi: boolean
+            name?: string
+        }
+    ) {
+        super(options)
+        this.transport = new outputChannelTransport.OutputChannelTransport(options)
+    }
+
+    public override log(info: outputChannelTransport.LogEntry, next: () => void): void {
+        globals.clock.setImmediate(() => {
+            this.transport.log(info, next)
+            this.emit('logged', info)
+        })
+        next()
+    }
+}
+
+export class WinstonConsoleLogTransport extends Transport {
+    private transport: consoleLogTransport.ConsoleLogTransport
+
+    public constructor(options: Transport.TransportStreamOptions) {
+        super(options)
+        this.transport = new consoleLogTransport.ConsoleLogTransport()
+    }
+
+    public override log(info: consoleLogTransport.LogEntry, next: () => void): void {
+        this.transport.log(info, next)
+    }
+}
 
 // Need to limit how many logs are actually tracked
 // LRU cache would work well, currently it just dumps the least recently added log
@@ -64,7 +102,7 @@ export class WinstonToolkitLogger implements Logger, vscode.Disposable {
     }
 
     public logToOutputChannel(outputChannel: vscode.OutputChannel, stripAnsi: boolean): void {
-        const outputChannelTransport: winston.transport = new OutputChannelTransport({
+        const outputChannelTransport: winston.transport = new WinstonOutputChannelTransport({
             outputChannel,
             stripAnsi,
         })
@@ -81,7 +119,7 @@ export class WinstonToolkitLogger implements Logger, vscode.Disposable {
     }
 
     public logToConsole(): void {
-        const consoleLogTransport: winston.transport = new ConsoleLogTransport({})
+        const consoleLogTransport: winston.transport = new WinstonConsoleLogTransport({})
         const logConsoleUri: vscode.Uri = vscode.Uri.parse('console://log')
         consoleLogTransport.on('logged', (obj: any) => this.parseLogObject(logConsoleUri, obj))
         this.logger.add(consoleLogTransport)

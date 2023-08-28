@@ -9,7 +9,7 @@
 import * as vscode from 'vscode'
 import { VSCODE_EXTENSION_ID } from '../shared/extensions'
 import { getLogger } from '../shared/logger'
-import { WinstonToolkitLogger } from '../shared/logger/winstonToolkitLogger'
+import { WinstonToolkitLogger } from '../nodejs/logger/winstonToolkitLogger'
 import { activateExtension } from '../shared/utilities/vsCodeUtils'
 import { mapTestErrors, normalizeError, patchObject, setRunnableTimeout } from '../test/setupUtil'
 import { getTestWindow, resetTestWindow } from '../test/shared/vscode/window'

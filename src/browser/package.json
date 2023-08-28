@@ -3,6 +3,7 @@
     "description": "Browser specific modules to separate concerns from main package.json",
     "license": "Apache-2.0",
     "dependencies": {
+        "winston-transport": "^4.5.0",
         "filer": "^1.4.1",
         "os-browserify": "^0.3.0",
         "path-browserify": "^1.0.1",

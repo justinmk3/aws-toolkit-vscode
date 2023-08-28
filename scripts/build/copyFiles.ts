@@ -86,7 +86,8 @@ async function copy(task: CopyTask): Promise<void> {
     const args = process.argv.slice(2)
 
     if (args.includes('--webpacked')) {
-        tasks.push(...webpackedTasks)
+        console.log(webpackedTasks)
+        // tasks.push(...webpackedTasks)
     }
 
     try {

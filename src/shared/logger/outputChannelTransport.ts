@@ -4,37 +4,37 @@
  */
 
 import * as vscode from 'vscode'
-import Transport from 'winston-transport'
 import globals from '../extensionGlobals'
 import { removeAnsi } from '../utilities/textUtilities'
 
 export const MESSAGE = Symbol.for('message') // eslint-disable-line @typescript-eslint/naming-convention
 
-interface LogEntry {
+export interface LogEntry {
     level: string
     message: string
     [MESSAGE]: string
     raw: boolean
 }
 
-export class OutputChannelTransport extends Transport {
+export interface Transport {
+    log(info: LogEntry, next: () => void): void
+    close?(): void
+}
+
+export class OutputChannelTransport implements Transport {
     private readonly outputChannel: vscode.OutputChannel
     private readonly stripAnsi: boolean
 
-    public constructor(
-        options: Transport.TransportStreamOptions & {
-            outputChannel: vscode.OutputChannel
-            stripAnsi: boolean
-            name?: string
-        }
-    ) {
-        super(options)
-
+    public constructor(options: { outputChannel: vscode.OutputChannel; stripAnsi: boolean; name?: string }) {
         this.outputChannel = options.outputChannel
         this.stripAnsi = options.stripAnsi
     }
 
-    public override log(info: LogEntry, next: () => void): void {
+    public close() {
+        this.outputChannel.dispose()
+    }
+
+    public log(info: LogEntry, next: () => void): void {
         globals.clock.setImmediate(() => {
             const msg: string = this.stripAnsi ? removeAnsi(info[MESSAGE]) : info[MESSAGE]
 
@@ -43,8 +43,6 @@ export class OutputChannelTransport extends Transport {
             } else {
                 this.outputChannel.appendLine(msg)
             }
-
-            this.emit('logged', info)
         })
 
         next()

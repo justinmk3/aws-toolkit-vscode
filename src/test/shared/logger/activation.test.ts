@@ -9,7 +9,7 @@ import { join } from 'path'
 import { makeTemporaryToolkitFolder } from '../../../shared/filesystemUtilities'
 import { Logger } from '../../../shared/logger'
 import { makeLogger } from '../../../shared/logger/activation'
-import { WinstonToolkitLogger } from '../../../shared/logger/winstonToolkitLogger'
+import { WinstonToolkitLogger } from '../../../nodejs/logger/winstonToolkitLogger'
 
 describe('makeLogger', function () {
     let tempFolder: string
