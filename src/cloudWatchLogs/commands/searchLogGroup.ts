@@ -185,7 +185,7 @@ export class SearchPatternPrompter extends InputBoxPrompter {
         }
         getLogger().debug('cwl: validateSearchPattern: %O', searchPattern)
         try {
-            await filterLogEventsFromUri(
+            const r = await filterLogEventsFromUri(
                 this.logGroup,
                 {
                     ...this.logParams,
@@ -195,6 +195,10 @@ export class SearchPatternPrompter extends InputBoxPrompter {
                 undefined,
                 false
             )
+
+            if (r.events.length === 0) {
+                throw Error('No results found')
+            }
         } catch (e) {
             // Validation error. Get the progress message from the global map and cancel it.
             const msgTimeout = await Messages.putMessage(msgKey(this.logGroup), '')

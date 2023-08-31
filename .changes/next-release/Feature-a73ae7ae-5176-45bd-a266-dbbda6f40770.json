@@ -1,0 +1,4 @@
+{
+	"type": "Feature",
+	"description": "CloudWatch Logs: If there are no results, \"Search Log Group\" shows a message and allows editing the search, instead of loading an empty results document"
+}
