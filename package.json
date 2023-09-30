@@ -1485,7 +1485,7 @@
                 },
                 {
                     "command": "aws.samcli.sync",
-                    "when": "!config.aws.samcli.legacyDeploy && view == aws.explorer && viewItem =~ /^(awsLambdaNode|awsRegionNode|awsCloudFormationRootNode)$/",
+                    "when": "!config.aws.samcli.legacyDeploy && view == aws.explorer && viewItem =~ /^(awsLambdaNode|awsRegionNode|awsCloudFormationRootNode|awsRegionFunctionNode|awsRegionFunctionNodeDownloadable)$/",
                     "group": "1@2"
                 },
                 {
