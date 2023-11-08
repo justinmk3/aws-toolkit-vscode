@@ -5,10 +5,10 @@ run-as: codebuild-user
 
 env:
     variables:
+        # Implicitly passed by the AWS automation pipeline:
+        # VSCODE_TEST_VERSION
+        # GITHUB_READONLY_TOKEN
         AWS_TOOLKIT_TEST_NO_COLOR: '1'
-        NO_COVERAGE: 'true'
-        # Suppress noisy apt-get/dpkg warnings like "debconf: unable to initialize frontend: Dialog").
-        DEBIAN_FRONTEND: 'noninteractive'
 
 phases:
     install:
@@ -16,30 +16,24 @@ phases:
         runtime-versions:
             nodejs: 16
         commands:
-            # - '>/dev/null add-apt-repository universe'
-            # - '>/dev/null apt-get -qq install -y apt-transport-https'
-            # - '>/dev/null apt-get -qq update'
-            # - '>/dev/null apt-get -qq install -y ca-certificates'
-            # - 'apt-get install --reinstall ca-certificates'
             - bash buildspec/shared/linux-install.sh
 
     pre_build:
         commands:
             - export HOME=/home/codebuild-user
-            - bash buildspec/shared/setup-github-token.sh
             - bash buildspec/shared/linux-pre_build.sh
 
     build:
         commands:
             - export HOME=/home/codebuild-user
-            - xvfb-run npm run testE2E
+            - npm run testCompile
+            - npm run lint
             - VCS_COMMIT_ID="${CODEBUILD_RESOLVED_SOURCE_VERSION}"
-            - CI_BUILD_URL=$(echo $CODEBUILD_BUILD_URL | sed 's/#/%23/g')
+            - CI_BUILD_URL=$(echo $CODEBUILD_BUILD_URL | sed 's/#/%23/g') # Encode `#` in the URL because otherwise the url is clipped in the Codecov.io site
             - CI_BUILD_ID="${CODEBUILD_BUILD_ID}"
-        finally:
-            - rm -rf ~/.aws/sso/cache || true
+
 reports:
-    e2e-test:
+    unit-test:
         files:
             - '*'
         base-directory: '.test-reports'
