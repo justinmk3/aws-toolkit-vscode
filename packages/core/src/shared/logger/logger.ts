@@ -12,21 +12,37 @@ const toolkitLoggers: {
     debugConsole: Logger | undefined
 } = { main: undefined, channel: undefined, debugConsole: undefined }
 
+/**
+ * Format specifiers (`%s`, `%O`, …) reference:  https://console.spec.whatwg.org/#formatting-specifiers
+ */
 export interface Logger {
+    /** Format specifiers (`%s`, `%O`, …) reference: https://console.spec.whatwg.org/#formatting-specifiers */
     debug(message: string, ...meta: any[]): number
     debug(error: Error, ...meta: any[]): number
+
+    /** Format specifiers (`%s`, `%O`, …) reference: https://console.spec.whatwg.org/#formatting-specifiers */
     verbose(message: string, ...meta: any[]): number
     verbose(error: Error, ...meta: any[]): number
+
+    /** Format specifiers (`%s`, `%O`, …) reference: https://console.spec.whatwg.org/#formatting-specifiers */
     info(message: string, ...meta: any[]): number
     info(error: Error, ...meta: any[]): number
+
+    /** Format specifiers (`%s`, `%O`, …) reference: https://console.spec.whatwg.org/#formatting-specifiers */
     warn(message: string, ...meta: any[]): number
     warn(error: Error, ...meta: any[]): number
+
+    /** Format specifiers (`%s`, `%O`, …) reference: https://console.spec.whatwg.org/#formatting-specifiers */
     error(message: string, ...meta: any[]): number
     error(error: Error, ...meta: any[]): number
+
     setLogLevel(logLevel: LogLevel): void
+
     /** Returns true if the given log level is being logged.  */
     logLevelEnabled(logLevel: LogLevel): boolean
+
     getLogById(logID: number, file: vscode.Uri): string | undefined
+
     /** HACK: Enables logging to vscode Debug Console. */
     enableDebugConsole(): void
 }

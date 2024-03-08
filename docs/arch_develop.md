@@ -1,4 +1,4 @@
-# Architecture: structure
+# Architecture: structure and modules
 
 > Describes the codebase structure and shared modules, and how to work with it.
 > Corresponds to the "Development view" of the [4+1 architectural views](https://en.wikipedia.org/wiki/4%2B1_architectural_view_model).
