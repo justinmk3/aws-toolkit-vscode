@@ -18,9 +18,9 @@ mutable state).
 If you must define a new key (is it _really_ necessary?), follow these guidelines:
 
 -   Choose a prefix as follows (as [recommended](https://code.visualstudio.com/api/extension-guides/command#using-a-custom-when-clause-context)):
-    -   `packages/core/` should use `aws.` prefix
-    -   `packages/toolkit/` should use `aws.toolkit.` prefix
-    -   `packages/amazonq/` should use `amazonq.` prefix
+    -   `packages/core/` should use `aws.` prefix.
+    -   `packages/toolkit/` should use `aws.toolkit.` prefix.
+    -   `packages/amazonq/` should use `amazonq.` prefix.
 -   Use brevity. Less is more.
 -   Document it in the list below.
 
@@ -28,8 +28,10 @@ If you must define a new key (is it _really_ necessary?), follow these guideline
 
 #### setContext keys owned by packages/core/
 
-These keys are currently set by the core/ package, but many of them may eventually be migrated to
-toolkit/ or amazonq/ if appropriate.
+These keys are currently set by the core/ package, but some of them may be migrated to toolkit/ or
+amazonq/ if appropriate.
+
+**Keys owned by "core" should be named with `aws.` prefix.**
 
 -   `isCloud9`: This is hardcoded by Cloud9 itself, not the Toolkit.
     -   Cloud9 _does not support setContext_. So this is the only usable key there.
@@ -45,9 +47,13 @@ toolkit/ or amazonq/ if appropriate.
 
 #### setContext keys owned by packages/toolkit/
 
+**Keys owned by the AWS Toolkit extension should be named with `aws.toolkit.` prefix.**
+
 -   TODO
 
 #### setContext keys owned by packages/amazonq/
+
+**Keys owned by the Amazon Q extension should be named with `amazonq.` prefix.**
 
 -   TODO
 

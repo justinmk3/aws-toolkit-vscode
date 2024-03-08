@@ -55,6 +55,9 @@ export async function makeCsharpConfig(config: SamLaunchRequestArgs): Promise<Sa
         runtimeFamily: RuntimeFamily.DotNet,
     }
 
+    // Need `--mount-with=WRITE` for dotnet container builds, else sam shows an interactive prompt:
+    //      "Would you like to enable mounting with write permissions? [y/N]:"
+    // https://github.com/aws/aws-toolkit-vscode/commit/000c32c0da8933392eec168bed304fc19a2f0962
     if (config.sam?.containerBuild) {
         config.mountWith = 'write'
     }

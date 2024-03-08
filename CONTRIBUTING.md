@@ -276,18 +276,21 @@ user's point of view.
 
 > [!TIP]
 >
-> -   Describe the change in a way that is _meaningful to the customer_. If you can't describe the _customer impact_ then it probably shouldn't be in the changelog.
->     -   ✅ `Connection wizard sometimes shows the old (stale) connection`
+> -   Describe the change in a way that is *meaningful to the customer*.
+> -   Examples:
+>     -   ❌ `Fix followups after hitting iteration limit` (missing context!)
+>         -   Missing context: how will the reader know which feature this refers to?
+>     -   ✅ `Amazon Q Feature Dev: Fix followups after hitting iteration limit`
+>         -   Context is given by the `Amazon Q Feature Dev:` prefix.
 >     -   ✅ `Faster startup after VSCode restarts`
->     -   ❌ `Remove the cache when the connection wizard is re-launched` (code internals are not relevant to customers)
->     -   ❌ `Update telemetry definitions` (not customer-impacting)
-> -   "Bug Fix" changes should describe the _problem being fixed_. Don't say "Fixed" in the
->     description, it's redundant. Example:
->     -   ❌ `Fixed S3 bug which caused filenames to be uppercase`
->     -   ✅ `S3 filenames are always uppercase`
+>         -   Startup is "globally" relevant, so this has enough context.
+>     -   ❌ `Remove the cache when the connection wizard is re-launched`
+>         -   Code internals are not relevant to customers.
+>     -   ✅ `Connection wizard sometimes shows the old (stale) connection`
+>     -   ❌ `Update telemetry definitions`
+>         -   Not customer-impacting.
 > -   To update an _existing_ changelog item, just edit its `.changes/next-release/….json` file, you don't need to re-run `npm run newChange`.
 > -   If there are multiple unrelated changes, run `npm run newChange` for each change.
-> -   Include the feature that the change affects, Q, CodeWhisperer, etc.
 
 ### Pull request title
 
