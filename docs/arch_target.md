@@ -3,6 +3,10 @@
 > Describes the expected environment when the product is running on a user's machine.
 > Corresponds to the "Physical view" of the [4+1 architectural views](https://en.wikipedia.org/wiki/4%2B1_architectural_view_model).
 
+## Publish
+
+-   Marketplace allows a [maximum of 10 tags](https://code.visualstudio.com/api/working-with-extensions/publishing-extension#i-get-a-you-exceeded-the-number-of-allowed-tags-of-10-error-when-i-try-to-publish-my-extension).
+
 ## Requirements / supported platforms
 
 TODO
