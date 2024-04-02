@@ -7,8 +7,11 @@ import { ExtensionContext, window } from 'vscode'
 import { AmazonQChatViewProvider } from './webview/webView'
 import { init as cwChatAppInit } from '../codewhispererChat/app'
 import { init as featureDevChatAppInit } from '../amazonqFeatureDev/app'
-import { init as gumbyChatAppInit } from '../amazonqGumby/app'
+import { init as refactorAssistantAppInit } from '../amazonqRefactorAssistant/app'
 import { AmazonQAppInitContext, DefaultAmazonQAppInitContext } from './apps/initContext'
+
+import { refactorAssistantEnabled } from '../dev/config'
+import { init as gumbyChatAppInit } from '../amazonqGumby/app'
 import { Commands, VsCodeCommandArg } from '../shared/vscode/commands2'
 import { MessagePublisher } from './messages/messagePublisher'
 import { welcome } from './onboardingPage'
@@ -50,6 +53,9 @@ function registerApps(appInitContext: AmazonQAppInitContext) {
     cwChatAppInit(appInitContext)
     featureDevChatAppInit(appInitContext)
     gumbyChatAppInit(appInitContext)
+    if (refactorAssistantEnabled) {
+        refactorAssistantAppInit(appInitContext)
+    }
 }
 
 export const amazonQWelcomeCommand = Commands.declare(

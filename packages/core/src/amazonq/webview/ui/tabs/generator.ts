@@ -11,6 +11,7 @@ import { QuickActionGenerator } from '../quickActions/generator'
 export interface TabDataGeneratorProps {
     isFeatureDevEnabled: boolean
     isGumbyEnabled: boolean
+    isRefactorAssistantEnabled: boolean
 }
 
 export class TabDataGenerator {
@@ -21,6 +22,7 @@ export class TabDataGenerator {
         ['unknown', 'Chat'],
         ['cwc', 'Chat'],
         ['featuredev', 'Q - Dev'],
+        ['refactor', 'Q - Refactor Assistant'],
         ['gumby', 'Q - Code Transformation'],
     ])
 
@@ -28,6 +30,7 @@ export class TabDataGenerator {
         ['unknown', 'Ask a question or enter "/" for quick actions'],
         ['cwc', 'Ask a question or enter "/" for quick actions'],
         ['featuredev', 'Briefly describe a task or issue'],
+        ['refactor', 'Describe your refactoring goal'],
         ['gumby', 'Chat is disabled during Code Transformation.'],
     ])
 
@@ -54,6 +57,12 @@ Before I begin generating code, let's agree on an implementation plan. What chan
 `,
         ],
         [
+            'refactor',
+            `Hi, I'm Amazon Q Refactor Assistant. I can help you analyze monlith code and recommend the best way to refactor them into microservices.
+
+First, make sure you've chose the root folder for the entire code base you intend to refactor, then you can ask me to run the refactoring analysis. Refactor Assistant will create a refactor recommendation based on the code repository you're on right now.`,
+        ],
+        [
             'gumby',
             `Welcome to Code Transformation!
 
@@ -66,6 +75,7 @@ I can help you upgrade your Java 8 and 11 codebases to Java 17.`,
         this.quickActionsGenerator = new QuickActionGenerator({
             isFeatureDevEnabled: props.isFeatureDevEnabled,
             isGumbyEnabled: props.isGumbyEnabled,
+            isRefactorAssistantEnabled: props.isRefactorAssistantEnabled,
         })
     }
 

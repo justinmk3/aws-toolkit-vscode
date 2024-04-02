@@ -17,7 +17,7 @@ import { MessageController } from './messages/controller'
 import { getActions, getDetails } from './diffTree/actions'
 import { DiffTreeFileInfo } from './diffTree/types'
 
-export const createMynahUI = (ideApi: any, amazonQEnabled: boolean) => {
+export const createMynahUI = (ideApi: any, amazonQEnabled: boolean, refactorAssistantInitEnabled: boolean) => {
     // eslint-disable-next-line prefer-const
     let mynahUI: MynahUI
     // eslint-disable-next-line prefer-const
@@ -47,9 +47,12 @@ export const createMynahUI = (ideApi: any, amazonQEnabled: boolean) => {
 
     let isGumbyEnabled = amazonQEnabled
 
+    let isRefactorAssistantEnabled = refactorAssistantInitEnabled
+
     let tabDataGenerator = new TabDataGenerator({
         isFeatureDevEnabled,
         isGumbyEnabled,
+        isRefactorAssistantEnabled,
     })
 
     // eslint-disable-next-line prefer-const
@@ -67,6 +70,7 @@ export const createMynahUI = (ideApi: any, amazonQEnabled: boolean) => {
         onUpdateAuthentication: (isAmazonQEnabled: boolean, authenticatingTabIDs: string[]): void => {
             isFeatureDevEnabled = isAmazonQEnabled
             isGumbyEnabled = isAmazonQEnabled
+            isRefactorAssistantEnabled = isAmazonQEnabled
 
             quickActionHandler = new QuickActionHandler({
                 mynahUI,
@@ -74,11 +78,13 @@ export const createMynahUI = (ideApi: any, amazonQEnabled: boolean) => {
                 tabsStorage,
                 isFeatureDevEnabled,
                 isGumbyEnabled,
+                isRefactorAssistantEnabled,
             })
 
             tabDataGenerator = new TabDataGenerator({
                 isFeatureDevEnabled,
                 isGumbyEnabled,
+                isRefactorAssistantEnabled,
             })
             // Set the new defaults for the quick action commands in all tabs now that isFeatureDevEnabled was enabled/disabled
             for (const tab of tabsStorage.getTabs()) {
@@ -210,7 +216,8 @@ export const createMynahUI = (ideApi: any, amazonQEnabled: boolean) => {
             if (
                 item.type === ChatItemType.PROMPT ||
                 item.type === ChatItemType.SYSTEM_PROMPT ||
-                item.type === ChatItemType.AI_PROMPT
+                item.type === ChatItemType.AI_PROMPT ||
+                item.type === ChatItemType.ANSWER_STREAM
             ) {
                 mynahUI.updateStore(tabID, {
                     loadingChat: true,
@@ -228,6 +235,11 @@ export const createMynahUI = (ideApi: any, amazonQEnabled: boolean) => {
                 })
                 tabsStorage.updateTabStatus(tabID, 'free')
             }
+        },
+        onUpdateChatAnswerReceived: (tabID: string, item: ChatItem) => {
+            mynahUI.updateChatAnswerWithMessageId(tabID, item.messageId || '', {
+                body: item.body,
+            })
         },
         onMessageReceived: (tabID: string, messageData: MynahUIDataModel) => {
             mynahUI.updateStore(tabID, messageData)
@@ -317,6 +329,7 @@ export const createMynahUI = (ideApi: any, amazonQEnabled: boolean) => {
     })
 
     mynahUI = new MynahUI({
+        onStopChatResponse: connector.onStopChatResponse,
         onReady: connector.uiReady,
         onTabAdd: (tabID: string) => {
             // If featureDev has changed availability inbetween the default store settings and now
@@ -404,11 +417,11 @@ export const createMynahUI = (ideApi: any, amazonQEnabled: boolean) => {
         tabs: {
             'tab-1': {
                 isSelected: true,
-                store: tabDataGenerator.getTabData('cwc', true),
+                store: { cancelButtonWhenLoading: false, ...tabDataGenerator.getTabData('cwc', true) },
             },
         },
         defaults: {
-            store: tabDataGenerator.getTabData('cwc', true),
+            store: { cancelButtonWhenLoading: false, ...tabDataGenerator.getTabData('cwc', true) },
         },
         config: {
             maxTabs: 10,
@@ -428,6 +441,7 @@ export const createMynahUI = (ideApi: any, amazonQEnabled: boolean) => {
         tabsStorage,
         isFeatureDevEnabled,
         isGumbyEnabled,
+        isRefactorAssistantEnabled,
     })
     textMessageHandler = new TextMessageHandler({
         mynahUI,
@@ -440,6 +454,7 @@ export const createMynahUI = (ideApi: any, amazonQEnabled: boolean) => {
         tabsStorage,
         isFeatureDevEnabled,
         isGumbyEnabled,
+        isRefactorAssistantEnabled,
     })
 
     return {

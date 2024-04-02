@@ -7,3 +7,4 @@
 // Nothing in this file should have a truthy value on mainline
 
 export const betaUrl = ''
+export const refactorAssistantEnabled = true

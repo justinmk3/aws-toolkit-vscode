@@ -15,6 +15,7 @@ export interface QuickActionsHandlerProps {
     tabsStorage: TabsStorage
     isFeatureDevEnabled: boolean
     isGumbyEnabled: boolean
+    isRefactorAssistantEnabled: boolean
 }
 
 export class QuickActionHandler {
@@ -32,6 +33,7 @@ export class QuickActionHandler {
         this.tabDataGenerator = new TabDataGenerator({
             isFeatureDevEnabled: props.isFeatureDevEnabled,
             isGumbyEnabled: props.isGumbyEnabled,
+            isRefactorAssistantEnabled: props.isRefactorAssistantEnabled,
         })
         this.isFeatureDevEnabled = props.isFeatureDevEnabled
         this.isGumbyEnabled = props.isGumbyEnabled
@@ -42,6 +44,9 @@ export class QuickActionHandler {
         switch (chatPrompt.command) {
             case '/dev':
                 this.handleFeatureDevCommand(chatPrompt, tabID, 'Q - Dev')
+                break
+            case '/refactor':
+                this.handleRefactorAssistantCommand(chatPrompt, tabID, 'Q - Refactor Assistant')
                 break
             case '/help':
                 this.handleHelpCommand(tabID)
@@ -151,6 +156,51 @@ export class QuickActionHandler {
                 affectedTabId,
                 this.tabDataGenerator.getTabData('featuredev', realPromptText === '', taskName)
             )
+
+            if (realPromptText !== '') {
+                this.mynahUI.addChatItem(affectedTabId, {
+                    type: ChatItemType.PROMPT,
+                    body: realPromptText,
+                })
+
+                this.mynahUI.addChatItem(affectedTabId, {
+                    type: ChatItemType.ANSWER_STREAM,
+                    body: '',
+                })
+
+                this.mynahUI.updateStore(affectedTabId, {
+                    loadingChat: true,
+                    promptInputDisabledState: true,
+                })
+
+                void this.connector.requestGenerativeAIAnswer(affectedTabId, {
+                    chatMessage: realPromptText,
+                })
+            }
+        }
+    }
+
+    private handleRefactorAssistantCommand(chatPrompt: ChatPrompt, tabID: string, taskName: string) {
+        let affectedTabId: string | undefined = tabID
+        const realPromptText = chatPrompt.escapedPrompt?.trim() ?? ''
+        if (this.tabsStorage.getTab(affectedTabId)?.type !== 'unknown') {
+            affectedTabId = this.mynahUI.updateStore('', {})
+        }
+        if (affectedTabId === undefined) {
+            this.mynahUI.notify({
+                content: uiComponentsTexts.noMoreTabsTooltip,
+                type: NotificationType.WARNING,
+            })
+            return
+        } else {
+            this.tabsStorage.updateTabTypeFromUnknown(affectedTabId, 'refactor')
+            this.connector.onKnownTabOpen(affectedTabId)
+            this.connector.onUpdateTabType(affectedTabId)
+
+            this.mynahUI.updateStore(affectedTabId, { chatItems: [] })
+            this.mynahUI.updateStore(affectedTabId, this.tabDataGenerator.getTabData('refactor', true, taskName))
+            // Enable stop generating button for refactor tab
+            this.mynahUI.updateStore(affectedTabId, { cancelButtonWhenLoading: true })
 
             if (realPromptText !== '') {
                 this.mynahUI.addChatItem(affectedTabId, {

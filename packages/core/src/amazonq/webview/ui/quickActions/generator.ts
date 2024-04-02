@@ -9,15 +9,18 @@ import { TabType } from '../storages/tabsStorage'
 export interface QuickActionGeneratorProps {
     isFeatureDevEnabled: boolean
     isGumbyEnabled: boolean
+    isRefactorAssistantEnabled: boolean
 }
 
 export class QuickActionGenerator {
     public isFeatureDevEnabled: boolean
     private isGumbyEnabled: boolean
+    private isRefactorAssistantEnabled: boolean
 
     constructor(props: QuickActionGeneratorProps) {
         this.isFeatureDevEnabled = props.isFeatureDevEnabled
         this.isGumbyEnabled = props.isGumbyEnabled
+        this.isRefactorAssistantEnabled = props.isRefactorAssistantEnabled
     }
 
     public generateForTab(tabType: TabType): QuickActionCommandGroup[] {
@@ -36,6 +39,18 @@ export class QuickActionGenerator {
                                           placeholder: 'Briefly describe a task or issue',
                                           description:
                                               'Use all project files as context for code suggestions (increases latency).',
+                                      },
+                                  ],
+                              },
+                          ]
+                        : []),
+                    ...(this.isRefactorAssistantEnabled
+                        ? [
+                              {
+                                  commands: [
+                                      {
+                                          command: '/refactor',
+                                          description: 'Get help with refactoring your monolith to microservices',
                                       },
                                   ],
                               },

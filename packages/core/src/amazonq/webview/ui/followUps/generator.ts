@@ -52,6 +52,21 @@ export class FollowUpGenerator {
                         },
                     ],
                 }
+            case 'refactor':
+                return {
+                    text: 'Try Examples:',
+                    options: [
+                        {
+                            pillText: 'Run analysis',
+                            prompt: 'Run analysis',
+                            type: 'init-prompt',
+                        },
+                        {
+                            pillText: 'What can Q Refactor Assistant do for me?',
+                            type: 'help',
+                        },
+                    ],
+                }
             default:
                 return {
                     text: 'Try Examples:',

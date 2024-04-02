@@ -28,6 +28,7 @@ type MessageCommand =
     | 'response-body-link-click'
     | 'transform'
     | 'footer-info-link-click'
+    | 'in-body-button-click'
     | 'file-click'
     | 'form-action-click'
 

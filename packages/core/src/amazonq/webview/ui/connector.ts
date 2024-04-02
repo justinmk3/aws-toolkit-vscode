@@ -6,6 +6,7 @@
 import { ChatItem, FeedbackPayload, Engagement, ChatItemAction } from '@aws/mynah-ui'
 import { Connector as CWChatConnector } from './apps/cwChatConnector'
 import { Connector as FeatureDevChatConnector } from './apps/featureDevChatConnector'
+import { Connector as RefactorAssistantChatConnector } from './apps/refactorAssistantChatConnector'
 import { Connector as AmazonQCommonsConnector } from './apps/amazonqCommonsConnector'
 import { Connector as GumbyChatConnector } from './apps/gumbyChatConnector'
 import { ExtensionMessage } from './commands'
@@ -34,6 +35,7 @@ export interface ConnectorProps {
     onMessageReceived?: (tabID: string, messageData: any, needToShowAPIDocsTab: boolean) => void
     onChatAnswerUpdated?: (tabID: string, message: ChatItem) => void
     onChatAnswerReceived?: (tabID: string, message: ChatItem) => void
+    onUpdateChatAnswerReceived?: (tabID: string, message: ChatItem) => void
     onWelcomeFollowUpClicked: (tabID: string, welcomeFollowUpType: WelcomeFollowupType) => void
     onAsyncEventProgress: (tabID: string, inProgress: boolean, message: string | undefined) => void
     onQuickHandlerCommand: (tabID: string, command?: string, eventId?: string) => void
@@ -55,6 +57,7 @@ export class Connector {
     private readonly onMessageReceived
     private readonly cwChatConnector
     private readonly featureDevChatConnector
+    private readonly refactorAssistantChatConnector
     private readonly gumbyChatConnector
     private readonly tabsStorage
     private readonly amazonqCommonsConnector: AmazonQCommonsConnector
@@ -66,6 +69,7 @@ export class Connector {
         this.onMessageReceived = props.onMessageReceived
         this.cwChatConnector = new CWChatConnector(props as ConnectorProps)
         this.featureDevChatConnector = new FeatureDevChatConnector(props)
+        this.refactorAssistantChatConnector = new RefactorAssistantChatConnector(props)
         this.gumbyChatConnector = new GumbyChatConnector(props)
         this.amazonqCommonsConnector = new AmazonQCommonsConnector({
             sendMessageToExtension: this.sendMessageToExtension,
@@ -90,8 +94,19 @@ export class Connector {
             case 'featuredev':
                 this.featureDevChatConnector.onResponseBodyLinkClick(tabID, messageId, link)
                 break
+            case 'refactor':
+                this.refactorAssistantChatConnector.onResponseBodyLinkClick(tabID, messageId, link)
+                break
             case 'gumby':
                 this.gumbyChatConnector.onResponseBodyLinkClick(tabID, messageId, link)
+        }
+    }
+
+    onInBodyButtonClick = (tabID: string, messageId: string, action: any): void => {
+        switch (this.tabsStorage.getTab(tabID)?.type) {
+            case 'refactor':
+                this.refactorAssistantChatConnector.onInBodyButtonClick(tabID, messageId, action)
+                break
         }
     }
 
@@ -116,6 +131,8 @@ export class Connector {
                 switch (this.tabsStorage.getTab(tabID)?.type) {
                     case 'featuredev':
                         return this.featureDevChatConnector.requestGenerativeAIAnswer(tabID, payload)
+                    case 'refactor':
+                        return this.refactorAssistantChatConnector.requestGenerativeAIAnswer(tabID, payload)
                     default:
                         return this.cwChatConnector.requestGenerativeAIAnswer(tabID, payload)
                 }
@@ -162,6 +179,8 @@ export class Connector {
             await this.cwChatConnector.handleMessageReceive(messageData)
         } else if (messageData.sender === 'featureDevChat') {
             await this.featureDevChatConnector.handleMessageReceive(messageData)
+        } else if (messageData.sender === 'refactorAssistant') {
+            await this.refactorAssistantChatConnector.handleMessageReceive(messageData)
         } else if (messageData.sender === 'gumbyChat') {
             await this.gumbyChatConnector.handleMessageReceive(messageData)
         }
@@ -245,6 +264,9 @@ export class Connector {
             case 'featuredev':
                 this.featureDevChatConnector.onTabRemove(tabID)
                 break
+            case 'refactor':
+                this.refactorAssistantChatConnector.onTabRemove(tabID)
+                break
             case 'gumby':
                 this.gumbyChatConnector.onTabRemove(tabID)
                 break
@@ -296,6 +318,7 @@ export class Connector {
         const tabType = this.tabsStorage.getTab(tabID)?.type
         switch (tabType) {
             case 'cwc':
+            case 'refactor':
             case 'featuredev':
                 this.amazonqCommonsConnector.authFollowUpClicked(tabID, tabType, authType)
         }
@@ -311,6 +334,9 @@ export class Connector {
                 break
             case 'featuredev':
                 this.featureDevChatConnector.followUpClicked(tabID, followUp)
+                break
+            case 'refactor':
+                this.refactorAssistantChatConnector.followUpClicked(tabID, followUp)
                 break
             default:
                 this.cwChatConnector.followUpClicked(tabID, messageId, followUp)
@@ -342,6 +368,9 @@ export class Connector {
             case 'cwc':
                 this.cwChatConnector.onStopChatResponse(tabID)
                 break
+            case 'refactor':
+                this.refactorAssistantChatConnector.onStopChatResponse(tabID)
+                break
         }
     }
 
@@ -353,6 +382,9 @@ export class Connector {
             case 'cwc':
                 this.cwChatConnector.onSendFeedback(tabId, feedbackPayload)
                 break
+            case 'refactor':
+                this.refactorAssistantChatConnector.sendFeedback(tabId, feedbackPayload)
+                break
         }
     }
 
@@ -363,6 +395,9 @@ export class Connector {
                 break
             case 'featuredev':
                 this.featureDevChatConnector.onChatItemVoted(tabId, messageId, vote)
+                break
+            case 'refactor':
+                this.refactorAssistantChatConnector.onChatItemVoted(tabId, messageId, vote)
                 break
         }
     }
