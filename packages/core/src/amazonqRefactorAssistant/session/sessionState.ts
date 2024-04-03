@@ -5,15 +5,15 @@
 import * as path from 'path'
 import * as vscode from 'vscode'
 import { SessionState, SessionStateAction, SessionStateConfig, SessionStateInteraction } from '../types'
-import { getWorkspaceRootDir, prepareRepoData } from '../util/files'
 import { VirtualFileSystem } from '../../shared/virtualFilesystem'
 import { VirtualMemoryFile } from '../../shared/virtualMemoryFile'
 import { analysisFinishedNotification, defaultPdfName } from '../constants'
 import { refactorAssistantScheme } from '../constants'
 import { v4 as uuidv4 } from 'uuid'
 import { Messenger } from '../controllers/chat/messenger/messenger'
+import { WorkflowStatus } from '../client/refactorAssistant'
 
-const TerminalStates = ['succeeded', 'failed', 'cancelled']
+const TerminalStates: WorkflowStatus[] = ['COMPLETED', 'FAILED', 'CANCELLED']
 
 export class ConversationNotStartedState implements Omit<SessionState, 'uploadId'> {
     constructor(public tabID: string) {}
@@ -71,11 +71,9 @@ export abstract class RefactoringState {
     async handlePlanExecution(
         action: SessionStateAction,
         tabID: string,
-        config: SessionStateConfig
+        config: SessionStateConfig,
+        progressMessageId: string
     ): Promise<SessionStateInteraction> {
-        // Ensure that the loading icon stays showing
-        const progressMessageId = uuidv4()
-        action.messenger.sendInitalStream(tabID, progressMessageId, `Generating plan...`)
         action.messenger.sendUpdatePlaceholder(tabID, 'Generating implementation plan ...')
 
         let pollResponse
@@ -90,8 +88,8 @@ export abstract class RefactoringState {
                 )
 
                 // If the plan hasn't finished yet, update user on progress, otherwise remove progress bar
-                if (pollResponse && !TerminalStates.includes(pollResponse.workflowStatus)) {
-                    workflowStatus = pollResponse.workflowStatus
+                if (pollResponse && !TerminalStates.includes(pollResponse.status)) {
+                    workflowStatus = pollResponse.status
 
                     action.messenger.updateAnswer({
                         type: 'answer-stream',
@@ -103,18 +101,18 @@ export abstract class RefactoringState {
                     action.messenger.updateAnswer({
                         type: 'answer-stream',
                         tabID: tabID,
-                        message: '',
+                        message: pollResponse.assessmentStatus,
                         messageId: progressMessageId,
                     })
                 }
-            } while (!TerminalStates.includes(pollResponse.workflowStatus))
+            } while (!TerminalStates.includes(pollResponse.status))
         } catch (error) {
             action.messenger.sendUpdatePlaceholder(tabID, '')
             const errorState = new ConversationErrored(tabID)
             return errorState.interact(action)
         }
 
-        if (pollResponse === undefined || pollResponse.workflowStatus === 'failed') {
+        if (pollResponse === undefined || pollResponse.status === 'FAILED') {
             action.messenger.sendAnswer({
                 type: 'answer',
                 tabID: tabID,
@@ -124,7 +122,7 @@ export abstract class RefactoringState {
             action.messenger.sendUpdatePlaceholder(tabID, '')
             const nextState = new StartOfConversation(config, tabID)
             return { nextState }
-        } else if (pollResponse.workflowStatus === 'cancelled') {
+        } else if (pollResponse.status === 'CANCELLED') {
             action.messenger.sendAnswer({
                 type: 'answer',
                 tabID: tabID,
@@ -136,23 +134,17 @@ export abstract class RefactoringState {
             return { nextState }
         }
 
-        // TODO: Use plan id from API or use version of plan number
-        const planID = uuidv4()
-        // PlanID in file name ensures unique naming for multiple versions of a plan
-        const generationFilePath = path.join(`RA_PLAN_${planID}.md`)
-
-        let createDownloadResult
+        let plan: string = ''
         try {
-            // TODO: For out temp dev server we are assuming the s3url string contains our plan. We need to update this to
-            //      use s3 once that functionality is built server side.
-            createDownloadResult = await config.proxyClient.createDownloadUrl(config.engagementId)
+            plan = await config.proxyClient.downloadPlan(config.engagementId, config.assessmentId)
         } catch (error) {
             action.messenger.sendUpdatePlaceholder(tabID, '')
             const errorState = new ConversationErrored(tabID)
             return errorState.interact(action)
         }
-        const plan = createDownloadResult.s3url
 
+        // PlanID in file name ensures unique naming for multiple versions of a plan
+        const generationFilePath = path.join(`RA_PLAN_${config.assessmentId}.md`)
         const planUri = registerFile(plan, generationFilePath, tabID, action.fs)
 
         // TODO: add the preview for the plan here instead of the entire plan
@@ -212,7 +204,7 @@ export abstract class RefactoringState {
             tabID: tabID,
             message: `Your Refactor Assistant analysis is ready! You can download the PDF version above. A local markdown version is available [here](${planUri}).
             
-        You can ask me any follow up questions you may have or adjust any part by generating a revised analysis.`,
+You can ask me any follow up questions you may have or adjust any part by generating a revised analysis.`,
             followUp: {
                 text: 'Try Examples:',
                 options: [
@@ -252,36 +244,46 @@ export class GenerateInitialPlan extends RefactoringState implements SessionStat
             message: `Ok, let me create a plan. This may take a few minutes`,
         })
 
-        // TODO: once server s3 functionality is implemented we need to use that instead
-        // upload code
-        const workspaceRoot = getWorkspaceRootDir()
-        const { zipFileBuffer } = await prepareRepoData(workspaceRoot)
+        // Ensure that the loading icon stays showing
+        const progressMessageId = uuidv4()
+        action.messenger.sendInitalStream(this.tabID, progressMessageId, `Uploading workspace...`)
+
         try {
-            const response = await this.config.proxyClient.uploadCode(zipFileBuffer)
-            this.config.engagementId = response.conversationId
+            const createEngagementResponse = await this.config.proxyClient.createEngagement()
+            this.config.engagementId = createEngagementResponse.engagementId
+        } catch (error) {
+            const errorState = new ConversationErrored(this.tabID)
+            return errorState.interact(action)
+        }
+
+        // upload code
+        try {
+            await this.config.proxyClient.uploadWorkspace(this.config.engagementId)
         } catch (error) {
             const errorState = new ConversationErrored(this.tabID)
             return errorState.interact(action)
         }
 
         try {
-            const startRefactoringResponse = await this.config.proxyClient.startRefactoringAssessment(
-                this.config.engagementId,
-                this.prompt + action.msg,
-                'markdown'
-            )
+            const startRefactoringResponse = await this.config.proxyClient.startRefactoringAssessment({
+                engagementId: this.config.engagementId,
+                userInput: this.prompt,
+            })
             this.config.assessmentId = startRefactoringResponse.assessmentId
         } catch (error) {
             const errorState = new ConversationErrored(this.tabID)
             return errorState.interact(action)
         }
 
-        return this.handlePlanExecution(action, this.tabID, this.config)
+        return this.handlePlanExecution(action, this.tabID, this.config, progressMessageId)
     }
 
     async cancel(messenger: Messenger) {
         try {
-            await this.config.proxyClient.stopRefactoringAssessment(this.config.engagementId, this.config.assessmentId)
+            await this.config.proxyClient.stopRefactoringAssessment({
+                engagementId: this.config.engagementId,
+                assessmentId: this.config.assessmentId,
+            })
 
             if (this.progressMessageId) {
                 messenger.updateAnswer({
@@ -312,23 +314,30 @@ export class RevisePlan extends RefactoringState implements SessionState {
             message: `Ok, let me revise the plan. This may take a few minutes`,
         })
 
+        // Ensure that the loading icon stays showing
+        const progressMessageId = uuidv4()
+        action.messenger.sendInitalStream(this.tabID, progressMessageId, `Starting plan revision...`)
+
         try {
-            await this.config.proxyClient.updateRefactoringAssessment(
-                this.config.engagementId,
-                this.config.assessmentId,
-                action.msg
-            )
+            await this.config.proxyClient.updateRefactoringAssessment({
+                engagementId: this.config.engagementId,
+                assessmentId: this.config.assessmentId,
+                userInput: action.msg,
+            })
         } catch (error) {
             const errorState = new ConversationErrored(this.tabID)
             return errorState.interact(action)
         }
 
-        return this.handlePlanExecution(action, this.tabID, this.config)
+        return this.handlePlanExecution(action, this.tabID, this.config, progressMessageId)
     }
 
     async cancel(messenger: Messenger) {
         try {
-            await this.config.proxyClient.stopRefactoringAssessment(this.config.engagementId, this.config.assessmentId)
+            await this.config.proxyClient.stopRefactoringAssessment({
+                engagementId: this.config.engagementId,
+                assessmentId: this.config.assessmentId,
+            })
 
             if (this.progressMessageId) {
                 messenger.updateAnswer({
@@ -362,12 +371,12 @@ export class PlanGenerationFollowup extends RefactoringState implements SessionS
         let workflowStatus = ''
 
         try {
-            const startInteractionResponse = await this.config.proxyClient.startRefactoringInteraction(
-                this.config.engagementId,
-                action.msg
-            )
+            const startInteractionResponse = await this.config.proxyClient.startRefactoringInteraction({
+                engagementId: this.config.engagementId,
+                userInput: action.msg,
+            })
             const interactionId = startInteractionResponse.interactionId
-            workflowStatus = startInteractionResponse.workflowStatus
+            workflowStatus = startInteractionResponse.status
 
             do {
                 pollResponse = await this.config.proxyClient.pollRefactoringInteraction(
@@ -376,17 +385,17 @@ export class PlanGenerationFollowup extends RefactoringState implements SessionS
                     workflowStatus
                 )
 
-                if (pollResponse && !TerminalStates.includes(pollResponse.workflowStatus)) {
-                    workflowStatus = pollResponse.workflowStatus
+                if (pollResponse && !TerminalStates.includes(pollResponse.status)) {
+                    workflowStatus = pollResponse.status
 
                     action.messenger.updateAnswer({
                         type: 'answer-stream',
                         tabID: this.tabID,
-                        message: pollResponse.workflowStatus,
+                        message: pollResponse.status,
                         messageId: this.progressMessageId,
                     })
                 }
-            } while (!TerminalStates.includes(pollResponse.workflowStatus))
+            } while (!TerminalStates.includes(pollResponse.status))
 
             action.messenger.sendAnswer({
                 type: 'answer',
@@ -477,14 +486,15 @@ You can ask me any follow up questions you may have or adjust any part by genera
     }
 
     async interact(action: SessionStateAction): Promise<SessionStateInteraction> {
-        const deriveIntentResult = await this.config.proxyClient.deriveUserIntent(this.config.engagementId, action.msg)
+        const deriveIntentResult = await this.config.proxyClient.deriveUserIntent({
+            engagementId: this.config.engagementId,
+            userInput: action.msg,
+        })
 
-        if (deriveIntentResult.intent === 'explain analysis') {
+        if (deriveIntentResult.userIntent === 'QUESTION_AND_ANSWER') {
             return this.explain(action)
-        } else if (deriveIntentResult.intent === 'revise analysis') {
+        } else if (deriveIntentResult.userIntent === 'ASSESSMENT') {
             return this.revise(action)
-        } else if (deriveIntentResult.intent === 'new analysis') {
-            return this.newPlan(action)
         }
 
         action.messenger.sendAnswer({

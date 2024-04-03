@@ -13,6 +13,7 @@ import { maxFileSizeBytes } from '../limits'
 import fs from 'fs-extra'
 import { GitIgnoreFilter } from './gitignore'
 import { Uri } from 'vscode'
+import { getStringHash } from '../../shared/utilities/textUtilities'
 
 export function getExcludePattern(additionalPatterns: string[] = []) {
     const globAlwaysExcludedDirs = getGlobDirExcludedPatterns().map(pattern => `**/${pattern}/*`)
@@ -86,7 +87,11 @@ export async function prepareRepoData(repoRootPath: string) {
         )
 
         const zipFileBuffer = zip.toBuffer()
-        return { zipFileBuffer }
+
+        return {
+            zipFileBuffer,
+            contentChecksumSha256: getStringHash(zipFileBuffer),
+        }
     } catch (error) {
         throw new Error(`refactorAssistant: Failed to prepare repo: ${error}`)
     }

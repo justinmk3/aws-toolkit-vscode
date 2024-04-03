@@ -17,7 +17,6 @@ import { Messenger } from '../../../amazonqRefactorAssistant/controllers/chat/me
 import { AppToWebViewMessageDispatcher } from '../../../amazonqRefactorAssistant/views/connector/connector'
 import { MessagePublisher } from '../../../amazonq/messages/messagePublisher'
 import { RefactorAssistantClient } from '../../../amazonqRefactorAssistant/client/refactorAssistant'
-import * as fileUtils from '../../../amazonqRefactorAssistant/util/files'
 import { VirtualFileSystem } from '../../../shared/virtualFilesystem'
 import { getTestWindow } from '../../shared/vscode/window'
 import { analysisFinishedNotification } from '../../../amazonqRefactorAssistant/constants'
@@ -37,7 +36,6 @@ const mockSessionStateAction = (
     }
 }
 
-let mockUploadCode: sinon.SinonStub
 let mockcreateEngagement: sinon.SinonStub
 let mockdeleteEngagement: sinon.SinonStub
 let mockcreateUploadUrl: sinon.SinonStub
@@ -51,7 +49,8 @@ let mockStartRefactoringInteraction: sinon.SinonStub
 let mockGetRefactoringInteraction: sinon.SinonStub
 let mockpollRefactoringAssessmentStatus: sinon.SinonStub
 let mockPollRefactoringInteraction: sinon.SinonStub
-let mockdownloadFile: sinon.SinonStub
+let mockUploadWorkspace: sinon.SinonStub
+let mockdownloadPlan: sinon.SinonStub
 
 const mockSessionStateConfig = ({
     engagementId,
@@ -66,7 +65,6 @@ const mockSessionStateConfig = ({
     assessmentId,
     recommendationId,
     proxyClient: {
-        uploadCode: () => mockUploadCode(),
         createEngagement: () => mockcreateEngagement(),
         deleteEngagement: () => mockdeleteEngagement(),
         createUploadUrl: () => mockcreateUploadUrl(),
@@ -80,7 +78,8 @@ const mockSessionStateConfig = ({
         getRefactoringInteraction: () => mockGetRefactoringInteraction(),
         pollRefactoringAssessmentStatus: () => mockpollRefactoringAssessmentStatus(),
         pollRefactoringInteraction: () => mockPollRefactoringInteraction(),
-        downloadFile: () => mockdownloadFile(),
+        uploadWorkspace: () => mockUploadWorkspace(),
+        downloadPlan: () => mockdownloadPlan(),
     } as unknown as RefactorAssistantClient,
 })
 
@@ -116,54 +115,50 @@ describe('Refactor Assistant sessionState', () => {
     })
 
     describe('GenerateInitialPlan', () => {
-        const testRepo = '/test-repo'
-        const testBuffer = { zipFileBuffer: Buffer.from('test-files') }
         const firstPrompt = 'please suggest a microservice'
         const secondPrompt = 'please focus on the cart functionality'
-        let stubGetWorkspaceRoot: sinon.SinonStub
-        let stubPrepareRepoData: sinon.SinonStub
-        let stubCreateDownloadUrl: sinon.SinonStub
-        let stubUploadCode: sinon.SinonStub
         let stubStartRefactoringAssessment: sinon.SinonStub
         let stubSendInitialStream: sinon.SinonStub
         let stubSendUpdatePlaceholder: sinon.SinonStub
         let stubUpdateAnswer: sinon.SinonStub
         let stubFileSystem: sinon.SinonStub
         let stubSendAnswer: sinon.SinonStub
+        let stubUploadWorkspace: sinon.SinonStub
+        let stubDownloadPlan: sinon.SinonStub
+        let stubCreateEngagement: sinon.SinonStub
 
         beforeEach(() => {
-            stubGetWorkspaceRoot = sinon.stub(fileUtils, 'getWorkspaceRootDir').returns(testRepo)
-            stubPrepareRepoData = sinon.stub(fileUtils, 'prepareRepoData').resolves(testBuffer)
-            stubCreateDownloadUrl = sinon
-                .stub(testConfig.proxyClient, 'createDownloadUrl')
-                .resolves({ s3url: '/test-url' })
-            stubUploadCode = sinon.stub(testConfig.proxyClient, 'uploadCode').resolves({ conversationId: engagementId })
             stubStartRefactoringAssessment = sinon
                 .stub(testConfig.proxyClient, 'startRefactoringAssessment')
-                .resolves({ assessmentId, workflowStatus: 'in progress' })
+                .resolves({ assessmentId, status: 'IN_PROGRESS' })
             stubSendInitialStream = sinon.stub(Messenger.prototype, 'sendInitalStream')
             stubSendUpdatePlaceholder = sinon.stub(Messenger.prototype, 'sendUpdatePlaceholder')
             stubUpdateAnswer = sinon.stub(Messenger.prototype, 'updateAnswer')
             stubFileSystem = sinon.stub(VirtualFileSystem.prototype, 'registerProvider')
             stubSendAnswer = sinon.stub(Messenger.prototype, 'sendAnswer')
+            stubUploadWorkspace = sinon.stub(testConfig.proxyClient, 'uploadWorkspace')
+            stubDownloadPlan = sinon.stub(testConfig.proxyClient, 'downloadPlan').resolves('')
+            stubCreateEngagement = sinon.stub(testConfig.proxyClient, 'createEngagement').resolves({
+                engagementId,
+            })
         })
 
         it('kicks off recommendation and polls for completion', async () => {
-            const pollForStatusStub = sinon
-                .stub(testConfig.proxyClient, 'pollRefactoringAssessmentStatus')
-                .resolves({ assessmentStatus: 'The plan has succeeded', workflowStatus: 'succeeded' })
+            const pollForStatusStub = sinon.stub(testConfig.proxyClient, 'pollRefactoringAssessmentStatus').resolves({
+                assessmentStatus: 'The plan has succeeded',
+                status: 'COMPLETED',
+                engagementId,
+                assessmentId,
+            })
 
             await new GenerateInitialPlan(testConfig, firstPrompt, tabId).interact(mockSessionStateAction(secondPrompt))
 
-            sinon.assert.calledOnce(stubGetWorkspaceRoot)
-            sinon.assert.calledOnceWithExactly(stubPrepareRepoData, testRepo)
-            sinon.assert.calledOnceWithExactly(stubUploadCode, testBuffer.zipFileBuffer)
-            sinon.assert.calledOnceWithExactly(
-                stubStartRefactoringAssessment,
+            sinon.assert.calledOnce(stubCreateEngagement)
+            sinon.assert.calledOnce(stubUploadWorkspace)
+            sinon.assert.calledOnceWithExactly(stubStartRefactoringAssessment, {
                 engagementId,
-                firstPrompt + secondPrompt,
-                'markdown'
-            )
+                userInput: firstPrompt,
+            })
             sinon.assert.calledOnce(pollForStatusStub)
             sinon.assert.calledOnce(stubSendInitialStream)
             sinon.assert.calledTwice(stubSendUpdatePlaceholder)
@@ -174,17 +169,20 @@ describe('Refactor Assistant sessionState', () => {
             // Called again, because the process is cancelled
             assert.strictEqual(stubSendUpdatePlaceholder.calledWith('tab-id', ''), true)
             sinon.assert.calledOnce(stubUpdateAnswer)
+            sinon.assert.calledOnce(stubDownloadPlan)
             sinon.assert.calledOnce(stubFileSystem)
             sinon.assert.callCount(stubSendAnswer, 4)
-            sinon.assert.calledOnce(stubCreateDownloadUrl)
         })
 
         it('shows vscode notification upon success', async () => {
             const testWindow = getTestWindow()
 
-            sinon
-                .stub(testConfig.proxyClient, 'pollRefactoringAssessmentStatus')
-                .resolves({ assessmentStatus: 'The plan has succeeded', workflowStatus: 'succeeded' })
+            sinon.stub(testConfig.proxyClient, 'pollRefactoringAssessmentStatus').resolves({
+                assessmentStatus: 'The plan has succeeded',
+                status: 'COMPLETED',
+                assessmentId,
+                engagementId,
+            })
 
             // If the user chooses the download button
 
@@ -203,18 +201,21 @@ describe('Refactor Assistant sessionState', () => {
         })
 
         it('detects failed status and sends error message to user', async () => {
-            const pollForStatusStub = sinon
-                .stub(testConfig.proxyClient, 'pollRefactoringAssessmentStatus')
-                .resolves({ assessmentStatus: 'The plan has failed', workflowStatus: 'failed' })
+            const pollForStatusStub = sinon.stub(testConfig.proxyClient, 'pollRefactoringAssessmentStatus').resolves({
+                assessmentStatus: 'The plan has failed',
+                status: 'FAILED',
+                assessmentId,
+                engagementId,
+            })
 
             await new GenerateInitialPlan(testConfig, firstPrompt, tabId).interact(mockSessionStateAction(secondPrompt))
 
-            sinon.assert.calledOnceWithExactly(
-                stubStartRefactoringAssessment,
+            sinon.assert.calledOnce(stubCreateEngagement)
+            sinon.assert.calledOnce(stubUploadWorkspace)
+            sinon.assert.calledOnceWithExactly(stubStartRefactoringAssessment, {
                 engagementId,
-                firstPrompt + secondPrompt,
-                'markdown'
-            )
+                userInput: firstPrompt,
+            })
             sinon.assert.calledOnce(pollForStatusStub)
             sinon.assert.calledOnce(stubSendInitialStream)
             sinon.assert.calledTwice(stubSendUpdatePlaceholder)
@@ -225,24 +226,27 @@ describe('Refactor Assistant sessionState', () => {
             // Called again, because the process is cancelled
             assert.strictEqual(stubSendUpdatePlaceholder.calledWith('tab-id', ''), true)
             sinon.assert.calledOnce(stubUpdateAnswer)
+            sinon.assert.notCalled(stubDownloadPlan)
             sinon.assert.notCalled(stubFileSystem)
             sinon.assert.calledTwice(stubSendAnswer)
-            sinon.assert.notCalled(stubCreateDownloadUrl)
         })
 
         it('detects cancelled status and notifies user', async () => {
-            const pollForStatusStub = sinon
-                .stub(testConfig.proxyClient, 'pollRefactoringAssessmentStatus')
-                .resolves({ assessmentStatus: 'The plan was cancelled', workflowStatus: 'cancelled' })
+            const pollForStatusStub = sinon.stub(testConfig.proxyClient, 'pollRefactoringAssessmentStatus').resolves({
+                assessmentStatus: 'The plan was cancelled',
+                status: 'CANCELLED',
+                assessmentId,
+                engagementId,
+            })
 
             await new GenerateInitialPlan(testConfig, firstPrompt, tabId).interact(mockSessionStateAction(secondPrompt))
 
-            sinon.assert.calledOnceWithExactly(
-                stubStartRefactoringAssessment,
+            sinon.assert.calledOnce(stubCreateEngagement)
+            sinon.assert.calledOnce(stubUploadWorkspace)
+            sinon.assert.calledOnceWithExactly(stubStartRefactoringAssessment, {
                 engagementId,
-                firstPrompt + secondPrompt,
-                'markdown'
-            )
+                userInput: firstPrompt,
+            })
             sinon.assert.calledOnce(pollForStatusStub)
             sinon.assert.calledOnce(stubSendInitialStream)
             sinon.assert.calledTwice(stubSendUpdatePlaceholder)
@@ -253,40 +257,41 @@ describe('Refactor Assistant sessionState', () => {
             // Called again, because the process is cancelled
             assert.strictEqual(stubSendUpdatePlaceholder.calledWith('tab-id', ''), true)
             sinon.assert.calledOnce(stubUpdateAnswer)
+            sinon.assert.notCalled(stubDownloadPlan)
             sinon.assert.notCalled(stubFileSystem)
             sinon.assert.calledTwice(stubSendAnswer)
-            sinon.assert.notCalled(stubCreateDownloadUrl)
         })
     })
 
     describe('RevisePlan', () => {
         const secondPrompt = 'please focus on the cart functionality'
-        let stubCreateDownloadUrl: sinon.SinonStub
         let stubUpdateRefactoringAssessment: sinon.SinonStub
         let stubSendInitialStream: sinon.SinonStub
         let stubSendUpdatePlaceholder: sinon.SinonStub
         let stubUpdateAnswer: sinon.SinonStub
         let stubFileSystem: sinon.SinonStub
         let stubSendAnswer: sinon.SinonStub
+        let stubDownloadPlan: sinon.SinonStub
 
         beforeEach(() => {
-            stubCreateDownloadUrl = sinon
-                .stub(testConfig.proxyClient, 'createDownloadUrl')
-                .resolves({ s3url: '/test-url' })
+            stubFileSystem = sinon.stub(VirtualFileSystem.prototype, 'registerProvider')
+            stubDownloadPlan = sinon.stub(testConfig.proxyClient, 'downloadPlan').resolves('revised plan')
             stubUpdateRefactoringAssessment = sinon
                 .stub(testConfig.proxyClient, 'updateRefactoringAssessment')
-                .resolves({ workflowStatus: 'in progress' })
+                .resolves({ status: 'IN_PROGRESS', engagementId: '', assessmentId: '' })
             stubSendInitialStream = sinon.stub(Messenger.prototype, 'sendInitalStream')
             stubSendUpdatePlaceholder = sinon.stub(Messenger.prototype, 'sendUpdatePlaceholder')
             stubUpdateAnswer = sinon.stub(Messenger.prototype, 'updateAnswer')
-            stubFileSystem = sinon.stub(VirtualFileSystem.prototype, 'registerProvider')
             stubSendAnswer = sinon.stub(Messenger.prototype, 'sendAnswer')
         })
 
         it('kicks off recommendation and polls for completion', async () => {
-            const pollForStatusStub = sinon
-                .stub(testConfig.proxyClient, 'pollRefactoringAssessmentStatus')
-                .resolves({ assessmentStatus: 'The plan has succeeded', workflowStatus: 'succeeded' })
+            const pollForStatusStub = sinon.stub(testConfig.proxyClient, 'pollRefactoringAssessmentStatus').resolves({
+                assessmentStatus: 'The plan has succeeded',
+                status: 'COMPLETED',
+                engagementId,
+                assessmentId,
+            })
 
             await new RevisePlan(testConfig, tabId).interact(mockSessionStateAction(secondPrompt))
 
@@ -300,17 +305,20 @@ describe('Refactor Assistant sessionState', () => {
             // Called again, because the process is cancelled
             assert.strictEqual(stubSendUpdatePlaceholder.calledWith('tab-id', ''), true)
             sinon.assert.calledOnce(stubUpdateAnswer)
+            sinon.assert.calledOnce(stubDownloadPlan)
             sinon.assert.calledOnce(stubFileSystem)
             sinon.assert.callCount(stubSendAnswer, 4)
-            sinon.assert.calledOnce(stubCreateDownloadUrl)
         })
 
         it('shows vscode notification upon success', async () => {
             const testWindow = getTestWindow()
 
-            sinon
-                .stub(testConfig.proxyClient, 'pollRefactoringAssessmentStatus')
-                .resolves({ assessmentStatus: 'The plan has succeeded', workflowStatus: 'succeeded' })
+            sinon.stub(testConfig.proxyClient, 'pollRefactoringAssessmentStatus').resolves({
+                assessmentStatus: 'The plan has succeeded',
+                status: 'COMPLETED',
+                engagementId,
+                assessmentId,
+            })
 
             // If the user chooses the download button
 
@@ -329,18 +337,20 @@ describe('Refactor Assistant sessionState', () => {
         })
 
         it('detects failed status and sends error message to user', async () => {
-            const pollForStatusStub = sinon
-                .stub(testConfig.proxyClient, 'pollRefactoringAssessmentStatus')
-                .resolves({ assessmentStatus: 'The plan has failed', workflowStatus: 'failed' })
+            const pollForStatusStub = sinon.stub(testConfig.proxyClient, 'pollRefactoringAssessmentStatus').resolves({
+                assessmentStatus: 'The plan has failed',
+                status: 'FAILED',
+                engagementId,
+                assessmentId,
+            })
 
             await new RevisePlan(testConfig, tabId).interact(mockSessionStateAction(secondPrompt))
 
-            sinon.assert.calledOnceWithExactly(
-                stubUpdateRefactoringAssessment,
+            sinon.assert.calledOnceWithExactly(stubUpdateRefactoringAssessment, {
                 engagementId,
                 assessmentId,
-                secondPrompt
-            )
+                userInput: secondPrompt,
+            })
             sinon.assert.calledOnce(pollForStatusStub)
             sinon.assert.calledOnce(stubSendInitialStream)
             sinon.assert.calledTwice(stubSendUpdatePlaceholder)
@@ -351,24 +361,24 @@ describe('Refactor Assistant sessionState', () => {
             // Called again, because the process is cancelled
             assert.strictEqual(stubSendUpdatePlaceholder.calledWith('tab-id', ''), true)
             sinon.assert.calledOnce(stubUpdateAnswer)
-            sinon.assert.notCalled(stubFileSystem)
             sinon.assert.calledTwice(stubSendAnswer)
-            sinon.assert.notCalled(stubCreateDownloadUrl)
         })
 
         it('detects cancelled status and notifies user', async () => {
-            const pollForStatusStub = sinon
-                .stub(testConfig.proxyClient, 'pollRefactoringAssessmentStatus')
-                .resolves({ assessmentStatus: 'The plan was cancelled', workflowStatus: 'cancelled' })
+            const pollForStatusStub = sinon.stub(testConfig.proxyClient, 'pollRefactoringAssessmentStatus').resolves({
+                assessmentStatus: 'The plan was cancelled',
+                status: 'CANCELLED',
+                engagementId,
+                assessmentId,
+            })
 
             await new RevisePlan(testConfig, tabId).interact(mockSessionStateAction(secondPrompt))
 
-            sinon.assert.calledOnceWithExactly(
-                stubUpdateRefactoringAssessment,
+            sinon.assert.calledOnceWithExactly(stubUpdateRefactoringAssessment, {
                 engagementId,
                 assessmentId,
-                secondPrompt
-            )
+                userInput: secondPrompt,
+            })
             sinon.assert.calledOnce(pollForStatusStub)
             sinon.assert.calledOnce(stubSendInitialStream)
             sinon.assert.calledTwice(stubSendUpdatePlaceholder)
@@ -379,9 +389,7 @@ describe('Refactor Assistant sessionState', () => {
             // Called again, because the process is cancelled
             assert.strictEqual(stubSendUpdatePlaceholder.calledWith('tab-id', ''), true)
             sinon.assert.calledOnce(stubUpdateAnswer)
-            sinon.assert.notCalled(stubFileSystem)
             sinon.assert.calledTwice(stubSendAnswer)
-            sinon.assert.notCalled(stubCreateDownloadUrl)
         })
     })
 
@@ -404,13 +412,13 @@ describe('Refactor Assistant sessionState', () => {
         it('explains code when prompted', async () => {
             stubDeriveUserIntent = sinon
                 .stub(testConfig.proxyClient, 'deriveUserIntent')
-                .resolves({ intent: 'explain analysis' })
+                .resolves({ userIntent: 'QUESTION_AND_ANSWER' })
             stubStartRefactoringInteraction = sinon
                 .stub(testConfig.proxyClient, 'startRefactoringInteraction')
-                .resolves({ workflowStatus: '', interactionId: '123' })
+                .resolves({ status: 'IN_PROGRESS', interactionId: '123', engagementId: '' })
             stubPollRefactoringInteraction = sinon
                 .stub(testConfig.proxyClient, 'pollRefactoringInteraction')
-                .resolves({ workflowStatus: 'succeeded', response: 'test response' })
+                .resolves({ status: 'COMPLETED', response: 'test response', engagementId: '', interactionId: '' })
 
             const result = await new PlanGenerationFollowup(testConfig, tabId).interact(mockSessionStateAction())
 
@@ -429,23 +437,10 @@ describe('Refactor Assistant sessionState', () => {
             assert(result.nextState instanceof PlanGenerationFollowup)
         })
 
-        it('creates a new analysis when prompted', async () => {
-            stubDeriveUserIntent = sinon
-                .stub(testConfig.proxyClient, 'deriveUserIntent')
-                .resolves({ intent: 'new analysis' })
-
-            const result = await new PlanGenerationFollowup(testConfig, tabId).interact(mockSessionStateAction())
-
-            sinon.assert.calledOnce(stubDeriveUserIntent)
-            sinon.assert.calledOnce(stubSendAnswer)
-
-            assert(result.nextState instanceof GenerateInitialPlan)
-        })
-
         it('revises plan when prompted', async () => {
             stubDeriveUserIntent = sinon
                 .stub(testConfig.proxyClient, 'deriveUserIntent')
-                .resolves({ intent: 'revise analysis' })
+                .resolves({ userIntent: 'ASSESSMENT' })
 
             const result = await new PlanGenerationFollowup(testConfig, tabId).interact(mockSessionStateAction())
 

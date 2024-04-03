@@ -55,8 +55,10 @@ export async function createSession({
 }) {
     const sessionConfig = await createSessionConfig()
 
-    const client = sinon.createStubInstance(RefactorAssistantClient)
-    client.startRefactoringAssessment.resolves({ assessmentId, workflowStatus: 'in progress' })
+    const client = sinon.createStubInstance(
+        RefactorAssistantClient
+    ) as sinon.SinonStubbedInstance<RefactorAssistantClient> & RefactorAssistantClient
+    client.startRefactoringAssessment.resolves({ assessmentId, status: 'IN_PROGRESS' })
     const session = new Session(sessionConfig, messenger, tabID, client)
 
     return session
