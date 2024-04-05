@@ -7,13 +7,18 @@ import { Messenger } from './controllers/chat/messenger/messenger'
 import { RefactorAssistantClient } from './client/refactorAssistant'
 import { VirtualFileSystem } from '../shared/virtualFilesystem'
 
-export interface SessionStateInteraction {
-    nextState: SessionState | Omit<SessionState, 'uploadId'> | undefined
-}
+export type State =
+    | 'AbstractRefactoringState'
+    | 'ConversationErrored'
+    | 'ConversationNotStarted'
+    | 'GenerateInitialPlan'
+    | 'PlanGenerationFollowup'
+    | 'RevisePlan'
+    | 'StartOfConversation'
 
 export interface SessionState {
     readonly tabID: string
-    interact(action: SessionStateAction): Promise<SessionStateInteraction>
+    interact(action: SessionStateAction): Promise<State>
     cancel?(messenger: Messenger): Promise<void>
 }
 
@@ -22,6 +27,8 @@ export interface SessionStateConfig {
     engagementId: string
     assessmentId: string
     recommendationId: string
+    prompt?: string
+    error?: string
 }
 
 export interface SessionStateAction {

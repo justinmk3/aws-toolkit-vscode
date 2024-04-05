@@ -3,6 +3,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+import { WorkflowStatus } from './client/refactorAssistant'
+
 // The Scheme name of the virtual documents.
 export const refactorAssistantScheme = 'aws-refactor'
 
@@ -19,3 +21,5 @@ export const analysisFinishedNotification = {
 }
 
 export const defaultPdfName = 'RA_PLAN.pdf'
+
+export const TerminalStates: WorkflowStatus[] = ['COMPLETED', 'FAILED', 'CANCELLED']

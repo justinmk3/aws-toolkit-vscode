@@ -100,17 +100,6 @@ export class RefactorAssistantController {
     }
 
     private async processUserChatMessage(message: any) {
-        /**
-         * Don't attempt to process any chat messages when a workspace folder is not set.
-         * When the tab is first opened we will throw an error and lock the chat if the workspace
-         * folder is not found
-         */
-
-        const workspaceFolders = vscode.workspace.workspaceFolders
-        if (workspaceFolders === undefined || workspaceFolders.length === 0) {
-            return
-        }
-
         if (!message.message) {
             throw new Error(`Invalid message: ${message.message}`)
         }

@@ -6,12 +6,11 @@
 import sinon from 'sinon'
 import * as vscode from 'vscode'
 import assert from 'assert'
-import {
-    GenerateInitialPlan,
-    StartOfConversation,
-    RevisePlan,
-    PlanGenerationFollowup,
-} from '../../../amazonqRefactorAssistant/session/sessionState'
+import * as fileUtils from '../../../amazonqRefactorAssistant/util/files'
+import { PlanGenerationFollowup } from '../../../amazonqRefactorAssistant/session/sessionState/PlanGenerationFollowup'
+import { GenerateInitialPlan } from '../../../amazonqRefactorAssistant/session/sessionState/GenerateInitialPlan'
+import { StartOfConversation } from '../../../amazonqRefactorAssistant/session/sessionState/StartOfConversation'
+import { RevisePlan } from '../../../amazonqRefactorAssistant/session/sessionState/RevisePlan'
 import { SessionStateConfig, SessionStateAction } from '../../../amazonqRefactorAssistant/types'
 import { Messenger } from '../../../amazonqRefactorAssistant/controllers/chat/messenger/messenger'
 import { AppToWebViewMessageDispatcher } from '../../../amazonqRefactorAssistant/views/connector/connector'
@@ -109,7 +108,7 @@ describe('Refactor Assistant sessionState', () => {
             const sessionState = new StartOfConversation(testConfig, tabId)
             const response = await sessionState.interact(testAction)
 
-            assert(response.nextState instanceof GenerateInitialPlan)
+            assert.strictEqual(response, 'GenerateInitialPlan')
             sinon.assert.calledOnce(mockMessenger)
         })
     })
@@ -126,6 +125,7 @@ describe('Refactor Assistant sessionState', () => {
         let stubUploadWorkspace: sinon.SinonStub
         let stubDownloadPlan: sinon.SinonStub
         let stubCreateEngagement: sinon.SinonStub
+        let mockGetWorkspaceFolders: sinon.SinonStub
 
         beforeEach(() => {
             stubStartRefactoringAssessment = sinon
@@ -141,6 +141,7 @@ describe('Refactor Assistant sessionState', () => {
             stubCreateEngagement = sinon.stub(testConfig.proxyClient, 'createEngagement').resolves({
                 engagementId,
             })
+            mockGetWorkspaceFolders = sinon.stub(fileUtils, 'getWorkspaceFolders').resolves(['/index.ts'])
         })
 
         it('kicks off recommendation and polls for completion', async () => {
@@ -151,13 +152,14 @@ describe('Refactor Assistant sessionState', () => {
                 assessmentId,
             })
 
-            await new GenerateInitialPlan(testConfig, firstPrompt, tabId).interact(mockSessionStateAction(secondPrompt))
+            await new GenerateInitialPlan(testConfig, tabId).interact(mockSessionStateAction(secondPrompt))
 
+            sinon.assert.calledOnce(mockGetWorkspaceFolders)
             sinon.assert.calledOnce(stubCreateEngagement)
             sinon.assert.calledOnce(stubUploadWorkspace)
             sinon.assert.calledOnceWithExactly(stubStartRefactoringAssessment, {
                 engagementId,
-                userInput: firstPrompt,
+                userInput: firstPrompt + ' ' + secondPrompt,
             })
             sinon.assert.calledOnce(pollForStatusStub)
             sinon.assert.calledOnce(stubSendInitialStream)
@@ -195,7 +197,7 @@ describe('Refactor Assistant sessionState', () => {
                 assert.ok(message.title)
             })
 
-            await new GenerateInitialPlan(testConfig, firstPrompt, tabId).interact(mockSessionStateAction(secondPrompt))
+            await new GenerateInitialPlan(testConfig, tabId).interact(mockSessionStateAction(secondPrompt))
 
             assert(testWindow.shownMessages.some(message => message.message === analysisFinishedNotification.body))
         })
@@ -208,13 +210,13 @@ describe('Refactor Assistant sessionState', () => {
                 engagementId,
             })
 
-            await new GenerateInitialPlan(testConfig, firstPrompt, tabId).interact(mockSessionStateAction(secondPrompt))
+            await new GenerateInitialPlan(testConfig, tabId).interact(mockSessionStateAction(secondPrompt))
 
             sinon.assert.calledOnce(stubCreateEngagement)
             sinon.assert.calledOnce(stubUploadWorkspace)
             sinon.assert.calledOnceWithExactly(stubStartRefactoringAssessment, {
                 engagementId,
-                userInput: firstPrompt,
+                userInput: firstPrompt + ' ' + secondPrompt,
             })
             sinon.assert.calledOnce(pollForStatusStub)
             sinon.assert.calledOnce(stubSendInitialStream)
@@ -239,13 +241,13 @@ describe('Refactor Assistant sessionState', () => {
                 engagementId,
             })
 
-            await new GenerateInitialPlan(testConfig, firstPrompt, tabId).interact(mockSessionStateAction(secondPrompt))
+            await new GenerateInitialPlan(testConfig, tabId).interact(mockSessionStateAction(secondPrompt))
 
             sinon.assert.calledOnce(stubCreateEngagement)
             sinon.assert.calledOnce(stubUploadWorkspace)
             sinon.assert.calledOnceWithExactly(stubStartRefactoringAssessment, {
                 engagementId,
-                userInput: firstPrompt,
+                userInput: firstPrompt + ' ' + secondPrompt,
             })
             sinon.assert.calledOnce(pollForStatusStub)
             sinon.assert.calledOnce(stubSendInitialStream)
@@ -434,7 +436,7 @@ describe('Refactor Assistant sessionState', () => {
             sinon.assert.notCalled(stubUpdateAnswer)
             sinon.assert.calledTwice(stubSendAnswer)
 
-            assert(result.nextState instanceof PlanGenerationFollowup)
+            assert.strictEqual(result, 'PlanGenerationFollowup')
         })
 
         it('revises plan when prompted', async () => {
@@ -447,7 +449,7 @@ describe('Refactor Assistant sessionState', () => {
             sinon.assert.calledOnce(stubDeriveUserIntent)
             sinon.assert.calledOnce(stubSendAnswer)
 
-            assert(result.nextState instanceof RevisePlan)
+            assert.strictEqual(result, 'RevisePlan')
         })
     })
 })

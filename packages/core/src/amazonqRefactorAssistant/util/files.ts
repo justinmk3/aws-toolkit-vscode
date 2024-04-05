@@ -51,6 +51,10 @@ export function getWorkspaceRootDir() {
     return workspaceFolders[0].uri.fsPath
 }
 
+export function getWorkspaceFolders() {
+    return vscode.workspace.workspaceFolders
+}
+
 /**
  * @param rootPath root folder to look for .gitignore files
  * @returns list of glob patterns extracted from .gitignore
