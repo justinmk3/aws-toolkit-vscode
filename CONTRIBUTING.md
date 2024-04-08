@@ -270,25 +270,28 @@ The audience for the changelog is _the user_. The changelog is presented to user
 marketplace. It is a "micro-blog" for advertising improvements to users. It is the _primary_ way of
 communicating changes to customers. Please consider this when writing changelog entries.
 
-Mentioning low-level details like "function x now takes argument y", will not be useful, because it
-doesn't say what that means in terms of the user experience. Instead, describe the effect from the
-user's point of view.
+Mentioning low-level details like "function x now takes argument y" is not useful, because it
+doesn't describe the _user experience_ impact. Instead, describe the effect from the user's point of
+view.
 
 > [!TIP]
 >
-> -   Describe the change in a way that is *meaningful to the customer*.
+> -   Describe the change in a way that is _meaningful to the user_.
 > -   Examples:
->     -   ❌ `Fix followups after hitting iteration limit` (missing context!)
->         -   Missing context: how will the reader know which feature this refers to?
+>     -   ✅ `Faster startup after VSCode restarts`
+>         -   Startup is globally relevant, so this has enough context.
+>     -   ❌ `Fix followups after hitting iteration limit`
+>         -   Missing context. How will the reader know which feature this refers to?
 >     -   ✅ `Amazon Q Feature Dev: Fix followups after hitting iteration limit`
 >         -   Context is given by the `Amazon Q Feature Dev:` prefix.
->     -   ✅ `Faster startup after VSCode restarts`
->         -   Startup is "globally" relevant, so this has enough context.
 >     -   ❌ `Remove the cache when the connection wizard is re-launched`
->         -   Code internals are not relevant to customers.
->     -   ✅ `Connection wizard sometimes shows the old (stale) connection`
+>         -   Describes internal details. What is the impact for the user?
+>         -   ✅ Improved version: `Connection wizard sometimes shows the old (stale) connection`
 >     -   ❌ `Update telemetry definitions`
->         -   Not customer-impacting.
+>         -   Not meaningful to users.
+>     -   ✅ `Introduced public listConnections() API for use by third-party extensions`
+>         -   In this case, the customer is a third-party extension developer, so the code interface
+>             is relevant.
 > -   To update an _existing_ changelog item, just edit its `.changes/next-release/….json` file, you don't need to re-run `npm run newChange`.
 > -   If there are multiple unrelated changes, run `npm run newChange` for each change.
 
@@ -357,6 +360,10 @@ The `aws.dev.forceDevMode` setting enables or disables Toolkit "dev mode". Witho
 -   Use `getLogger()` to log debugging messages, warnings, etc.
     -   Example: `getLogger().error('topic: widget failed: %O', { foo: 'bar', baz: 42 })`
 -   Log messages are written to the extension Output channel, which you can view in vscode by visiting the "Output" panel and selecting `AWS Toolkit Logs` or `Amazon Q Logs`.
+    -   This is separate from the `AWS Toolkit` channel, which only shows UI and info messages for normal application use.
+-   To set the _log level_ ("Debug", "Info", "Error", …), view the Output channel (`AWS Toolkit Logs` or `Amazon Q Logs`), then [click the "gear" icon](https://github.com/aws/aws-toolkit-vscode/pull/4859).
+    -   **Telemetry message details** are logged at "debug" level.
+    -   To open the log file in an editor, click the "..." icon.
 -   Use the `aws.dev.logfile` setting to set the logfile path to a fixed location, so you can follow
     and filter logs using shell tools like `tail` and `grep`.
     -   Note: this always logs at **debug log-level** (though you can temporarily override that from the `AWS Toolkit Logs` UI).
