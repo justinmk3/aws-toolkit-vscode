@@ -325,9 +325,11 @@ The `aws.dev.forceDevMode` setting enables or disables Toolkit "dev mode". Witho
 -   Use `getLogger()` to log debugging messages, warnings, etc.
     -   Example: `getLogger().error('topic: widget failed: %O', { foo: 'bar', baz: 42 })`
 -   Log messages are written to the extension Output channel, which you can view in vscode by visiting the "Output" panel and selecting `AWS Toolkit Logs` or `Amazon Q Logs`.
--   While viewing the Output channel (`AWS Toolkit Logs` or `Amazon Q Logs`) in vscode:
-    -   Click the "gear" icon to [select a log level](https://github.com/aws/aws-toolkit-vscode/pull/4859) ("Debug", "Info", "Error", …).
-    -   Click the "..." icon to open the log file.
+    -   This is separate from the `AWS Toolkit` channel, which only shows UI and info messages for normal application use.
+-   To view the logs, run the `Output: Show Output Channels...` command or visit the vscode "Output" panel.
+-   To set the *log level* ("Debug", "Info", "Error", …), view the Output channel (`AWS Toolkit Logs` or `Amazon Q Logs`), then [click the "gear" icon](https://github.com/aws/aws-toolkit-vscode/pull/4859).
+    -   **Telemetry message details** are logged at "debug" level.
+    -   To open the log file in an editor, click the "..." icon.
 -   Use the `aws.dev.logfile` setting to set the logfile path to a fixed location, so you can follow
     and filter logs using shell tools like `tail` and `grep`. For example in settings.json,
     ```
@@ -337,7 +339,7 @@ The `aws.dev.forceDevMode` setting enables or disables Toolkit "dev mode". Witho
     ```
     tail -F ~/awstoolkit.log
     ```
--   Use the `AWS (Developer): Watch Logs` command to watch and filter Toolkit logs (including
+-   Use the `AWS (Developer): Watch Logs` command to watch and _filter_ Toolkit logs (including
     telemetry) in VSCode.
     -   Only available if you enabled "dev mode" (`aws.dev.forceDevMode` setting, see above).
     -   Enter text in the Debug Console filter box to show only log messages with that text. <br/>
