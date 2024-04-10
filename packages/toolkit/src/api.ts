@@ -3,6 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+import * as vscode from 'vscode'
 import { Auth, Connection, AwsConnection } from 'aws-core-vscode/auth'
 import { getLogger } from 'aws-core-vscode/shared'
 
@@ -12,6 +13,11 @@ export const awsToolkitApi = {
      * @param extensionId Extension id that identifies the caller.
      */
     getApi(extensionId: string) {
+        const caller = vscode.extensions.getExtension(extensionId)
+        if (!caller) {
+            throw Error(`invalid extensionId: "${extensionId}"`)
+        }
+
         return {
             /**
              * Exposing listConnections API for other extension to read or re-use
