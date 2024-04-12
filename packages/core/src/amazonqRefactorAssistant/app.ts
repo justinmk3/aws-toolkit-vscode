@@ -3,21 +3,21 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import * as vscode from 'vscode'
-import { UIMessageListener } from './views/actions/uiMessageListener'
-import { ChatControllerEventEmitters, RefactorAssistantController } from './controllers/chat/controller'
-import { AmazonQAppInitContext } from '../amazonq/apps/initContext'
-import { MessagePublisher } from '../amazonq/messages/messagePublisher'
-import { MessageListener } from '../amazonq/messages/messageListener'
-import { Messenger } from './controllers/chat/messenger/messenger'
-import { AppToWebViewMessageDispatcher } from './views/connector/connector'
-import { ChatSessionStorage } from './storage/chatSession'
-import { fromQueryToParameters } from '../shared/utilities/uriUtils'
-import { getLogger } from '../shared/logger/logger'
-import globals from '../shared/extensionGlobals'
-import { refactorAssistantScheme } from './constants'
 import { debounce } from 'lodash'
+import * as vscode from 'vscode'
+import { AmazonQAppInitContext } from '../amazonq/apps/initContext'
+import { MessageListener } from '../amazonq/messages/messageListener'
+import { MessagePublisher } from '../amazonq/messages/messagePublisher'
 import { AuthUtil, getChatAuthState } from '../codewhisperer/util/authUtil'
+import globals from '../shared/extensionGlobals'
+import { getLogger } from '../shared/logger/logger'
+import { fromQueryToParameters } from '../shared/utilities/uriUtils'
+import { refactorAssistantScheme } from './constants'
+import { ChatControllerEventEmitters, RefactorAssistantController } from './controllers/chat/controller'
+import { Messenger } from './controllers/chat/messenger/messenger'
+import { ChatSessionStorage } from './storage/chatSession'
+import { UIMessageListener } from './views/actions/uiMessageListener'
+import { AppToWebViewMessageDispatcher } from './views/connector/connector'
 
 export function init(appContext: AmazonQAppInitContext) {
     const refactorAssistantEventEmitters: ChatControllerEventEmitters = {

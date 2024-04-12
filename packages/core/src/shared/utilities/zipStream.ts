@@ -37,13 +37,13 @@ export class ZipStream {
         this._archive.pipe(this._streamBuffer)
         this._hasher = crypto.createHash('md5')
 
-        this._archive.on('data', data => {
+        this._archive.on('data', (data: crypto.BinaryLike) => {
             this._hasher.update(data)
         })
-        this._archive.on('error', err => {
+        this._archive.on('error', (err: any) => {
             throw err
         })
-        this._archive.on('warning', err => {
+        this._archive.on('warning', (err: string) => {
             getLogger().warn(err)
         })
     }

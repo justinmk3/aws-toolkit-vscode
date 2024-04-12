@@ -4,10 +4,13 @@
  */
 import * as path from 'path'
 import * as vscode from 'vscode'
-import { SessionStateAction, SessionStateConfig, State } from '../../types'
 import { VirtualFileSystem } from '../../../shared/virtualFilesystem'
 import { VirtualMemoryFile } from '../../../shared/virtualMemoryFile'
-import { refactorAssistantScheme, analysisFinishedNotification, defaultPdfName, TerminalStates } from '../../constants'
+import { GetRefactoringAssessmentStatusResult } from '../../client/refactorAssistant'
+import { TerminalStates, analysisFinishedNotification, defaultPdfName, refactorAssistantScheme } from '../../constants'
+import { SessionStateAction, SessionStateConfig, State } from '../../types'
+import { ToolkitError } from '../../../shared/errors'
+import { telemetry } from '../../../shared/telemetry/telemetry'
 
 export abstract class AbstractRefactoringState {
     async handlePlanExecution(
@@ -18,7 +21,7 @@ export abstract class AbstractRefactoringState {
     ): Promise<State> {
         action.messenger.sendUpdatePlaceholder(tabID, 'Generating implementation plan ...')
 
-        let pollResponse
+        let pollResponse: GetRefactoringAssessmentStatusResult
         let workflowStatus = ''
 
         try {
@@ -50,6 +53,7 @@ export abstract class AbstractRefactoringState {
             } while (!TerminalStates.includes(pollResponse.status))
         } catch (error) {
             action.messenger.sendUpdatePlaceholder(tabID, '')
+            throw new ToolkitError('Revised plan generation has failed', { code: 'ServerError' })
             return 'ConversationErrored'
         }
 
@@ -61,6 +65,7 @@ export abstract class AbstractRefactoringState {
             })
 
             action.messenger.sendUpdatePlaceholder(tabID, '')
+            throw new ToolkitError('Revised plan generation has failed', { code: 'ServerError' })
             return 'StartOfConversation'
         } else if (pollResponse.status === 'CANCELLED') {
             action.messenger.sendAnswer({
@@ -70,8 +75,12 @@ export abstract class AbstractRefactoringState {
             })
 
             action.messenger.sendUpdatePlaceholder(tabID, '')
+            throw new ToolkitError('Revised plan generation has been cancelled', { cancelled: true })
             return 'StartOfConversation'
         }
+        telemetry.record({
+            reportStatus: pollResponse.status,
+        })
 
         let plan: string = ''
         try {

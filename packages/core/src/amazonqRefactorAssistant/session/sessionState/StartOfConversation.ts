@@ -2,12 +2,21 @@
  * Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * SPDX-License-Identifier: Apache-2.0
  */
+import { telemetry } from '../../../shared/telemetry/telemetry'
+import { RefactorAssistantShowChatMessage } from '../../../shared/telemetry/telemetry.gen'
 import { SessionState, SessionStateAction, SessionStateConfig, State } from '../../types'
 
 export class StartOfConversation implements SessionState {
     constructor(private config: SessionStateConfig, public tabID: string) {}
 
     async interact(action: SessionStateAction): Promise<State> {
+        const telemetryEvent: RefactorAssistantShowChatMessage = {
+            sessionId: this.config.sessionId,
+        }
+
+        telemetry.refactorAssistant_showChatMessage.run(() => {
+            telemetry.refactorAssistant_showChatMessage.record(telemetryEvent)
+        })
         action.messenger.sendAnswer({
             type: 'answer',
             tabID: this.tabID,

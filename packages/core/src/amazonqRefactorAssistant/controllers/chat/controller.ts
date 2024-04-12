@@ -5,12 +5,12 @@
 
 import * as vscode from 'vscode'
 import { EventEmitter } from 'vscode'
-import { getLogger } from '../../../shared/logger'
-import { ChatSessionStorage } from '../../storage/chatSession'
-import * as authUtil from '../../../codewhisperer/util/authUtil'
-import { Messenger } from './messenger/messenger'
 import { AuthController } from '../../../amazonq/auth/controller'
+import * as authUtil from '../../../codewhisperer/util/authUtil'
+import { getLogger } from '../../../shared/logger'
 import { defaultPdfName } from '../../constants'
+import { ChatSessionStorage } from '../../storage/chatSession'
+import { Messenger } from './messenger/messenger'
 
 export interface ChatControllerEventEmitters {
     readonly processHumanChatMessage: EventEmitter<any>

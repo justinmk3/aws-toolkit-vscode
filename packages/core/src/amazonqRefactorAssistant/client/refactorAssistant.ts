@@ -44,7 +44,7 @@ type DeriveUserIntentInput = {
     userInput: string
 }
 
-type StartRefactoringAssessmentResult = {
+export type StartRefactoringAssessmentResult = {
     assessmentId: string
     status: WorkflowStatus
 }
@@ -54,7 +54,7 @@ type StartRefactoringAssessmentInput = {
     userInput: string
 }
 
-type GetRefactoringAssessmentStatusResult = {
+export type GetRefactoringAssessmentStatusResult = {
     engagementId: string
     assessmentId: string
     status: WorkflowStatus
@@ -132,6 +132,7 @@ export class RefactorAssistantClient {
                 clientMetadata: this.getClientMetadata(),
                 ...params,
             })
+
             const response = await request.fetch('POST', `http://localhost:3030/${apiName}`, {
                 body,
                 headers: {

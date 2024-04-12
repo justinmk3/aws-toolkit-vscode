@@ -27,6 +27,8 @@ export interface SessionStateConfig {
     engagementId: string
     assessmentId: string
     recommendationId: string
+    sessionId: string
+    reportGenerationStartTime: number
     prompt?: string
     error?: string
 }

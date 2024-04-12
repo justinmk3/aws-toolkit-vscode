@@ -286,6 +286,33 @@
             "name": "codewhispererUserInputDetails",
             "type": "string",
             "description": "A JSON serialized string of user input details."
+        },
+        {
+            "name": "generationDuration",
+            "description": "Length of time between start and completion of plan generation",
+            "type": "int"
+        },
+        {
+            "name": "sessionId",
+            "type": "string",
+            "description": "Represents an arbitrary session defined by a given feature"
+        },
+        {
+            "name": "apiNames",
+            "type": "string",
+            "description": "Names of allowed API calls",
+            "allowedValues": ["TBD"]
+        },
+        {
+            "name": "reportId",
+            "type": "string",
+            "description": "Represents a report generated for user"
+        },
+        {
+            "name": "reportStatus",
+            "type": "string",
+            "description": "Names of the phases in which a server-generated report can exist",
+            "allowedValues": ["IN_PROGRESS", "COMPLETED", "FAILED", "CANCELLED"]
         }
     ],
     "metrics": [
@@ -1050,6 +1077,137 @@
                 }
             ],
             "passive": true
+        },
+        {
+            "name": "refactorAssistant_showChatMessage",
+            "passive": true,
+            "description": "show the initial welcome message to the user.",
+            "metadata": [
+                {
+                    "type": "sessionId",
+                    "required": true
+                }
+            ]
+        },
+        {
+            "name": "refactorAssistant_generateRecommendation",
+            "passive": true,
+            "description": "",
+            "metadata": [
+                {
+                    "type": "sessionId",
+                    "required": true
+                },
+                {
+                    "type": "reportId"
+                },
+                {
+                    "type": "result"
+                },
+                {
+                    "type": "reportStatus",
+                    "required": true
+                }
+            ]
+        },
+        {
+            "name": "refactorAssistant_updateRecommendation",
+            "passive": true,
+            "description": "",
+            "metadata": [
+                {
+                    "type": "sessionId",
+                    "required": true
+                },
+                {
+                    "type": "reportId"
+                },
+                {
+                    "type": "result"
+                },
+
+                {
+                    "type": "reportStatus",
+                    "required": true
+                }
+            ]
+        },
+        {
+            "name": "refactorAssistant_getRecommendationStatus",
+            "passive": true,
+            "description": "",
+            "metadata": [
+                {
+                    "type": "sessionId",
+                    "required": true
+                },
+                {
+                    "type": "reportId",
+                    "required": true
+                },
+                {
+                    "type": "result"
+                },
+                {
+                    "type": "reportStatus"
+                }
+            ]
+        },
+        {
+            "name": "refactorAssistant_ChatPanel",
+            "passive": true,
+            "description": "We wnat to know if the user closed the RA chat panel in Q",
+            "metadata": [
+                {
+                    "type": "sessionId",
+                    "required": true
+                },
+                {
+                    "type": "reportId"
+                }
+            ]
+        },
+        {
+            "name": "refactorAssistant_fileOpen",
+            "passive": true,
+            "description": "Open markdown file from chat panel",
+            "metadata": [
+                {
+                    "type": "sessionId",
+                    "required": true
+                },
+                {
+                    "type": "reportId"
+                }
+            ]
+        },
+        {
+            "name": "refactorAssistant_showMarkdownPreviewInChat",
+            "passive": true,
+            "description": "show markdown preview in chat panel",
+            "metadata": [
+                {
+                    "type": "sessionId",
+                    "required": true
+                },
+                {
+                    "type": "reportId"
+                }
+            ]
+        },
+        {
+            "name": "refactorAssistant_planGenerationIsCanceledFromChatPrompt",
+            "passive": true,
+            "description": "Metric for cancellation of plan generation",
+            "metadata": [
+                {
+                    "type": "sessionId",
+                    "required": true
+                },
+                {
+                    "type": "reportId"
+                }
+            ]
         }
     ]
 }

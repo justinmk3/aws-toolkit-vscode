@@ -6,6 +6,8 @@ import { SessionState, SessionStateAction, SessionStateConfig, State } from '../
 import { v4 as uuidv4 } from 'uuid'
 import { Messenger } from '../../controllers/chat/messenger/messenger'
 import { AbstractRefactoringState } from './AbstractRefactoringState'
+import { telemetry } from '../../../shared/telemetry/telemetry'
+import { ToolkitError } from '../../../shared/errors'
 
 export class RevisePlan extends AbstractRefactoringState implements SessionState {
     private progressMessageId?: string
@@ -32,10 +34,21 @@ export class RevisePlan extends AbstractRefactoringState implements SessionState
                 userInput: action.msg,
             })
         } catch (error) {
+            throw new ToolkitError('Revised plan generation has failed', { code: 'ServerError' })
             return 'ConversationErrored'
         }
+        let nextState: State
+        await telemetry.refactorAssistant_updateRecommendation.run(async telemetrySpan => {
+            telemetrySpan.record({
+                sessionId: this.config.sessionId,
+                reportId: this.config.assessmentId,
+            })
+            nextState = await this.handlePlanExecution(action, this.tabID, this.config, progressMessageId)
 
-        return this.handlePlanExecution(action, this.tabID, this.config, progressMessageId)
+            return nextState
+        })
+        // @ts-ignore
+        return nextState
     }
 
     async cancel(messenger: Messenger) {
