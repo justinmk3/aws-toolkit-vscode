@@ -6,15 +6,16 @@
 import { createSessionConfig } from '../session/sessionConfigFactory'
 import { Messenger } from '../controllers/chat/messenger/messenger'
 import { Session } from '../session/session'
+import { RefactorAssistantClient } from '../client/refactorAssistant'
 
 export class ChatSessionStorage {
     private sessions: Map<string, Session> = new Map()
 
-    constructor(private readonly messenger: Messenger) {}
+    constructor(private readonly messenger: Messenger, private readonly proxyClient: RefactorAssistantClient) {}
 
     private async createSession(tabID: string): Promise<Session> {
         const sessionConfig = await createSessionConfig()
-        const session = new Session(sessionConfig, this.messenger, tabID)
+        const session = new Session(sessionConfig, this.messenger, tabID, this.proxyClient)
         this.sessions.set(tabID, session)
         return session
     }
@@ -34,5 +35,9 @@ export class ChatSessionStorage {
 
     public deleteSession(tabID: string) {
         this.sessions.delete(tabID)
+    }
+
+    public getSessionIds(): string[] {
+        return [...this.sessions.keys()]
     }
 }

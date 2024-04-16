@@ -20,6 +20,6 @@ export const analysisFinishedNotification = {
     view: 'View Plan Markdown',
 }
 
-export const defaultPdfName = 'RA_PLAN.pdf'
+export const pdfName = (id: string) => `Q_refactor_analysis_${id}.pdf`
 
 export const TerminalStates: WorkflowStatus[] = ['COMPLETED', 'FAILED', 'CANCELLED']

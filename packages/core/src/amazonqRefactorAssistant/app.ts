@@ -18,6 +18,7 @@ import { Messenger } from './controllers/chat/messenger/messenger'
 import { ChatSessionStorage } from './storage/chatSession'
 import { UIMessageListener } from './views/actions/uiMessageListener'
 import { AppToWebViewMessageDispatcher } from './views/connector/connector'
+import { RefactorAssistantClient } from './client/refactorAssistant'
 
 export function init(appContext: AmazonQAppInitContext) {
     const refactorAssistantEventEmitters: ChatControllerEventEmitters = {
@@ -27,16 +28,19 @@ export function init(appContext: AmazonQAppInitContext) {
         authClicked: new vscode.EventEmitter<any>(),
         stopResponse: new vscode.EventEmitter<any>(),
         removeTab: new vscode.EventEmitter<any>(),
+        authChanged: new vscode.EventEmitter<any>(),
     }
 
+    const proxyClient = new RefactorAssistantClient()
     const messenger = new Messenger(new AppToWebViewMessageDispatcher(appContext.getAppsToWebViewMessagePublisher()))
-    const sessionStorage = new ChatSessionStorage(messenger)
+    const sessionStorage = new ChatSessionStorage(messenger, proxyClient)
 
     new RefactorAssistantController(
         refactorAssistantEventEmitters,
         appContext.onDidChangeAmazonQVisibility.event,
         messenger,
-        sessionStorage
+        sessionStorage,
+        proxyClient
     )
 
     const refactorAssistantProvider = new (class implements vscode.TextDocumentContentProvider {
@@ -89,6 +93,7 @@ export function init(appContext: AmazonQAppInitContext) {
         }
 
         messenger.sendAuthenticationUpdate(authenticated, authenticatingSessionIDs)
+        refactorAssistantEventEmitters.authChanged.fire({ authenticated })
     }, 500)
 
     AuthUtil.instance.secondaryAuth.onDidChangeActiveConnection(() => {

@@ -2,13 +2,13 @@
  * Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * SPDX-License-Identifier: Apache-2.0
  */
-import { v4 as uuidv4 } from 'uuid'
 import { telemetry } from '../../../shared/telemetry/telemetry'
-import { Messenger } from '../../controllers/chat/messenger/messenger'
 import { SessionState, SessionStateAction, SessionStateConfig, State } from '../../types'
+import { Messenger } from '../../controllers/chat/messenger/messenger'
 import { getWorkspaceFolders } from '../../util/files'
 import { AbstractRefactoringState } from './AbstractRefactoringState'
 import { ToolkitError } from '../../../shared/errors'
+import { randomUUID } from 'crypto'
 
 export class GenerateInitialPlan extends AbstractRefactoringState implements SessionState {
     private progressMessageId?: string
@@ -35,7 +35,7 @@ export class GenerateInitialPlan extends AbstractRefactoringState implements Ses
         this.config.reportGenerationStartTime = performance.now()
 
         // Ensure that the loading icon stays showing
-        const progressMessageId = uuidv4()
+        const progressMessageId = randomUUID()
         action.messenger.sendInitalStream(this.tabID, progressMessageId, `Uploading workspace...`)
 
         try {
@@ -78,6 +78,8 @@ export class GenerateInitialPlan extends AbstractRefactoringState implements Ses
 
     async cancel(messenger: Messenger) {
         try {
+            this.cancelled = true
+
             await this.config.proxyClient.stopRefactoringAssessment({
                 engagementId: this.config.engagementId,
                 assessmentId: this.config.assessmentId,

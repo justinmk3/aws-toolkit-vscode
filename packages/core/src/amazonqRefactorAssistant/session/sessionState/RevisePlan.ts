@@ -3,11 +3,11 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 import { SessionState, SessionStateAction, SessionStateConfig, State } from '../../types'
-import { v4 as uuidv4 } from 'uuid'
 import { Messenger } from '../../controllers/chat/messenger/messenger'
 import { AbstractRefactoringState } from './AbstractRefactoringState'
 import { telemetry } from '../../../shared/telemetry/telemetry'
 import { ToolkitError } from '../../../shared/errors'
+import { randomUUID } from 'crypto'
 
 export class RevisePlan extends AbstractRefactoringState implements SessionState {
     private progressMessageId?: string
@@ -24,7 +24,7 @@ export class RevisePlan extends AbstractRefactoringState implements SessionState
         })
 
         // Ensure that the loading icon stays showing
-        const progressMessageId = uuidv4()
+        const progressMessageId = randomUUID()
         action.messenger.sendInitalStream(this.tabID, progressMessageId, `Starting plan revision...`)
 
         try {

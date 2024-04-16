@@ -33,6 +33,7 @@ export function createMockChatEmitters(): ChatControllerEventEmitters {
         processInBodyButtonClick: new vscode.EventEmitter<any>(),
         stopResponse: new vscode.EventEmitter<any>(),
         removeTab: new vscode.EventEmitter<any>(),
+        authChanged: new vscode.EventEmitter<any>(),
     }
 }
 
@@ -71,7 +72,11 @@ export async function createController(): Promise<ControllerSetup> {
     const testWorkspaceFolder = await createTestWorkspaceFolder()
     sinon.stub(vscode.workspace, 'workspaceFolders').value([testWorkspaceFolder])
 
-    const sessionStorage = new ChatSessionStorage(messenger)
+    const client = sinon.createStubInstance(
+        RefactorAssistantClient
+    ) as sinon.SinonStubbedInstance<RefactorAssistantClient> & RefactorAssistantClient
+
+    const sessionStorage = new ChatSessionStorage(messenger, client)
 
     const mockChatControllerEventEmitters = createMockChatEmitters()
 
@@ -79,7 +84,8 @@ export async function createController(): Promise<ControllerSetup> {
         mockChatControllerEventEmitters,
         sinon.createStubInstance(vscode.EventEmitter).event,
         messenger,
-        sessionStorage
+        sessionStorage,
+        client
     )
 
     return {

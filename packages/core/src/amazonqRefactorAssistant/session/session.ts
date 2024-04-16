@@ -17,9 +17,10 @@ import { randomUUID } from 'crypto'
 
 export class Session {
     private state?: SessionState
-    private stateConfig: SessionStateConfig
     public sessionId: string
     public sessionStartTime: number
+    public stateConfig: SessionStateConfig
+
     // Used to keep track of whether or not the current session is currently authenticating/needs authenticating
     public isAuthenticating: boolean
 
@@ -27,7 +28,7 @@ export class Session {
         public readonly config: SessionConfig,
         private messenger: Messenger,
         public readonly tabID: string,
-        proxyClient: RefactorAssistantClient = new RefactorAssistantClient()
+        proxyClient: RefactorAssistantClient
     ) {
         this.isAuthenticating = false
         // The sessionId is used for telemetry to track a user's entire sequence of activity
@@ -66,6 +67,14 @@ export class Session {
             default:
                 return new ConversationErrored(this.stateConfig, this.tabID)
         }
+    }
+
+    async authChanged(authenticated: boolean) {
+        if (!authenticated && !this.isAuthenticating) {
+            await this.cancel()
+        }
+
+        this.isAuthenticating = !authenticated
     }
 
     async cancel() {

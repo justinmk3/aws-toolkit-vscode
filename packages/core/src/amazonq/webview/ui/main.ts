@@ -365,8 +365,8 @@ export const createMynahUI = (ideApi: any, amazonQEnabled: boolean, refactorAssi
             textMessageHandler.handle(prompt, tabID)
         },
         onVote: connector.onChatItemVoted,
-        onInBodyButtonClicked: (tabId, messageId, action, eventId) => {
-            connector.onCustomFormAction(tabId, messageId, action, eventId)
+        onInBodyButtonClicked: (tabId, messageId, action) => {
+            connector.onInBodyButtonClick(tabId, messageId, action)
         },
         onCustomFormAction: (tabId, action, eventId) => {
             connector.onCustomFormAction(tabId, undefined, action, eventId)

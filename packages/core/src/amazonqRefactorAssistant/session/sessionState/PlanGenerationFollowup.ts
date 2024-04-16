@@ -3,9 +3,10 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 import { SessionState, SessionStateAction, SessionStateConfig, State } from '../../types'
-import { v4 as uuidv4 } from 'uuid'
 import { AbstractRefactoringState } from './AbstractRefactoringState'
 import { TerminalStates } from '../../constants'
+import { Messenger } from '../../controllers/chat/messenger/messenger'
+import { randomUUID } from 'crypto'
 
 export class PlanGenerationFollowup extends AbstractRefactoringState implements SessionState {
     private progressMessageId?: string
@@ -16,7 +17,7 @@ export class PlanGenerationFollowup extends AbstractRefactoringState implements 
 
     async explain(action: SessionStateAction): Promise<State> {
         // Ensure that the loading icon stays showing
-        this.progressMessageId = uuidv4()
+        this.progressMessageId = randomUUID()
         action.messenger.sendInitalStream(this.tabID, this.progressMessageId, `Generating response...`)
         action.messenger.sendUpdatePlaceholder(this.tabID, 'Generating response ...')
 
@@ -172,5 +173,28 @@ You can ask me any follow up questions you may have or adjust any part by genera
         })
 
         return 'PlanGenerationFollowup'
+    }
+
+    async cancel(messenger: Messenger) {
+        try {
+            this.cancelled = true
+
+            await this.config.proxyClient.stopRefactoringAssessment({
+                engagementId: this.config.engagementId,
+                assessmentId: this.config.assessmentId,
+            })
+
+            if (this.progressMessageId) {
+                messenger.updateAnswer({
+                    type: 'answer-stream',
+                    tabID: this.tabID,
+                    message: 'Cancelling plan generation',
+                    messageId: this.progressMessageId,
+                })
+            }
+        } catch (error) {
+            // swallow this exception, as if our cancellation request fails it's better to just not cancel
+            console.error(error)
+        }
     }
 }

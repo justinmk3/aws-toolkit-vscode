@@ -7,12 +7,15 @@ import * as vscode from 'vscode'
 import { VirtualFileSystem } from '../../../shared/virtualFilesystem'
 import { VirtualMemoryFile } from '../../../shared/virtualMemoryFile'
 import { GetRefactoringAssessmentStatusResult } from '../../client/refactorAssistant'
-import { TerminalStates, analysisFinishedNotification, defaultPdfName, refactorAssistantScheme } from '../../constants'
 import { SessionStateAction, SessionStateConfig, State } from '../../types'
 import { ToolkitError } from '../../../shared/errors'
 import { telemetry } from '../../../shared/telemetry/telemetry'
+import { refactorAssistantScheme, analysisFinishedNotification, pdfName, TerminalStates } from '../../constants'
+import { fsCommon } from '../../../srcShared/fs'
 
 export abstract class AbstractRefactoringState {
+    protected cancelled = false
+
     async handlePlanExecution(
         action: SessionStateAction,
         tabID: string,
@@ -32,6 +35,10 @@ export abstract class AbstractRefactoringState {
                     workflowStatus
                 )
 
+                if (this.cancelled) {
+                    break
+                }
+
                 // If the plan hasn't finished yet, update user on progress, otherwise remove progress bar
                 if (pollResponse && !TerminalStates.includes(pollResponse.status)) {
                     workflowStatus = pollResponse.status
@@ -50,11 +57,16 @@ export abstract class AbstractRefactoringState {
                         messageId: progressMessageId,
                     })
                 }
-            } while (!TerminalStates.includes(pollResponse.status))
+            } while (!TerminalStates.includes(pollResponse.status) && !this.cancelled)
         } catch (error) {
             action.messenger.sendUpdatePlaceholder(tabID, '')
             throw new ToolkitError('Revised plan generation has failed', { code: 'ServerError' })
             return 'ConversationErrored'
+        }
+
+        if (this.cancelled) {
+            action.messenger.sendUpdatePlaceholder(tabID, '')
+            return 'StartOfConversation'
         }
 
         if (pollResponse === undefined || pollResponse.status === 'FAILED') {
@@ -133,16 +145,14 @@ export abstract class AbstractRefactoringState {
                 void vscode.commands.executeCommand('vscode.open', plan)
             } else if (userButtonSelection === analysisFinishedNotification.download) {
                 const saveOptions: vscode.SaveDialogOptions = {
-                    defaultUri: vscode.Uri.parse(defaultPdfName),
+                    defaultUri: vscode.Uri.parse(pdfName(config.assessmentId)),
                 }
-                void vscode.window.showSaveDialog(saveOptions).then((e: any) => {})
-                // .then(async fileUri => {
-                //     if (fileUri) {
-                //         // TODO: ConversationId should be retrieved from session state
-                //         // TODO: Uncomment this when downloading is done via a URL and doesn't require RefactorClient
-                //         //await downloadFile(this.conversationId, fileUri.fsPath)
-                //     }
-                // })
+                void vscode.window.showSaveDialog(saveOptions).then(async fileUri => {
+                    if (fileUri) {
+                        const plan = await config.proxyClient.downloadPlan(config.engagementId, config.assessmentId)
+                        await fsCommon.writeFile(fileUri.fsPath, plan)
+                    }
+                })
             }
         })
 

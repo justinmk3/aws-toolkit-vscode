@@ -8,9 +8,11 @@ import { EventEmitter } from 'vscode'
 import { AuthController } from '../../../amazonq/auth/controller'
 import * as authUtil from '../../../codewhisperer/util/authUtil'
 import { getLogger } from '../../../shared/logger'
-import { defaultPdfName } from '../../constants'
 import { ChatSessionStorage } from '../../storage/chatSession'
 import { Messenger } from './messenger/messenger'
+import { pdfName } from '../../constants'
+import { RefactorAssistantClient } from '../../client/refactorAssistant'
+import { fsCommon } from '../../../srcShared/fs'
 
 export interface ChatControllerEventEmitters {
     readonly processHumanChatMessage: EventEmitter<any>
@@ -19,22 +21,26 @@ export interface ChatControllerEventEmitters {
     readonly authClicked: EventEmitter<any>
     readonly stopResponse: EventEmitter<any>
     readonly removeTab: EventEmitter<any>
+    readonly authChanged: EventEmitter<any>
 }
 
 export class RefactorAssistantController {
     readonly messenger: Messenger
     private readonly sessionStorage: ChatSessionStorage
     private authController: AuthController
+    private readonly proxyClient: RefactorAssistantClient
 
     public constructor(
         private readonly chatControllerMessageListeners: ChatControllerEventEmitters,
         onDidChangeAmazonQVisibility: vscode.Event<boolean>,
         messenger: Messenger,
-        sessionStorage: ChatSessionStorage
+        sessionStorage: ChatSessionStorage,
+        proxyClient: RefactorAssistantClient
     ) {
         this.messenger = messenger
         this.sessionStorage = sessionStorage
         this.authController = new AuthController()
+        this.proxyClient = proxyClient
 
         this.chatControllerMessageListeners.processHumanChatMessage.event(data => {
             this.processUserChatMessage(data).catch(e => {
@@ -62,6 +68,10 @@ export class RefactorAssistantController {
         this.chatControllerMessageListeners.removeTab.event(async data => {
             await this.removeTab(data)
         })
+
+        this.chatControllerMessageListeners.authChanged.event(async data => {
+            await this.handleAuthChanged(data)
+        })
     }
 
     private authClicked(message: any) {
@@ -77,24 +87,43 @@ export class RefactorAssistantController {
         this.messenger.sendChatInputEnabled(message.tabID, false)
     }
 
+    private async handleAuthChanged(message: any) {
+        const tabIds = this.sessionStorage.getSessionIds()
+
+        for (const tabId of tabIds) {
+            const session = await this.sessionStorage.getSession(tabId)
+            await session.authChanged(message.authenticated)
+            if (!message.authenticated) {
+                const authState = await authUtil.getChatAuthState()
+                await this.messenger.sendAuthNeededExceptionMessage(authState, tabId)
+            } else {
+                this.messenger.sendChatInputEnabled(tabId, true)
+            }
+        }
+    }
+
     private async processButtonClick(message: any) {
         switch (message?.action?.id) {
             case 'download-pdf':
-                await this.downloadFile(defaultPdfName)
+                await this.downloadFile(message)
                 break
         }
     }
 
-    private async downloadFile(defaultFileName: string) {
+    private async downloadFile(message: any) {
+        const session = await this.sessionStorage.getSession(message.tabId)
+
         const saveOptions: vscode.SaveDialogOptions = {
-            defaultUri: vscode.Uri.parse(defaultFileName),
+            defaultUri: vscode.Uri.parse(pdfName(session.stateConfig.assessmentId)),
         }
 
         void vscode.window.showSaveDialog(saveOptions).then(async fileUri => {
             if (fileUri) {
-                // TODO: ConversationId should be retrieved from session state
-                // TODO: Uncomment this when downloading is done via a URL and doesn't require RefactorClient
-                //await downloadFile(this.conversationId, fileUri.fsPath)
+                const plan = await this.proxyClient.downloadPlan(
+                    session.stateConfig.engagementId,
+                    session.stateConfig.assessmentId
+                )
+                await fsCommon.writeFile(fileUri.fsPath, plan)
             }
         })
     }
