@@ -355,6 +355,11 @@ export class RefactorAssistantClient {
             },
         })
 
+        // TODO: When accessing S3 files, handle expired requests:
+        // if (result.status === 403) {
+        //     throw new Error('plan URL has expired')
+        // }
+
         const buffer = await result.arrayBuffer()
         const plan = new TextDecoder().decode(buffer)
 

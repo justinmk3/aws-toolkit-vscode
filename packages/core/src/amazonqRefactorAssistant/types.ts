@@ -15,6 +15,7 @@ export type State =
     | 'PlanGenerationFollowup'
     | 'RevisePlan'
     | 'StartOfConversation'
+    | 'Help'
 
 export interface SessionState {
     readonly tabID: string

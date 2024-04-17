@@ -63,7 +63,8 @@ export class FollowUpGenerator {
                         },
                         {
                             pillText: 'What can Q Refactor Assistant do for me?',
-                            type: 'help',
+                            prompt: 'What can Q Refactor Assistant do for me?',
+                            type: 'refactorassistant-help',
                         },
                     ],
                 }

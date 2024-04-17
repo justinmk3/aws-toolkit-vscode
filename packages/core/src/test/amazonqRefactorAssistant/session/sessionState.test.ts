@@ -102,17 +102,57 @@ describe('Refactor Assistant sessionState', () => {
     })
 
     describe('StartOfConversation', () => {
-        it('sends response to user and returns GetMoreDetails state', async () => {
+        let stubCreateEngagement: sinon.SinonStub
+        let stubDeriveUserIntent: sinon.SinonStub
+        beforeEach(() => {
+            stubCreateEngagement = sinon.stub(testConfig.proxyClient, 'createEngagement').resolves({
+                engagementId,
+            })
+            stubDeriveUserIntent = sinon
+                .stub(testConfig.proxyClient, 'deriveUserIntent')
+                .resolves({ userIntent: 'QUESTION_AND_ANSWER' })
+        })
+
+        it('sends response to user and returns GenerateInitialPlan state when user intent is ASSESSMENT', async () => {
             const firstPrompt = 'please suggest a microservice'
             const testAction = mockSessionStateAction(firstPrompt)
 
             const mockMessenger = sinon.stub(Messenger.prototype, 'sendAnswer')
+            stubDeriveUserIntent.resolves({ userIntent: 'ASSESSMENT' })
 
             const sessionState = new StartOfConversation(testConfig, tabId)
             const response = await sessionState.interact(testAction)
-
+            sinon.assert.calledOnce(stubCreateEngagement)
             assert.strictEqual(response, 'GenerateInitialPlan')
             sinon.assert.calledOnce(mockMessenger)
+        })
+
+        it('sends response to user and returns GenerateInitialPlan state when user intent is QUESTION_AND_ANSWER', async () => {
+            const firstPrompt = 'please suggest a microservice'
+            const testAction = mockSessionStateAction(firstPrompt)
+
+            const mockMessenger = sinon.stub(Messenger.prototype, 'sendAnswer')
+            stubDeriveUserIntent.resolves({ userIntent: 'QUESTION_AND_ANSWER' })
+
+            const sessionState = new StartOfConversation(testConfig, tabId)
+            const response = await sessionState.interact(testAction)
+            sinon.assert.calledOnce(stubCreateEngagement)
+            assert.strictEqual(response, 'GenerateInitialPlan')
+            sinon.assert.calledOnce(mockMessenger)
+        })
+
+        it('sends response to user and returns Help state when user intent is DEFAULT', async () => {
+            const firstPrompt = 'please suggest a microservice'
+            const testAction = mockSessionStateAction(firstPrompt)
+
+            const mockMessenger = sinon.stub(Messenger.prototype, 'sendAnswer')
+            stubDeriveUserIntent.resolves({ userIntent: 'DEFAULT' })
+
+            const sessionState = new StartOfConversation(testConfig, tabId)
+            const response = await sessionState.interact(testAction)
+            sinon.assert.calledOnce(stubCreateEngagement)
+            assert.strictEqual(response, 'Help')
+            sinon.assert.notCalled(mockMessenger)
         })
     })
 
@@ -158,7 +198,7 @@ describe('Refactor Assistant sessionState', () => {
             await new GenerateInitialPlan(testConfig, tabId).interact(mockSessionStateAction(secondPrompt))
 
             sinon.assert.calledOnce(mockGetWorkspaceFolders)
-            sinon.assert.calledOnce(stubCreateEngagement)
+            sinon.assert.notCalled(stubCreateEngagement)
             sinon.assert.calledOnce(stubUploadWorkspace)
             sinon.assert.calledOnceWithExactly(stubStartRefactoringAssessment, {
                 engagementId,
@@ -216,7 +256,7 @@ describe('Refactor Assistant sessionState', () => {
 
             await new GenerateInitialPlan(testConfig, tabId).interact(mockSessionStateAction(secondPrompt))
 
-            sinon.assert.calledOnce(stubCreateEngagement)
+            sinon.assert.notCalled(stubCreateEngagement)
             sinon.assert.calledOnce(stubUploadWorkspace)
             sinon.assert.calledOnceWithExactly(stubStartRefactoringAssessment, {
                 engagementId,
@@ -247,7 +287,7 @@ describe('Refactor Assistant sessionState', () => {
 
             await new GenerateInitialPlan(testConfig, tabId).interact(mockSessionStateAction(secondPrompt))
 
-            sinon.assert.calledOnce(stubCreateEngagement)
+            sinon.assert.notCalled(stubCreateEngagement)
             sinon.assert.calledOnce(stubUploadWorkspace)
             sinon.assert.calledOnceWithExactly(stubStartRefactoringAssessment, {
                 engagementId,

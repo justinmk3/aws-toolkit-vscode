@@ -29,6 +29,7 @@ export function init(appContext: AmazonQAppInitContext) {
         stopResponse: new vscode.EventEmitter<any>(),
         removeTab: new vscode.EventEmitter<any>(),
         authChanged: new vscode.EventEmitter<any>(),
+        processHelpMessage: new vscode.EventEmitter<any>(),
     }
 
     const proxyClient = new RefactorAssistantClient()

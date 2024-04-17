@@ -28,6 +28,7 @@ export function createMessenger(): Messenger {
 export function createMockChatEmitters(): ChatControllerEventEmitters {
     return {
         processHumanChatMessage: new vscode.EventEmitter<any>(),
+        processHelpMessage: new vscode.EventEmitter<any>(),
         authClicked: new vscode.EventEmitter<any>(),
         processResponseBodyLinkClick: new vscode.EventEmitter<any>(),
         processInBodyButtonClick: new vscode.EventEmitter<any>(),

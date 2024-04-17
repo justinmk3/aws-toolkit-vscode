@@ -115,6 +115,15 @@ export class Connector {
             })
         })
 
+    help = (tabID: string): void => {
+        this.sendMessageToExtension({
+            tabID: tabID,
+            command: 'help',
+            chatMessage: 'help',
+            tabType: 'refactor',
+        })
+    }
+
     private processChatMessage = async (messageData: any): Promise<void> => {
         if (this.onChatAnswerReceived !== undefined) {
             const answer: ChatItem = {

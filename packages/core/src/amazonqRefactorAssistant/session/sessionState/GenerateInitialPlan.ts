@@ -38,13 +38,6 @@ export class GenerateInitialPlan extends AbstractRefactoringState implements Ses
         const progressMessageId = randomUUID()
         action.messenger.sendInitalStream(this.tabID, progressMessageId, `Uploading workspace...`)
 
-        try {
-            const createEngagementResponse = await this.config.proxyClient.createEngagement()
-            this.config.engagementId = createEngagementResponse.engagementId
-        } catch (error) {
-            return 'ConversationErrored'
-        }
-
         // upload code
         try {
             await this.config.proxyClient.uploadWorkspace(this.config.engagementId)

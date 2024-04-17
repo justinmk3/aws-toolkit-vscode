@@ -14,6 +14,7 @@ import { PlanGenerationFollowup } from './sessionState/PlanGenerationFollowup'
 import { RevisePlan } from './sessionState/RevisePlan'
 import { StartOfConversation } from './sessionState/StartOfConversation'
 import { randomUUID } from 'crypto'
+import { HelpUser } from './sessionState/HelpUser'
 
 export class Session {
     private state?: SessionState
@@ -52,6 +53,8 @@ export class Session {
 
     nextState(next: State): SessionState {
         switch (next) {
+            case 'Help':
+                return new HelpUser(this.stateConfig, this.tabID)
             case 'ConversationErrored':
                 return new ConversationErrored(this.stateConfig, this.tabID)
             case 'ConversationNotStarted':
@@ -75,6 +78,11 @@ export class Session {
         }
 
         this.isAuthenticating = !authenticated
+    }
+
+    async help(msg: string) {
+        this.state = this.nextState('Help')
+        void this.nextInteraction(msg)
     }
 
     async cancel() {

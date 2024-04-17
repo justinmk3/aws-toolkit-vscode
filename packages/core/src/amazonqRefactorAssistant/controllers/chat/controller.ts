@@ -15,6 +15,7 @@ import { RefactorAssistantClient } from '../../client/refactorAssistant'
 import { fsCommon } from '../../../srcShared/fs'
 
 export interface ChatControllerEventEmitters {
+    readonly processHelpMessage: EventEmitter<any>
     readonly processHumanChatMessage: EventEmitter<any>
     readonly processResponseBodyLinkClick: EventEmitter<any>
     readonly processInBodyButtonClick: EventEmitter<any>
@@ -45,6 +46,12 @@ export class RefactorAssistantController {
         this.chatControllerMessageListeners.processHumanChatMessage.event(data => {
             this.processUserChatMessage(data).catch(e => {
                 getLogger().error('processUserChatMessage failed: %s', (e as Error).message)
+            })
+        })
+
+        this.chatControllerMessageListeners.processHelpMessage.event(data => {
+            this.processHelpMessage(data).catch(e => {
+                getLogger().error('processHelpMessage failed: %s', (e as Error).message)
             })
         })
 
@@ -126,6 +133,22 @@ export class RefactorAssistantController {
                 await fsCommon.writeFile(fileUri.fsPath, plan)
             }
         })
+    }
+
+    private async processHelpMessage(message: any) {
+        if (!message.message) {
+            throw new Error(`Invalid message: ${message.message}`)
+        }
+
+        const session = await this.sessionStorage.getSession(message.tabID)
+        const authState = await authUtil.getChatAuthState()
+        if (authState.amazonQ !== 'connected') {
+            await this.messenger.sendAuthNeededExceptionMessage(authState, message.tabID)
+            session.isAuthenticating = true
+            return
+        }
+
+        await session.help(message.message)
     }
 
     private async processUserChatMessage(message: any) {

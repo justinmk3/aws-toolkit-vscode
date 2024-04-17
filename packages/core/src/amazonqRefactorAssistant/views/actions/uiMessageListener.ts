@@ -6,6 +6,8 @@
 import { ChatControllerEventEmitters } from '../../controllers/chat/controller'
 import { MessageListener } from '../../../amazonq/messages/messageListener'
 import { ExtensionMessage } from '../../../amazonq/webview/ui/commands'
+import { openUrl } from '../../../shared/utilities/vsCodeUtils'
+import { Uri } from 'vscode'
 
 export interface UIMessageListenerProps {
     readonly chatControllerEventEmitters: ChatControllerEventEmitters
@@ -28,6 +30,9 @@ export class UIMessageListener {
 
     private handleMessage(msg: ExtensionMessage) {
         switch (msg.command) {
+            case 'help':
+                this.processHelpMessage(msg)
+                break
             case 'chat-prompt':
                 this.processChatMessage(msg)
                 break
@@ -58,6 +63,13 @@ export class UIMessageListener {
         }
     }
 
+    private processHelpMessage(msg: any) {
+        this.refactorAssistantEventsEmitters?.processHelpMessage.fire({
+            message: msg.chatMessage,
+            tabID: msg.tabID,
+        })
+    }
+
     private processChatMessage(msg: any) {
         this.refactorAssistantEventsEmitters?.processHumanChatMessage.fire({
             message: msg.chatMessage,
@@ -66,6 +78,10 @@ export class UIMessageListener {
     }
 
     private processResponseBodyLinkClick(msg: any) {
+        if (msg.messageId === 'help-external-url') {
+            void openUrl(Uri.parse(msg.link))
+            return
+        }
         this.refactorAssistantEventsEmitters?.processResponseBodyLinkClick.fire({
             command: msg.command,
             messageId: msg.messageId,

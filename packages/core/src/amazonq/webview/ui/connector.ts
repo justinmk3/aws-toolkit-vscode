@@ -156,6 +156,9 @@ export class Connector {
             case 'cwc':
                 this.cwChatConnector.help(tabID)
                 break
+            case 'refactor':
+                return this.refactorAssistantChatConnector.help(tabID)
+                break
         }
     }
 
