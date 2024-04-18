@@ -97,6 +97,10 @@ export class QuickActionGenerator {
                 description: "This command isn't available in /transform",
                 unavailableItems: ['/dev', '/transform'],
             },
+            refactor: {
+                description: "This command isn't available in /refactor",
+                unavailableItems: ['/dev', '/transform'],
+            },
             unknown: {
                 description: '',
                 unavailableItems: [],
