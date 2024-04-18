@@ -35,7 +35,7 @@ export interface ConnectorProps {
     onMessageReceived?: (tabID: string, messageData: any, needToShowAPIDocsTab: boolean) => void
     onChatAnswerUpdated?: (tabID: string, message: ChatItem) => void
     onChatAnswerReceived?: (tabID: string, message: ChatItem) => void
-    onUpdateChatAnswerReceived?: (tabID: string, message: ChatItem) => void
+    onUpdateChatAnswerReceived?: (tabID: string, message: ChatItem, finalUpdate?: boolean) => void
     onWelcomeFollowUpClicked: (tabID: string, welcomeFollowUpType: WelcomeFollowupType) => void
     onAsyncEventProgress: (tabID: string, inProgress: boolean, message: string | undefined) => void
     onQuickHandlerCommand: (tabID: string, command?: string, eventId?: string) => void

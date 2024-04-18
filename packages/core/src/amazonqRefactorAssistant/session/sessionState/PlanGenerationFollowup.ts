@@ -190,6 +190,7 @@ You can ask me any follow up questions you may have or adjust any part by genera
                     tabID: this.tabID,
                     message: 'Cancelling plan generation',
                     messageId: this.progressMessageId,
+                    finalUpdate: true,
                 })
             }
         } catch (error) {

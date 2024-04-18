@@ -9,6 +9,7 @@ import { getWorkspaceFolders } from '../../util/files'
 import { AbstractRefactoringState } from './AbstractRefactoringState'
 import { ToolkitError } from '../../../shared/errors'
 import { randomUUID } from 'crypto'
+import { planGenerationMessage } from '../../constants'
 
 export class GenerateInitialPlan extends AbstractRefactoringState implements SessionState {
     private progressMessageId?: string
@@ -25,18 +26,17 @@ export class GenerateInitialPlan extends AbstractRefactoringState implements Ses
             return 'ConversationErrored'
         }
 
-        action.messenger.sendAnswer({
-            type: 'answer',
-            tabID: this.tabID,
-            message: `Ok, let me create a plan. This may take a few minutes`,
-        })
         // We want telemetry to track the duration of a plan generation,
         // so we set the start time here.
         this.config.reportGenerationStartTime = performance.now()
 
         // Ensure that the loading icon stays showing
         const progressMessageId = randomUUID()
-        action.messenger.sendInitalStream(this.tabID, progressMessageId, `Uploading workspace...`)
+        action.messenger.sendInitalStream(
+            this.tabID,
+            progressMessageId,
+            planGenerationMessage('Uploading workspace...')
+        )
 
         // upload code
         try {
@@ -53,17 +53,13 @@ export class GenerateInitialPlan extends AbstractRefactoringState implements Ses
             this.config.assessmentId = startRefactoringResponse.assessmentId
             this.config.reportGenerationStartTime = Math.floor(performance.now())
 
-            let nextState: State
-            await telemetry.refactorAssistant_generateRecommendation.run(async telemetrySpan => {
+            return await telemetry.refactorAssistant_generateRecommendation.run(async telemetrySpan => {
                 telemetrySpan.record({
                     sessionId: this.config.sessionId,
                     reportId: this.config.assessmentId,
                 })
-                nextState = await this.handlePlanExecution(action, this.tabID, this.config, progressMessageId)
-                return nextState
+                return await this.handlePlanExecution(action, this.tabID, this.config, progressMessageId)
             })
-            // @ts-ignore
-            return nextState
         } catch (error) {
             return 'ConversationErrored'
         }
@@ -84,6 +80,7 @@ export class GenerateInitialPlan extends AbstractRefactoringState implements Ses
                     tabID: this.tabID,
                     message: 'Cancelling plan generation',
                     messageId: this.progressMessageId,
+                    finalUpdate: true,
                 })
             }
             throw new ToolkitError('Revised plan generation has been canceled', { cancelled: true })

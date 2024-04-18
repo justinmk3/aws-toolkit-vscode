@@ -7,7 +7,7 @@ import { ChatItemButton } from '@aws/mynah-ui/dist/static'
 import { MessagePublisher } from '../../../amazonq/messages/messagePublisher'
 import { refactorAssistant } from '../../constants'
 import { ChatItemType } from '../../models'
-import { ChatItemAction, SourceLink } from '@aws/mynah-ui'
+import { ChatItemAction, ChatItemBodyRenderer, SourceLink } from '@aws/mynah-ui'
 import { AuthFollowUpType } from '../../../amazonq/auth/model'
 
 class UiMessage {
@@ -19,18 +19,18 @@ class UiMessage {
 }
 
 export interface ChatMessageProps {
-    readonly message: string | undefined
-    readonly messageId: string | undefined
+    readonly message?: string
+    readonly messageId?: string
     readonly messageType: ChatItemType
-    readonly followUp:
-        | {
-              text?: string
-              options?: ChatItemAction[]
-          }
-        | undefined
-    readonly relatedSuggestions: SourceLink[] | undefined
+    readonly followUp?: {
+        text?: string
+        options?: ChatItemAction[]
+    }
+    readonly relatedSuggestions?: SourceLink[]
     readonly canBeVoted: boolean
-    readonly buttons: ChatItemButton[] | undefined
+    readonly buttons?: ChatItemButton[]
+    readonly customRenderer?: string | ChatItemBodyRenderer | ChatItemBodyRenderer[]
+    readonly finalUpdate?: boolean
 }
 
 export class AsyncEventProgressMessage extends UiMessage {
@@ -91,8 +91,8 @@ export class ChatInputEnabledMessage extends UiMessage {
 }
 
 export class ChatMessage extends UiMessage {
-    readonly message: string | undefined
-    readonly messageId: string | undefined
+    readonly message?: string
+    readonly messageId?: string
     readonly messageType: ChatItemType
     readonly followUp:
         | {
@@ -100,10 +100,11 @@ export class ChatMessage extends UiMessage {
               options?: ChatItemAction[]
           }
         | undefined
-    readonly relatedSuggestions: SourceLink[] | undefined
+    readonly relatedSuggestions?: SourceLink[]
     readonly canBeVoted: boolean
     readonly requestID!: string
-    readonly buttons: ChatItemButton[] | undefined
+    readonly buttons?: ChatItemButton[]
+    readonly customRenderer?: string | ChatItemBodyRenderer | ChatItemBodyRenderer[]
     override type = 'chatMessage'
 
     constructor(props: ChatMessageProps, tabID: string) {
@@ -115,6 +116,7 @@ export class ChatMessage extends UiMessage {
         this.relatedSuggestions = props.relatedSuggestions
         this.canBeVoted = props.canBeVoted
         this.buttons = props.buttons
+        this.customRenderer = props.customRenderer
     }
 }
 
@@ -132,6 +134,8 @@ export class ChatMessageUpdate extends UiMessage {
     readonly canBeVoted: boolean
     readonly requestID!: string
     readonly buttons: ChatItemButton[] | undefined
+    readonly finalUpdate?: boolean
+    readonly customRenderer?: string | ChatItemBodyRenderer | ChatItemBodyRenderer[]
     override type = 'updateMessage'
 
     constructor(props: ChatMessageProps, tabID: string) {
@@ -143,6 +147,8 @@ export class ChatMessageUpdate extends UiMessage {
         this.relatedSuggestions = props.relatedSuggestions
         this.canBeVoted = props.canBeVoted
         this.buttons = props.buttons
+        this.finalUpdate = props.finalUpdate
+        this.customRenderer = props.customRenderer
     }
 }
 

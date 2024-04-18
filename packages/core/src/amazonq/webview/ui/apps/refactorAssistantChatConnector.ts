@@ -18,7 +18,7 @@ export interface ConnectorProps {
     onMessageReceived?: (tabID: string, messageData: any, needToShowAPIDocsTab: boolean) => void
     onAsyncEventProgress: (tabID: string, inProgress: boolean, message: string) => void
     onChatAnswerReceived?: (tabID: string, message: ChatItem) => void
-    onUpdateChatAnswerReceived?: (tabID: string, message: ChatItem) => void
+    onUpdateChatAnswerReceived?: (tabID: string, message: ChatItem, finalUpdate?: boolean) => void
     sendFeedback?: (tabId: string, feedbackPayload: FeedbackPayload) => void | undefined
     onError: (tabID: string, message: string, title: string) => void
     onWarning: (tabID: string, message: string, title: string) => void
@@ -134,6 +134,7 @@ export class Connector {
                 buttons: messageData.buttons,
                 canBeVoted: messageData.canBeVoted,
                 followUp: messageData.followUp,
+                customRenderer: messageData.customRenderer,
             }
             this.onChatAnswerReceived(messageData.tabID, answer)
         }
@@ -149,8 +150,9 @@ export class Connector {
                 buttons: messageData.buttons,
                 canBeVoted: messageData.canBeVoted,
                 followUp: messageData.followUp,
+                customRenderer: messageData.customRenderer,
             }
-            this.onUpdateChatAnswerReceived(messageData.tabID, answer)
+            this.onUpdateChatAnswerReceived(messageData.tabID, answer, messageData.finalUpdate)
         }
     }
 

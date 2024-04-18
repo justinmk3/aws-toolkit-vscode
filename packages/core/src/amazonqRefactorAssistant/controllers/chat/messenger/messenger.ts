@@ -13,7 +13,7 @@ import {
     AuthenticationUpdateMessage,
 } from '../../../views/connector/connector'
 import { AppToWebViewMessageDispatcher } from '../../../views/connector/connector'
-import { ChatItemAction } from '@aws/mynah-ui'
+import { ChatItemAction, ChatItemBodyRenderer } from '@aws/mynah-ui'
 import { FeatureAuthState } from '../../../../codewhisperer/util/authUtil'
 import { AuthFollowUpType, expiredText, enableQText, reauthenticateText } from '../../../../amazonq/auth/model'
 
@@ -59,6 +59,8 @@ export class Messenger {
         tabID: string
         canBeVoted?: boolean
         buttons?: ChatItemButton[]
+        finalUpdate?: boolean
+        customRenderer?: string | ChatItemBodyRenderer | ChatItemBodyRenderer[]
     }) {
         this.dispatcher.sendChatMessageUpdate(
             new ChatMessageUpdate(
@@ -70,6 +72,8 @@ export class Messenger {
                     relatedSuggestions: undefined,
                     canBeVoted: params.canBeVoted ?? false,
                     buttons: params.buttons,
+                    finalUpdate: params.finalUpdate,
+                    customRenderer: params.customRenderer,
                 },
                 params.tabID
             )

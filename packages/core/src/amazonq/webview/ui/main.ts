@@ -208,7 +208,8 @@ export const createMynahUI = (ideApi: any, amazonQEnabled: boolean, refactorAssi
                 item.relatedContent !== undefined ||
                 item.followUp !== undefined ||
                 item.formItems !== undefined ||
-                item.buttons !== undefined
+                item.buttons !== undefined ||
+                item.customRenderer !== undefined
             ) {
                 mynahUI.addChatItem(tabID, item)
             }
@@ -236,10 +237,22 @@ export const createMynahUI = (ideApi: any, amazonQEnabled: boolean, refactorAssi
                 tabsStorage.updateTabStatus(tabID, 'free')
             }
         },
-        onUpdateChatAnswerReceived: (tabID: string, item: ChatItem) => {
+        onUpdateChatAnswerReceived: (tabID: string, item: ChatItem, finalUpdate?: boolean) => {
             mynahUI.updateChatAnswerWithMessageId(tabID, item.messageId || '', {
                 body: item.body,
+                customRenderer: item.customRenderer,
+                buttons: item.buttons,
+                followUp: item.followUp,
+                canBeVoted: item.canBeVoted,
             })
+
+            if (finalUpdate) {
+                mynahUI.updateStore(tabID, {
+                    loadingChat: false,
+                    promptInputDisabledState: tabsStorage.isTabDead(tabID),
+                })
+                tabsStorage.updateTabStatus(tabID, 'free')
+            }
         },
         onMessageReceived: (tabID: string, messageData: MynahUIDataModel) => {
             mynahUI.updateStore(tabID, messageData)

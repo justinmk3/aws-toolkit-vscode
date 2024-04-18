@@ -10,7 +10,13 @@ import { GetRefactoringAssessmentStatusResult } from '../../client/refactorAssis
 import { SessionStateAction, SessionStateConfig, State } from '../../types'
 import { ToolkitError } from '../../../shared/errors'
 import { telemetry } from '../../../shared/telemetry/telemetry'
-import { refactorAssistantScheme, analysisFinishedNotification, pdfName, TerminalStates } from '../../constants'
+import {
+    refactorAssistantScheme,
+    analysisFinishedNotification,
+    pdfName,
+    TerminalStates,
+    planGenerationMessage,
+} from '../../constants'
 import { fsCommon } from '../../../srcShared/fs'
 
 export abstract class AbstractRefactoringState {
@@ -39,29 +45,21 @@ export abstract class AbstractRefactoringState {
                     break
                 }
 
+                action.messenger.updateAnswer({
+                    type: 'answer-stream',
+                    tabID: tabID,
+                    message: planGenerationMessage(pollResponse.assessmentStatus),
+                    messageId: progressMessageId,
+                })
+
                 // If the plan hasn't finished yet, update user on progress, otherwise remove progress bar
                 if (pollResponse && !TerminalStates.includes(pollResponse.status)) {
                     workflowStatus = pollResponse.status
-
-                    action.messenger.updateAnswer({
-                        type: 'answer-stream',
-                        tabID: tabID,
-                        message: pollResponse.assessmentStatus,
-                        messageId: progressMessageId,
-                    })
-                } else if (pollResponse) {
-                    action.messenger.updateAnswer({
-                        type: 'answer-stream',
-                        tabID: tabID,
-                        message: pollResponse.assessmentStatus,
-                        messageId: progressMessageId,
-                    })
                 }
             } while (!TerminalStates.includes(pollResponse.status) && !this.cancelled)
         } catch (error) {
             action.messenger.sendUpdatePlaceholder(tabID, '')
             throw new ToolkitError('Revised plan generation has failed', { code: 'ServerError' })
-            return 'ConversationErrored'
         }
 
         if (this.cancelled) {
@@ -78,7 +76,6 @@ export abstract class AbstractRefactoringState {
 
             action.messenger.sendUpdatePlaceholder(tabID, '')
             throw new ToolkitError('Revised plan generation has failed', { code: 'ServerError' })
-            return 'StartOfConversation'
         } else if (pollResponse.status === 'CANCELLED') {
             action.messenger.sendAnswer({
                 type: 'answer',
@@ -88,7 +85,6 @@ export abstract class AbstractRefactoringState {
 
             action.messenger.sendUpdatePlaceholder(tabID, '')
             throw new ToolkitError('Revised plan generation has been cancelled', { cancelled: true })
-            return 'StartOfConversation'
         }
         telemetry.record({
             reportStatus: pollResponse.status,
@@ -105,30 +101,6 @@ export abstract class AbstractRefactoringState {
         // PlanID in file name ensures unique naming for multiple versions of a plan
         const generationFilePath = path.join(`RA_PLAN_${config.assessmentId}.md`)
         const planUri = this.registerFile(plan, generationFilePath, tabID, action.fs)
-
-        // TODO: add the preview for the plan here instead of the entire plan
-        action.messenger.sendAnswer({
-            type: 'answer',
-            tabID: tabID,
-            message: plan,
-            canBeVoted: true,
-        })
-
-        // TODO: this should be part of the preview component
-        // Download button in chat window
-        action.messenger.sendAnswer({
-            type: 'answer',
-            tabID: tabID,
-            message: 'Download Options',
-            buttons: [
-                {
-                    text: 'Download PDF',
-                    id: 'download-pdf',
-                    status: 'info',
-                    disabled: false, // Explicitly set to false so button isn't disabled on click
-                },
-            ],
-        })
 
         // Toast notification
         const userButtonSelectionThenable = vscode.window.showInformationMessage(
@@ -156,12 +128,13 @@ export abstract class AbstractRefactoringState {
             }
         })
 
-        action.messenger.sendAnswer({
+        action.messenger.updateAnswer({
             type: 'answer',
             tabID: tabID,
-            message: `Your Refactor Assistant analysis is ready! You can download the PDF version above. A local markdown version is available [here](${planUri}).
-            
-You can ask me any follow up questions you may have or adjust any part by generating a revised analysis.`,
+            messageId: progressMessageId,
+            message: `Your Refactor analysis is ready! You can review it by opening the Markdown file: [here](${planUri})
+
+You can also ask me any follow-up questions that you have or adjust any part by generating a revised analysis.`,
             followUp: {
                 text: 'Try Examples:',
                 options: [
@@ -179,9 +152,20 @@ You can ask me any follow up questions you may have or adjust any part by genera
                     },
                 ],
             },
+            buttons: [
+                {
+                    text: 'Download PDF',
+                    id: 'download-pdf',
+                    status: 'info',
+                    disabled: false, // Explicitly set to false so button isn't disabled on click
+                },
+            ],
+            finalUpdate: true,
+            canBeVoted: true,
         })
 
         action.messenger.sendUpdatePlaceholder(tabID, '')
+        action.messenger.sendChatInputEnabled(tabID, true)
         return 'PlanGenerationFollowup'
     }
 

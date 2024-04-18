@@ -35,7 +35,6 @@ export class RevisePlan extends AbstractRefactoringState implements SessionState
             })
         } catch (error) {
             throw new ToolkitError('Revised plan generation has failed', { code: 'ServerError' })
-            return 'ConversationErrored'
         }
         let nextState: State
         await telemetry.refactorAssistant_updateRecommendation.run(async telemetrySpan => {
@@ -64,6 +63,7 @@ export class RevisePlan extends AbstractRefactoringState implements SessionState
                     tabID: this.tabID,
                     message: 'Cancelling plan generation',
                     messageId: this.progressMessageId,
+                    finalUpdate: true,
                 })
             }
         } catch (error) {

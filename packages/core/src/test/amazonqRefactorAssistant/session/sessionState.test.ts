@@ -213,10 +213,9 @@ describe('Refactor Assistant sessionState', () => {
             )
             // Called again, because the process is cancelled
             assert.strictEqual(stubSendUpdatePlaceholder.calledWith('tab-id', ''), true)
-            sinon.assert.calledOnce(stubUpdateAnswer)
+            sinon.assert.calledTwice(stubUpdateAnswer)
             sinon.assert.calledOnce(stubDownloadPlan)
             sinon.assert.calledOnce(stubFileSystem)
-            sinon.assert.callCount(stubSendAnswer, 4)
         })
 
         it('shows vscode notification upon success', async () => {
@@ -274,7 +273,7 @@ describe('Refactor Assistant sessionState', () => {
             sinon.assert.calledOnce(stubUpdateAnswer)
             sinon.assert.notCalled(stubDownloadPlan)
             sinon.assert.notCalled(stubFileSystem)
-            sinon.assert.calledTwice(stubSendAnswer)
+            sinon.assert.calledOnce(stubSendAnswer)
         })
 
         it('detects cancelled status and notifies user', async () => {
@@ -305,7 +304,7 @@ describe('Refactor Assistant sessionState', () => {
             sinon.assert.calledOnce(stubUpdateAnswer)
             sinon.assert.notCalled(stubDownloadPlan)
             sinon.assert.notCalled(stubFileSystem)
-            sinon.assert.calledTwice(stubSendAnswer)
+            sinon.assert.calledOnce(stubSendAnswer)
         })
     })
 
@@ -350,10 +349,10 @@ describe('Refactor Assistant sessionState', () => {
             )
             // Called again, because the process is cancelled
             assert.strictEqual(stubSendUpdatePlaceholder.calledWith('tab-id', ''), true)
-            sinon.assert.calledOnce(stubUpdateAnswer)
+            sinon.assert.calledTwice(stubUpdateAnswer)
             sinon.assert.calledOnce(stubDownloadPlan)
             sinon.assert.calledOnce(stubFileSystem)
-            sinon.assert.callCount(stubSendAnswer, 4)
+            sinon.assert.calledOnce(stubSendAnswer)
         })
 
         it('shows vscode notification upon success', async () => {
