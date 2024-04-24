@@ -18,6 +18,7 @@ import {
     planGenerationMessage,
 } from '../../constants'
 import { fsCommon } from '../../../srcShared/fs'
+import { MynahIcons } from '@aws/mynah-ui'
 
 export abstract class AbstractRefactoringState {
     protected cancelled = false
@@ -158,6 +159,8 @@ You can also ask me any follow-up questions that you have or adjust any part by 
                     id: 'download-pdf',
                     status: 'info',
                     disabled: false, // Explicitly set to false so button isn't disabled on click
+                    // If we use MynahIcons.EXTERNAL, there are build errors, so we'll cast:
+                    icon: 'external' as MynahIcons,
                 },
             ],
             finalUpdate: true,
