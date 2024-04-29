@@ -371,17 +371,25 @@ export class CodeCatalystAuthenticationProvider {
         }
     }
 
-    private getState(): Record<string, ConnectionState> {
+    private getStates(): Record<string, ConnectionState> {
         return this.memento.get(this.mementoKey, {} as Record<string, ConnectionState>)
     }
 
+    public tryGetConnectionState(conn: SsoConnection): ConnectionState | undefined {
+        return this.getStates()[conn.id]
+    }
     public getConnectionState(conn: SsoConnection): ConnectionState {
-        return this.getState()[conn.id]
+        return (
+            this.tryGetConnectionState(conn) ?? {
+                onboarded: false,
+                scopeExpired: false,
+            }
+        )
     }
 
     private async setConnectionState(conn: SsoConnection, state: ConnectionState) {
         await this.memento.update(this.mementoKey, {
-            ...this.getState(),
+            ...this.getStates(),
             [conn.id]: state,
         })
     }
@@ -392,7 +400,7 @@ export class CodeCatalystAuthenticationProvider {
     }
 
     public async isConnectionOnboarded(conn: SsoConnection, recheck = false) {
-        const state = this.getConnectionState(conn)
+        const state = this.tryGetConnectionState(conn)
         if (state !== undefined && !recheck) {
             return state.onboarded
         }
