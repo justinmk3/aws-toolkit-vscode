@@ -1,3 +1,7 @@
+## 3.9.0 2024-06-05
+
+- **Feature** x
+
 ## 3.8.0 2024-05-30
 
 - **Bug Fix** auth: use device code auth when running in a web browser
