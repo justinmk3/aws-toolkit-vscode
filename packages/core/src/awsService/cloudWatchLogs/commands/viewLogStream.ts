@@ -183,12 +183,14 @@ export class DefaultSelectLogStreamWizardContext implements SelectLogStreamWizar
 export function convertDescribeLogToQuickPickItems(
     response: CloudWatchLogs.DescribeLogStreamsResponse
 ): vscode.QuickPickItem[] {
-    return (response.logStreams ?? []).map<vscode.QuickPickItem>((stream) => ({
-        label: stream.logStreamName!,
-        detail: stream.lastEventTimestamp
-            ? formatLocalized(new Date(stream.lastEventTimestamp))
-            : localize('AWS.cwl.viewLogStream.workflow.noStreams', '[No Log Events found]'),
-    }))
+    return (response.logStreams ?? []).map<vscode.QuickPickItem>((stream) => {
+        return {
+            label: stream.logStreamName!,
+            detail: stream.lastEventTimestamp
+                ? formatLocalized(new Date(stream.lastEventTimestamp))
+                : localize('AWS.cwl.viewLogStream.workflow.noStreams', '[No Log Events found]'),
+        }
+    })
 }
 
 export class SelectLogStreamWizard extends MultiStepWizard<LogSearchChoice> {

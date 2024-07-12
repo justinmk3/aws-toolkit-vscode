@@ -74,9 +74,9 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
                 diagnostics: resourceDiagnostics,
             })
         }),
-        vscode.workspace.onDidSaveTextDocument(async (doc: vscode.TextDocument) => {
-            return await saveResource(doc, resourceManager, resourceDiagnostics)
-        }),
+        vscode.workspace.onDidSaveTextDocument(
+            async (doc: vscode.TextDocument) => await saveResource(doc, resourceManager, resourceDiagnostics)
+        ),
         Commands.register('aws.resources.saveResource', async (uri: vscode.Uri) => {
             await vscode.window.showTextDocument(uri)
             await vscode.commands.executeCommand('workbench.action.files.save')
@@ -110,9 +110,9 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
                 resourceDiagnostics.set(textDocumentEvent.document.uri, diagnostics)
             }
         }),
-        vscode.workspace.onDidCloseTextDocument((closeDocumentEvent) => {
-            return resourceManager.close(closeDocumentEvent.uri, true)
-        }),
+        vscode.workspace.onDidCloseTextDocument((closeDocumentEvent) =>
+            resourceManager.close(closeDocumentEvent.uri, true)
+        ),
         vscode.languages.registerCodeLensProvider(
             {
                 language: 'json',

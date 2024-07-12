@@ -83,7 +83,7 @@ function patchWindow() {
  * otherwise we get: "Error: DialogService: refused to show dialog in tests. Contents: Do you want Code to open the external website?"
  */
 function patchAuth() {
-    globalSandbox.stub(tokenProvider.SsoAccessTokenProvider, 'create').callsFake((profile, cache, oidc) => {
-        return new DeviceFlowAuthorization(profile, cache, oidc)
-    })
+    globalSandbox
+        .stub(tokenProvider.SsoAccessTokenProvider, 'create')
+        .callsFake((profile, cache, oidc) => new DeviceFlowAuthorization(profile, cache, oidc))
 }

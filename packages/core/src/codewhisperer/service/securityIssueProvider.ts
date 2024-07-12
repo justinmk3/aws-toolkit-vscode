@@ -21,11 +21,13 @@ export abstract class SecurityIssueProvider {
             return
         }
         const { changedRange, changedText, lineOffset } = event.contentChanges.reduce(
-            (acc, change) => ({
-                changedRange: acc.changedRange.union(change.range),
-                changedText: acc.changedText + change.text,
-                lineOffset: acc.lineOffset + this._getLineOffset(change.range, change.text),
-            }),
+            (acc, change) => {
+                return {
+                    changedRange: acc.changedRange.union(change.range),
+                    changedText: acc.changedText + change.text,
+                    lineOffset: acc.lineOffset + this._getLineOffset(change.range, change.text),
+                }
+            },
             {
                 changedRange: event.contentChanges[0].range,
                 changedText: '',

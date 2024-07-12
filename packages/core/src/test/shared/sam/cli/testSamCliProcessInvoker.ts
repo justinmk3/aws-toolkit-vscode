@@ -43,9 +43,7 @@ export class BadExitCodeSamCliProcessInvoker extends TestSamCliProcessInvoker {
         stdout?: string
         stderr?: string
     }) {
-        super((spawnOptions: SpawnOptions, ...args: any[]) => {
-            return this.makeChildProcessResult()
-        })
+        super((spawnOptions: SpawnOptions, ...args: any[]) => this.makeChildProcessResult())
 
         this.exitCode = exitCode
         this.error = error

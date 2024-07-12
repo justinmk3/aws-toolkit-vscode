@@ -26,18 +26,14 @@ describe('createCertificateCommand', function () {
     let node: IotCertsFolderNode
     let saveLocation: vscode.Uri | undefined = vscode.Uri.file('/certificate.txt')
     let saveSuccess: boolean
-    const promptFolder: () => Promise<vscode.Uri | undefined> = async () => {
-        return saveLocation
-    }
+    const promptFolder: () => Promise<vscode.Uri | undefined> = async () => saveLocation
     const saveFiles: (
         basePath: vscode.Uri,
         certId: string,
         certPem: string,
         privateKey: string,
         publicKey: string
-    ) => Promise<boolean> = async (basePath, certId, certPem, privateKey, publicKey) => {
-        return saveSuccess
-    }
+    ) => Promise<boolean> = async (basePath, certId, certPem, privateKey, publicKey) => saveSuccess
 
     beforeEach(function () {
         sandbox = sinon.createSandbox()

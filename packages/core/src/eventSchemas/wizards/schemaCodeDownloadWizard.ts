@@ -65,11 +65,13 @@ export class DefaultSchemaCodeDownloadWizardContext extends WizardContext implem
                 totalSteps: this.totalSteps,
             },
             buttons: [this.helpButton, vscode.QuickInputButtons.Back],
-            items: this.schemaLangs.toArray().map((language) => ({
-                label: language,
-                alwaysShow: language === currLanguage,
-                description: language === currLanguage ? recentlyUsed : '',
-            })),
+            items: this.schemaLangs.toArray().map((language) => {
+                return {
+                    label: language,
+                    alwaysShow: language === currLanguage,
+                    description: language === currLanguage ? recentlyUsed : '',
+                }
+            }),
         })
 
         const choices = await picker.promptUser({
@@ -103,11 +105,13 @@ export class DefaultSchemaCodeDownloadWizardContext extends WizardContext implem
                 totalSteps: this.totalSteps,
             },
             buttons: [this.helpButton, vscode.QuickInputButtons.Back],
-            items: versions!.map((schemaVersion) => ({
-                label: schemaVersion.SchemaVersion!,
-                alwaysShow: schemaVersion.SchemaVersion === currSchemaVersion,
-                description: schemaVersion === currSchemaVersion ? recentlyUsed : '',
-            })),
+            items: versions!.map((schemaVersion) => {
+                return {
+                    label: schemaVersion.SchemaVersion!,
+                    alwaysShow: schemaVersion.SchemaVersion === currSchemaVersion,
+                    description: schemaVersion === currSchemaVersion ? recentlyUsed : '',
+                }
+            }),
         })
 
         const choices = await picker.promptUser({

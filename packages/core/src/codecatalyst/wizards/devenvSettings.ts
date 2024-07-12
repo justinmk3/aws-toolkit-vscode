@@ -56,12 +56,14 @@ export function getAllInstanceDescriptions(): { [key: string]: InstanceDescripti
 
 export function createInstancePrompter(subscriptionType: SubscriptionType): QuickPickPrompter<InstanceType> {
     const isSupported = (name: string) => subscriptionType !== 'FREE' || name === 'dev.standard1.small'
-    const items = entries(devenvOptions.instanceType).map(([name, desc]) => ({
-        data: name,
-        label: `${getInstanceDescription(name).name} (${getInstanceDescription(name).specs})`,
-        description: isSupported(name) ? '' : 'unavailable in current billing tier',
-        invalidSelection: !isSupported(name),
-    }))
+    const items = entries(devenvOptions.instanceType).map(([name, desc]) => {
+        return {
+            data: name,
+            label: `${getInstanceDescription(name).name} (${getInstanceDescription(name).specs})`,
+            description: isSupported(name) ? '' : 'unavailable in current billing tier',
+            invalidSelection: !isSupported(name),
+        }
+    })
 
     return createQuickPick(items, {
         title: 'Compute Size',
@@ -89,12 +91,14 @@ export function createAliasPrompter(): InputBoxPrompter {
 
 export function createStoragePrompter(subscriptionType: SubscriptionType): QuickPickPrompter<{ sizeInGiB: number }> {
     const isSupported = (v: number) => subscriptionType !== 'FREE' || v === 16
-    const items = settings.environment.persistentStorageSize.map((v) => ({
-        data: { sizeInGiB: v },
-        label: `${v} GB`,
-        description: isSupported(v) ? '' : 'unavailable in current organization billing tier',
-        invalidSelection: !isSupported(v),
-    }))
+    const items = settings.environment.persistentStorageSize.map((v) => {
+        return {
+            data: { sizeInGiB: v },
+            label: `${v} GB`,
+            description: isSupported(v) ? '' : 'unavailable in current organization billing tier',
+            invalidSelection: !isSupported(v),
+        }
+    })
 
     return createQuickPick(items, {
         title: 'Storage Size',

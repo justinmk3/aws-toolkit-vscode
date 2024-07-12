@@ -21,21 +21,14 @@ describe('Amazon Q Feature Dev', function () {
     const tooManyRequestsWaitTime = 100000
 
     function waitForButtons(buttons: FollowUpTypes[]) {
-        return tab.waitForEvent(() => {
-            return buttons.every((value) => tab.hasButton(value))
-        })
+        return tab.waitForEvent(() => buttons.every((value) => tab.hasButton(value)))
     }
 
     async function waitForText(text: string) {
-        await tab.waitForEvent(
-            () => {
-                return tab.getChatItems().some((chatItem) => chatItem.body === text)
-            },
-            {
-                waitIntervalInMs: 250,
-                waitTimeoutInMs: 2000,
-            }
-        )
+        await tab.waitForEvent(() => tab.getChatItems().some((chatItem) => chatItem.body === text), {
+            waitIntervalInMs: 250,
+            waitTimeoutInMs: 2000,
+        })
     }
 
     async function iterate(prompt: string) {
@@ -61,12 +54,9 @@ describe('Amazon Q Feature Dev', function () {
 
         const findAnotherTopic = 'find another topic to discuss'
         const tooManyRequests = 'Too many requests'
-        const failureState = (message: string) => {
-            return (
-                tab.getChatItems().pop()?.body?.includes(message) ||
-                tab.getChatItems().slice(-2).shift()?.body?.includes(message)
-            )
-        }
+        const failureState = (message: string) =>
+            tab.getChatItems().pop()?.body?.includes(message) ||
+            tab.getChatItems().slice(-2).shift()?.body?.includes(message)
         while (
             tab.hasButton(FollowUpTypes.Retry) ||
             (request && (failureState(findAnotherTopic) || failureState(tooManyRequests)))

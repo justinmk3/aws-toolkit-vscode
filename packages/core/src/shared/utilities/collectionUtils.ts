@@ -399,7 +399,9 @@ export async function* toStream<T>(values: Iterable<T | Promise<T>>): AsyncGener
             const index = unresolved.size
             unresolved.set(
                 index,
-                val.then((data) => ({ index, data }))
+                val.then((data) => {
+                    return { index, data }
+                })
             )
         } else {
             yield val
@@ -482,7 +484,9 @@ class AsyncIterableCollection<T, U = undefined> {
         } else if (state.pending) {
             return state.pending
         } else {
-            const pending = state.iterator.next().then((result) => ({ index, result }))
+            const pending = state.iterator.next().then((result) => {
+                return { index, result }
+            })
             state.pending = pending
 
             return pending

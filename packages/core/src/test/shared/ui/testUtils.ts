@@ -130,12 +130,12 @@ export function createQuickPickPrompterTester<T>(
         return result
     }
 
-    const withTrace = <T extends (...args: any[]) => any>(f: T, name: string) => {
-        return (...args: any[]) => {
+    const withTrace =
+        <T extends (...args: any[]) => any>(f: T, name: string) =>
+        (...args: any[]) => {
             traces.push({ stackStartFn: f, operator: name, message: name })
             f(...args)
         }
-    }
 
     prompter.onDidShow(start)
 

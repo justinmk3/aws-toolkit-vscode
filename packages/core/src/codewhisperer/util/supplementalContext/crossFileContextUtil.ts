@@ -225,14 +225,13 @@ export async function getCrossFileCandidates(editor: vscode.TextEditor): Promise
      * 2. has the same file extension or it's one of the dialect of target file (e.g .js vs. .jsx)
      * 3. is not a test file
      */
-    const unsortedCandidates = await getOpenFilesInWindow(async (candidateFile) => {
-        return (
+    const unsortedCandidates = await getOpenFilesInWindow(
+        async (candidateFile) =>
             targetFile !== candidateFile &&
             (path.extname(targetFile) === path.extname(candidateFile) ||
                 (dialects && dialects.has(path.extname(candidateFile)))) &&
             !(await isTestFile(candidateFile, { languageId: language }))
-        )
-    })
+    )
 
     return unsortedCandidates
         .map((candidate) => {
@@ -241,12 +240,8 @@ export async function getCrossFileCandidates(editor: vscode.TextEditor): Promise
                 fileDistance: getFileDistance(targetFile, candidate),
             }
         })
-        .sort((file1, file2) => {
-            return file1.fileDistance - file2.fileDistance
-        })
-        .map((fileToDistance) => {
-            return fileToDistance.file
-        })
+        .sort((file1, file2) => file1.fileDistance - file2.fileDistance)
+        .map((fileToDistance) => fileToDistance.file)
 }
 
 function throwIfCancelled(token: vscode.CancellationToken): void | never {

@@ -15,11 +15,13 @@ describe('Prompts', function () {
 
     beforeEach(function () {
         orgs = [{ type: 'org', name: 'MyOrg', description: 'My Description', regionName: 'region' }]
-        projects = orgs.map((org) => ({
-            name: 'MyProject',
-            type: 'project',
-            org,
-        }))
+        projects = orgs.map((org) => {
+            return {
+                name: 'MyProject',
+                type: 'project',
+                org,
+            }
+        })
     })
 
     function mockClient(): CodeCatalystClient {

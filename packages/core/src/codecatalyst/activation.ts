@@ -75,9 +75,7 @@ export async function activate(ctx: ExtContext): Promise<void> {
         uriHandlers.register(ctx.uriHandler, CodeCatalystCommands.declared),
         ...Object.values(CodeCatalystCommands.declared).map((c) => c.register(commands)),
         codecatalystConnectionsCmd.register(),
-        Commands.register('aws.codecatalyst.signout', () => {
-            return authProvider.secondaryAuth.deleteConnection()
-        })
+        Commands.register('aws.codecatalyst.signout', () => authProvider.secondaryAuth.deleteConnection())
     )
 
     if (!isCloud9()) {

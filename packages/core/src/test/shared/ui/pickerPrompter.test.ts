@@ -92,7 +92,9 @@ describe('createLabelQuickPick', function () {
         const prompter = createLabelQuickPick(labelItems)
         assert.deepStrictEqual(
             prompter.quickPick.items,
-            labelItems.map((item) => ({ label: item.label, data: item.label }))
+            labelItems.map((item) => {
+                return { label: item.label, data: item.label }
+            })
         )
     })
 

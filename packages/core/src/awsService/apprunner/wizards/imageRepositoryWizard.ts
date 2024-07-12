@@ -76,11 +76,13 @@ function createImagePrompter(
         last ??
         toArrayAsync(ecrClient.describeRepositories())
             .then((resp) => {
-                const repos = resp.map((repo) => ({
-                    label: repo.repositoryName,
-                    detail: repo.repositoryUri,
-                    data: repo,
-                }))
+                const repos = resp.map((repo) => {
+                    return {
+                        label: repo.repositoryName,
+                        detail: repo.repositoryUri,
+                        data: repo,
+                    }
+                })
                 cache['repos'] = repos
                 return repos
             })
@@ -186,7 +188,9 @@ function createTagPrompter(
                     ]
                 }
 
-                const tagT = tags.map((tag) => ({ label: tag }))
+                const tagT = tags.map((tag) => {
+                    return { label: tag }
+                })
                 cache[imageRepo.repositoryName] = tagT
                 return tagT
             })
@@ -259,14 +263,13 @@ export class AppRunnerImageRepositoryWizard extends Wizard<AppRunner.SourceConfi
     constructor(ecrClient: EcrClient, iamClient: IamClient, autoDeployButton = makeDeploymentButton()) {
         super()
         const form = this.form
-        const createAccessRolePrompter = () => {
-            return createRolePrompter(iamClient, {
+        const createAccessRolePrompter = () =>
+            createRolePrompter(iamClient, {
                 title: localize('AWS.apprunner.createService.selectRole.title', 'Select a role to pull from ECR'),
                 helpUrl: vscode.Uri.parse(apprunnerCreateServiceDocsUrl),
                 roleFilter: (role) => (role.AssumeRolePolicyDocument ?? '').includes(appRunnerEcrEntity),
                 createRole: createEcrRole.bind(undefined, iamClient),
             }).transform((resp) => resp.Arn)
-        }
 
         form.ImageRepository.applyBoundForm(createImageRepositorySubForm(ecrClient, autoDeployButton))
         form.AuthenticationConfiguration.AccessRoleArn.bindPrompter(createAccessRolePrompter, {

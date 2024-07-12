@@ -67,9 +67,7 @@ async function deleteWithProgress(node: S3BucketNode): Promise<void> {
             location: vscode.ProgressLocation.Notification,
             title: localize('AWS.s3.deleteBucket.progressTitle', 'Deleting {0}...', node.bucket.name),
         },
-        () => {
-            return node.deleteBucket()
-        }
+        () => node.deleteBucket()
     )
 }
 

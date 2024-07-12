@@ -86,7 +86,9 @@ class MockSamParamComplItemProviderContext implements SamParameterCompletionItem
         },
         getWorkspaceFolder = (uri) => undefined,
         executeCommand = async (command, ...rest) => undefined as any,
-        loadTemplate = async () => ({}),
+        loadTemplate = async () => {
+            return {}
+        },
     }: Partial<SamParameterCompletionItemProviderContext>) {
         this.logger = logger
         this.getWorkspaceFolder = getWorkspaceFolder
@@ -183,16 +185,18 @@ describe('SamParameterCompletionItemProvider', async function () {
             new MockSamParamComplItemProviderContext({
                 executeCommand: async <T>() => [templatesSymbol] as any as T,
                 getWorkspaceFolder: () => ({ uri: vscode.Uri.file('') }) as any as vscode.WorkspaceFolder,
-                loadTemplate: async () => ({
-                    Parameters: {
-                        MyParamName1: {
-                            Type: 'String',
+                loadTemplate: async () => {
+                    return {
+                        Parameters: {
+                            MyParamName1: {
+                                Type: 'String',
+                            },
+                            MyParamName2: {
+                                Type: 'String',
+                            },
                         },
-                        MyParamName2: {
-                            Type: 'String',
-                        },
-                    },
-                }),
+                    }
+                },
             })
         )
 
@@ -225,19 +229,21 @@ describe('SamParameterCompletionItemProvider', async function () {
             new MockSamParamComplItemProviderContext({
                 executeCommand: async <T>() => [templatesSymbol] as any as T,
                 getWorkspaceFolder: () => ({ uri: vscode.Uri.file('') }) as any as vscode.WorkspaceFolder,
-                loadTemplate: async () => ({
-                    Parameters: {
-                        MyParamName1: {
-                            Type: 'String',
+                loadTemplate: async () => {
+                    return {
+                        Parameters: {
+                            MyParamName1: {
+                                Type: 'String',
+                            },
+                            MyParamName2: {
+                                Type: 'String',
+                            },
+                            MyOtherParamName: {
+                                Type: 'String',
+                            },
                         },
-                        MyParamName2: {
-                            Type: 'String',
-                        },
-                        MyOtherParamName: {
-                            Type: 'String',
-                        },
-                    },
-                }),
+                    }
+                },
             })
         )
 
@@ -289,19 +295,21 @@ describe('SamParameterCompletionItemProvider', async function () {
             new MockSamParamComplItemProviderContext({
                 executeCommand: async <T>() => [templatesSymbol] as any as T,
                 getWorkspaceFolder: () => ({ uri: vscode.Uri.file('') }) as any as vscode.WorkspaceFolder,
-                loadTemplate: async () => ({
-                    Parameters: {
-                        MyParamName1: {
-                            Type: 'String',
+                loadTemplate: async () => {
+                    return {
+                        Parameters: {
+                            MyParamName1: {
+                                Type: 'String',
+                            },
+                            MyParamName2: {
+                                Type: 'String',
+                            },
+                            MyOtherParamName: {
+                                Type: 'String',
+                            },
                         },
-                        MyParamName2: {
-                            Type: 'String',
-                        },
-                        MyOtherParamName: {
-                            Type: 'String',
-                        },
-                    },
-                }),
+                    }
+                },
             })
         )
 
@@ -328,19 +336,21 @@ describe('SamParameterCompletionItemProvider', async function () {
             new MockSamParamComplItemProviderContext({
                 executeCommand: async <T>() => [templatesSymbol] as any as T,
                 getWorkspaceFolder: () => ({ uri: vscode.Uri.file('') }) as any as vscode.WorkspaceFolder,
-                loadTemplate: async () => ({
-                    Parameters: {
-                        MyParamName1: {
-                            Type: 'String',
+                loadTemplate: async () => {
+                    return {
+                        Parameters: {
+                            MyParamName1: {
+                                Type: 'String',
+                            },
+                            MyParamName2: {
+                                Type: 'String',
+                            },
+                            MyOtherParamName: {
+                                Type: 'String',
+                            },
                         },
-                        MyParamName2: {
-                            Type: 'String',
-                        },
-                        MyOtherParamName: {
-                            Type: 'String',
-                        },
-                    },
-                }),
+                    }
+                },
             })
         )
 
@@ -371,19 +381,21 @@ describe('SamParameterCompletionItemProvider', async function () {
             new MockSamParamComplItemProviderContext({
                 executeCommand: async <T>() => [templatesSymbol] as any as T,
                 getWorkspaceFolder: () => ({ uri: vscode.Uri.file('') }) as any as vscode.WorkspaceFolder,
-                loadTemplate: async () => ({
-                    Parameters: {
-                        MyParamName1: {
-                            Type: 'String',
+                loadTemplate: async () => {
+                    return {
+                        Parameters: {
+                            MyParamName1: {
+                                Type: 'String',
+                            },
+                            MyParamName2: {
+                                Type: 'String',
+                            },
+                            MyOtherParamName: {
+                                Type: 'String',
+                            },
                         },
-                        MyParamName2: {
-                            Type: 'String',
-                        },
-                        MyOtherParamName: {
-                            Type: 'String',
-                        },
-                    },
-                }),
+                    }
+                },
             })
         )
 
@@ -414,19 +426,21 @@ describe('SamParameterCompletionItemProvider', async function () {
             new MockSamParamComplItemProviderContext({
                 executeCommand: async <T>() => [templatesSymbol] as any as T,
                 getWorkspaceFolder: () => ({ uri: vscode.Uri.file('') }) as any as vscode.WorkspaceFolder,
-                loadTemplate: async () => ({
-                    Parameters: {
-                        MyParamName1: {
-                            Type: 'String',
+                loadTemplate: async () => {
+                    return {
+                        Parameters: {
+                            MyParamName1: {
+                                Type: 'String',
+                            },
+                            MyParamName2: {
+                                Type: 'String',
+                            },
+                            MyOtherParamName: {
+                                Type: 'String',
+                            },
                         },
-                        MyParamName2: {
-                            Type: 'String',
-                        },
-                        MyOtherParamName: {
-                            Type: 'String',
-                        },
-                    },
-                }),
+                    }
+                },
             })
         )
 

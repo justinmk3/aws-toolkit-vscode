@@ -128,14 +128,16 @@ describe('securityScanHandler', function () {
             codeScanIssueMap = new Map()
             editor = {
                 document: {
-                    lineAt: (lineNumber: number): vscode.TextLine => ({
-                        lineNumber: lineNumber + 1,
-                        range: new vscode.Range(0, 0, 0, 0),
-                        rangeIncludingLineBreak: new vscode.Range(0, 0, 0, 0),
-                        firstNonWhitespaceCharacterIndex: 0,
-                        isEmptyOrWhitespace: false,
-                        text: `line ${lineNumber + 1}`,
-                    }),
+                    lineAt: (lineNumber: number): vscode.TextLine => {
+                        return {
+                            lineNumber: lineNumber + 1,
+                            range: new vscode.Range(0, 0, 0, 0),
+                            rangeIncludingLineBreak: new vscode.Range(0, 0, 0, 0),
+                            firstNonWhitespaceCharacterIndex: 0,
+                            isEmptyOrWhitespace: false,
+                            text: `line ${lineNumber + 1}`,
+                        }
+                    },
                 },
             } as vscode.TextEditor
         })

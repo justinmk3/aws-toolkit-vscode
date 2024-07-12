@@ -86,9 +86,9 @@ describe('LineTracker class', function () {
                 preview: false,
             })
 
-            const vscodeSelections = selections.map((s) => {
-                return new Selection(new Position(s.anchor, 0), new Position(s.active, 0))
-            })
+            const vscodeSelections = selections.map(
+                (s) => new Selection(new Position(s.anchor, 0), new Position(s.active, 0))
+            )
 
             await sut.onTextEditorSelectionChanged({
                 textEditor: editor,

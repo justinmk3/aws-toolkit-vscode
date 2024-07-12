@@ -150,17 +150,16 @@ export async function invokeCodeLensCommandPalette(
 ): Promise<void> {
     const labelRenderRange = 200
     const handlers: (vscode.QuickPickItem & { lens?: vscode.CodeLens })[] = lenses
-        .filter((lens) => {
-            // remove codelenses that go to the invoker UI
-            // maybe move this into the workflow at some point (drop down to one)
-            return (
+        .filter(
+            (lens) =>
+                // remove codelenses that go to the invoker UI
+                // maybe move this into the workflow at some point (drop down to one)
                 lens &&
                 lens.command &&
                 lens.command.arguments &&
                 lens.command.arguments.length === 3 &&
                 lens.command.arguments![2] !== true
-            )
-        })
+        )
         .map((lens) => {
             return {
                 // lens is currently pulling the entire function, not just the declaration

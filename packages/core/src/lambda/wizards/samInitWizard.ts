@@ -65,11 +65,13 @@ function createSamTemplatePrompter(
     samCliVersion: string
 ): QuickPickPrompter<SamTemplate> {
     const templates = getSamTemplateWizardOption(currRuntime, packageType, samCliVersion)
-    const items = templates.toArray().map((template) => ({
-        label: template,
-        data: template,
-        detail: getTemplateDescription(template),
-    }))
+    const items = templates.toArray().map((template) => {
+        return {
+            label: template,
+            data: template,
+            detail: getTemplateDescription(template),
+        }
+    })
 
     return createQuickPick(items, {
         title: localize('AWS.samcli.initWizard.template.prompt', 'Select a SAM Application Template'),
@@ -87,7 +89,9 @@ function createSchemaRegionPrompter(regions: Region[], defaultRegion?: string): 
 
 function createDependencyPrompter(currRuntime: Runtime): QuickPickPrompter<DependencyManager> {
     const dependencyManagers = getDependencyManager(currRuntime)
-    const items = dependencyManagers.map((dependencyManager) => ({ label: dependencyManager }))
+    const items = dependencyManagers.map((dependencyManager) => {
+        return { label: dependencyManager }
+    })
 
     return createLabelQuickPick(items, {
         title: localize('AWS.samcli.initWizard.dependencyManager.prompt', 'Select a Dependency Manager'),
@@ -110,9 +114,11 @@ function createRegistryPrompter(region: string, credentials?: AWS.Credentials): 
                 return []
             }
 
-            return registryNames.map((registry) => ({
-                label: registry,
-            }))
+            return registryNames.map((registry) => {
+                return {
+                    label: registry,
+                }
+            })
         })
 
     return createLabelQuickPick(items, {
@@ -148,9 +154,11 @@ function createSchemaPrompter(
                 return []
             }
 
-            return schemas.map((schema) => ({
-                label: schema.SchemaName!,
-            }))
+            return schemas.map((schema) => {
+                return {
+                    label: schema.SchemaName!,
+                }
+            })
         })
 
     return createLabelQuickPick(items, {

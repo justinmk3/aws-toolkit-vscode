@@ -172,11 +172,13 @@ async function promptVsix(
                 yield [seps.shift()!]
             }
 
-            yield uris.map((v) => ({
-                label: path.basename(v.fsPath),
-                detail: v.fsPath,
-                data: v,
-            }))
+            yield uris.map((v) => {
+                return {
+                    label: path.basename(v.fsPath),
+                    detail: v.fsPath,
+                    data: v,
+                }
+            })
         }
     })()
 

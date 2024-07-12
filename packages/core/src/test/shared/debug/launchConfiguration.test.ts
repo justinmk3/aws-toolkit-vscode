@@ -118,7 +118,9 @@ describe('LaunchConfiguration', function () {
             setDebugConfigurations: setDebugConfigurationsStub,
         }
         mockSamValidator = {
-            validate: async () => ({ isValid: true }),
+            validate: async () => {
+                return { isValid: true }
+            },
         }
     })
 

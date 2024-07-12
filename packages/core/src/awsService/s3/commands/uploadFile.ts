@@ -73,13 +73,15 @@ export async function uploadFileCommand(
         document = undefined
     }
 
-    const fileToUploadRequest = (bucketName: string, key: string, file: vscode.Uri) => ({
-        bucketName,
-        key: key,
-        fileLocation: file,
-        fileSizeBytes: fileSizeBytes(file),
-        s3Client,
-    })
+    const fileToUploadRequest = (bucketName: string, key: string, file: vscode.Uri) => {
+        return {
+            bucketName,
+            key: key,
+            fileLocation: file,
+            fileSizeBytes: fileSizeBytes(file),
+            s3Client,
+        }
+    }
 
     if (node) {
         const filesToUpload = await getFile(undefined)
@@ -422,9 +424,7 @@ export async function promptUserForBucket(
         throw new Error('Failed to list buckets from client')
     }
 
-    const s3Buckets = allBuckets.filter((bucket) => {
-        return bucket && bucket.Name
-    }) as S3.Bucket[]
+    const s3Buckets = allBuckets.filter((bucket) => bucket && bucket.Name) as S3.Bucket[]
 
     const createNewBucket: BucketQuickPickItem = {
         label: localize('AWS.command.s3.createBucket', 'Create new bucket'),

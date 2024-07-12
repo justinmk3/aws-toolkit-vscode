@@ -49,9 +49,11 @@ async function _quickPickUrl(configList: FunctionUrlConfigList): Promise<string 
 }
 
 export function createLambdaFuncUrlPrompter(configList: FunctionUrlConfigList): QuickPickPrompter<string> {
-    const items = configList.map((c) => ({
-        label: c.FunctionArn,
-        data: c.FunctionUrl,
-    }))
+    const items = configList.map((c) => {
+        return {
+            label: c.FunctionArn,
+            data: c.FunctionUrl,
+        }
+    })
     return createQuickPick(items, { title: 'Select function to copy url from.' })
 }

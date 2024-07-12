@@ -80,9 +80,7 @@ export class SecurityPanelViewProvider implements vscode.WebviewViewProvider {
         editor: vscode.TextEditor | undefined
     ) {
         this.createPanelSets(securityRecommendationCollection)
-        const total = this.panelSets.reduce((accumulator, current) => {
-            return accumulator + current.items.length
-        }, 0)
+        const total = this.panelSets.reduce((accumulator, current) => accumulator + current.items.length, 0)
         this.persistLog.push(
             `<p>[${getLocalDatetime()}] Security scan for <span class="packageName">${
                 this.packageName

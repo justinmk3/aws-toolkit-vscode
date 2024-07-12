@@ -23,8 +23,8 @@ export type ToolId = 'codecatalyst' | 'codewhisperer' | 'testId'
 let currentConn: Auth['activeConnection']
 const auths = new Map<string, SecondaryAuth>()
 const multiConnectionListeners = new WeakMap<Auth, vscode.Disposable>()
-const registerAuthListener = (auth: Auth) => {
-    return auth.onDidChangeActiveConnection(async (newConn) => {
+const registerAuthListener = (auth: Auth) =>
+    auth.onDidChangeActiveConnection(async (newConn) => {
         // When we change the active connection, there may be
         // secondary auths that were dependent on the previous active connection.
         // To ensure secondary auths still work, when we change to a new active connection,
@@ -38,7 +38,6 @@ const registerAuthListener = (auth: Auth) => {
         }
         currentConn = newConn
     })
-}
 
 export function getSecondaryAuth<T extends Connection>(
     auth: Auth,

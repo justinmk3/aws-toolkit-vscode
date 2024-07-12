@@ -17,9 +17,7 @@ import { getLogger } from '../shared/logger'
 import { SsoConnection } from '../auth/connection'
 import { openUrl } from '../shared/utilities/vsCodeUtils'
 
-export const learnMoreCommand = Commands.declare('aws.learnMore', () => async (docsUrl: vscode.Uri) => {
-    return openUrl(docsUrl)
-})
+export const learnMoreCommand = Commands.declare('aws.learnMore', () => async (docsUrl: vscode.Uri) => openUrl(docsUrl))
 
 // Only used in rare cases on C9
 export const reauth = Commands.declare(

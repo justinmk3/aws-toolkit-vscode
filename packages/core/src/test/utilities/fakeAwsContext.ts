@@ -26,11 +26,13 @@ export class FakeAwsContext implements AwsContext {
     }
 
     public credentialsShim = {
-        get: async () => ({
-            accessKeyId: '',
-            secretAccessKey: '',
-            ...this.awsContextCredentials?.credentials,
-        }),
+        get: async () => {
+            return {
+                accessKeyId: '',
+                secretAccessKey: '',
+                ...this.awsContextCredentials?.credentials,
+            }
+        },
         async refresh() {
             return this.get()
         },

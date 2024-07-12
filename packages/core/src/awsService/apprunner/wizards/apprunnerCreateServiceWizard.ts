@@ -61,10 +61,12 @@ function createInstanceStep(): Prompter<AppRunner.InstanceConfiguration> {
         [2, 4],
     ]
 
-    const items: picker.DataQuickPickItem<AppRunner.InstanceConfiguration>[] = enumerations.map((e) => ({
-        label: `${e[0]} vCPUs, ${e[1]} GBs Memory`,
-        data: { Cpu: `${e[0]} vCPU`, Memory: `${e[1]} GB` },
-    }))
+    const items: picker.DataQuickPickItem<AppRunner.InstanceConfiguration>[] = enumerations.map((e) => {
+        return {
+            label: `${e[0]} vCPUs, ${e[1]} GBs Memory`,
+            data: { Cpu: `${e[0]} vCPU`, Memory: `${e[1]} GB` },
+        }
+    })
 
     return picker.createQuickPick(items, {
         title: localize('AWS.apprunner.createService.selectInstanceConfig.title', 'Select instance configuration'),

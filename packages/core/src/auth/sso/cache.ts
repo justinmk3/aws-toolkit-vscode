@@ -53,8 +53,12 @@ export function getCacheFileWatcher(directory = getCacheDir()) {
 export function getRegistrationCache(directory = getCacheDir()): KeyedCache<ClientRegistration, RegistrationKey> {
     // Compatability for older Toolkit versions (format on disk is unchanged)
     type StoredRegistration = Omit<ClientRegistration, 'expiresAt'> & { readonly expiresAt: string }
-    const read = (data: StoredRegistration) => ({ ...data, expiresAt: new Date(data.expiresAt) })
-    const write = (data: ClientRegistration) => ({ ...data, expiresAt: data.expiresAt.toISOString() })
+    const read = (data: StoredRegistration) => {
+        return { ...data, expiresAt: new Date(data.expiresAt) }
+    }
+    const write = (data: ClientRegistration) => {
+        return { ...data, expiresAt: data.expiresAt.toISOString() }
+    }
 
     const logger = (message: string) => getLogger().debug('auth: SSO registration cache: %s', message)
     const cache: KeyedCache<StoredRegistration, RegistrationKey> = createDiskCache(

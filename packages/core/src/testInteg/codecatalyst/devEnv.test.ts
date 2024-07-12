@@ -48,9 +48,7 @@ describe('InactivityMessage', function () {
             const timestamp = getLatestTimestamp()
             activityCallback(timestamp)
         })
-        devEnvActivity.isLocalActivityStale.callsFake(async () => {
-            return false
-        })
+        devEnvActivity.isLocalActivityStale.callsFake(async () => false)
 
         startCapturingMessages()
     })
@@ -103,9 +101,7 @@ describe('InactivityMessage', function () {
     it('does not show inactivity message if user activity is found using the API', async function () {
         // This gets checked each time before we decide to show the message.
         // If a new user activity exists then we abort showing the message.
-        devEnvActivity.isLocalActivityStale.callsFake(async () => {
-            return true
-        })
+        devEnvActivity.isLocalActivityStale.callsFake(async () => true)
 
         await inactivityMsg.init(
             inactivityMsg.shutdownWarningThreshold + 1,
@@ -126,12 +122,11 @@ describe('InactivityMessage', function () {
      * @param minute The minute the message was expected to be shown at
      */
     async function assertMessagesShown(expectedMessages: [text: string, minute: number][]) {
-        await waitUntil(
-            async () => {
-                return expectedMessages.length === actualMessages.length
-            },
-            { truthy: true, interval: 200, timeout: 10_000 }
-        )
+        await waitUntil(async () => expectedMessages.length === actualMessages.length, {
+            truthy: true,
+            interval: 200,
+            timeout: 10_000,
+        })
         if (expectedMessages.length !== actualMessages.length) {
             assert.fail(`Expected ${expectedMessages.length} messages, but got ${actualMessages.length}`)
         }

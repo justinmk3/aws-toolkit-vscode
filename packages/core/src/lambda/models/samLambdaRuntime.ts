@@ -265,20 +265,24 @@ export function createRuntimeQuickPick(params: {
         // remove uncreatable runtimes
         .filter((value) => samLambdaCreatableRuntimes().has(value))
         .toArray()
-        .map((runtime) => ({
-            data: { runtime, packageType: 'Zip' } as RuntimeAndPackage,
-            label: runtime,
-        }))
+        .map((runtime) => {
+            return {
+                data: { runtime, packageType: 'Zip' } as RuntimeAndPackage,
+                label: runtime,
+            }
+        })
 
     // internally, after init there is essentially no difference between a ZIP and Image runtime;
     // behavior is keyed off of what is specified in the cloudformation template
     let imageRuntimeItems: DataQuickPickItem<RuntimeAndPackage>[] = []
     if (params.showImageRuntimes) {
         imageRuntimeItems = samImageLambdaRuntimes()
-            .map((runtime) => ({
-                data: { runtime, packageType: 'Image' } as RuntimeAndPackage,
-                label: `${runtime} (Image)`,
-            }))
+            .map((runtime) => {
+                return {
+                    data: { runtime, packageType: 'Image' } as RuntimeAndPackage,
+                    label: `${runtime} (Image)`,
+                }
+            })
             .toArray()
     }
 

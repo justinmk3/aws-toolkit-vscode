@@ -134,14 +134,14 @@ describe('createNewSamApp', function () {
                 )
             )
             assert.ok(launchConfigs)
-            const matchingConfigs = launchConfigs?.filter((config) => {
-                return pathutils.areEqual(
+            const matchingConfigs = launchConfigs?.filter((config) =>
+                pathutils.areEqual(
                     fakeWorkspaceFolder.uri.fsPath,
                     (config.invokeTarget as TemplateTargetProperties).templatePath,
                     tempTemplate.fsPath,
                     true
                 )
-            })
+            )
             assert.ok(matchingConfigs)
             assert.strictEqual(matchingConfigs!.length, 1)
         })
@@ -169,16 +169,15 @@ describe('createNewSamApp', function () {
                 )
             )
             assert.ok(launchConfigs)
-            const matchingConfigs = launchConfigs?.filter((config) => {
-                return (
+            const matchingConfigs = launchConfigs?.filter(
+                (config) =>
                     pathutils.areEqual(
                         fakeWorkspaceFolder.uri.fsPath,
                         (config.invokeTarget as TemplateTargetProperties).templatePath,
                         tempTemplate.fsPath,
                         true
                     ) && config.lambda?.runtime === 'someruntime'
-                )
-            })
+            )
             assert.ok(matchingConfigs)
             assert.strictEqual(matchingConfigs!.length, 1)
         })
@@ -287,9 +286,8 @@ describe('createNewSamApp', function () {
                         request: 'barRequest',
                     },
                 ],
-                async (path: string) => {
-                    return '${PRODUCTNAME} ${IDE} ${CODELENS} ${COMPANYNAME} ${COMMANDPALETTE} ${DOCURL}${LISTOFCONFIGURATIONS}'
-                }
+                async (path: string) =>
+                    '${PRODUCTNAME} ${IDE} ${CODELENS} ${COMPANYNAME} ${COMMANDPALETTE} ${DOCURL}${LISTOFCONFIGURATIONS}'
             )
 
             assert.ok(success)

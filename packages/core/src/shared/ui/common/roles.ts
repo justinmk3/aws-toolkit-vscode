@@ -39,10 +39,12 @@ export function createRolePrompter(client: IamClient, options: RolePrompterOptio
             .getRoles()
             .map(filterRoles)
             .map((roles) =>
-                roles.map((r) => ({
-                    label: r.RoleName,
-                    data: r,
-                }))
+                roles.map((r) => {
+                    return {
+                        label: r.RoleName,
+                        data: r,
+                    }
+                })
             )
     }
 

@@ -203,10 +203,12 @@ export async function startSecurityScan(
             editor
         )
         const { total, withFixes } = securityRecommendationCollection.reduce(
-            (accumulator, current) => ({
-                total: accumulator.total + current.issues.length,
-                withFixes: accumulator.withFixes + current.issues.filter((i) => i.suggestedFixes.length > 0).length,
-            }),
+            (accumulator, current) => {
+                return {
+                    total: accumulator.total + current.issues.length,
+                    withFixes: accumulator.withFixes + current.issues.filter((i) => i.suggestedFixes.length > 0).length,
+                }
+            },
             { total: 0, withFixes: 0 }
         )
         codeScanTelemetryEntry.codewhispererCodeScanTotalIssues = total

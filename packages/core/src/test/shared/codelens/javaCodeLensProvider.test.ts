@@ -62,9 +62,7 @@ describe('javaCodeLensProvider', () => {
 
         it('returns true for a public class', async function () {
             const doc = {
-                getText: (range?: vscode.Range): string => {
-                    return 'public class Function {}'
-                },
+                getText: (range?: vscode.Range): string => 'public class Function {}',
             }
 
             assert.strictEqual(isValidClassSymbol(doc, sampleClassSymbol), true, 'Expected symbol to be a public class')
@@ -80,9 +78,7 @@ describe('javaCodeLensProvider', () => {
             )
 
             const doc = {
-                getText: (range?: vscode.Range): string => {
-                    return 'public method Function {}'
-                },
+                getText: (range?: vscode.Range): string => 'public method Function {}',
             }
 
             assert.strictEqual(isValidClassSymbol(doc, symbol), false, 'Expected symbol not to be a public class')

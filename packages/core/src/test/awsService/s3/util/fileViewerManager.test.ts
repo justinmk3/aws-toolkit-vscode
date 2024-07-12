@@ -33,8 +33,8 @@ const bigImage = toFile(bucket, {
 })
 
 const computeTag = (content: Buffer) => content.toString()
-const makeFile = (key: string, content: Buffer) => {
-    return Object.assign(
+const makeFile = (key: string, content: Buffer) =>
+    Object.assign(
         toFile(bucket, {
             Key: key,
             ETag: computeTag(content),
@@ -43,7 +43,6 @@ const makeFile = (key: string, content: Buffer) => {
         }),
         { content }
     )
-}
 
 type DataFile = File & { readonly content: Buffer }
 function createS3() {

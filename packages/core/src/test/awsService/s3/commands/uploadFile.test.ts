@@ -32,11 +32,10 @@ describe('uploadFileCommand', function () {
         bucket: { Name: bucketName },
         folder: { name: 'folderA', path: 'folderA/', arn: 'arn' },
     }
-    const getFolder: (s3client: S3Client) => Promise<BucketQuickPickItem | 'cancel' | 'back'> = (s3Client) => {
-        return new Promise((resolve, reject) => {
+    const getFolder: (s3client: S3Client) => Promise<BucketQuickPickItem | 'cancel' | 'back'> = (s3Client) =>
+        new Promise((resolve, reject) => {
             resolve(folderResponse)
         })
-    }
     let outputChannel: MockOutputChannel
     let s3: S3Client
     let bucketNode: S3BucketNode
@@ -64,11 +63,10 @@ describe('uploadFileCommand', function () {
             const promiseStub = sinon.stub().resolves()
             mockedUpload.promise = promiseStub
 
-            getFile = (document) => {
-                return new Promise((resolve, reject) => {
+            getFile = (document) =>
+                new Promise((resolve, reject) => {
                     resolve([fileLocation])
                 })
-            }
 
             await uploadFileCommand(s3, bucketNode, statFile, undefined, getFile, outputChannel)
 
@@ -85,11 +83,10 @@ describe('uploadFileCommand', function () {
         })
 
         it('cancels and displays a message if a user does not select a file', async function () {
-            getFile = (document) => {
-                return new Promise((resolve, reject) => {
+            getFile = (document) =>
+                new Promise((resolve, reject) => {
                     resolve(undefined)
                 })
-            }
 
             await uploadFileCommand(s3, bucketNode, statFile, undefined, getFile, outputChannel)
             assert.deepStrictEqual(outputChannel.lines, ['No file selected, cancelling upload'])
@@ -100,17 +97,15 @@ describe('uploadFileCommand', function () {
         this.beforeEach(function () {
             s3 = {} as any as S3Client
             outputChannel = new MockOutputChannel()
-            getFile = (document) => {
-                return new Promise((resolve, reject) => {
+            getFile = (document) =>
+                new Promise((resolve, reject) => {
                     resolve([fileLocation])
                 })
-            }
 
-            getBucket = (s3Client) => {
-                return new Promise((resolve, reject) => {
+            getBucket = (s3Client) =>
+                new Promise((resolve, reject) => {
                     resolve(bucketResponse)
                 })
-            }
         })
 
         it('uploads if user provides file and bucket', async function () {
@@ -128,39 +123,35 @@ describe('uploadFileCommand', function () {
         })
 
         it('cancels if user does not provide bucket', async function () {
-            getBucket = (s3Client) => {
-                return new Promise((resolve, reject) => {
+            getBucket = (s3Client) =>
+                new Promise((resolve, reject) => {
                     resolve('cancel')
                 })
-            }
 
             await uploadFileCommand(s3, undefined, statFile, getBucket, getFile, outputChannel)
             assert.deepStrictEqual(outputChannel.lines, ['No bucket selected, cancelling upload'])
         })
 
         it('cancels if user does not select file', async function () {
-            getFile = (document) => {
-                return new Promise((resolve, reject) => {
+            getFile = (document) =>
+                new Promise((resolve, reject) => {
                     resolve(undefined)
                 })
-            }
 
             await uploadFileCommand(s3, undefined, statFile, getBucket, getFile, outputChannel)
             assert.deepStrictEqual(outputChannel.lines, ['No file selected, cancelling upload'])
         })
     })
 
-    getFile = (document) => {
-        return new Promise((resolve, reject) => {
+    getFile = (document) =>
+        new Promise((resolve, reject) => {
             resolve([fileLocation])
         })
-    }
 
-    getBucket = (s3Client) => {
-        return new Promise((resolve, reject) => {
+    getBucket = (s3Client) =>
+        new Promise((resolve, reject) => {
             resolve(bucketResponse)
         })
-    }
 
     it('successfully upload file or folder', async function () {
         const uploadStub = sinon.stub().resolves(mockedUpload)
@@ -212,11 +203,10 @@ describe('getFileToUpload', function () {
             resolve: (value: T[] | PromiseLike<T[] | undefined> | undefined) => void,
             reject: (reason?: any) => void
         ): void
-    }) => Promise<T[] | undefined> = () => {
-        return new Promise((resolve, reject) => {
+    }) => Promise<T[] | undefined> = () =>
+        new Promise((resolve, reject) => {
             resolve([selection])
         })
-    }
 
     it('directly asks user for file if no active editor', async function () {
         getTestWindow().onDidShowDialog((d) => d.selectItem(fileLocation))
@@ -269,11 +259,10 @@ describe('promptUserForBucket', async function () {
             resolve: (value: T[] | PromiseLike<T[] | undefined> | undefined) => void,
             reject: (reason?: any) => void
         ): void
-    }) => Promise<T[] | undefined> = () => {
-        return new Promise((resolve, reject) => {
+    }) => Promise<T[] | undefined> = () =>
+        new Promise((resolve, reject) => {
             resolve(undefined)
         })
-    }
     const selection: any = {
         label: 'bucket selected',
         bucket: { Name: 'bucket 1' },
@@ -285,11 +274,10 @@ describe('promptUserForBucket', async function () {
             resolve: (value: T[] | PromiseLike<T[] | undefined> | undefined) => void,
             reject: (reason?: any) => void
         ): void
-    }) => Promise<T[] | undefined> = () => {
-        return new Promise((resolve, reject) => {
+    }) => Promise<T[] | undefined> = () =>
+        new Promise((resolve, reject) => {
             resolve([selection])
         })
-    }
 
     beforeEach(function () {
         s3 = {} as any as S3Client

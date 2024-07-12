@@ -341,10 +341,12 @@ export function associateDevEnv(
             .filter((env) => env.repositories.length > 0 && isDevenvVscode(env.ides))
             .toMap((env) => `${env.org.name}.${env.project.name}.${env.repositories[0].repositoryName}`)
 
-        yield* repos.map((repo) => ({
-            ...repo,
-            devEnv: devenvs.get(`${repo.org.name}.${repo.project.name}.${repo.name}`),
-        }))
+        yield* repos.map((repo) => {
+            return {
+                ...repo,
+                devEnv: devenvs.get(`${repo.org.name}.${repo.project.name}.${repo.name}`),
+            }
+        })
     })
 }
 

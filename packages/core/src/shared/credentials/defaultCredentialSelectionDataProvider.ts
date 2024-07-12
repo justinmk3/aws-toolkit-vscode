@@ -225,7 +225,9 @@ export class DefaultCredentialSelectionDataProvider implements CredentialSelecti
         const remainingProfiles: ProfileEntry[] = this.existingProfileNames
             .filter((x) => !orderedNames.has(x))
             .sort()
-            .map((profileName) => ({ profileName: profileName, isRecentlyUsed: false }))
+            .map((profileName) => {
+                return { profileName: profileName, isRecentlyUsed: false }
+            })
         orderedProfiles.push(...remainingProfiles)
 
         return orderedProfiles

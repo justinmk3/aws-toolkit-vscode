@@ -138,11 +138,11 @@ export function isInDirectory(d: string, p: string): boolean {
     }
     const caseInsensitive = os.platform() === 'win32'
 
-    return parentDirPieces.every((value, index) => {
-        return caseInsensitive
+    return parentDirPieces.every((value, index) =>
+        caseInsensitive
             ? value.toLowerCase() === containedPathPieces[index].toLowerCase()
             : value === containedPathPieces[index]
-    })
+    )
 }
 
 /**

@@ -127,7 +127,10 @@ export class SamInvokeWebview extends VueWebview {
     public async getSamplePayload(): Promise<string | undefined> {
         try {
             const inputs: SampleQuickPickItem[] = (await getSampleLambdaPayloads()).map((entry) => {
-                return { label: entry.name ?? '', filename: entry.filename ?? '' }
+                return {
+                    label: entry.name ?? '',
+                    filename: entry.filename ?? '',
+                }
             })
 
             const qp = picker.createQuickPick({

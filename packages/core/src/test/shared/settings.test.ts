@@ -129,9 +129,7 @@ describe('Settings', function () {
             // const fakeSettings = {}
             const fake = {
                 lastValue: 'x',
-                get: (key: string) => {
-                    return `${key}-value`
-                },
+                get: (key: string) => `${key}-value`,
                 update: async (key: string, val: any) => {
                     // Do nothing (success).
                     // (fakeSettings as any)[key] = val

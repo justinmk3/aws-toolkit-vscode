@@ -65,9 +65,7 @@ describe('isPublicClassSymbol', async function () {
 
     it('returns true for a public class', async function () {
         const doc = {
-            getText: (range?: vscode.Range): string => {
-                return 'public class Function {}'
-            },
+            getText: (range?: vscode.Range): string => 'public class Function {}',
         }
 
         const isPublic = isPublicClassSymbol(doc, sampleClassSymbol)
@@ -84,9 +82,7 @@ describe('isPublicClassSymbol', async function () {
         )
 
         const doc = {
-            getText: (range?: vscode.Range): string => {
-                return 'public class Function {}'
-            },
+            getText: (range?: vscode.Range): string => 'public class Function {}',
         }
 
         const isPublic = isPublicClassSymbol(doc, symbol)

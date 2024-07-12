@@ -38,15 +38,15 @@ describe('RegistryItemNode', function () {
                 }
 
                 const client = stub(DefaultSsmDocumentClient, { regionCode })
-                client.listDocuments.callsFake(() => {
-                    return asyncGenerator([
+                client.listDocuments.callsFake(() =>
+                    asyncGenerator([
                         {
                             Name: `${owner}doc`,
                             Owner: `${owner}`,
                             DocumentType: `${documentType}`,
                         },
                     ])
-                })
+                )
 
                 const testNode: RegistryItemNode = new RegistryItemNode(regionCode, registry, documentType, client)
                 const childNode = await testNode.getChildren()

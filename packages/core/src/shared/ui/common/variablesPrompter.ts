@@ -38,7 +38,9 @@ function parseEnvFile(contents: string): { [key: string]: string } {
         .split(/\r?\n/)
         .map((line) => line.match(/^\s*([\w.-]+)\s*=\s*(.*)?\s*$/))
         .filter(isMatchArray)
-        .map((match) => ({ [match[1]]: unquote(match[2] ?? '').trim() }))
+        .map((match) => {
+            return { [match[1]]: unquote(match[2] ?? '').trim() }
+        })
         .reduce((a, b) => Object.assign(a, b))
 }
 

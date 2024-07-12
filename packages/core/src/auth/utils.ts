@@ -286,7 +286,10 @@ const getConnectionIcon = (conn: Connection) =>
 
 const deleteConnection = 'Delete Connection'
 export const createDeleteConnectionButton: () => vscode.QuickInputButton = () => {
-    return { tooltip: deleteConnection, iconPath: getIcon('vscode-trash') }
+    return {
+        tooltip: deleteConnection,
+        iconPath: getIcon('vscode-trash'),
+    }
 }
 
 export function createConnectionPrompter(auth: Auth, type?: 'iam' | 'iam-only' | 'sso') {
@@ -568,14 +571,10 @@ export async function findSsoConnections(
     let predicate: (c?: Connection) => boolean
     switch (kind) {
         case 'codewhisperer':
-            predicate = (conn?: Connection) => {
-                return isIdcSsoConnection(conn) && isValidCodeWhispererCoreConnection(conn)
-            }
+            predicate = (conn?: Connection) => isIdcSsoConnection(conn) && isValidCodeWhispererCoreConnection(conn)
             break
         case 'codecatalyst':
-            predicate = (conn?: Connection) => {
-                return isIdcSsoConnection(conn) && isValidCodeCatalystConnection(conn)
-            }
+            predicate = (conn?: Connection) => isIdcSsoConnection(conn) && isValidCodeCatalystConnection(conn)
             break
         case 'any':
             predicate = isIdcSsoConnection
@@ -605,14 +604,10 @@ async function findBuilderIdConnections(
     let predicate: (c?: Connection) => boolean
     switch (kind) {
         case 'codewhisperer':
-            predicate = (conn?: Connection) => {
-                return isBuilderIdConnection(conn) && isValidCodeWhispererCoreConnection(conn)
-            }
+            predicate = (conn?: Connection) => isBuilderIdConnection(conn) && isValidCodeWhispererCoreConnection(conn)
             break
         case 'codecatalyst':
-            predicate = (conn?: Connection) => {
-                return isBuilderIdConnection(conn) && isValidCodeCatalystConnection(conn)
-            }
+            predicate = (conn?: Connection) => isBuilderIdConnection(conn) && isValidCodeCatalystConnection(conn)
             break
         case 'any':
             predicate = isBuilderIdConnection

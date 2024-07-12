@@ -130,9 +130,7 @@ export class Connector {
                         return this.cwChatConnector.requestGenerativeAIAnswer(tabID, payload)
                 }
             } else {
-                return setTimeout(() => {
-                    return this.requestGenerativeAIAnswer(tabID, payload)
-                }, 2000)
+                return setTimeout(() => this.requestGenerativeAIAnswer(tabID, payload), 2000)
             }
         })
 

@@ -22,16 +22,11 @@ describe('detectCdkProjects', function () {
     // eslint-disable-next-line @typescript-eslint/naming-convention
     async function detectCdkProjects_wait(dirs: any) {
         return (
-            (await waitUntil(
-                async () => {
-                    return await detectCdkProjects(dirs)
-                },
-                {
-                    timeout: 10000,
-                    interval: 250,
-                    truthy: true,
-                }
-            )) ?? []
+            (await waitUntil(async () => await detectCdkProjects(dirs), {
+                timeout: 10000,
+                interval: 250,
+                truthy: true,
+            })) ?? []
         )
     }
 

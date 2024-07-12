@@ -513,10 +513,12 @@ export class DefaultS3Client {
             .promise()
 
         const response: ListObjectVersionsResponse = {
-            objects: (output.Versions ?? []).map((version) => ({
-                key: version.Key!,
-                versionId: version.VersionId,
-            })),
+            objects: (output.Versions ?? []).map((version) => {
+                return {
+                    key: version.Key!,
+                    versionId: version.VersionId,
+                }
+            }),
             continuationToken: output.IsTruncated
                 ? { keyMarker: output.NextKeyMarker!, versionIdMarker: output.NextVersionIdMarker }
                 : undefined,
@@ -584,7 +586,9 @@ export class DefaultS3Client {
             .deleteObjects({
                 Bucket: request.bucketName,
                 Delete: {
-                    Objects: request.objects.map(({ key: Key, versionId: VersionId }) => ({ Key, VersionId })),
+                    Objects: request.objects.map(({ key: Key, versionId: VersionId }) => {
+                        return { Key, VersionId }
+                    }),
                     Quiet: true,
                 },
             })

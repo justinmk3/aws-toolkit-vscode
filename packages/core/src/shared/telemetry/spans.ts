@@ -192,7 +192,9 @@ export class TelemetrySpan<T extends MetricBase = MetricBase> {
         const metadata = Object.entries(state)
             .filter(([_, v]) => v !== '') // XXX: the telemetry service currently rejects empty strings :/
             .filter(([k, v]) => v !== undefined && !TelemetrySpan.#excludedFields.includes(k))
-            .map(([k, v]) => ({ Key: k, Value: String(v) }))
+            .map(([k, v]) => {
+                return { Key: k, Value: String(v) }
+            })
 
         globals.telemetry.record({
             Metadata: metadata,

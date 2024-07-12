@@ -379,9 +379,8 @@ export function createTestQuickPick<T extends vscode.QuickPickItem>(picker: vsco
             }
             return Reflect.set(target, prop, val, recv)
         },
-        has: (target, prop) => {
-            return isKeyOf(prop, emitters) || isKeyOf(prop, tester) || isKeyOf(prop, state) || Reflect.has(target, prop)
-        },
+        has: (target, prop) =>
+            isKeyOf(prop, emitters) || isKeyOf(prop, tester) || isKeyOf(prop, state) || Reflect.has(target, prop),
     }) as TestQuickPick<T>
 }
 

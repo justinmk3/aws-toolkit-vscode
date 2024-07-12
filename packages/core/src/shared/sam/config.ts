@@ -70,7 +70,9 @@ export class SamConfig {
     public listEnvironments(): Environment[] {
         const envs = this.config.environments
 
-        return Object.entries(envs).map(([name, data]) => ({ name, ...data }))
+        return Object.entries(envs).map(([name, data]) => {
+            return { name, ...data }
+        })
     }
 
     public static async fromUri(uri: vscode.Uri) {

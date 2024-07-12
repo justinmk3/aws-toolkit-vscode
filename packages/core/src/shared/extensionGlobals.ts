@@ -68,9 +68,8 @@ function getBrowserAlternatives() {
     if (globalThis.setImmediate === undefined) {
         // "A setTimeout() callback with a 0ms delay is very similar to setImmediate()"
         // https://nodejs.dev/en/learn/understanding-setimmediate/
-        alternatives['setImmediate'] = (callback: (...args: any[]) => void, ...args: any[]) => {
-            return globalThis.setTimeout(callback, 0, ...args)
-        }
+        alternatives['setImmediate'] = (callback: (...args: any[]) => void, ...args: any[]) =>
+            globalThis.setTimeout(callback, 0, ...args)
         alternatives['clearImmediate'] = (handle: any) => {
             globalThis.clearTimeout(handle)
         }

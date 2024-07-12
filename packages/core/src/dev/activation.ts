@@ -192,13 +192,15 @@ export async function activate(ctx: vscode.ExtensionContext): Promise<void> {
 }
 
 async function openMenu(options: MenuOption[]): Promise<void> {
-    const items = options.map((v) => ({
-        label: v.label,
-        detail: v.detail,
-        description: v.description,
-        skipEstimate: true,
-        data: v.executor,
-    }))
+    const items = options.map((v) => {
+        return {
+            label: v.label,
+            detail: v.detail,
+            description: v.description,
+            skipEstimate: true,
+            data: v.executor,
+        }
+    })
 
     const prompter = createQuickPick(items, {
         title: 'Developer Menu',
@@ -393,9 +395,7 @@ async function openStorageFromInput() {
                                 data: key,
                             }
                         })
-                        .sort((a, b) => {
-                            return a.data.localeCompare(b.data)
-                        })
+                        .sort((a, b) => a.data.localeCompare(b.data))
 
                     return createQuickPick(items, { title: 'Select a key' })
                 } else {

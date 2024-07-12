@@ -45,9 +45,7 @@ export async function activateYamlExtension(): Promise<YamlExtension | undefined
     }
     yamlExt.exports.registerContributor(
         AWS_SCHEME,
-        (resource) => {
-            return schemaMap.get(resource)?.toString()
-        },
+        (resource) => schemaMap.get(resource)?.toString(),
         (uri) => {
             try {
                 // SLOW: This request happens on every keystroke! (5MB+ read from filesystem).

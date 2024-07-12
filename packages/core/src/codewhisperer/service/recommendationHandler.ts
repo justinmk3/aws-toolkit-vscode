@@ -123,13 +123,12 @@ export class RecommendationHandler {
                     title: CodeWhispererConstants.pendingResponse,
                     cancellable: false,
                 },
-                async () => {
-                    return await asyncCallWithTimeout(
+                async () =>
+                    await asyncCallWithTimeout(
                         promise,
                         timeoutMessage,
                         CodeWhispererConstants.promiseTimeoutLimit * 1000
                     )
-                }
             )
         }
         return await asyncCallWithTimeout(promise, timeoutMessage, CodeWhispererConstants.promiseTimeoutLimit * 1000)

@@ -112,14 +112,13 @@ export class AwsResourceManager {
 
     public toUri(resource: ResourceNode): vscode.Uri | undefined {
         const existing = [...this.openResources.entries()]
-            .filter(([_, v]) => {
-                return (
+            .filter(
+                ([_, v]) =>
                     v instanceof ResourceNode &&
                     v.identifier === resource.identifier &&
                     v.parent.typeName === resource.parent.typeName &&
                     v.parent.parent.region === resource.parent.parent.region
-                )
-            })
+            )
             .map(([k]) => k)
         return existing.length > 0 ? vscode.Uri.parse(existing[0]) : undefined
     }

@@ -352,10 +352,12 @@ export class MockCodeGenState implements SessionState {
                 this.config.workspaceFolders,
                 false
             )
-            const newFileContents = files.map((f) => ({
-                zipFilePath: f.zipFilePath,
-                fileContent: f.fileContent,
-            }))
+            const newFileContents = files.map((f) => {
+                return {
+                    zipFilePath: f.zipFilePath,
+                    fileContent: f.fileContent,
+                }
+            })
             this.filePaths = registerNewFiles(action.fs, newFileContents, this.uploadId, this.config.workspaceFolders)
             this.deletedFiles = [
                 {

@@ -278,9 +278,8 @@ Resources:
         },
     ]
 
-    const makeTemplatePath = (templateFileName: string): string => {
-        return path.join(path.dirname(__filename), 'yaml', templateFileName)
-    }
+    const makeTemplatePath = (templateFileName: string): string =>
+        path.join(path.dirname(__filename), 'yaml', templateFileName)
 
     describe('getResourceFromTemplate', async function () {
         for (const scenario of templateWithExistingHandlerScenarios) {

@@ -37,7 +37,9 @@ describe('deploySamApplication', async function () {
     const badValidator: SamCliValidator = {
         detectValidSamCli: async (): Promise<SamCliValidatorResult> => badValidatorResult,
         getVersionValidatorResult: async (): Promise<SamCliVersionValidatorResult> => {
-            return { validation: SamCliVersionValidation.VersionNotParseable }
+            return {
+                validation: SamCliVersionValidation.VersionNotParseable,
+            }
         },
     }
 
@@ -63,7 +65,10 @@ describe('deploySamApplication', async function () {
     const goodValidator: SamCliValidator = {
         detectValidSamCli: async (): Promise<SamCliValidatorResult> => goodValidatorResult,
         getVersionValidatorResult: async (): Promise<SamCliVersionValidatorResult> => {
-            return { validation: SamCliVersionValidation.Valid, version: '' }
+            return {
+                validation: SamCliVersionValidation.Valid,
+                version: '',
+            }
         },
     }
 
@@ -117,9 +122,7 @@ describe('deploySamApplication', async function () {
     let templatePath: string
     let tempToolkitFolder: string
     let samDeployWizardResponse: SamDeployWizardResponse | undefined
-    const samDeployWizard = async (): Promise<SamDeployWizardResponse | undefined> => {
-        return samDeployWizardResponse
-    }
+    const samDeployWizard = async (): Promise<SamDeployWizardResponse | undefined> => samDeployWizardResponse
 
     const awsContext = new FakeAwsContext()
     awsContext.getCredentials = async () => testCredentials
@@ -134,7 +137,14 @@ describe('deploySamApplication', async function () {
     beforeEach(async function () {
         didRefreshExplorer = false
         settings = new TestSettings() as any
-        config = new SamCliSettings({ getLocation: async () => ({ path: '', version: '' }) }, settings)
+        config = new SamCliSettings(
+            {
+                getLocation: async () => {
+                    return { path: '', version: '' }
+                },
+            },
+            settings
+        )
         profile = 'testAcct'
         tempToolkitFolder = await makeTemporaryToolkitFolder()
         templatePath = path.join(tempToolkitFolder, 'template.yaml')

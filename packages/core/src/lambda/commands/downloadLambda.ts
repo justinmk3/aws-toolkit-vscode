@@ -111,11 +111,7 @@ async function runDownloadLambda(functionNode: LambdaFunctionNode): Promise<Resu
 
             try {
                 await openLambdaFile(lambdaLocation)
-                if (
-                    workspaceFolders.filter((val) => {
-                        return selectedUri === val.uri
-                    }).length === 0
-                ) {
+                if (workspaceFolders.filter((val) => selectedUri === val.uri).length === 0) {
                     await addFolderToWorkspace({ uri: selectedUri! }, true)
                 }
                 const workspaceFolder = vscode.workspace.getWorkspaceFolder(vscode.Uri.file(downloadLocation))!

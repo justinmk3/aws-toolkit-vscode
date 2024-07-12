@@ -229,13 +229,15 @@ export async function getSearchResults(
 }
 
 export function getSchemaVersionedSummary(searchSummary: Schemas.SearchSchemaSummary[], prefix: string) {
-    const results = searchSummary.map((searchSchemaSummary) => ({
-        RegistryName: searchSchemaSummary.RegistryName!,
-        Title: prefix.concat(searchSchemaSummary.SchemaName!),
-        VersionList: searchSchemaSummary
-            .SchemaVersions!.map((summary) => summary.SchemaVersion!)
-            .sort(sortNumericStringsInDescendingOrder),
-    }))
+    const results = searchSummary.map((searchSchemaSummary) => {
+        return {
+            RegistryName: searchSchemaSummary.RegistryName!,
+            Title: prefix.concat(searchSchemaSummary.SchemaName!),
+            VersionList: searchSchemaSummary
+                .SchemaVersions!.map((summary) => summary.SchemaVersion!)
+                .sort(sortNumericStringsInDescendingOrder),
+        }
+    })
 
     return results
 }

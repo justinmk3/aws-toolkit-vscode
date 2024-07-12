@@ -22,9 +22,7 @@ class MockMultiStepWizard extends MultiStepWizard<undefined> {
     }
 
     public get startStep(): WizardStep {
-        return async () => {
-            return WIZARD_TERMINATE
-        }
+        return async () => WIZARD_TERMINATE
     }
 
     protected getResult(): undefined {

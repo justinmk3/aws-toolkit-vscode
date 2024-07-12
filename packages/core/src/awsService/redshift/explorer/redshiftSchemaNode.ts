@@ -52,9 +52,9 @@ export class RedshiftSchemaNode extends AWSTreeNodeBase implements LoadMoreNode 
                 )
                 if (listTablesResponse.Tables?.sort()) {
                     newChildren.push(
-                        ...listTablesResponse.Tables.filter((table) => !table.name?.endsWith('_pkey')).map((table) => {
-                            return new RedshiftTableNode(table.name ?? 'UnknownTable')
-                        })
+                        ...listTablesResponse.Tables.filter((table) => !table.name?.endsWith('_pkey')).map(
+                            (table) => new RedshiftTableNode(table.name ?? 'UnknownTable')
+                        )
                     )
                 }
                 return {

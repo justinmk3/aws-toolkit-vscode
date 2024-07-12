@@ -102,11 +102,13 @@ export function disposeSecurityDiagnostic(event: vscode.TextDocumentChangeEvent)
     const newSecurityDiagnostics: vscode.Diagnostic[] = []
 
     const { changedRange, changedText, lineOffset } = event.contentChanges.reduce(
-        (acc, change) => ({
-            changedRange: acc.changedRange.union(change.range),
-            changedText: acc.changedText + change.text,
-            lineOffset: acc.lineOffset + getLineOffset(change.range, change.text),
-        }),
+        (acc, change) => {
+            return {
+                changedRange: acc.changedRange.union(change.range),
+                changedText: acc.changedText + change.text,
+                lineOffset: acc.lineOffset + getLineOffset(change.range, change.text),
+            }
+        },
         {
             changedRange: event.contentChanges[0].range,
             changedText: '',
@@ -147,9 +149,9 @@ function getLineOffset(range: vscode.Range, text: string) {
 export function removeDiagnostic(uri: vscode.Uri, issue: CodeScanIssue) {
     const currentSecurityDiagnostics = securityScanRender.securityDiagnosticCollection?.get(uri)
     if (currentSecurityDiagnostics) {
-        const newSecurityDiagnostics = currentSecurityDiagnostics.filter((diagnostic: SecurityDiagnostic) => {
-            return diagnostic.findingId !== issue.findingId
-        })
+        const newSecurityDiagnostics = currentSecurityDiagnostics.filter(
+            (diagnostic: SecurityDiagnostic) => diagnostic.findingId !== issue.findingId
+        )
         securityScanRender.securityDiagnosticCollection?.set(uri, newSecurityDiagnostics)
     }
 }

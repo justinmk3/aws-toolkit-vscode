@@ -286,9 +286,7 @@ async function runUploadDirectory(lambda: LambdaFunction, type: 'zip' | 'sam', p
                 location: vscode.ProgressLocation.Notification,
                 cancellable: false,
             },
-            async (progress) => {
-                return await zipAndUploadDirectory(lambda, parentDir.fsPath, progress)
-            }
+            async (progress) => await zipAndUploadDirectory(lambda, parentDir.fsPath, progress)
         )
     }
 }

@@ -440,21 +440,23 @@ export function getWorkspaceFoldersByPrefixes(
     if (folders.length <= 1) {
         return undefined
     }
-    let remainingWorkspaceFoldersToMap = folders.map((f) => ({
-        folder: f,
-        preferredPrefixQueue: f.uri.fsPath
-            .split(path.sep)
-            .reverse()
-            .slice(0, workspaceFolderPrefixGuards.maximumFolderDepthConsidered)
-            .reduce(
-                (candidates, subDir) => {
-                    candidates.push(sanitizeFilename(path.join(subDir, candidates[candidates.length - 1])))
-                    return candidates
-                },
-                [f.name]
-            )
-            .reverse(),
-    }))
+    let remainingWorkspaceFoldersToMap = folders.map((f) => {
+        return {
+            folder: f,
+            preferredPrefixQueue: f.uri.fsPath
+                .split(path.sep)
+                .reverse()
+                .slice(0, workspaceFolderPrefixGuards.maximumFolderDepthConsidered)
+                .reduce(
+                    (candidates, subDir) => {
+                        candidates.push(sanitizeFilename(path.join(subDir, candidates[candidates.length - 1])))
+                        return candidates
+                    },
+                    [f.name]
+                )
+                .reverse(),
+        }
+    })
     const results: ReturnType<typeof getWorkspaceFoldersByPrefixes> = {}
 
     for (

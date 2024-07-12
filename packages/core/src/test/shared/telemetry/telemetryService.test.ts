@@ -123,30 +123,9 @@ describe('TelemetryService', function () {
         service.record(m4)
         service.record(m5)
 
-        assert.deepStrictEqual(
-            await toArrayAsync(
-                service.findIter((m) => {
-                    return m.MetricName === 'bogus'
-                })
-            ),
-            []
-        )
-        assert.deepStrictEqual(
-            await toArrayAsync(
-                service.findIter((m) => {
-                    return m.MetricName === 'metric1'
-                })
-            ),
-            [m1]
-        )
-        assert.deepStrictEqual(
-            await toArrayAsync(
-                service.findIter((m) => {
-                    return !!m.Passive
-                })
-            ),
-            [m1, m2, m5]
-        )
+        assert.deepStrictEqual(await toArrayAsync(service.findIter((m) => m.MetricName === 'bogus')), [])
+        assert.deepStrictEqual(await toArrayAsync(service.findIter((m) => m.MetricName === 'metric1')), [m1])
+        assert.deepStrictEqual(await toArrayAsync(service.findIter((m) => !!m.Passive)), [m1, m2, m5])
 
         await service.shutdown()
     })

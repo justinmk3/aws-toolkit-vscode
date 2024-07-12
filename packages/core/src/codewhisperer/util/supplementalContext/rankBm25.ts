@@ -32,9 +32,7 @@ export abstract class BM25 {
 
         let numDoc = 0
         corpus
-            .map((document) => {
-                return tokenizer(document)
-            })
+            .map((document) => tokenizer(document))
             .forEach((document) => {
                 this.docLen.push(document.length)
                 numDoc += document.length

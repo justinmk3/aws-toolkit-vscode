@@ -303,8 +303,8 @@ export class Auth implements AuthService, ConnectionManager {
             const linked = this.store
                 .listProfiles()
                 .filter(isLinkable)
-                .map(([id, profile]) => {
-                    return toCollection(() =>
+                .map(([id, profile]) =>
+                    toCollection(() =>
                         loadLinkedProfilesIntoStore(
                             this.store,
                             id,
@@ -317,7 +317,7 @@ export class Auth implements AuthService, ConnectionManager {
                         })
                         .filter(isNonNullable)
                         .map((entry) => this.getConnectionFromStoreEntry(entry))
-                })
+                )
 
             yield* linked.reduce(join, stream)
         }

@@ -161,10 +161,10 @@ export class RegionNode extends AWSTreeNodeBase {
     }
 
     private sortNodes(nodes: AWSTreeNodeBase[]) {
-        return nodes.sort((a, b) => {
+        return nodes.sort((a, b) =>
             // Always sort `ResourcesNode` at the bottom
-            return a instanceof ResourcesNode ? 1 : b instanceof ResourcesNode ? -1 : compareTreeItems(a, b)
-        })
+            a instanceof ResourcesNode ? 1 : b instanceof ResourcesNode ? -1 : compareTreeItems(a, b)
+        )
     }
     public update(region: Region): void {
         this.region = region

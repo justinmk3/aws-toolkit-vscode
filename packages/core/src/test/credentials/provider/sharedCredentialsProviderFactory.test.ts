@@ -40,11 +40,12 @@ describe('SharedCredentialsProviderFactory', async function () {
         sandbox = sinon.createSandbox()
 
         sharedCredentialsLastModifiedMillis = 1
-        sandbox.stub(fs, 'stat').callsFake(async () => {
-            return {
-                mtime: sharedCredentialsLastModifiedMillis,
-            } as any as vscode.FileStat
-        })
+        sandbox.stub(fs, 'stat').callsFake(
+            async () =>
+                ({
+                    mtime: sharedCredentialsLastModifiedMillis,
+                }) as any as vscode.FileStat
+        )
 
         sharedCredentialProfiles = new Map<string, sharedCredentials.Profile>()
         sharedCredentialProfiles.set(validProfileName1, validProfile)
@@ -52,20 +53,26 @@ describe('SharedCredentialsProviderFactory', async function () {
 
         loadSharedCredentialsSectionsStub = sandbox
             .stub(sharedCredentials, 'loadSharedCredentialsSections')
-            .callsFake(async () => ({
-                sections: Array.from(sharedCredentialProfiles.entries()).map(([k, v]) => ({
-                    name: k,
-                    type: 'profile',
-                    assignments: Object.entries(v).map(([key, value]) => ({
-                        key,
-                        value: value!,
-                        range: new Range(0, 0, 0, 0),
-                    })),
-                    source: Uri.file(''),
-                    startLines: [],
-                })),
-                errors: [],
-            }))
+            .callsFake(async () => {
+                return {
+                    sections: Array.from(sharedCredentialProfiles.entries()).map(([k, v]) => {
+                        return {
+                            name: k,
+                            type: 'profile',
+                            assignments: Object.entries(v).map(([key, value]) => {
+                                return {
+                                    key,
+                                    value: value!,
+                                    range: new Range(0, 0, 0, 0),
+                                }
+                            }),
+                            source: Uri.file(''),
+                            startLines: [],
+                        }
+                    }),
+                    errors: [],
+                }
+            })
     })
 
     afterEach(async function () {

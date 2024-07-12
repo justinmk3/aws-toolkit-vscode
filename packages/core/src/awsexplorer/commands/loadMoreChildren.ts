@@ -31,6 +31,6 @@ export async function loadMoreChildren(awsExplorer: AwsExplorer, node: AWSTreeNo
     }
 }
 
-export const loadMoreChildrenCommand = Commands.declare('aws.loadMoreChildren', (explorer: AwsExplorer) => {
-    return loadMoreChildren.bind(undefined, explorer)
-})
+export const loadMoreChildrenCommand = Commands.declare('aws.loadMoreChildren', (explorer: AwsExplorer) =>
+    loadMoreChildren.bind(undefined, explorer)
+)

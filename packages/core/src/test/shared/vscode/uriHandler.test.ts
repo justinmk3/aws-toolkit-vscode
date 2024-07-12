@@ -28,7 +28,9 @@ describe('UriHandler', function () {
         uriHandler.onPath(
             testPath,
             (q) => assert.strictEqual(q.myNumber, 123),
-            (q: SearchParams) => ({ myNumber: Number(q.get('myString')) })
+            (q: SearchParams) => {
+                return { myNumber: Number(q.get('myString')) }
+            }
         )
         return uriHandler.handleUri(makeUri('myString=123'))
     })

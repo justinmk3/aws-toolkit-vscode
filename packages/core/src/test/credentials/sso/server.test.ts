@@ -125,9 +125,7 @@ describe('AuthSSOServer', function () {
     })
 
     it('can be cancelled while waiting for auth', async function () {
-        const promise = server.waitForAuthorization().catch((e) => {
-            return e
-        })
+        const promise = server.waitForAuthorization().catch((e) => e)
         server.cancelCurrentFlow()
 
         const err = await promise

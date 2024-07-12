@@ -88,6 +88,8 @@ async function* getCertList(iot: IotClient) {
             void showViewLogsMessage(localize('AWS.iot.attachCert.error', 'Failed to retrieve certificates'))
             return
         }
-        yield filteredCerts.map((cert) => ({ label: cert.certificateId!, data: cert }))
+        yield filteredCerts.map((cert) => {
+            return { label: cert.certificateId!, data: cert }
+        })
     } while (marker !== undefined)
 }

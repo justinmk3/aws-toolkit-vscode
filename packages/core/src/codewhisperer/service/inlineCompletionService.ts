@@ -33,9 +33,7 @@ export class InlineCompletionService {
             this.startShowRecommendationTimer()
         })
 
-        CodeSuggestionsState.instance.onDidChangeState(() => {
-            return this.refreshStatusBar()
-        })
+        CodeSuggestionsState.instance.onDidChangeState(() => this.refreshStatusBar())
     }
 
     static #instance: InlineCompletionService

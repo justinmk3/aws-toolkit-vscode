@@ -362,9 +362,9 @@ describe('resolveErrorMessageToDisplay()', function () {
         'ValidationException',
         'ResourceNotFoundException',
     ]
-    const prioritiziedAwsErrors: TestAwsError[] = preferredErrors.map((name) => {
-        return new TestAwsError(name, awsErrorMessage, errorTime)
-    })
+    const prioritiziedAwsErrors: TestAwsError[] = preferredErrors.map(
+        (name) => new TestAwsError(name, awsErrorMessage, errorTime)
+    )
 
     // Sanity check specific errors are resolved as expected
     prioritiziedAwsErrors.forEach((error) => {

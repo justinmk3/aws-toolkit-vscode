@@ -267,11 +267,13 @@ export class GitExtension {
                 return stdout
                     .toString()
                     .split(/\r?\n/)
-                    .map((branch) => ({
-                        name: branch.replace(/.*refs\/heads\//, 'head/'),
-                        remote: remote.name,
-                        type: GitTypes.RefType.RemoteHead,
-                    }))
+                    .map((branch) => {
+                        return {
+                            name: branch.replace(/.*refs\/heads\//, 'head/'),
+                            remote: remote.name,
+                            type: GitTypes.RefType.RemoteHead,
+                        }
+                    })
                     .filter((branch) => !!branch.name)
             } catch (err) {
                 getLogger().verbose(`git: failed to get branches for remote "${remote.fetchUrl}": %s`, err)
@@ -366,19 +368,23 @@ export class GitExtension {
                 .slice(0, -1) // remove trailing null character
                 .split(/\0/)
                 .map((s) => s.split(/\s/))
-                .map(([mode, type, hash, name]) => ({
-                    name,
-                    read: async () => {
-                        const api = await this.validateApi(
-                            new Error(`git: api was disabled while reading file "${name}" from "${remote.fetchUrl}"`)
-                        )
+                .map(([mode, type, hash, name]) => {
+                    return {
+                        name,
+                        read: async () => {
+                            const api = await this.validateApi(
+                                new Error(
+                                    `git: api was disabled while reading file "${name}" from "${remote.fetchUrl}"`
+                                )
+                            )
 
-                        return this.execFileAsync(api.git.path, ['cat-file', type, hash], {
-                            cwd: tmpDir,
-                            maxBuffer: 1024 * 1024 * maxBufferSizeInMB,
-                        }).then(({ stdout }) => stdout)
-                    },
-                }))
+                            return this.execFileAsync(api.git.path, ['cat-file', type, hash], {
+                                cwd: tmpDir,
+                                maxBuffer: 1024 * 1024 * maxBufferSizeInMB,
+                            }).then(({ stdout }) => stdout)
+                        },
+                    }
+                })
 
             return { files, dispose: () => tryRemoveFolder(tmpDir), stats: { downloadSize } }
         } catch (err) {

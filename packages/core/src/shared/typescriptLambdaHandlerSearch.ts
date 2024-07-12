@@ -7,10 +7,12 @@ import * as path from 'path'
 import * as ts from 'typescript'
 import { LambdaHandlerSearch, RootlessLambdaHandlerCandidate } from './lambdaHandlerSearch'
 
-const getRange = (node: ts.Node) => ({
-    positionStart: node.getStart(),
-    positionEnd: node.end,
-})
+const getRange = (node: ts.Node) => {
+    return {
+        positionStart: node.getStart(),
+        positionEnd: node.end,
+    }
+}
 
 /**
  * Detects functions that could possibly be used as Lambda Function Handlers from a Typescript file.
@@ -135,12 +137,12 @@ export class TypescriptLambdaHandlerSearch implements LambdaHandlerSearch {
      */
     private findCandidateHandlersInModuleExports(): RootlessLambdaHandlerCandidate[] {
         return this._candidateModuleExportsExpressions
-            .filter((expression) => {
-                return TypescriptLambdaHandlerSearch.isEligibleLambdaHandlerAssignment(
+            .filter((expression) =>
+                TypescriptLambdaHandlerSearch.isEligibleLambdaHandlerAssignment(
                     expression,
                     this._candidateDeclaredFunctionNames
                 )
-            })
+            )
             .map((candidate) => {
                 // 'module.exports.xyz' => ['module', 'exports', 'xyz']
                 const lhsComponents: string[] = (candidate.expression as ts.BinaryExpression).left

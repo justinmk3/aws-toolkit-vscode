@@ -26,7 +26,9 @@ describe('StateMachineController', function () {
 
     it('handles undefined steps', async function () {
         const controller = new StateMachineController()
-        controller.addStep(async () => ({ nextState: {}, nextSteps: undefined }))
+        controller.addStep(async () => {
+            return { nextState: {}, nextSteps: undefined }
+        })
         await assert.doesNotReject(controller.run())
     })
 
@@ -116,7 +118,9 @@ describe('StateMachineController', function () {
             const stub2 = sinon.stub()
             stub1.returns({ nextState: { answer: true } })
             stub2.onFirstCall().returns({ controlSignal: ControlSignal.Retry })
-            stub2.onSecondCall().callsFake((state) => ({ nextState: state }))
+            stub2.onSecondCall().callsFake((state) => {
+                return { nextState: state }
+            })
             controller.addStep(stub1)
             controller.addStep(stub2)
 

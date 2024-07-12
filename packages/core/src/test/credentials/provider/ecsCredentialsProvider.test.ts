@@ -12,9 +12,7 @@ describe('EcsCredentialsProvider', function () {
     const dummyUri = 'dummyUri'
     const dummyRegion = 'dummmyRegion'
     const dummyCredentials = { accessKeyId: 'dummyKey' } as Credentials
-    const dummyProvider = () => {
-        return Promise.resolve(dummyCredentials)
-    }
+    const dummyProvider = () => Promise.resolve(dummyCredentials)
     const env = process.env as EnvironmentVariables
 
     let credentialsProvider: EcsCredentialsProvider

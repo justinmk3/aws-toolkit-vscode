@@ -418,7 +418,12 @@ class CodeCatalystClientInternal {
             this.call(this.sdkClient.listSpaces(request), true, { items: [] })
         const collection = pageableToCollection(requester, request, 'nextToken', 'items')
 
-        return collection.map((summaries) => summaries?.map((s) => ({ type: 'org', ...s })) ?? [])
+        return collection.map(
+            (summaries) =>
+                summaries?.map((s) => {
+                    return { type: 'org', ...s }
+                }) ?? []
+        )
     }
 
     /**
@@ -440,11 +445,13 @@ class CodeCatalystClientInternal {
 
         return collection.map(
             (summaries) =>
-                summaries?.map((s) => ({
-                    type: 'project',
-                    org: { name: request.spaceName },
-                    ...s,
-                })) ?? []
+                summaries?.map((s) => {
+                    return {
+                        type: 'project',
+                        org: { name: request.spaceName },
+                        ...s,
+                    }
+                }) ?? []
         )
     }
 
@@ -496,12 +503,14 @@ class CodeCatalystClientInternal {
         const collection = pageableToCollection(requester, request, 'nextToken', 'items')
         return collection.map(
             (summaries) =>
-                summaries?.map((s) => ({
-                    type: 'repo',
-                    org: { name: request.spaceName },
-                    project: { name: request.projectName },
-                    ...s,
-                })) ?? []
+                summaries?.map((s) => {
+                    return {
+                        type: 'repo',
+                        org: { name: request.spaceName },
+                        project: { name: request.projectName },
+                        ...s,
+                    }
+                }) ?? []
         )
     }
 
@@ -822,15 +831,15 @@ export async function excludeThirdPartyRepos(
     // Filter out 3P repos.
     return (
         await Promise.all(
-            items.map(async (item) => {
-                return (await isThirdPartyRepo(client, {
+            items.map(async (item) =>
+                (await isThirdPartyRepo(client, {
                     spaceName,
                     projectName,
                     sourceRepositoryName: item.name,
                 }))
                     ? undefined
                     : item
-            })
+            )
         )
     ).filter((item) => item !== undefined) as CodeCatalyst.ListSourceRepositoriesItem[]
 }

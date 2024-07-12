@@ -4,8 +4,6 @@
  */
 import path from 'path'
 
-export const getTestResourceFilePath = (relativePathToFile: string) => {
-    return path.resolve(__dirname, relativePathToFile)
-}
+export const getTestResourceFilePath = (relativePathToFile: string) => path.resolve(__dirname, relativePathToFile)
 
 export const stripStringWhitespace = (str: string) => str.replace(/\s+/g, '')

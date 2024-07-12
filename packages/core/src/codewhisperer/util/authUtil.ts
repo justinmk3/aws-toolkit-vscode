@@ -69,13 +69,10 @@ export const isValidCodeWhispererCoreConnection = (conn?: Connection): conn is C
     )
 }
 /** Superset that includes all of CodeWhisperer + Amazon Q */
-export const isValidAmazonQConnection = (conn?: Connection): conn is Connection => {
-    return (
-        (isSsoConnection(conn) || isBuilderIdConnection(conn)) &&
-        isValidCodeWhispererCoreConnection(conn) &&
-        hasScopes(conn, amazonQScopes)
-    )
-}
+export const isValidAmazonQConnection = (conn?: Connection): conn is Connection =>
+    (isSsoConnection(conn) || isBuilderIdConnection(conn)) &&
+    isValidCodeWhispererCoreConnection(conn) &&
+    hasScopes(conn, amazonQScopes)
 
 const authClassName = 'AuthQ'
 

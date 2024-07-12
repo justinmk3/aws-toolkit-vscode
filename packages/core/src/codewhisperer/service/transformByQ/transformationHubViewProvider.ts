@@ -300,11 +300,10 @@ export class TransformationHubViewProvider implements vscode.WebviewViewProvider
         const styleSheet = this._view?.webview.asWebviewUri(
             vscode.Uri.joinPath(this._extensionUri, 'resources', 'css', 'amazonqTransformationHub.css')
         )
-        const simpleStep = (icon: string, text: string, isActive: boolean) => {
-            return isActive
+        const simpleStep = (icon: string, text: string, isActive: boolean) =>
+            isActive
                 ? `<p class="simple-step active">${icon} ${text}</p>`
                 : `<p class="simple-step">${icon} ${text}</p>`
-        }
 
         let planSteps = transformByQState.getPlanSteps()
         if (jobPlanProgress['generatePlan'] === StepProgress.Succeeded && transformByQState.isRunning()) {

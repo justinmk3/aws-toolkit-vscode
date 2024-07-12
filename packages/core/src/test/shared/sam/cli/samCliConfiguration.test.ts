@@ -57,7 +57,9 @@ describe('samCliConfiguration', function () {
 
         const config = new SamCliSettings(
             {
-                getLocation: async () => ({ path: fakeCliLocation, version: '' }),
+                getLocation: async () => {
+                    return { path: fakeCliLocation, version: '' }
+                },
             },
             settingsConfiguration
         )

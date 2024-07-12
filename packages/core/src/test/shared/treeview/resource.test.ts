@@ -35,7 +35,9 @@ async function* runLoadMore(node: TreeNode) {
 }
 
 describe('ResourceTreeNode', function () {
-    const createResource = (id: string) => ({ id, getTreeItem: () => new TreeItem(''), resource: {} })
+    const createResource = (id: string) => {
+        return { id, getTreeItem: () => new TreeItem(''), resource: {} }
+    }
 
     it('uses a non-collapsible tree item if no children are provided', async function () {
         const node = new ResourceTreeNode(createResource('foo'))

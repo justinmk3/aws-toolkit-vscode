@@ -18,12 +18,14 @@ import { ConstructTreeEntity } from '../../awsService/cdk/explorer/tree/types'
 import { getDisplayLabel } from '../../awsService/cdk/explorer/tree/treeInspector'
 
 function createLocationPrompter() {
-    const items = detectCdkProjects(vscode.workspace.workspaceFolders).then((locations) => {
-        return locations.map((l) => ({
-            label: vscode.workspace.asRelativePath(l.cdkJsonUri),
-            data: l,
-        }))
-    })
+    const items = detectCdkProjects(vscode.workspace.workspaceFolders).then((locations) =>
+        locations.map((l) => {
+            return {
+                label: vscode.workspace.asRelativePath(l.cdkJsonUri),
+                data: l,
+            }
+        })
+    )
 
     return createQuickPick(items, {
         title: localize('AWS.message.prompt.selectCDKWorkspace.placeholder', 'Select a CDK application'),
@@ -53,11 +55,13 @@ function createResourcePrompter(location: CdkAppLocation) {
     const items = getApp(location)
         .then((app) => getStateMachines(app.constructTree.tree))
         .then((constructs) =>
-            constructs.map((c) => ({
-                label: getDisplayLabel(c),
-                description: path.dirname(c.path),
-                data: { construct: c, location: location.treeUri.with({ fragment: c.path }) },
-            }))
+            constructs.map((c) => {
+                return {
+                    label: getDisplayLabel(c),
+                    description: path.dirname(c.path),
+                    data: { construct: c, location: location.treeUri.with({ fragment: c.path }) },
+                }
+            })
         )
 
     return createQuickPick(items, {

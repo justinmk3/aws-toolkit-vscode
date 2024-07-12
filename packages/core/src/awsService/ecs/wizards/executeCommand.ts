@@ -19,9 +19,9 @@ export interface CommandWizardState {
 }
 
 function createTaskPrompter(node: Container) {
-    const taskItems = (async () => {
+    const taskItems = (async () =>
         // Filter for only 'Running' tasks
-        return (await node.listTasks()).map((task) => {
+        (await node.listTasks()).map((task) => {
             // TODO: get task definition name and include it in the item detail
             // The last 32 digits of the task arn is the task identifier
             const taskId = task.taskArn.substring(task.taskArn.length - 32)
@@ -37,8 +37,7 @@ function createTaskPrompter(node: Container) {
                 data: taskId,
                 invalidSelection,
             }
-        })
-    })()
+        }))()
 
     return createQuickPick(taskItems, {
         title: localize('AWS.command.ecs.runCommandInContainer.chooseInstance', 'Choose a container instance'),

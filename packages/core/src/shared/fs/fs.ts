@@ -525,9 +525,7 @@ export class FileSystem {
             logMsgs.push((e as Error).message)
             return undefined
         }
-        const tryGet = (envName: string) => {
-            return this.tryGetFilepathEnvVar(envName, vscode.FileType.Directory).catch(logErr)
-        }
+        const tryGet = (envName: string) => this.tryGetFilepathEnvVar(envName, vscode.FileType.Directory).catch(logErr)
         let p: string | undefined
         if ((p = await tryGet('HOME'))) {
             this.#homeDir = p

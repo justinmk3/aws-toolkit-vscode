@@ -604,6 +604,4 @@ export class ClassifierTrigger {
     }
 }
 
-const sigmoid = (x: number) => {
-    return 1 / (1 + Math.exp(-x))
-}
+const sigmoid = (x: number) => 1 / (1 + Math.exp(-x))

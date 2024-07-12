@@ -79,12 +79,11 @@ describe('getDefaultSchemas()', () => {
         await getDefaultSchemas()
         await getDefaultSchemas()
         await getDefaultSchemas()
-        await waitUntil(
-            async () => {
-                return fs.existsSync(GlobalStorage.samAndCfnSchemaDestinationUri().fsPath)
-            },
-            { truthy: true, interval: 200, timeout: 5000 }
-        )
+        await waitUntil(async () => fs.existsSync(GlobalStorage.samAndCfnSchemaDestinationUri().fsPath), {
+            truthy: true,
+            interval: 200,
+            timeout: 5000,
+        })
         assertTelemetry('toolkit_getExternalResource', [
             // Initial retrieval.
             // (Technically, this is done on activation, not any of the getDefaultSchemas() calls above.)

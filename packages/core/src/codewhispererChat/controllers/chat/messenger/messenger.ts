@@ -156,14 +156,16 @@ export class Messenger {
                     ) {
                         codeReference = [
                             ...codeReference,
-                            ...chatEvent.codeReferenceEvent.references.map((reference) => ({
-                                ...reference,
-                                recommendationContentSpan: {
-                                    start: reference.recommendationContentSpan?.start ?? 0,
-                                    end: reference.recommendationContentSpan?.end ?? 0,
-                                },
-                                information: `Reference code under **${reference.licenseName}** license from repository \`${reference.repository}\``,
-                            })),
+                            ...chatEvent.codeReferenceEvent.references.map((reference) => {
+                                return {
+                                    ...reference,
+                                    recommendationContentSpan: {
+                                        start: reference.recommendationContentSpan?.start ?? 0,
+                                        end: reference.recommendationContentSpan?.end ?? 0,
+                                    },
+                                    information: `Reference code under **${reference.licenseName}** license from repository \`${reference.repository}\``,
+                                }
+                            }),
                         ]
                     }
 

@@ -34,6 +34,7 @@ module.exports = {
                 ],
             },
         ],
+        'arrow-body-style': ['error', 'as-needed', { requireReturnForObjectLiteral: true }],
         // https://typescript-eslint.io/rules/naming-convention/
         '@typescript-eslint/naming-convention': [
             'error',

@@ -47,10 +47,12 @@ export async function copyUrlCommand(node: RestApiNode, regionProvider: RegionPr
         return
     }
 
-    const quickPickItems = stages.map<StageInvokeUrlQuickPick>((stage) => ({
-        label: stage.stageName!,
-        detail: buildDefaultApiInvokeUrl(node.id, region, dnsSuffix, stage.stageName!),
-    }))
+    const quickPickItems = stages.map<StageInvokeUrlQuickPick>((stage) => {
+        return {
+            label: stage.stageName!,
+            detail: buildDefaultApiInvokeUrl(node.id, region, dnsSuffix, stage.stageName!),
+        }
+    })
 
     if (quickPickItems.length === 0) {
         void vscode.window.showInformationMessage(

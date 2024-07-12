@@ -16,9 +16,7 @@ export async function readImports(text: string, languageId: string): Promise<str
         return extractContextFromJavaImports(names)
     } else {
         const imports = names.fullyQualified?.declaredSymbols
-            .map((symbol: { source: string[] }): string => {
-                return symbol.source[0].replace('@', '')
-            })
+            .map((symbol: { source: string[] }): string => symbol.source[0].replace('@', ''))
             .filter((source: string) => source.length !== 0)
         return imports
     }

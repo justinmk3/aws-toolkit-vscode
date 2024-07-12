@@ -113,10 +113,12 @@ export async function searchLogGroup(
 async function getLogGroupsFromRegion(regionCode: string): Promise<DataQuickPickItem<string>[]> {
     const client = new DefaultCloudWatchLogsClient(regionCode)
     const logGroups = await logGroupsToArray(client.describeLogGroups())
-    const options = logGroups.map<DataQuickPickItem<string>>((logGroupString) => ({
-        label: logGroupString,
-        data: logGroupString,
-    }))
+    const options = logGroups.map<DataQuickPickItem<string>>((logGroupString) => {
+        return {
+            label: logGroupString,
+            data: logGroupString,
+        }
+    })
     return options
 }
 

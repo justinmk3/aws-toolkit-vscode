@@ -81,7 +81,7 @@ export async function createQuickStartWebview(
  * @param basePath Extension path (from extension context)
  */
 function convertExtensionRootTokensToPath(text: string, basePath: string, webview: vscode.Webview): string {
-    return text.replace(/!!EXTENSIONROOT!!(?<restOfUrl>[-a-zA-Z0-9@:%_\+.~#?&//=]*)/g, (matchedString, restOfUrl) => {
-        return webview.asWebviewUri(vscode.Uri.file(`${basePath}${restOfUrl}`)).toString()
-    })
+    return text.replace(/!!EXTENSIONROOT!!(?<restOfUrl>[-a-zA-Z0-9@:%_\+.~#?&//=]*)/g, (matchedString, restOfUrl) =>
+        webview.asWebviewUri(vscode.Uri.file(`${basePath}${restOfUrl}`)).toString()
+    )
 }

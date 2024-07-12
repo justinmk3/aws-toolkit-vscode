@@ -35,7 +35,9 @@ function validateCommand(command: string): string | undefined {
 }
 
 function createRepoPrompter(git: GitExtension): QuickPickPrompter<Remote> {
-    const mapRemote = (remote: Remote) => ({ label: remote.name, detail: remote.fetchUrl, data: remote })
+    const mapRemote = (remote: Remote) => {
+        return { label: remote.name, detail: remote.fetchUrl, data: remote }
+    }
     const remotes = git.getRemotes().then((r) => r.map(mapRemote))
     const userInputString = localize('AWS.apprunner.createService.customRepo', 'Enter GitHub URL')
 
@@ -47,7 +49,9 @@ function createRepoPrompter(git: GitExtension): QuickPickPrompter<Remote> {
         ),
         filterBoxInputSettings: {
             label: userInputString,
-            transform: (resp) => ({ name: 'UserRemote', isReadOnly: true, fetchUrl: resp }),
+            transform: (resp) => {
+                return { name: 'UserRemote', isReadOnly: true, fetchUrl: resp }
+            },
         },
         buttons: createCommonButtons(),
     })
@@ -64,9 +68,11 @@ function createBranchPrompter(
         git.getBranchesForRemote({ name: '', fetchUrl: repo } as any).then((branches) => {
             const branchItems = branches
                 .filter((b) => b.name !== undefined && b.name !== '')
-                .map((branch) => ({
-                    label: branch.name!.split('/').slice(1).join('/'),
-                }))
+                .map((branch) => {
+                    return {
+                        label: branch.name!.split('/').slice(1).join('/'),
+                    }
+                })
             cache[repo] = branchItems
             return branchItems
         })
@@ -162,10 +168,12 @@ export function createConnectionPrompter(client: AppRunnerClient) {
     const getItems = async () => {
         const resp = await client.listConnections()
 
-        return resp.ConnectionSummaryList.filter((conn) => conn.Status === 'AVAILABLE').map((conn) => ({
-            label: conn.ConnectionName!,
-            data: conn,
-        }))
+        return resp.ConnectionSummaryList.filter((conn) => conn.Status === 'AVAILABLE').map((conn) => {
+            return {
+                label: conn.ConnectionName!,
+                data: conn,
+            }
+        })
     }
 
     const refreshButton = createRefreshButton()

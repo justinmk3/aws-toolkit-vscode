@@ -19,9 +19,7 @@ describe('SSH Agent', function () {
             return new ChildProcess('powershell.exe', args).run({ rejectOnErrorCode: true })
         }
 
-        const getStatus = () => {
-            return runCommand('echo (Get-Service ssh-agent).Status').then((o) => o.stdout)
-        }
+        const getStatus = () => runCommand('echo (Get-Service ssh-agent).Status').then((o) => o.stdout)
 
         await runCommand('Stop-Service ssh-agent')
         assert.strictEqual(await getStatus(), 'Stopped')

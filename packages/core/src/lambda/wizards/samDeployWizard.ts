@@ -368,14 +368,16 @@ export class DefaultSamDeployWizardContext implements SamDeployWizardContext {
                 step: step,
                 totalSteps: this.totalSteps + this.additionalSteps,
             },
-            items: partitionRegions.map((region) => ({
-                label: region.name,
-                detail: region.id,
-                // this is the only way to get this to show on going back
-                // this will make it so it always shows even when searching for something else
-                alwaysShow: region.id === initialRegionCode,
-                description: region.id === initialRegionCode ? localizedText.recentlyUsed : '',
-            })),
+            items: partitionRegions.map((region) => {
+                return {
+                    label: region.name,
+                    detail: region.id,
+                    // this is the only way to get this to show on going back
+                    // this will make it so it always shows even when searching for something else
+                    alwaysShow: region.id === initialRegionCode,
+                    description: region.id === initialRegionCode ? localizedText.recentlyUsed : '',
+                }
+            }),
             buttons: [this.helpButton, vscode.QuickInputButtons.Back],
         })
 

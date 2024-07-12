@@ -86,70 +86,74 @@ export async function toggleExecuteCommandFlag(
     await service.toggleExecuteCommand()
 }
 
-export const runCommandInContainer = Commands.declare('aws.ecs.runCommandInContainer', () => (obj?: unknown) => {
-    return telemetry.ecs_runExecuteCommand.run(async (span) => {
-        span.record({ ecsExecuteCommandType: 'command' })
+export const runCommandInContainer = Commands.declare(
+    'aws.ecs.runCommandInContainer',
+    () => (obj?: unknown) =>
+        telemetry.ecs_runExecuteCommand.run(async (span) => {
+            span.record({ ecsExecuteCommandType: 'command' })
 
-        const { container, task, command } = await runCommandWizard(obj)
-        const timeout = new Timeout(600000)
-        void showMessageWithCancel('Running command...', timeout)
+            const { container, task, command } = await runCommandWizard(obj)
+            const timeout = new Timeout(600000)
+            void showMessageWithCancel('Running command...', timeout)
 
-        try {
-            const { path, args, dispose } = await container.prepareCommandForTask(command, task)
-            showOutputMessage(
-                `${formatDateTimestamp(false)}:  Container: "${
-                    container.description.name
-                }" Task ID: "${task}" Command: "${command}"`,
-                globals.outputChannel
-            )
+            try {
+                const { path, args, dispose } = await container.prepareCommandForTask(command, task)
+                showOutputMessage(
+                    `${formatDateTimestamp(false)}:  Container: "${
+                        container.description.name
+                    }" Task ID: "${task}" Command: "${command}"`,
+                    globals.outputChannel
+                )
 
-            const proc = new ChildProcess(path, args, { logging: 'noparams' })
-            await proc
-                .run({
-                    timeout,
-                    rejectOnError: true,
-                    rejectOnErrorCode: true,
-                    // TODO: `showOutputMessage` should not be writing to the logs...
-                    onStdout: (text) => {
-                        showOutputMessage(removeAnsi(text), globals.outputChannel)
-                    },
-                    onStderr: (text) => {
-                        showOutputMessage(removeAnsi(text), globals.outputChannel)
-                    },
-                })
-                .finally(dispose)
-        } catch (err) {
-            if (isUserCancelledError(err)) {
-                showOutputMessage('Cancelled command execution', globals.outputChannel)
+                const proc = new ChildProcess(path, args, { logging: 'noparams' })
+                await proc
+                    .run({
+                        timeout,
+                        rejectOnError: true,
+                        rejectOnErrorCode: true,
+                        // TODO: `showOutputMessage` should not be writing to the logs...
+                        onStdout: (text) => {
+                            showOutputMessage(removeAnsi(text), globals.outputChannel)
+                        },
+                        onStderr: (text) => {
+                            showOutputMessage(removeAnsi(text), globals.outputChannel)
+                        },
+                    })
+                    .finally(dispose)
+            } catch (err) {
+                if (isUserCancelledError(err)) {
+                    showOutputMessage('Cancelled command execution', globals.outputChannel)
+                }
+
+                const failedMessage = localize(
+                    'AWS.ecs.runCommandInContainer.error',
+                    'Failed to execute command in container.'
+                )
+                throw ToolkitError.chain(err, failedMessage)
+            } finally {
+                timeout.dispose()
+            }
+        })
+)
+
+export const openTaskInTerminal = Commands.declare(
+    'aws.ecs.openTaskInTerminal',
+    () => (obj?: unknown) =>
+        telemetry.ecs_runExecuteCommand.run(async (span) => {
+            span.record({ ecsExecuteCommandType: 'shell' })
+
+            const startCommand = new EcsSettings().get('openTerminalCommand')
+            const { container, task, command } = await runCommandWizard(obj, startCommand)
+            const session = await container.prepareCommandForTask(command, task)
+
+            const terminalOptions = {
+                name: `${container.description.name}/${task}`,
+                shellPath: session.path,
+                shellArgs: session.args,
             }
 
-            const failedMessage = localize(
-                'AWS.ecs.runCommandInContainer.error',
-                'Failed to execute command in container.'
-            )
-            throw ToolkitError.chain(err, failedMessage)
-        } finally {
-            timeout.dispose()
-        }
-    })
-})
-
-export const openTaskInTerminal = Commands.declare('aws.ecs.openTaskInTerminal', () => (obj?: unknown) => {
-    return telemetry.ecs_runExecuteCommand.run(async (span) => {
-        span.record({ ecsExecuteCommandType: 'shell' })
-
-        const startCommand = new EcsSettings().get('openTerminalCommand')
-        const { container, task, command } = await runCommandWizard(obj, startCommand)
-        const session = await container.prepareCommandForTask(command, task)
-
-        const terminalOptions = {
-            name: `${container.description.name}/${task}`,
-            shellPath: session.path,
-            shellArgs: session.args,
-        }
-
-        await openRemoteTerminal(terminalOptions, session.dispose).catch((err) => {
-            throw ToolkitError.chain(err, localize('AWS.ecs.openTaskInTerminal.error', 'Failed to open terminal.'))
+            await openRemoteTerminal(terminalOptions, session.dispose).catch((err) => {
+                throw ToolkitError.chain(err, localize('AWS.ecs.openTaskInTerminal.error', 'Failed to open terminal.'))
+            })
         })
-    })
-})
+)

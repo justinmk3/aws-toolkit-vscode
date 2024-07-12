@@ -174,12 +174,18 @@ export function createLabelQuickPick<T extends string>(
 ): QuickPickPrompter<T> {
     if (items instanceof Promise) {
         return createQuickPick(
-            items.then((items) => items.map((item) => ({ data: item.label, ...item }))),
+            items.then((items) =>
+                items.map((item) => {
+                    return { data: item.label, ...item }
+                })
+            ),
             options
         )
     }
     return createQuickPick(
-        items.map((item) => ({ data: item.label, ...item })),
+        items.map((item) => {
+            return { data: item.label, ...item }
+        }),
         options
     )
 }
@@ -202,7 +208,9 @@ function acceptItems<T>(picker: DataQuickPick<T>, resolve: (items: DataQuickPick
 }
 
 function castDatumToItems<T>(...datum: T[]): DataQuickPickItem<T>[] {
-    return datum.map((data) => ({ label: '', data }))
+    return datum.map((data) => {
+        return { label: '', data }
+    })
 }
 
 /**

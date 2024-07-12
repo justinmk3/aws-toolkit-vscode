@@ -24,9 +24,9 @@ class TestCredentialsProviderFactory implements CredentialsProviderFactory {
         providerSubIds: string[]
     ) {
         this.providers.push(
-            ...providerSubIds.map<CredentialsProvider>((subId) => {
-                return makeSampleCredentialsProvider(this.credentialSource, subId, true)
-            })
+            ...providerSubIds.map<CredentialsProvider>((subId) =>
+                makeSampleCredentialsProvider(this.credentialSource, subId, true)
+            )
         )
     }
 
@@ -249,8 +249,6 @@ function makeSampleCredentialsProvider(
                 credentialTypeId: testProviderId,
             }
         },
-        isAvailable: () => {
-            return Promise.resolve(available)
-        },
+        isAvailable: () => Promise.resolve(available),
     } as any as CredentialsProvider
 }

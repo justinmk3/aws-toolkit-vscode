@@ -138,9 +138,8 @@ function getUsernamePrompter(): Prompter<string> {
         title: localize('AWS.redshift.username', 'Enter the username you want to use to connect to the database'),
         buttons: createCommonButtons(redshiftHelpUrl),
         placeholder: 'Enter username',
-        validateInput: (value) => {
-            return value.trim() ? undefined : localize('AWS.redshift.usernameValidation', 'Username cannot be empty')
-        },
+        validateInput: (value) =>
+            value.trim() ? undefined : localize('AWS.redshift.usernameValidation', 'Username cannot be empty'),
     })
 }
 
@@ -150,9 +149,8 @@ function getPasswordPrompter(): Prompter<string> {
         title: localize('AWS.redshift.password', 'Enter password'),
         buttons: createCommonButtons(redshiftHelpUrl),
         placeholder: 'Enter password',
-        validateInput: (value) => {
-            return value.trim() ? undefined : localize('AWS.redshift.passwordValidation', 'Password cannot be empty')
-        },
+        validateInput: (value) =>
+            value.trim() ? undefined : localize('AWS.redshift.passwordValidation', 'Password cannot be empty'),
         password: true,
     })
 }
@@ -163,9 +161,8 @@ function getDatabasePrompter(): Prompter<string> {
         title: localize('AWS.redshift.database', 'Enter the name of the database you want to connect to'),
         buttons: createCommonButtons(redshiftHelpUrl),
         placeholder: 'Enter database name',
-        validateInput: (value) => {
-            return value.trim() ? undefined : localize('AWS.redshift.databaseValidation', 'Database cannot be empty')
-        },
+        validateInput: (value) =>
+            value.trim() ? undefined : localize('AWS.redshift.databaseValidation', 'Database cannot be empty'),
     })
 }
 
@@ -181,10 +178,12 @@ function getConnectionTypePrompter(
     existingConnectionType: ConnectionType | undefined,
     warehouseType?: RedshiftWarehouseType
 ): Prompter<ConnectionType> {
-    const items: DataQuickPickItem<ConnectionType>[] = Object.values(ConnectionType).map((type) => ({
-        label: type,
-        data: type,
-    }))
+    const items: DataQuickPickItem<ConnectionType>[] = Object.values(ConnectionType).map((type) => {
+        return {
+            label: type,
+            data: type,
+        }
+    })
     if (existingConnectionType) {
         const updatedItems = items.map((item) => {
             if (item.data === existingConnectionType) {

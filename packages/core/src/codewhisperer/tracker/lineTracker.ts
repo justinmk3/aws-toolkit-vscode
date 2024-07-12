@@ -175,5 +175,7 @@ function isIncluded(selections: LineSelection[] | undefined, within: LineSelecti
 function toLineSelections(selections: readonly vscode.Selection[]): LineSelection[]
 function toLineSelections(selections: readonly vscode.Selection[] | undefined): LineSelection[] | undefined
 function toLineSelections(selections: readonly vscode.Selection[] | undefined) {
-    return selections?.map((s) => ({ active: s.active.line, anchor: s.anchor.line }))
+    return selections?.map((s) => {
+        return { active: s.active.line, anchor: s.anchor.line }
+    })
 }

@@ -139,15 +139,9 @@ export class FeatureDevController {
                     break
             }
         })
-        this.chatControllerMessageListeners.openDiff.event((data) => {
-            return this.openDiff(data)
-        })
-        this.chatControllerMessageListeners.stopResponse.event((data) => {
-            return this.stopResponse(data)
-        })
-        this.chatControllerMessageListeners.tabOpened.event((data) => {
-            return this.tabOpened(data)
-        })
+        this.chatControllerMessageListeners.openDiff.event((data) => this.openDiff(data))
+        this.chatControllerMessageListeners.stopResponse.event((data) => this.stopResponse(data))
+        this.chatControllerMessageListeners.tabOpened.event((data) => this.tabOpened(data))
         this.chatControllerMessageListeners.tabClosed.event((data) => {
             this.tabClosed(data)
         })
@@ -160,9 +154,7 @@ export class FeatureDevController {
         this.chatControllerMessageListeners.insertCodeAtPositionClicked.event((data) => {
             this.insertCodeAtPosition(data)
         })
-        this.chatControllerMessageListeners.fileClicked.event(async (data) => {
-            return await this.fileClicked(data)
-        })
+        this.chatControllerMessageListeners.fileClicked.event(async (data) => await this.fileClicked(data))
     }
 
     private async processChatItemVotedMessage(tabId: string, vote: string) {

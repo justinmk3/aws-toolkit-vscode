@@ -98,13 +98,15 @@ const removeBracketsFromRightContext = async (
     const offset = editor.document.offsetAt(endPosition)
 
     if (isCloud9()) {
-        const edits = idxToRemove.map((idx) => ({
-            range: new vscode.Range(
-                editor.document.positionAt(offset + idx),
-                editor.document.positionAt(offset + idx + 1)
-            ),
-            newText: '',
-        }))
+        const edits = idxToRemove.map((idx) => {
+            return {
+                range: new vscode.Range(
+                    editor.document.positionAt(offset + idx),
+                    editor.document.positionAt(offset + idx + 1)
+                ),
+                newText: '',
+            }
+        })
         const wEdit = new WorkspaceEdit()
         wEdit.set(editor.document.uri, [...edits])
         await workspace.applyEdit(wEdit)

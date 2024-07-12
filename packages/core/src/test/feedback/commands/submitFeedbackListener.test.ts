@@ -31,12 +31,7 @@ describe('submitFeedbackListener', function () {
             mockTelemetry.postFeedback = postStub
             const webview = new FeedbackWebview(mockTelemetry, productName)
             await webview.submit(message)
-            const gotArgs = await waitUntil(
-                async () => {
-                    return postStub.lastCall.args?.[0]
-                },
-                { interval: 100 }
-            )
+            const gotArgs = await waitUntil(async () => postStub.lastCall.args?.[0], { interval: 100 })
             assert.deepStrictEqual(gotArgs, { comment: comment, sentiment: sentiment })
             assert.ok(webview.isDisposed)
         })

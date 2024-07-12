@@ -68,10 +68,12 @@ export function createFolderPrompt(
     folders: readonly Folder[] = [],
     options: LocationPromptOptions = {}
 ): QuickPickPrompter<vscode.Uri> {
-    const items: DataQuickPickItem<vscode.Uri>[] = folders.map((f: Folder) => ({
-        label: addCodiconToString('folder', f.name),
-        data: f.uri,
-    }))
+    const items: DataQuickPickItem<vscode.Uri>[] = folders.map((f: Folder) => {
+        return {
+            label: addCodiconToString('folder', f.name),
+            data: f.uri,
+        }
+    })
 
     if (!options.disableBrowseFolder) {
         const browseLabel = addCodiconToString(

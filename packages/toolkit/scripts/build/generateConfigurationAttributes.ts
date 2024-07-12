@@ -32,9 +32,7 @@ function addBaseClass(generated: string, topLevelClass: string): string {
 async function generateConfigurationAttributes(): Promise<void> {
     const packageJson = JSON.parse(fs.readFileSync('./package.json', { encoding: 'utf-8' }))
     for (const debugConfiguration of packageJson.contributes.debuggers) {
-        const debuggerConfig = config.find((cfg) => {
-            return cfg.debugger === debugConfiguration.type
-        })
+        const debuggerConfig = config.find((cfg) => cfg.debugger === debugConfiguration.type)
         if (debuggerConfig === undefined) {
             continue
         }

@@ -18,7 +18,13 @@ const regionCode = 'someregioncode'
 
 function createLambdaClient(...functionNames: string[]) {
     const client = stub(DefaultLambdaClient, { regionCode })
-    client.listFunctions.returns(asyncGenerator(functionNames.map((name) => ({ FunctionName: name }))))
+    client.listFunctions.returns(
+        asyncGenerator(
+            functionNames.map((name) => {
+                return { FunctionName: name }
+            })
+        )
+    )
 
     return client
 }

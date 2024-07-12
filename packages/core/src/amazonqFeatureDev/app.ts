@@ -97,7 +97,5 @@ export function init(appContext: AmazonQAppInitContext) {
         messenger.sendAuthenticationUpdate(authenticated, authenticatingSessionIDs)
     }, 500)
 
-    AuthUtil.instance.secondaryAuth.onDidChangeActiveConnection(() => {
-        return debouncedEvent()
-    })
+    AuthUtil.instance.secondaryAuth.onDidChangeActiveConnection(() => debouncedEvent())
 }

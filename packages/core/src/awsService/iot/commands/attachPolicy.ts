@@ -101,6 +101,8 @@ async function* getPolicyList(iot: IotClient) {
             void showViewLogsMessage(localize('AWS.iot.attachPolicy.error', 'Failed to retrieve policies'))
             return
         }
-        yield filteredPolicies.map((policy) => ({ label: policy.policyName!, data: policy }))
+        yield filteredPolicies.map((policy) => {
+            return { label: policy.policyName!, data: policy }
+        })
     } while (marker !== undefined)
 }

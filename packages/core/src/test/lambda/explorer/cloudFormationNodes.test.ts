@@ -28,7 +28,13 @@ const regionCode = 'someregioncode'
 
 function createLambdaClient(...functionNames: string[]) {
     const client = stub(DefaultLambdaClient, { regionCode })
-    client.listFunctions.returns(asyncGenerator(functionNames.map((name) => ({ FunctionName: name }))))
+    client.listFunctions.returns(
+        asyncGenerator(
+            functionNames.map((name) => {
+                return { FunctionName: name }
+            })
+        )
+    )
 
     return client
 }
@@ -73,13 +79,15 @@ describe('CloudFormationStackNode', function () {
     }
 
     function generateStackResources(...functionNames: string[]): CloudFormation.StackResource[] {
-        return functionNames.map((name) => ({
-            PhysicalResourceId: name,
-            LogicalResourceId: name,
-            ResourceStatus: 'CREATED',
-            ResourceType: 'Lambda::Function',
-            Timestamp: new globals.clock.Date(),
-        }))
+        return functionNames.map((name) => {
+            return {
+                PhysicalResourceId: name,
+                LogicalResourceId: name,
+                ResourceStatus: 'CREATED',
+                ResourceType: 'Lambda::Function',
+                Timestamp: new globals.clock.Date(),
+            }
+        })
     }
 
     it('initializes name and tooltip', async function () {

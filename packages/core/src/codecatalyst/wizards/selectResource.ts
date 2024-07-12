@@ -147,9 +147,8 @@ export function createDevEnvPrompter(
     const helpUri = isCloud9() ? docs.cloud9.devenv : docs.vscode.devenv
     const envs = proj ? client.listDevEnvironments(proj) : client.listResources('devEnvironment')
     const filtered = envs.map((arr) => arr.filter((env) => isDevenvVscode(env.ides)))
-    const isData = <T>(obj: T | DataQuickPickItem<T>['data']): obj is T => {
-        return typeof obj !== 'function' && isValidResponse(obj)
-    }
+    const isData = <T>(obj: T | DataQuickPickItem<T>['data']): obj is T =>
+        typeof obj !== 'function' && isValidResponse(obj)
 
     return createResourcePrompter(filtered, helpUri, {
         title: 'Select a CodeCatalyst Dev Environment',

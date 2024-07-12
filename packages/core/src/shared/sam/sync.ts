@@ -105,13 +105,15 @@ function createStackPrompter(client: DefaultCloudFormationClient) {
     const recentStack = getRecentResponse(client.regionCode, 'stackName')
     const consoleUrl = getAwsConsoleUrl('cloudformation', client.regionCode)
     const items = client.listAllStacks().map((stacks) =>
-        stacks.filter(canShowStack).map((s) => ({
-            label: s.StackName,
-            data: s.StackName,
-            invalidSelection: !canPickStack(s),
-            recentlyUsed: s.StackName === recentStack,
-            description: !canPickStack(s) ? 'stack create/update already in progress' : undefined,
-        }))
+        stacks.filter(canShowStack).map((s) => {
+            return {
+                label: s.StackName,
+                data: s.StackName,
+                invalidSelection: !canPickStack(s),
+                recentlyUsed: s.StackName === recentStack,
+                description: !canPickStack(s) ? 'stack create/update already in progress' : undefined,
+            }
+        })
     )
 
     return createQuickPick(items, {
@@ -138,12 +140,14 @@ function createEcrPrompter(client: DefaultEcrClient) {
     const recentEcrRepo = getRecentResponse(client.regionCode, 'ecrRepoUri')
     const consoleUrl = getAwsConsoleUrl('ecr', client.regionCode)
     const items = client.listAllRepositories().map((list) =>
-        list.map((repo) => ({
-            label: repo.repositoryName,
-            data: repo.repositoryUri,
-            detail: repo.repositoryArn,
-            recentlyUsed: repo.repositoryUri === recentEcrRepo,
-        }))
+        list.map((repo) => {
+            return {
+                label: repo.repositoryName,
+                data: repo.repositoryUri,
+                detail: repo.repositoryArn,
+                recentlyUsed: repo.repositoryUri === recentEcrRepo,
+            }
+        })
     )
 
     return createQuickPick(items, {
@@ -169,11 +173,13 @@ function createEcrPrompter(client: DefaultEcrClient) {
 // TODO: hook this up so it prompts the user when more than 1 environment is present in `samconfig.toml`
 export function createEnvironmentPrompter(config: SamConfig, environments = config.listEnvironments()) {
     const recentEnvironmentName = getRecentResponse(config.location.fsPath, 'environmentName')
-    const items = environments.map((env) => ({
-        label: env.name,
-        data: env,
-        recentlyUsed: env.name === recentEnvironmentName,
-    }))
+    const items = environments.map((env) => {
+        return {
+            label: env.name,
+            data: env,
+            recentlyUsed: env.name === recentEnvironmentName,
+        }
+    })
 
     return createQuickPick(items, {
         title: 'Select an Environment to Use',
@@ -204,7 +210,12 @@ function createTemplatePrompter(registry: CloudFormationTemplateRegistry) {
         }
     })
 
-    const trimmedItems = folders.size === 1 ? items.map((item) => ({ ...item, description: undefined })) : items
+    const trimmedItems =
+        folders.size === 1
+            ? items.map((item) => {
+                  return { ...item, description: undefined }
+              })
+            : items
     return createQuickPick(trimmedItems, {
         title: 'Select a SAM CloudFormation Template',
         placeholder: 'Select a SAM template.yaml file',

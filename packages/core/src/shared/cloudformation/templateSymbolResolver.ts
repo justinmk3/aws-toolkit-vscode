@@ -44,7 +44,9 @@ export class TemplateSymbolResolver {
             allSymbols.find((o) => o.name === 'Resources' && o.kind === vscode.SymbolKind.Module)?.children ?? []
         ).filter((r) => this.isCfnType(CloudFormation.SERVERLESS_FUNCTION_TYPE, r))
         if (kind === 'function') {
-            return funSymbols.map((r) => ({ name: r.name, range: r.range, kind: kind }))
+            return funSymbols.map((r) => {
+                return { name: r.name, range: r.range, kind: kind }
+            })
         }
         // Api symbols:
         //
@@ -56,13 +58,15 @@ export class TemplateSymbolResolver {
                 this.isCfnType('Api', r)
             )
             apiSymbols.push(
-                ...found.map((o) => ({
-                    // We want the resource name of the Function node (not Api,
-                    // that node is always named "Events".)
-                    name: funSymbol.name,
-                    range: o.range,
-                    kind: kind,
-                }))
+                ...found.map((o) => {
+                    return {
+                        // We want the resource name of the Function node (not Api,
+                        // that node is always named "Events".)
+                        name: funSymbol.name,
+                        range: o.range,
+                        kind: kind,
+                    }
+                })
             )
         }
         return apiSymbols

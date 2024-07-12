@@ -246,11 +246,13 @@ describe('SchemaCodeDownloadWizard', async function () {
 
             let index = 0
             const context: SchemaCodeDownloadWizardContext = new MockSchemaCodeDownloadWizardContext(
-                workspaceFolderPaths.map((p) => ({
-                    uri: vscode.Uri.file(p),
-                    name: path.basename(p),
-                    index: index++,
-                })),
+                workspaceFolderPaths.map((p) => {
+                    return {
+                        uri: vscode.Uri.file(p),
+                        name: path.basename(p),
+                        index: index++,
+                    }
+                }),
                 Set<SchemaCodeLangs>([JAVA]),
                 'myName',
                 []

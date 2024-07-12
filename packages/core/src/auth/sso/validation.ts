@@ -23,9 +23,9 @@ export async function validateIsNewSsoUrlAsync(
     url: string,
     requiredScopes?: string[]
 ): Promise<string | undefined> {
-    return auth.listConnections().then((conns) => {
-        return validateIsNewSsoUrl(url, requiredScopes, conns.filter(isAnySsoConnection))
-    })
+    return auth
+        .listConnections()
+        .then((conns) => validateIsNewSsoUrl(url, requiredScopes, conns.filter(isAnySsoConnection)))
 }
 
 export function validateIsNewSsoUrl(

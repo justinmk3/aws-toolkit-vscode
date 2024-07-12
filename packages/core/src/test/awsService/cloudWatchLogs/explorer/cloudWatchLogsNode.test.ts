@@ -26,7 +26,13 @@ describe('CloudWatchLogsNode', function () {
 
     function createClient() {
         const client = stub(DefaultCloudWatchLogsClient, { regionCode: fakeRegionCode })
-        client.describeLogGroups.callsFake(() => asyncGenerator(logGroupNames.map((name) => ({ logGroupName: name }))))
+        client.describeLogGroups.callsFake(() =>
+            asyncGenerator(
+                logGroupNames.map((name) => {
+                    return { logGroupName: name }
+                })
+            )
+        )
 
         return client
     }

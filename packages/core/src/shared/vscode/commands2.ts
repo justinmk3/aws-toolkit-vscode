@@ -372,13 +372,14 @@ class CommandResource<T extends Callback = Callback, U extends any[] = any[]> {
     }
 
     private buildCommand(id: string, args: unknown[]) {
-        return (content: PartialCommand) => ({ ...content, command: id, arguments: args })
+        return (content: PartialCommand) => {
+            return { ...content, command: id, arguments: args }
+        }
     }
 
     private buildCodeLens(id: string, args: unknown[]) {
-        return (range: vscode.Range, content: PartialCommand) => {
-            return new vscode.CodeLens(range, this.buildCommand(id, args)(content))
-        }
+        return (range: vscode.Range, content: PartialCommand) =>
+            new vscode.CodeLens(range, this.buildCommand(id, args)(content))
     }
 
     private buildTreeNode(id: string, args: unknown[]) {

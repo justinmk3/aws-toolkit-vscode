@@ -59,9 +59,7 @@ console.log = connection.console.log.bind(connection.console)
 console.error = connection.console.error.bind(connection.console)
 
 const workspaceContext = {
-    resolveRelativePath: (relativePath: string, resource: string) => {
-        return URL.resolve(resource, relativePath)
-    },
+    resolveRelativePath: (relativePath: string, resource: string) => URL.resolve(resource, relativePath),
 }
 
 // create the JSON language service
@@ -225,19 +223,21 @@ connection.onDidChangeConfiguration((change) => {
 })
 
 // Retry schema validation on all open documents
-connection.onRequest(ForceValidateRequest, async (uri) => {
-    return new Promise<Diagnostic[]>((resolve) => {
-        const document = documents.get(uri)
-        if (document) {
-            // updateConfiguration()
-            validateTextDocument(document, (diagnostics) => {
-                resolve(diagnostics)
-            })
-        } else {
-            resolve([])
-        }
-    })
-})
+connection.onRequest(
+    ForceValidateRequest,
+    async (uri) =>
+        new Promise<Diagnostic[]>((resolve) => {
+            const document = documents.get(uri)
+            if (document) {
+                // updateConfiguration()
+                validateTextDocument(document, (diagnostics) => {
+                    resolve(diagnostics)
+                })
+            } else {
+                resolve([])
+            }
+        })
+)
 
 // The content of a text document has changed. This event is emitted
 // when the text document first opened or when its content has changed.
@@ -341,8 +341,8 @@ function getJSONDocument(document: TextDocument): JSONDocument {
     return jsonDocuments.get(document)
 }
 
-connection.onCompletion((textDocumentPosition, token) => {
-    return runSafeAsync(
+connection.onCompletion((textDocumentPosition, token) =>
+    runSafeAsync(
         async () => {
             const document = documents.get(textDocumentPosition.textDocument.uri)
             if (document) {
@@ -361,22 +361,21 @@ connection.onCompletion((textDocumentPosition, token) => {
         `Error while computing completions for ${textDocumentPosition.textDocument.uri}`,
         token
     )
-})
+)
 
-connection.onCompletionResolve((completionItem, token) => {
-    return runSafeAsync(
-        () => {
+connection.onCompletionResolve((completionItem, token) =>
+    runSafeAsync(
+        () =>
             // the asl-yaml-languageservice uses doResolve from the asl service
-            return getLanguageService('asl').doResolve(completionItem)
-        },
+            getLanguageService('asl').doResolve(completionItem),
         completionItem,
         'Error while resolving completion proposal',
         token
     )
-})
+)
 
-connection.onHover((textDocumentPositionParams, token) => {
-    return runSafeAsync(
+connection.onHover((textDocumentPositionParams, token) =>
+    runSafeAsync(
         async () => {
             const document = documents.get(textDocumentPositionParams.textDocument.uri)
             if (document) {
@@ -394,10 +393,10 @@ connection.onHover((textDocumentPositionParams, token) => {
         `Error while computing hover for ${textDocumentPositionParams.textDocument.uri}`,
         token
     )
-})
+)
 
-connection.onDocumentSymbol((documentSymbolParams, token) => {
-    return runSafe(
+connection.onDocumentSymbol((documentSymbolParams, token) =>
+    runSafe(
         () => {
             const document = documents.get(documentSymbolParams.textDocument.uri)
             if (document) {
@@ -426,10 +425,10 @@ connection.onDocumentSymbol((documentSymbolParams, token) => {
         `Error while computing document symbols for ${documentSymbolParams.textDocument.uri}`,
         token
     )
-})
+)
 
-connection.onDocumentRangeFormatting((formatParams, token) => {
-    return runSafe(
+connection.onDocumentRangeFormatting((formatParams, token) =>
+    runSafe(
         () => {
             const document = documents.get(formatParams.textDocument.uri)
             if (document) {
@@ -446,10 +445,10 @@ connection.onDocumentRangeFormatting((formatParams, token) => {
         `Error while formatting range for ${formatParams.textDocument.uri}`,
         token
     )
-})
+)
 
-connection.onDocumentColor((params, token) => {
-    return runSafeAsync(
+connection.onDocumentColor((params, token) =>
+    runSafeAsync(
         async () => {
             const document = documents.get(params.textDocument.uri)
             if (document) {
@@ -472,10 +471,10 @@ connection.onDocumentColor((params, token) => {
         `Error while computing document colors for ${params.textDocument.uri}`,
         token
     )
-})
+)
 
-connection.onColorPresentation((params, token) => {
-    return runSafe(
+connection.onColorPresentation((params, token) =>
+    runSafe(
         () => {
             const document = documents.get(params.textDocument.uri)
             if (document) {
@@ -495,10 +494,10 @@ connection.onColorPresentation((params, token) => {
         `Error while computing color presentations for ${params.textDocument.uri}`,
         token
     )
-})
+)
 
-connection.onFoldingRanges((params, token) => {
-    return runSafe(
+connection.onFoldingRanges((params, token) =>
+    runSafe(
         () => {
             const document = documents.get(params.textDocument.uri)
             if (document) {
@@ -519,10 +518,10 @@ connection.onFoldingRanges((params, token) => {
         `Error while computing folding ranges for ${params.textDocument.uri}`,
         token
     )
-})
+)
 
-connection.onSelectionRanges((params, token) => {
-    return runSafe(
+connection.onSelectionRanges((params, token) =>
+    runSafe(
         () => {
             const document = documents.get(params.textDocument.uri)
             if (document) {
@@ -541,7 +540,7 @@ connection.onSelectionRanges((params, token) => {
         `Error while computing selection ranges for ${params.textDocument.uri}`,
         token
     )
-})
+)
 
 // Listen on the connection
 connection.listen()

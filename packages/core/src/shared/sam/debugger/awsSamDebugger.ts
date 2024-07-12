@@ -107,9 +107,9 @@ class SamLaunchRequestError extends ToolkitError.named('SamLaunchRequestError') 
 
         const buttonsWithLogs = [viewLogsButton, ...this.buttons]
 
-        await vscode.window.showErrorMessage(this.message, ...buttonsWithLogs.map((b) => b.label)).then((resp) => {
-            return buttonsWithLogs.find(({ label }) => label === resp)?.onClick()
-        })
+        await vscode.window
+            .showErrorMessage(this.message, ...buttonsWithLogs.map((b) => b.label))
+            .then((resp) => buttonsWithLogs.find(({ label }) => label === resp)?.onClick())
     }
 }
 
