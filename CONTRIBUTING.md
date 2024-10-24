@@ -665,7 +665,7 @@ There are several ways to make pre-production changes available on a "preview" o
     so the functionality could be merged to mainline while it was under development.
 -   **Beta artifacts:** For a "private beta" launch, `src/dev/beta.ts` contains
     logic to check a hardcoded, stable URL serving the latest `.vsix` build for
-    the private beta. The hardcoded URL defined in [`dev/config.ts:betaUrl`](https://github.com/aws/aws-toolkit-vscode/blob/d9c27234c0732b021d07e184a865213d6efde8ec/src/dev/config.ts#L9)
+    the private beta. The hardcoded URL defined in [`dev/config.ts:betaUrl`](https://github.com/aws/aws-toolkit-vscode/blob/96783eae9a3b02a1c64d198c36692609d1c5ac9c/packages/core/src/dev/config.ts)
     also forces the Toolkit to declare version `99.0` (since "private beta" has no semver and to
     avoid unwanted auto-updating from VSCode marketplace). Beta builds of the Toolkit automatically
     query the URL once per session per day.

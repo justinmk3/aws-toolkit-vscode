@@ -1,14 +1,15 @@
 ---
 name: unreliable test
+title: 'unreliable test: '
 about: Help us monitor our test suite by reporting flaky tests.
 labels: tests-ci-cd
 ---
 
 ## Test Details
 
--   Name of test:
+-   Name of test: ``
 -   OS of failure:
--   VSCode version of failure (minimum/insider/stable):
+-   VSCode version of failure (minimum/insider/stable): ``
 -   Link to failing run:
 -   Link to failing test:
 

@@ -22,6 +22,10 @@ type samInitStateKey =
 
 type stepFunctionsKey = 'SCRIPT_LAST_DOWNLOADED_URL' | 'CSS_LAST_DOWNLOADED_URL'
 
+/**
+ * Note: globalState keys are isolated per-extension, so the "namespacing" in these key names is
+ * only for readability.
+ */
 export type globalKey =
     | samInitStateKey
     | stepFunctionsKey
