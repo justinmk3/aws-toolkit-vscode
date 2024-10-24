@@ -6,7 +6,9 @@
 import * as vscode from 'vscode'
 
 /**
- * Context keys used by the extension.
+ * Context keys used by the extension. Must be GLOBALLY UNIQUE to avoid conflicting with third-party
+ * extensions; vscode does not isolate these from other extensions (unlike `globalState`, which *is*
+ * isolated).
  *
  * New keys must start with "aws." or "amazonq.".
  */

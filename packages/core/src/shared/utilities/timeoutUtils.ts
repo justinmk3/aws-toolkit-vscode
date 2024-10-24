@@ -184,6 +184,8 @@ export class Timeout {
     }
 }
 
+// TODO(jmkeyes): merge this into the existing `Timeout` class. Interval and Timeout are overlapping
+// concepts. https://github.com/aws/aws-toolkit-vscode/pull/5792#issuecomment-2654933902
 export class Interval {
     private _setCompleted: (() => void) | undefined
     private _nextCompletion: Promise<void>

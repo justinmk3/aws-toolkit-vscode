@@ -183,6 +183,11 @@ export class ZipStream {
         return result
     }
 
+    /**
+     * TODO: Avoid this function if possible, it loads the full data into memory, which defeats the
+     * purpose of a "zip stream". Instead, allow consumers to stream unzipped data and control where
+     * it is written to (or inspected and discarded).
+     */
     public static async unzip(zipBuffer: Buffer): Promise<Entry[]> {
         const reader = new ZipReader(new Uint8ArrayReader(new Uint8Array(zipBuffer)))
         try {

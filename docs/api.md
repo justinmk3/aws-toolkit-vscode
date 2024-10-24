@@ -21,6 +21,10 @@ This command supports the following arguments:
 
 ### Extension API
 
+-   The AWS Toolkit API is defined in [toolkit/src/api.ts](https://github.com/aws/aws-toolkit-vscode/blob/d3abef0932bdc6a28c699c00dedec3e42cc288f4/packages/toolkit/src/api.ts#L9).
+    -   Example usage is [here](https://github.com/aws/aws-toolkit-vscode/blob/d3abef0932bdc6a28c699c00dedec3e42cc288f4/packages/core/src/codewhisperer/commands/basicCommands.ts#L611-L631).
+-   TODO: The Amazon Q API is defined in ...?
+
 #### `listConnections`
 
 **Signature**: _async () => Promise<AwsConnection>_
