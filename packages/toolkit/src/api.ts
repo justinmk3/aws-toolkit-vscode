@@ -41,7 +41,7 @@ export const awsToolkitApi = {
             },
 
             /**
-             * Exposing setConnection API for other extension to push its connection state to aws toolkit
+             * Exposing setConnection API for other exension to push its connection state to aws toolkit
              * @param connection The AWS connection of the source extension that is intended to be shared with toolkit
              */
             async setConnection(connection: AwsConnection): Promise<void> {
