@@ -13,7 +13,7 @@ Amazon CodeWhisperer is now part of Amazon Q. [Try the Amazon Q extension](https
 
 ![getting-started](https://raw.githubusercontent.com/aws/aws-toolkit-vscode/HEAD/docs/marketplace/vscode/auth-Toolkit.gif)
 
-The AWS Toolkit lets you interact with AWS directly from VS Code. Ready to install? See [Getting Started](#getting-started).
+The AWS Toolkit lets you [interact with AWS](#view-modify-and-deploy-aws-resources) directly from VS Code.
 
 # Features
 
@@ -65,12 +65,13 @@ Unified software development service to quickly build and deliver applications o
 
 ![cw_logs](https://raw.githubusercontent.com/aws/aws-toolkit-vscode/HEAD/docs/marketplace/vscode/cw_logs.gif)
 
-**ECS** - execute commands against running ECS containers (or open a terminal)
+**ECS** - open a terminal or execute commands on ECS containers
 
 ![ecs-terminal](https://raw.githubusercontent.com/aws/aws-toolkit-vscode/HEAD/docs/marketplace/vscode/ecs-terminal.gif)
 
 ## More features
 
+-   **EC2** - remote-connect or open a terminal to any EC2 instance
 -   **Redshift** - view database objects and run SQL queries in a notebook interface
 -   **Step Functions** - work with asl files and render state machine visuals
 -   **CloudFormation** - view CloudFormation stacks

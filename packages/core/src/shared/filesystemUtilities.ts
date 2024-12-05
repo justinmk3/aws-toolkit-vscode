@@ -70,12 +70,10 @@ export async function fileExists(p: string): Promise<boolean> {
     } catch (err) {
         return false
     }
-
-    return true
 }
 
 /**
- * @deprecated use {@link fs} exist methods instead.
+ * @deprecated use `fs.readFileText` instead.
  */
 export async function readFileAsString(pathLike: string): Promise<string> {
     return fs.readFileText(pathLike)
