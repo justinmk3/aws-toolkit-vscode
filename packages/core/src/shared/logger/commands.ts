@@ -59,6 +59,9 @@ export class Logging {
     }
 
     public async openLogUri(): Promise<vscode.TextEditor | undefined> {
+        if (!getLogger().logLevelEnabled('debug')) {
+            getLogger().setLogLevel('debug')
+        }
         if (!this.logUri) {
             globals.logOutputChannel.show(true)
             return undefined
