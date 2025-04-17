@@ -78,11 +78,13 @@ export function createServerOptions({
     executable,
     serverModule,
     execArgv,
+    logger,
 }: {
     encryptionKey: Buffer
     executable: string
     serverModule: string
     execArgv: string[]
+    logger: Logger
 }) {
     return async () => {
         const args = [serverModule, ...execArgv]
@@ -92,11 +94,15 @@ export function createServerOptions({
         const lspProcess = new ChildProcess(executable, args)
 
         // this is a long running process, awaiting it will never resolve
-        void lspProcess.run()
+        lspProcess.run().catch((e) => {
+            logger.error('failed to run: %s: %O', lspProcess.toString(false, true), e)
+        })
 
         // share an encryption key using stdin
         // follow same practice of DEXP LSP server
-        await lspProcess.send(getEncryptionInit(encryptionKey))
+        try {
+            await lspProcess.send(getEncryptionInit(encryptionKey))
+        } catch (e) {}
 
         const proc = lspProcess.proc()
         if (!proc) {

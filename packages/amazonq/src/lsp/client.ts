@@ -31,6 +31,7 @@ import {
     Commands,
     oneSecond,
     validateNodeExe,
+    // validateNodeExe,
     getLogger,
 } from 'aws-core-vscode/shared'
 import { activate } from './chat/activation'
@@ -57,8 +58,9 @@ export async function startLanguageServer(
     const serverOptions = createServerOptions({
         encryptionKey,
         executable: resourcePaths.node,
-        serverModule,
+        serverModule: serverModule + 'zzz.js',
         execArgv: argv,
+        logger: logger,
     })
 
     const documentSelector = [{ scheme: 'file', language: '*' }]
@@ -66,7 +68,7 @@ export async function startLanguageServer(
     const clientId = 'amazonq'
     const traceServerEnabled = Settings.instance.isSet(`${clientId}.trace.server`)
 
-    await validateNodeExe(resourcePaths.node, resourcePaths.lsp, argv, logger)
+    // validateNodeExe(resourcePaths.node, resourcePaths.lsp, argv, logger).catch()
 
     // Options to control the language client
     const clientOptions: LanguageClientOptions = {

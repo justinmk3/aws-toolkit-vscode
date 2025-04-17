@@ -259,6 +259,7 @@ export async function activate(extensionContext: ExtensionContext, resourcePaths
         serverModule,
         // TODO(jmkeyes): we always use the debug options...?
         execArgv: debugOptions.execArgv,
+        logger: logger,
     })
 
     const documentSelector = [{ scheme: 'file', language: '*' }]
